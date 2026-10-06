@@ -73,7 +73,21 @@ Site Worker settings:
 - Set that URL in **only** `astro.config.mjs` under `site`; canonical URLs and later sitemap generation derive from it.
 - Free Workers plan. No domain or paid features are required.
 
-From the **lab** Cloudflare dashboard, try Workers Builds. Install the Cloudflare GitHub app on **insitu-illinois** with **Only select repositories → website**. If the personal GitHub identity is rejected because it is connected elsewhere, stop that connection flow. Do not disconnect anything and do not switch GitHub accounts. The authorized fallback is a GitHub Actions deployment workflow using a lab-scoped API token stored as a repository secret. The exact token permissions and clicks will be verified when that fallback is needed; no token has been created or requested yet.
+Automatic publication uses GitHub Actions. The app installation flow offered **Authorize & Request** because the builder's personal account is currently an organization Member, although it has Admin access to this repository. No installation request was submitted and the existing personal Cloudflare connection was not changed. The Actions fallback is prepared locally; it still awaits a token and a successful first run.
+
+The workflow checks content, builds, runs browser tests, and passes that exact `dist/` artifact to the deployment job. Only `main` pushes or a manual run on `main` can deploy; pull requests only verify. CI asserts the lab account ID, Worker name, and output directory before running Wrangler. The account ID is public configuration, not a secret.
+
+To create or replace the deployment token:
+
+1. Sign into Cloudflare as `insituillinois@gmail.com`. Open **Manage account → Account API tokens → Create Token**.
+2. Name: `insitu-website-github-actions`. Choose **Custom**, then scope **Specified Workers → insitu-illinois**.
+3. Select only **Individual Workers → Editor**. Do not select Admin, other Workers, account-wide access, or zone permissions. The site already exists and has no custom domain. This is the [minimum role for deploying an existing Worker](https://developers.cloudflare.com/workers/authorization/workers/).
+4. Review the token. A token without expiration avoids silently stopping publication; revoke or replace it when access changes. Leave IP filtering empty because hosted GitHub runners have changing addresses.
+5. The lab owner clicks **Create token**, copies its value, and opens [the repository's new Actions secret form](https://github.com/insitu-illinois/website/settings/secrets/actions/new).
+6. Secret name: `CLOUDFLARE_API_TOKEN`. Paste the value in **Secret**, click **Add secret**, and close the Cloudflare token-reveal page. Never put the token into chat, a source file, or a commit. On replacement, update the existing secret instead of creating a second one.
+7. Push to `main`, or open **Actions → Check and deploy website → Run workflow → main**. Confirm both jobs succeed, then check the public site. An unsuccessful check or deployment leaves the previous site online.
+
+Set **Settings → Secrets and variables → Actions → Variables → CMS_AUTH_URL** to the relay origin after the OAuth Worker is configured. This value is not secret. The workflow passes it into the build that generates the CMS configuration.
 
 ## Recreate the Sveltia OAuth relay
 
