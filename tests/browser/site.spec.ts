@@ -26,9 +26,9 @@ test('draft people and papers are absent from every production page',()=>{
   const html=publicPages.map(p=>readFileSync(p,'utf8')).join('');
   for(const name of ['Lily Meyer','Beneath the Stone','Situated Cartographies','Computation in Context','cognitive-loads']) expect(html).not.toContain(name);
 });
-test('all internal links and assets resolve; public pages make no third-party requests',async({page})=>{
+test('all internal links and assets resolve; public pages make no third-party requests',async({page,baseURL})=>{
   const external:string[]=[];
-  page.on('request',req=>{if(!new URL(req.url()).hostname.match(/^(127\.0\.0\.1|localhost)$/))external.push(req.url());});
+  page.on('request',req=>{if(new URL(req.url()).origin!==new URL(baseURL!).origin)external.push(req.url());});
   for(const path of publicPages){
     await page.goto(path.replace(/^dist/,'').replace(/index\.html$/,''));
     const links=await page.locator('[href],[src]').evaluateAll(elements=>elements.flatMap(el=>[el.getAttribute('href'),el.getAttribute('src')]).filter((v):v is string=>!!v&&v.startsWith('/')));

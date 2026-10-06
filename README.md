@@ -2,11 +2,13 @@
 
 Astro static website for IN/SITU at the University of Illinois Urbana-Champaign.
 
+Preview: https://insitu-illinois.insituillinois.workers.dev
+
 Repository: https://github.com/insitu-illinois/website
 
 ## Current status
 
-This is the early preview milestone: seven collections, 55 seed records, five published person pages, nine basic ordinary pages, shared navigation, and tested derived lists. Project, theme, publication, and news detail templates and the full design pass follow the first deployment. CMS forms load, but OAuth login and publishing are not connected yet. Cloudflare deployment is pending creation of the lab account. No hosted URL has been assigned.
+This is the early preview milestone: seven collections, 55 seed records, five published person pages, nine basic ordinary pages, shared navigation, and tested derived lists. Project, theme, publication, and news detail templates and the full design pass follow the first deployment. CMS forms load, but OAuth login and publishing are not connected yet. The early preview is deployed in the verified lab Cloudflare account. Continuous deployment and the OAuth relay are the next account setup steps.
 
 The preview asks search engines not to index it. Remove the temporary `noindex` meta tag and change `public/robots.txt` to `Allow: /` when the full public release is ready. Drafts are excluded from production HTML, but source records are in a public GitHub repository: never enter confidential or anonymous submissions, even as drafts.
 
@@ -54,7 +56,9 @@ These account-wide permissions have not been changed by the build.
 
 The lab Cloudflare account must be created with the lab Gmail and protected with 2FA. Never use the builder's personal Cloudflare account, even for a test. Never change or remove its existing GitHub connection.
 
-Before deploying, authorize Wrangler in the lab account and run `wrangler whoami`. Verify the email and account ID together with the lab owner. Record the verified lab `account_id` in `wrangler.jsonc` and keep the auth Worker in that same account. Keep local lab credentials separate from existing personal Wrangler credentials. `.cloudflare-lab/` is ignored by Git.
+The verified lab account is `insituillinois@gmail.com`, account ID `8ff08acf55c2976a352f2dcc15b7612f`. Email 2FA is active. `wrangler.jsonc` is pinned to this ID. Local credentials are stored separately under ignored `.cloudflare-lab/`.
+
+Use `npm run deploy` for local publication. The deployment script clears inherited Cloudflare credentials, uses the isolated lab login, runs `wrangler whoami`, and aborts unless both the lab email and account ID match. It also aborts if a legacy global Wrangler directory would override the isolated login. A new maintainer must authorize their lab account session before this command can work. Do not use a bare deploy command with a personal profile.
 
 Site Worker settings:
 
@@ -119,7 +123,7 @@ The token files came from the supplied design system. Fonts are self-hosted thro
 
 ## Preview verification
 
-The local production build generates 15 public pages. Astro type checks pass with zero errors or warnings; nine content and derived-list tests pass; six browser checks pass, including axe and reflow on every public page at 1440px, 390px and 320px. This was desktop Chrome automation and viewport emulation, not physical-device or screen-reader testing. Sveltia loads its configuration without errors; authenticated editing awaits the OAuth relay. The dependency audit reports zero known vulnerabilities. Hosted URL verification remains pending.
+The local production build generates 15 public pages. Astro type checks pass with zero errors or warnings; nine content and derived-list tests pass; six browser checks pass, including axe and reflow on every public page at 1440px, 390px and 320px. This was desktop Chrome automation and viewport emulation, not physical-device or screen-reader testing. Sveltia loads its configuration without errors; authenticated editing awaits the OAuth relay. The dependency audit reports zero known vulnerabilities. The live preview also passed the browser checks at all three widths. HTTPS, the person deep link, `/admin/`, its configuration, and `robots.txt` match the built files; `robots.txt` returns `text/plain`, security headers are present, and missing pages return 404. The first requests briefly preceded HTTPS certificate availability; rerunning the affected checks succeeded.
 
 ## Content provenance and confirmation queue
 
@@ -159,3 +163,12 @@ Draft records needing review:
 - `src/content/recognition/epic-megagrant.json` — Epic MegaGrant.
 
 Lily: role and biography. Collaborators and alumni: permission to list. Beneath the Stone: complete author list. ASCAAD papers: acceptance and author lists. Lincoln Home: exact title and author list. Cognitive-loads paper: obtain PDF and complete author list. Epic MegaGrant: year and recipient. GSD 282 news: approved wording. Home statement: Laura’s approval. Website launch: actual launch date.
+
+## Release record
+
+- First preview: October 6, 2026.
+- Site source commit: `a771992`.
+- Cloudflare version: `0f9a74d5-ad10-4d8f-bd35-d1c867c36463`.
+- Worker: `insitu-illinois`, free `workers.dev` hostname, lab account only.
+- Deployment method for this first release: verified local Wrangler login.
+- Pending: automatic GitHub deployment, OAuth relay and CMS login, remaining templates and full design pass.

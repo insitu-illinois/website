@@ -1,6 +1,7 @@
 import { defineConfig } from '@playwright/test';
+const baseURL=process.env.SITE_TEST_URL ?? 'http://127.0.0.1:4321';
 export default defineConfig({
   testDir: './tests/browser',
-  use: { baseURL: 'http://127.0.0.1:4321', browserName: 'chromium', ...(process.env.PLAYWRIGHT_CHANNEL ? {channel: process.env.PLAYWRIGHT_CHANNEL} : {}) },
-  webServer: { command: 'npm run preview -- --ignore-lock', url: 'http://127.0.0.1:4321', reuseExistingServer: !process.env.CI },
+  use: { baseURL, browserName: 'chromium', ...(process.env.PLAYWRIGHT_CHANNEL ? {channel: process.env.PLAYWRIGHT_CHANNEL} : {}) },
+  ...(process.env.SITE_TEST_URL ? {} : {webServer: { command: 'npm run preview -- --ignore-lock', url: baseURL, reuseExistingServer: !process.env.CI }}),
 });
