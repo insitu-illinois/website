@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // The only site-origin setting. Replace after Cloudflare assigns the account subdomain.
-  site: 'http://localhost:4321',
+  // The only site-origin setting. Change here when a custom domain is attached.
+  site: 'https://insitu-illinois.insituillinois.workers.dev',
   output: 'static',
   trailingSlash: 'always',
 });
