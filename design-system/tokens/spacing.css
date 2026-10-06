@@ -1,0 +1,13 @@
+:root{
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;
+/* IN/SITU is precise, not bubbly: sharp corners, hairline strokes */
+--radius-none:0px;--radius-sm:2px;--radius-md:4px;--radius-full:999px;
+--border-hairline:1px;--border-thick:2px;
+--shadow-card:0 1px 0 rgba(21,18,13,0.08),0 4px 12px rgba(21,18,13,0.10);
+--shadow-raised:0 8px 24px rgba(21,18,13,0.18);
+--shadow-inverse:0 1px 0 rgba(0,0,0,0.5),0 8px 24px rgba(0,0,0,0.35);
+--ease-standard:cubic-bezier(.2,.7,.3,1); /* @kind other */
+--dur-fast:120ms; /* @kind other */
+--dur-med:220ms; /* @kind other */
+--grid-max:1280px;
+}

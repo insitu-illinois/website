@@ -4,6 +4,158 @@ Astro static website for IN/SITU at the University of Illinois Urbana-Champaign.
 
 Repository: https://github.com/insitu-illinois/website
 
-Status: building the initial preview. Cloudflare deployment and CMS authentication are not configured yet.
+## Current status
 
-The site uses seven file-based content collections, Sveltia CMS, and Cloudflare Workers Static Assets. The supplied source archive is local reference material and is not published.
+This is the early preview milestone: seven collections, 55 seed records, five published person pages, nine basic ordinary pages, shared navigation, and tested derived lists. Project, theme, publication, and news detail templates and the full design pass follow the first deployment. CMS forms load, but OAuth login and publishing are not connected yet. Cloudflare deployment is pending creation of the lab account. No hosted URL has been assigned.
+
+The preview asks search engines not to index it. Remove the temporary `noindex` meta tag and change `public/robots.txt` to `Allow: /` when the full public release is ready. Drafts are excluded from production HTML, but source records are in a public GitHub repository: never enter confidential or anonymous submissions, even as drafts.
+
+## Add a paper through /admin
+
+Once authentication is connected:
+
+1. Open the site's `/admin/` page and choose GitHub login. Use your own GitHub account with Write access to this repository.
+2. Choose **Publications**, then create an entry.
+3. Enter a short permanent **Slug**, such as `archaeological-learning`. Use lowercase letters and hyphens. Do not change it after other records link to it.
+4. Enter the title. Fill **Authors** with the complete author list in citation order, including people outside the lab. Select all lab members separately in **Lab authors**. Both fields are needed: the text produces the citation; the references update person pages.
+5. Add the year, venue, type, and an approved plain-language summary. Select the related project and themes. Leave unknown information empty.
+6. Upload a PDF under the media folder, and add DOI and code URLs or BibTeX when available. Optional buttons appear only when their fields are filled.
+7. If adding a thumbnail, enable its image section, choose the image, and enter meaningful alt text. Both are required together.
+8. Keep **Draft** on while anything needs confirmation. Turn it off only when the record is approved, then save/publish.
+9. Publishing commits to `main`. Once continuous deployment is connected, wait for its successful build before checking the public page. The paper also appears automatically under its lab authors, project, themes, and the homepage when it is one of the three newest.
+
+A failed build keeps the previous deployed version. Check the repository's Actions tab and the Worker build log, correct the entry in `/admin`, and publish again. Do not rename referenced slugs or delete a person used by another record; change their role to alumni instead.
+
+## Add a person through /admin
+
+1. Choose **People**, then create an entry.
+2. Enter the person's name and a permanent slug, for example `first-last`.
+3. Choose the confirmed role and enter the approved biography. Lower sort-order numbers appear first.
+4. Add website, Scholar, and email only when supplied. For a photo, enable the photo section and fill both the image file and alt text. Without a photo, the site displays initials.
+5. Save as a draft until the person approves their details. Switch Draft off and publish when ready.
+6. Select this person in project teams, publication lab authors, presentation presenters, and recognition recipients. Their page fills itself from those references.
+
+**Page text** contains the Home statement, About text, Join text, and footer contact. The proposed Home statement is draft pending approval.
+
+Dates can be a year (`2019`), year and month (`2020-01`), or full date (`2021-03-12`). Leave unknown dates blank. Do not invent a day merely to fill a form. Images are optional objects containing a local `/media/` path and required `alt`; this lets Sveltia prevent saving an image without alt text.
+
+## Invite an editor
+
+An organization Owner handles invitations. Use the existing personal GitHub account; the repository remains owned by `insitu-illinois`.
+
+1. In the organization's **Settings → Member privileges**, keep base repository permission at **Read**.
+2. Open **website → Settings → Collaborators and teams / Manage access → Add people**.
+3. Invite the member's own GitHub account with **Write** access to `website` only. Do not grant organization Owner or repository Admin for content editing.
+4. Have them accept the invitation and sign in at `/admin/`.
+
+These account-wide permissions have not been changed by the build.
+
+## Lab-only Cloudflare deployment
+
+The lab Cloudflare account must be created with the lab Gmail and protected with 2FA. Never use the builder's personal Cloudflare account, even for a test. Never change or remove its existing GitHub connection.
+
+Before deploying, authorize Wrangler in the lab account and run `wrangler whoami`. Verify the email and account ID together with the lab owner. Record the verified lab `account_id` in `wrangler.jsonc` and keep the auth Worker in that same account. Keep local lab credentials separate from existing personal Wrangler credentials. `.cloudflare-lab/` is ignored by Git.
+
+Site Worker settings:
+
+- Worker name: `insitu-illinois`.
+- Root directory: repository root.
+- Build command: `npm run build`.
+- Deploy command: `npx wrangler deploy`.
+- Static assets directory: `./dist` (already in `wrangler.jsonc`).
+- Node.js: 24; dependencies installed from `package-lock.json`.
+- Source: `insitu-illinois/website`, branch `main`.
+- URL: use the assigned `insitu-illinois.<lab-account>.workers.dev` URL.
+- Set that URL in **only** `astro.config.mjs` under `site`; canonical URLs and later sitemap generation derive from it.
+- Free Workers plan. No domain or paid features are required.
+
+From the **lab** Cloudflare dashboard, try Workers Builds. Install the Cloudflare GitHub app on **insitu-illinois** with **Only select repositories → website**. If the personal GitHub identity is rejected because it is connected elsewhere, stop that connection flow. Do not disconnect anything and do not switch GitHub accounts. The authorized fallback is a GitHub Actions deployment workflow using a lab-scoped API token stored as a repository secret. The exact token permissions and clicks will be verified when that fallback is needed; no token has been created or requested yet.
+
+## Recreate the Sveltia OAuth relay
+
+Use the official project: https://github.com/sveltia/sveltia-cms-auth. Recheck its current README when replacing it, because variable names and setup screens can change.
+
+1. Verify Wrangler's account with `wrangler whoami`. Deploy the official relay as a separate Worker, `insitu-cms-auth`, in the **lab** account. Record the assigned URL.
+2. An organization Owner, using their existing personal GitHub account, opens **insitu-illinois → Settings → Developer settings → OAuth Apps → New OAuth App**.
+3. Application name: **IN/SITU content editor**. Homepage URL: the actual site URL from `astro.config.mjs`. Authorization callback URL: the actual auth Worker URL followed by `/callback`.
+4. Register the app and generate its client secret. The owner enters credentials directly in Cloudflare, never in Git, chat, or a source file.
+5. In the auth Worker's **Settings → Variables and Secrets**, set `GITHUB_CLIENT_ID`, encrypted `GITHUB_CLIENT_SECRET`, and `ALLOWED_DOMAINS` to the site's hostname without `https://` or a path. Save and deploy.
+6. Set the site's build variable `CMS_AUTH_URL` to the auth Worker's origin. `npm run build` generates `public/admin/config.yml` with this value as `backend.base_url`; the backend is GitHub, repo `insitu-illinois/website`, branch `main`. Keep this environment variable in whichever deployment path is active.
+7. Redeploy the site. Test `/admin/` with a permitted editor, create and publish a harmless draft, verify the GitHub commit and successful redeployment, then remove the test entry. Verify that a user without repo Write access cannot publish.
+
+The CMS script is pinned to major version `0`, as the official Sveltia release remains in beta. Its configuration is generated from the same field definitions as Astro's Zod schemas, so editing the generated YAML directly will be overwritten.
+
+## Attach a custom domain later
+
+No custom domain has been bought or configured.
+
+When the lab separately authorizes it:
+
+1. Register the chosen domain in the lab Cloudflare account; the lab owner handles payment.
+2. Add it under the site Worker's **Settings → Domains & Routes → Add → Custom Domain**.
+3. Change `site` in `astro.config.mjs` to the new HTTPS origin and redeploy.
+4. Change the GitHub OAuth App's Homepage URL to the new site URL. Its callback stays on the auth Worker's `/callback` URL unless that Worker itself moves.
+5. Add the new hostname to the auth Worker's `ALLOWED_DOMAINS` (comma-separated with the old hostname during transition).
+6. Check the homepage, profile and project deep links, `/admin/`, canonical URLs, sitemap, and `robots.txt` over HTTPS.
+7. Decide whether the old `workers.dev` URL should remain reachable or redirect; do not retire it accidentally.
+
+## Development and checks
+
+A future student needs Node.js 24 and npm. The lab's editors do not need a terminal.
+
+```sh
+npm ci
+npm run dev
+npm test
+npm run check
+npm run build
+npx playwright install chromium
+npx playwright test
+```
+
+`npm run dev` includes drafts and marks them. `npm run build` excludes drafts from pages and lists. `npm run preview` serves the production build. Automated tests exercise every derived rule in handoff section 8, schema and reference integrity, alt-text enforcement, draft exclusion, keyboard navigation, local links, external request absence, and axe WCAG checks at desktop, 390px and 320px widths. CI runs these checks on pushes and pull requests.
+
+The token files came from the supplied design system. Fonts are self-hosted through Fontsource, with unchanged font-family names. The `sharp` override selects the patched dependency used by the build tooling; review it during future upgrades.
+
+## Preview verification
+
+The local production build generates 15 public pages. Astro type checks pass with zero errors or warnings; nine content and derived-list tests pass; six browser checks pass, including axe and reflow on every public page at 1440px, 390px and 320px. This was desktop Chrome automation and viewport emulation, not physical-device or screen-reader testing. Sveltia loads its configuration without errors; authenticated editing awaits the OAuth relay. The dependency audit reports zero known vulnerabilities. Hosted URL verification remains pending.
+
+## Content provenance and confirmation queue
+
+Content comes only from the supplied seed-content and old-site archive, with the handoff's approved names and structure. The original ZIPs and reference material remain local and are not committed. The first two historical PDFs were preserved under `public/media/papers/`, and their author lists were read from those files. The third PDF returned HTTP 429; its paper remains a draft.
+
+Unconfirmed relationships are left empty: the current VRchaeology team and Sarvin's Chi311 team link. Confirm them before adding references. CITL and ATLAS are not displayed as current partners. Photos, logo, Scholar links, publication summaries, and unknown details are left empty. The website-launch post remains a draft until a public launch date exists. The temporary preview has no favicon because no logo file has been supplied.
+
+Draft records needing review:
+
+- `src/content/news/gsd-282-spring-2027.json` — GSD 282: VRchaeology opens in Spring 2027.
+- `src/content/news/website-launch.json` — IN/SITU launches its website.
+- `src/content/pages/home.json` — People, technology, and experience in context..
+- `src/content/people/aaron-stocks.json` — Aaron Stocks.
+- `src/content/people/alan-b-craig.json` — Alan B. Craig.
+- `src/content/people/alexandra-zachwieja.json` — Alexandra Zachwieja.
+- `src/content/people/alice-xuehui-chao.json` — Alice (Xuehui) Chao.
+- `src/content/people/cameron-merrill.json` — Cameron Merrill.
+- `src/content/people/dan-matis.json` — Dan Matis.
+- `src/content/people/david-hopping.json` — David Hopping.
+- `src/content/people/emma-verstraete.json` — Emma Verstraete.
+- `src/content/people/isaac-smith.json` — Isaac Smith.
+- `src/content/people/jamie-arjona.json` — Jamie Arjona.
+- `src/content/people/janny-chen.json` — Janny Chen.
+- `src/content/people/jin-jang.json` — Jin Jang.
+- `src/content/people/lily-meyer.json` — Lily Meyer.
+- `src/content/people/monika-janas.json` — Monika Janas.
+- `src/content/people/nan-kang.json` — Nan Kang.
+- `src/content/people/rajee-shah.json` — Rajee Shah.
+- `src/content/people/robbie-sieczkowski.json` — Robbie Sieczkowski.
+- `src/content/people/wen-hao-david-huang.json` — Wen-Hao David Huang.
+- `src/content/people/zade-lobo.json` — Zade Lobo.
+- `src/content/publications/beneath-the-stone.json` — Beneath the Stone: A Low-Resource Text-Based Design Framework for Ethical Digital Representation of Marginalized Heritage Sites.
+- `src/content/publications/cognitive-loads.json` — Relationships between cognitive loads and motivational support in a VR game-based learning system for teaching introductory archaeology.
+- `src/content/publications/computation-in-context.json` — Computation in Context: A Cross-Industry Framework for Assessing the Situated Challenges of XR in Environmental Conservation.
+- `src/content/publications/lincoln-home-ar.json` — Lincoln Home augmented reality case study (title to confirm).
+- `src/content/publications/situated-cartographies.json` — Situated Cartographies: Computational Methods for Surfacing Embedded Knowledge in Regional Architectural Heritage.
+- `src/content/recognition/epic-megagrant.json` — Epic MegaGrant.
+
+Lily: role and biography. Collaborators and alumni: permission to list. Beneath the Stone: complete author list. ASCAAD papers: acceptance and author lists. Lincoln Home: exact title and author list. Cognitive-loads paper: obtain PDF and complete author list. Epic MegaGrant: year and recipient. GSD 282 news: approved wording. Home statement: Laura’s approval. Website launch: actual launch date.

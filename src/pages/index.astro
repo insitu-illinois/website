@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import RecordList from '../components/RecordList.astro';
+import { content } from '../lib/content';
+import { homeLists } from '../lib/derived.mjs';
+import home from '../content/pages/home.json';
+const data=await content();
+const lists=homeLists(data);
+---
+<Base title="People, technology, and experience in context">
+  <section>
+    <p class="label">University of Illinois Urbana-Champaign</p>
+    <h1>People, technology, and experience in context.</h1>
+    {(import.meta.env.DEV || !home.draft) && <><p>{home.statement}</p>{home.draft && <p class="label">Draft statement · Not published</p>}</>}
+    <p>We design immersive, game-based, and interactive experiences across archaeological sites, museums, cities, classrooms, and virtual worlds.</p>
+    <a href="/people/">Meet the people</a>
+  </section>
+  <RecordList title="Research themes" records={data.themes} />
+  <RecordList title="Featured projects" records={lists.projects} />
+  <RecordList title="Recent papers" records={lists.publications} />
+  <RecordList title="News" records={lists.news} />
+</Base>

@@ -1,0 +1,50 @@
+---
+import '@fontsource/big-shoulders-display/latin-800';
+import '@fontsource/source-serif-4/latin-400';
+import '@fontsource/source-serif-4/latin-400-italic';
+import '@fontsource/ibm-plex-mono/latin-400';
+import '@fontsource/ibm-plex-mono/latin-500';
+import '../../design-system/styles.css';
+import '../styles/base.css';
+import footer from '../content/pages/footer.json';
+const { title, description = 'IN/SITU at the University of Illinois Urbana-Champaign. People, technology, and experience in context.' } = Astro.props;
+const navigation=[['About','about'],['Projects','projects'],['Publications','publications'],['Presentations','presentations'],['Awards & funding','awards-funding'],['People','people'],['News','news'],['Join','join']];
+const canonical=new URL(Astro.url.pathname,Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | IN/SITU</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={`${title} | IN/SITU`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell">
+        <a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a>
+        <nav aria-label="Main navigation">
+          <ul>{navigation.map(([label,path])=><li><a href={`/${path}/`} aria-current={Astro.url.pathname.startsWith(`/${path}/`) ? 'page' : undefined}>{label}</a></li>)}</ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="shell" tabindex="-1">
+      <p class="preview-note">Working preview · Content and page layouts are in preparation.</p>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="shell">
+        <p class="label">IN/SITU · {footer.institution}</p>
+        <p><a href={`mailto:${footer.email}`}>{footer.email}</a></p>
+        <p><a href="/people/">People</a> · <a href="/join/">Join</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

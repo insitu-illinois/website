@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import RecordList from '../components/RecordList.astro';
+import { content } from '../lib/content';
+import { grouped, newest } from '../lib/derived.mjs';
+import about from '../content/pages/about.json';
+import join from '../content/pages/join.json';
+export function getStaticPaths(){return ['about','projects','publications','presentations','awards-funding','people','news','join'].map(page=>({params:{page}}));}
+const page=Astro.params.page!;
+const titles:Record<string,string>={about:'About',projects:'Projects',publications:'Publications',presentations:'Presentations','awards-funding':'Awards & funding',people:'People',news:'News',join:'Join'};
+const labels:Record<string,string>={active:'Active projects',completed:'Completed projects',journal:'Journal articles',conference:page==='presentations'?'Conference talks':'Conference papers',chapter:'Chapters',thesis:'Theses',preprint:'Preprints',invited:'Invited talks',poster:'Posters',demo:'Demos',workshop:'Workshops',exhibition:'Exhibitions',award:'Awards',grant:'Grants',fellowship:'Fellowships',scholarship:'Scholarships'};
+const data=await content();
+const collection=page==='awards-funding'?'recognition':page;
+const prose=page==='about'?about:page==='join'?join:null;
+---
+<Base title={titles[page]}>
+  <h1>{titles[page]}</h1>
+  {prose && (!prose.draft || import.meta.env.DEV) && prose.body.split('\n\n').map(paragraph=><p>{paragraph}</p>)}
+  {page==='join' && <p><a href="mailto:llshacke@illinois.edu">Contact Laura Shackelford</a></p>}
+  {['projects','publications','presentations','awards-funding'].includes(page) && grouped(data,collection).map((group:{type:string;items:any[]})=><RecordList title={labels[group.type]} records={group.items} />)}
+  {page==='people' && <RecordList title="Lab members" records={[...data.people].sort((a,b)=>a.data.order-b.data.order)} peopleLinks />}
+  {page==='news' && <RecordList title="From the archive" records={newest(data.news)} />}
+  {page==='about' && <RecordList title="Research themes" records={data.themes} />}
+</Base>

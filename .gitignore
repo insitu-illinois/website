@@ -6,7 +6,8 @@ dist/
 .dev.vars*
 .DS_Store
 handoff/
-insitu-handoff.zip
+insitu-handoff*.zip
+.cloudflare-lab/
 test-results/
 playwright-report/
 *.log

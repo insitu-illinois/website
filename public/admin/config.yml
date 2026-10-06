@@ -1,0 +1,745 @@
+# Generated from src/lib/content-model.mjs.
+backend:
+  name: github
+  repo: insitu-illinois/website
+  branch: main
+media_folder: public/media
+public_folder: /media
+collections:
+  - name: themes
+    label: Themes
+    folder: src/content/themes
+    create: true
+    format: json
+    extension: json
+    identifier_field: name
+    slug: "{{fields.slug}}"
+    fields:
+      - name: slug
+        label: Slug
+        widget: string
+        required: true
+        pattern:
+          - ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          - Use lowercase letters, numbers, and hyphens.
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
+      - name: draft
+        label: Draft
+        widget: boolean
+        required: false
+        default: false
+      - name: name
+        label: Name
+        widget: string
+        required: true
+      - name: question
+        label: Question
+        widget: text
+        required: false
+      - name: description
+        label: Description
+        widget: text
+        required: false
+      - name: image
+        label: Image
+        widget: object
+        required: false
+        collapsed: true
+        hint: Optional. Adding an image requires both a file and meaningful alt text.
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            pattern:
+              - .*\S.*
+              - Describe the image.
+  - name: people
+    label: People
+    folder: src/content/people
+    create: true
+    format: json
+    extension: json
+    identifier_field: name
+    slug: "{{fields.slug}}"
+    fields:
+      - name: slug
+        label: Slug
+        widget: string
+        required: true
+        pattern:
+          - ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          - Use lowercase letters, numbers, and hyphens.
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
+      - name: draft
+        label: Draft
+        widget: boolean
+        required: false
+        default: false
+      - name: name
+        label: Name
+        widget: string
+        required: true
+      - name: role
+        label: Role
+        widget: select
+        required: false
+        options:
+          - faculty
+          - phd
+          - ms
+          - undergrad
+          - collaborator
+          - alumni
+          - visitor
+      - name: photo
+        label: Photo
+        widget: object
+        required: false
+        collapsed: true
+        hint: Optional. Adding an image requires both a file and meaningful alt text.
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            pattern:
+              - .*\S.*
+              - Describe the image.
+      - name: bio
+        label: Bio
+        widget: text
+        required: false
+      - name: website
+        label: Website
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: scholar
+        label: Scholar
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: email
+        label: Email
+        widget: string
+        required: false
+        pattern:
+          - ^[^@\s]+@[^@\s]+\.[^@\s]+$
+          - Use an email address.
+      - name: order
+        label: Order
+        widget: number
+        required: false
+        default: 100
+        value_type: int
+        min: 0
+  - name: projects
+    label: Projects
+    folder: src/content/projects
+    create: true
+    format: json
+    extension: json
+    identifier_field: name
+    slug: "{{fields.slug}}"
+    fields:
+      - name: slug
+        label: Slug
+        widget: string
+        required: true
+        pattern:
+          - ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          - Use lowercase letters, numbers, and hyphens.
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
+      - name: draft
+        label: Draft
+        widget: boolean
+        required: false
+        default: false
+      - name: name
+        label: Name
+        widget: string
+        required: true
+      - name: shortDescription
+        label: Short description
+        widget: text
+        required: false
+      - name: heroMedia
+        label: Hero image
+        widget: object
+        required: false
+        collapsed: true
+        hint: Optional. Adding an image requires both a file and meaningful alt text.
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            pattern:
+              - .*\S.*
+              - Describe the image.
+      - name: body
+        label: Body
+        widget: markdown
+        required: false
+      - name: status
+        label: Status
+        widget: select
+        required: true
+        options:
+          - active
+          - completed
+      - name: featured
+        label: Featured
+        widget: boolean
+        required: false
+        default: false
+      - name: themes
+        label: Themes
+        widget: relation
+        required: false
+        collection: themes
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: team
+        label: Team
+        widget: relation
+        required: false
+        collection: people
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: funding
+        label: Funding
+        widget: relation
+        required: false
+        collection: recognition
+        search_fields:
+          - title
+        value_field: "{{slug}}"
+        display_fields:
+          - title
+        multiple: true
+  - name: publications
+    label: Publications
+    folder: src/content/publications
+    create: true
+    format: json
+    extension: json
+    identifier_field: title
+    slug: "{{fields.slug}}"
+    fields:
+      - name: slug
+        label: Slug
+        widget: string
+        required: true
+        pattern:
+          - ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          - Use lowercase letters, numbers, and hyphens.
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
+      - name: draft
+        label: Draft
+        widget: boolean
+        required: false
+        default: false
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: authors
+        label: Authors
+        widget: text
+        required: false
+      - name: labAuthors
+        label: Lab authors
+        widget: relation
+        required: false
+        collection: people
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: summary
+        label: Summary
+        widget: text
+        required: false
+      - name: year
+        label: Year
+        widget: number
+        required: false
+        value_type: int
+        min: 1000
+        max: 9999
+      - name: venue
+        label: Venue
+        widget: string
+        required: false
+      - name: type
+        label: Type
+        widget: select
+        required: true
+        options:
+          - journal
+          - conference
+          - chapter
+          - thesis
+          - preprint
+      - name: award
+        label: Award
+        widget: string
+        required: false
+      - name: pdf
+        label: PDF
+        widget: file
+        required: false
+        choose_url: false
+        pattern:
+          - ^/media/(?!.*\.\.).+$
+          - Upload the file to the media folder.
+      - name: doi
+        label: DOI URL
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: code
+        label: Code
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: bibtex
+        label: BibTeX
+        widget: text
+        required: false
+      - name: project
+        label: Project
+        widget: relation
+        required: false
+        collection: projects
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: false
+      - name: themes
+        label: Themes
+        widget: relation
+        required: false
+        collection: themes
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: thumbnail
+        label: Thumbnail
+        widget: object
+        required: false
+        collapsed: true
+        hint: Optional. Adding an image requires both a file and meaningful alt text.
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            pattern:
+              - .*\S.*
+              - Describe the image.
+  - name: presentations
+    label: Presentations
+    folder: src/content/presentations
+    create: true
+    format: json
+    extension: json
+    identifier_field: title
+    slug: "{{fields.slug}}"
+    fields:
+      - name: slug
+        label: Slug
+        widget: string
+        required: true
+        pattern:
+          - ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          - Use lowercase letters, numbers, and hyphens.
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
+      - name: draft
+        label: Draft
+        widget: boolean
+        required: false
+        default: false
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: type
+        label: Type
+        widget: select
+        required: true
+        options:
+          - invited
+          - conference
+          - poster
+          - demo
+          - workshop
+          - exhibition
+      - name: venue
+        label: Venue
+        widget: string
+        required: false
+      - name: location
+        label: Location
+        widget: string
+        required: false
+      - name: date
+        label: Date
+        widget: string
+        required: false
+        pattern:
+          - ^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$
+          - Use YYYY, YYYY-MM, or YYYY-MM-DD.
+        hint: Keep only the precision that is known. Leave blank if the date is unknown.
+      - name: presenters
+        label: Presenters
+        widget: relation
+        required: false
+        collection: people
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: project
+        label: Project
+        widget: relation
+        required: false
+        collection: projects
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: false
+      - name: themes
+        label: Themes
+        widget: relation
+        required: false
+        collection: themes
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: slides
+        label: Slides
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: video
+        label: Video
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+  - name: recognition
+    label: Recognition
+    folder: src/content/recognition
+    create: true
+    format: json
+    extension: json
+    identifier_field: title
+    slug: "{{fields.slug}}"
+    fields:
+      - name: slug
+        label: Slug
+        widget: string
+        required: true
+        pattern:
+          - ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          - Use lowercase letters, numbers, and hyphens.
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
+      - name: draft
+        label: Draft
+        widget: boolean
+        required: false
+        default: false
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: type
+        label: Type
+        widget: select
+        required: true
+        options:
+          - award
+          - grant
+          - fellowship
+          - scholarship
+      - name: recipients
+        label: Recipients
+        widget: relation
+        required: false
+        collection: people
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: awardingBody
+        label: Awarding body
+        widget: string
+        required: false
+      - name: year
+        label: Year
+        widget: number
+        required: false
+        value_type: int
+        min: 1000
+        max: 9999
+      - name: link
+        label: Link
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: description
+        label: Description
+        widget: text
+        required: false
+  - name: news
+    label: News
+    folder: src/content/news
+    create: true
+    format: json
+    extension: json
+    identifier_field: title
+    slug: "{{fields.slug}}"
+    fields:
+      - name: slug
+        label: Slug
+        widget: string
+        required: true
+        pattern:
+          - ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          - Use lowercase letters, numbers, and hyphens.
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
+      - name: draft
+        label: Draft
+        widget: boolean
+        required: false
+        default: false
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: date
+        label: Date
+        widget: string
+        required: false
+        pattern:
+          - ^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$
+          - Use YYYY, YYYY-MM, or YYYY-MM-DD.
+        hint: Keep only the precision that is known. Leave blank if the date is unknown.
+      - name: type
+        label: Type
+        widget: select
+        required: true
+        options:
+          - paper
+          - award
+          - talk
+          - lab-life
+          - press
+      - name: body
+        label: Body
+        widget: markdown
+        required: false
+      - name: image
+        label: Image
+        widget: object
+        required: false
+        collapsed: true
+        hint: Optional. Adding an image requires both a file and meaningful alt text.
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            pattern:
+              - .*\S.*
+              - Describe the image.
+      - name: externalLink
+        label: External link
+        widget: string
+        required: false
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: relatedPublication
+        label: Related publication
+        widget: relation
+        required: false
+        collection: publications
+        search_fields:
+          - title
+        value_field: "{{slug}}"
+        display_fields:
+          - title
+        multiple: false
+      - name: relatedProject
+        label: Related project
+        widget: relation
+        required: false
+        collection: projects
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: false
+  - name: pages
+    label: Page text
+    files:
+      - name: home
+        label: Home
+        file: src/content/pages/home.json
+        fields:
+          - name: title
+            label: Title
+            widget: string
+            required: true
+          - name: statement
+            label: Statement
+            widget: string
+            required: false
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            default: false
+      - name: about
+        label: About
+        file: src/content/pages/about.json
+        fields:
+          - name: title
+            label: Title
+            widget: string
+            required: true
+          - name: body
+            label: Body
+            widget: markdown
+            required: false
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            default: false
+      - name: join
+        label: Join
+        file: src/content/pages/join.json
+        fields:
+          - name: title
+            label: Title
+            widget: string
+            required: true
+          - name: body
+            label: Body
+            widget: markdown
+            required: false
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            default: false
+      - name: footer
+        label: Footer contact
+        file: src/content/pages/footer.json
+        fields:
+          - name: email
+            label: Email
+            widget: string
+            required: false
+            pattern:
+              - ^[^@\s]+@[^@\s]+\.[^@\s]+$
+              - Use an email address.
+          - name: institution
+            label: Institution
+            widget: string
+            required: false
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            default: false

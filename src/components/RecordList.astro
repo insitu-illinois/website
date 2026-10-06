@@ -1,0 +1,26 @@
+---
+interface Props { title: string; records: any[]; peopleLinks?: boolean; }
+const { title, records, peopleLinks=false }=Astro.props;
+---
+<section>
+  <h2>{title}</h2>
+  {records.length ? <ul class="records">
+    {records.map(record => <li>
+      <h3>{peopleLinks ? <a href={`/people/${record.id}/`}>{record.data.name}</a> : record.data.name ?? record.data.title}</h3>
+      {record.data.draft && <p class="label">Draft · Not published</p>}
+      {record.data.authors && <p>{record.data.authors}</p>}
+      {(record.data.venue || record.data.year || record.data.date || record.data.awardingBody) && <p class="label">{[record.data.venue ?? record.data.awardingBody,record.data.year ?? record.data.date].filter(Boolean).join(' · ')}</p>}
+      {(record.data.shortDescription || record.data.summary || record.data.description) && <p>{record.data.shortDescription || record.data.summary || record.data.description}</p>}
+      <div class="links">
+        {record.data.award && <span class="label">{record.data.award}</span>}
+        {record.data.pdf && <a href={record.data.pdf}>PDF</a>}
+        {record.data.doi && <a href={record.data.doi}>DOI</a>}
+        {record.data.code && <a href={record.data.code}>Code</a>}
+        {record.data.slides && <a href={record.data.slides}>Slides</a>}
+        {record.data.video && <a href={record.data.video}>Video</a>}
+        {record.data.link && <a href={record.data.link}>Award details</a>}
+        {record.data.externalLink && <a href={record.data.externalLink}>Read the source</a>}
+      </div>
+    </li>)}
+  </ul> : <p>No entries published yet.</p>}
+</section>

@@ -1,0 +1,42 @@
+:root{
+/* Excavation-dark base */
+--ink-950:#15120D;
+--ink-900:#1E1A14;
+--ink-800:#2A241C;
+--ink-700:#3A3227;
+/* Warm paper neutrals */
+--paper-50:#F7F2E8;
+--paper-100:#EFE6D4;
+--paper-200:#E2D5B9;
+--paper-300:#CDBB95;
+/* Stone mid-neutral (dividers, secondary text on paper) */
+--stone-400:#9C8F79;
+--stone-600:#6E6250;
+/* Heritage accent — fired-clay ochre */
+--ochre-200:#E7C295;
+--ochre-500:#BF6A2E;
+--ochre-600:#9A5320;
+--ochre-900:#4A2711;
+/* Digital / immersive luminous accent — survey-laser cyan */
+--lumen-300:#8FF0EA;
+--lumen-400:#45D9D2;
+--lumen-600:#1E9C97;
+/* Semantic aliases */
+--surface-page:var(--paper-50);
+--surface-card:var(--paper-100);
+--surface-inverse:var(--ink-950);
+--surface-inverse-raised:var(--ink-800);
+--text-primary:var(--ink-950);
+--text-secondary:var(--stone-600);
+--text-on-inverse:var(--paper-50);
+--text-on-inverse-secondary:var(--paper-300);
+--accent-heritage:var(--ochre-500);
+--accent-heritage-strong:var(--ochre-600);
+--accent-lumen:var(--lumen-400);
+--accent-lumen-strong:var(--lumen-600);
+--border-default:var(--paper-300);
+--border-strong:var(--stone-400);
+--border-on-inverse:var(--ink-700);
+--focus-ring:var(--lumen-400);
+--danger:#B4432B;
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "vrchaeology",
+  "draft": false,
+  "name": "VRchaeology",
+  "shortDescription": "VRchaeology teaches archaeological field methods using immersive virtual reality, allowing all students to learn archaeology without leaving the classroom. This is a test case for field sciences more broadly.",
+  "heroMedia": null,
+  "status": "active",
+  "featured": true,
+  "themes": [
+    "situated-learning",
+    "accessibility"
+  ],
+  "team": [],
+  "funding": [
+    "nsf-1736235",
+    "nsf-2021460"
+  ],
+  "body": "VRchaeology is built in Unreal Engine and belongs to The GSD Studio at the University of Illinois Urbana-Champaign.\n\nFirst taught as ANTH 399, the virtual field school began with 15 undergraduates working in pairs. Its virtual cave is modeled partly on a real cave excavated in the 1930s. Students set up research grids, locate artifacts, map features, excavate, photograph finds, and run lab analyses. Students transferred skills to real excavations.\n\nThe original team included Laura Shackelford, Wen-Hao David Huang, and Cameron Merrill. The work was presented at the Society for Historical Archaeology meeting in Boston in 2020.\n\n## Project strands\n\n- Archaeology Lab Class\n- Field School Prep\n- Virtual Reality for Wheelchair Users\n\n## Teaching\n\nGSD 282: VRchaeology, Spring 2027, was co-created by Laura Shackelford and Sepehr Vaez Afshar.\n\n## Support\n\nNational Science Foundation awards 1736235 and 2021460, and Epic MegaGrants."
+}
