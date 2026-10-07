@@ -265,6 +265,12 @@ The approved combination is Space Grotesk 600 for headings, Source Sans 3 400 fo
 
 ## Night mode and home-page sections (local review)
 
-**Night mode** in the header switches every public page between light and dark palettes. Its visible on/off label and pressed state work with keyboard and assistive technology. Light is the default even if the device prefers dark mode; only an explicit saved choice activates night mode. Theme and accessibility settings share the same browser preference record, so changing one preserves the others. Reset preferences also turns night mode off. If storage is blocked, changes work on the current page without being saved. `/admin` remains Sveltia's separate editor interface.
+**Night mode** in the header switches every public page between light and dark palettes. Its moon/sun icon, descriptive tooltip, accessible name, and pressed state work with keyboard and assistive technology. Light is the default even if the device prefers dark mode; only an explicit saved choice activates night mode. Theme and accessibility settings share the same browser preference record, so changing one preserves the others. Reset preferences also turns night mode off. If storage is blocked, changes work on the current page without being saved. `/admin` remains Sveltia's separate editor interface.
 
 Night colors are tokens in `design-system/tokens/colors.css`, including distinct button text and hover colors. Higher contrast has a separate night palette. The home page now uses consistent section spacing and visible separators, without removing, reordering, or rewriting its content. This improves scanning while preserving the full research, publication, and news lists.
+
+## Navigation in the local review preview
+
+The six primary destinations are About, Research, People, Publications, News, and Join. Research opens a single submenu containing Projects, Research themes (the existing About section), Presentations, and Awards & funding. Existing URLs and content remain unchanged. The submenu opens by click, Enter, or Space; Escape closes it and restores focus. Smaller screens have a labeled Menu button. Without JavaScript, the links remain available through native HTML disclosure.
+
+Night mode and Accessibility use compact icons in the header, with 48 CSS-pixel touch targets, accessible names, and hover/focus tooltips dismissible with Escape. The footer retains a text Accessibility entry. Navigation checks cover submenu links, keyboard behavior, no-JavaScript access, and enlarged text on mobile, alongside the existing light/night accessibility checks.

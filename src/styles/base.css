@@ -35,7 +35,7 @@ nav a { display:inline-block; padding-block:var(--space-3); text-decoration:none
 nav a:hover,.site-footer a:hover { text-decoration:underline; text-decoration-color:var(--accent-heritage-strong); }
 nav [aria-current] { text-decoration:underline; text-decoration-thickness:var(--border-thick); }
 .site-header nav a:hover { text-decoration-color:var(--ochre-200); }
-.site-header nav li:last-child a { border:var(--border-hairline) solid var(--slate-300); padding-inline:var(--space-4); border-radius:var(--radius-sm); }
+.site-header .nav-list > .nav-join > a { border:var(--border-hairline) solid var(--slate-300); padding-inline:var(--space-4); border-radius:var(--radius-sm); }
 .home-hero { display:grid; gap:var(--space-7); padding-block:var(--space-8); align-items:end; }
 .home-hero h1 { font-size:var(--text-display-xl); margin-block:var(--space-6); }
 .home-hero h1 em { color:var(--accent-heritage-strong); font-style:normal; }

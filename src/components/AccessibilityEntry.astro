@@ -1,2 +1,20 @@
-<button type="button" class="accessibility-entry" data-accessibility-open aria-haspopup="dialog" aria-controls="accessibility-settings" hidden>Accessibility</button>
-<noscript><a href="/accessibility/">Accessibility</a></noscript>
+---
+const {iconOnly=false} = Astro.props;
+---
+<span class:list={{'utility-control':iconOnly}}>
+  <button type="button" class:list={['accessibility-entry',{'icon-control':iconOnly}]} data-accessibility-open aria-label="Accessibility" aria-haspopup="dialog" aria-controls="accessibility-settings" hidden>
+    {iconOnly ? <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2"/><path d="M4 8l8 2 8-2M12 10v5m0 0-4 6m4-6 4 6"/></svg> : 'Accessibility'}
+  </button>
+  {iconOnly&&<span class="utility-tooltip" aria-hidden="true">Accessibility</span>}
+  <noscript><a href="/accessibility/">Accessibility</a></noscript>
+</span>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.utility-control').forEach(control=>{
+    control.addEventListener('pointerleave',()=>control.classList.remove('tooltip-dismissed'));
+    control.addEventListener('focusout',()=>control.classList.remove('tooltip-dismissed'));
+  });
+  document.addEventListener('keydown',event=>{
+    if (event.key === 'Escape') document.querySelectorAll('.utility-control').forEach(control=>control.classList.add('tooltip-dismissed'));
+  });
+</script>

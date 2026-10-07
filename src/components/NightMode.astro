@@ -1,4 +1,10 @@
-<button type="button" class="accessibility-entry" data-night-mode aria-pressed="false" hidden>Night mode <span data-theme-state aria-hidden="true">off</span></button>
+<span class="utility-control">
+  <button type="button" class="accessibility-entry icon-control" data-night-mode aria-label="Night mode" aria-pressed="false" hidden>
+    <svg class="night-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+    <svg class="night-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+  </button>
+  <span class="utility-tooltip" data-theme-state aria-hidden="true">Turn on night mode</span>
+</span>
 <span class="theme-status" role="status" data-theme-status></span>
 <script>
   import { savePreferences } from '../scripts/preferences';
@@ -8,7 +14,7 @@
     const sync = () => {
       const night = document.documentElement.dataset.theme === 'night';
       button.setAttribute('aria-pressed', String(night));
-      button.querySelector('[data-theme-state]')!.textContent = night ? 'on' : 'off';
+      document.querySelector('[data-theme-state]')!.textContent = night ? 'Turn off night mode' : 'Turn on night mode';
     };
     sync();
     button.hidden = false;

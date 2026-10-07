@@ -12,13 +12,14 @@ import LabContact from '../components/LabContact.astro';
 import AccessibilityEntry from '../components/AccessibilityEntry.astro';
 import AccessibilityPanel from '../components/AccessibilityPanel.astro';
 import NightMode from '../components/NightMode.astro';
+import SiteNavigation from '../components/SiteNavigation.astro';
+import '../styles/navigation.css';
 import preferencesBootstrap from '../scripts/preferences-init.js?raw';
 import '../styles/accessibility.css';
 import { indexingEnabled } from '../config/site.mjs';
 import {content} from '../lib/content';
 const {themes}=await content();
 const { title, noindex=false, description = 'IN/SITU at the University of Illinois Urbana-Champaign. People, technology, and experience in context.' } = Astro.props;
-const navigation=[['About','about'],['Projects','projects'],['Publications','publications'],['Presentations','presentations'],['Awards & funding','awards-funding'],['People','people'],['News','news'],['Join','join']];
 const canonical=new URL(Astro.url.pathname,Astro.site);
 ---
 <!doctype html>
@@ -43,10 +44,8 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
     <header class="site-header">
       <div class="shell">
         <a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a>
-        <nav aria-label="Main navigation">
-          <ul>{navigation.map(([label,path])=><li><a href={`/${path}/`} aria-current={Astro.url.pathname.startsWith(`/${path}/`) ? 'page' : undefined}>{label}</a></li>)}</ul>
-        </nav>
-        <div class="header-tools"><NightMode /><AccessibilityEntry /></div>
+        <SiteNavigation />
+        <div class="header-tools"><NightMode /><AccessibilityEntry iconOnly /></div>
       </div>
     </header>
     <main id="main" tabindex="-1" class:list={{"home-page":Astro.props.homePage}}>

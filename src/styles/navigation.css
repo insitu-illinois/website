@@ -1,0 +1,43 @@
+/* Six content destinations, with separate compact display controls. */
+.site-header .shell { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:var(--space-4); }
+.primary-navigation { min-width:0; }
+.site-header .nav-list { justify-content:center; align-items:center; gap:var(--space-2) var(--space-4); }
+.site-header :is(.nav-list a,summary,.mobile-menu-toggle) { min-height:var(--space-7); }
+.research-menu { position:relative; }
+.research-menu summary { display:flex; align-items:center; gap:var(--space-1); padding-block:var(--space-3); cursor:pointer; list-style:none; }
+.research-menu summary::-webkit-details-marker { display:none; }
+.primary-navigation svg { width:var(--space-4); height:var(--space-4); fill:none; stroke:currentColor; stroke-width:2; flex-shrink:0; }
+.research-menu[open] summary svg { rotate:180deg; }
+.site-header :is(summary,.mobile-menu-toggle):focus-visible { outline:var(--border-thick) solid var(--white); outline-offset:var(--space-1); box-shadow:0 0 0 var(--space-2) var(--navy-900); }
+.research-menu summary:is(:hover,.section-current) { text-decoration:underline; text-underline-offset:var(--space-1); }
+.site-header .research-links { position:absolute; z-index:5; inset-block-start:100%; inset-inline-start:0; display:flex; flex-direction:column; gap:0; align-items:stretch; min-width:18rem; max-width:calc(100vw - var(--space-6)); padding:var(--space-2); background:var(--navy-900); border:var(--border-hairline) solid var(--slate-300); border-radius:var(--radius-sm); box-shadow:var(--shadow-raised); }
+.site-header .research-links a { display:flex; align-items:center; padding:var(--space-3); }
+.site-header .research-links a:hover { background:var(--night-900); }
+.header-tools { justify-self:end; gap:var(--space-1); flex-wrap:nowrap; }
+.utility-control { position:relative; display:inline-flex; }
+.site-header .icon-control { width:var(--space-7); min-height:var(--space-7); padding:var(--space-3); display:inline-flex; align-items:center; justify-content:center; border-color:transparent; }
+.icon-control svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.site-header .icon-control:hover { background:var(--night-900); border-color:var(--slate-300); }
+.icon-control .night-sun { display:none; }
+.icon-control[aria-pressed="true"] .night-moon { display:none; }
+.icon-control[aria-pressed="true"] .night-sun { display:block; }
+.utility-tooltip { display:none; position:absolute; inset-inline-end:0; inset-block-start:100%; z-index:6; width:max-content; max-width:min(12rem,calc(100vw - var(--space-10))); padding:var(--space-2) var(--space-3); border:var(--border-hairline) solid var(--slate-300); border-radius:var(--radius-sm); background:var(--navy-900); color:var(--white); font-family:var(--font-mono); font-size:var(--text-label-md); line-height:var(--lh-label); pointer-events:auto; }
+.utility-control:is(:hover,:focus-within) .utility-tooltip { display:block; }
+.utility-control.tooltip-dismissed .utility-tooltip { display:none; }
+.visually-hidden { position:absolute; width:var(--border-hairline); height:var(--border-hairline); overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.mobile-menu-toggle { display:flex; align-items:center; gap:var(--space-2); color:var(--white); background:transparent; border:var(--border-hairline) solid var(--slate-300); padding:var(--space-3) var(--space-4); border-radius:var(--radius-sm); font:inherit; }
+@media (max-width:51.999rem) {
+  .site-header .shell { grid-template-columns:1fr auto; }
+  .site-header .wordmark { grid-column:1; grid-row:1; }
+  .header-tools { grid-column:2; grid-row:1; }
+  .primary-navigation { grid-column:1/-1; grid-row:2; }
+  .site-header .nav-list { display:flex; flex-direction:column; align-items:stretch; gap:0; margin-top:var(--space-3); }
+  .nav-list > li > a { display:block; }
+  .site-header .research-links { position:static; min-width:0; max-width:100%; box-shadow:none; margin-block:var(--space-2); padding-inline-start:var(--space-4); }
+  .site-header .nav-list > .nav-join > a { display:inline-flex; margin-block:var(--space-2); }
+}
+@media (max-width:24rem) {
+  .site-header .shell { display:flex; }
+  .header-tools { margin-inline-start:auto; order:1; }
+  .primary-navigation { flex-basis:100%; order:2; }
+}
