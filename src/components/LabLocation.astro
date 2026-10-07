@@ -3,7 +3,7 @@ import location from '../content/pages/location.json';
 import { mapUrl } from '../lib/location.mjs';
 const embed=mapUrl(location.mapEmbedUrl);
 ---
-{(!location.draft || import.meta.env.DEV) && <section class="lab-location" aria-labelledby="location-heading">
+{(!location.draft || import.meta.env.DEV) && <section id="location" class="lab-location" aria-labelledby="location-heading">
   <div class="split-section"><h2 id="location-heading">Find us</h2><div><address>{location.address.split('\n').map(line=><>{line}<br/></>)}</address>
     <p>The map shows the building. Use the room number in the address above.</p>
     {location.directionsUrl&&<a class="text-link" href={location.directionsUrl}>Open directions in Google Maps</a>}

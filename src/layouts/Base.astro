@@ -8,6 +8,7 @@ import '@fontsource/ibm-plex-mono/latin-500';
 import '../../design-system/styles.css';
 import '../styles/base.css';
 import footer from '../content/pages/footer.json';
+import location from '../content/pages/location.json';
 import LabContact from '../components/LabContact.astro';
 import AccessibilityEntry from '../components/AccessibilityEntry.astro';
 import AccessibilityPanel from '../components/AccessibilityPanel.astro';
@@ -17,8 +18,7 @@ import '../styles/navigation.css';
 import preferencesBootstrap from '../scripts/preferences-init.js?raw';
 import '../styles/accessibility.css';
 import { indexingEnabled } from '../config/site.mjs';
-import {content} from '../lib/content';
-const {themes}=await content();
+const shortAddress=location.address.split('\n').map(line=>line.trim()).filter(Boolean)[1] || location.address;
 const { title, noindex=false, description = 'IN/SITU at the University of Illinois Urbana-Champaign. People, technology, and experience in context.' } = Astro.props;
 const canonical=new URL(Astro.url.pathname,Astro.site);
 ---
@@ -54,9 +54,27 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
     </main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div><a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a><p>People, technology,<br/>and experience in context.</p>{(!footer.draft||import.meta.env.DEV)&&<><p class="label">{footer.institution}</p><p><LabContact /></p></>}</div>
-        <div><p class="label">Research themes</p><ul>{themes.map((theme:any)=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}</a></li>)}</ul></div>
-        <div><p class="label">The lab</p><ul><li><a href="/people/">People</a></li><li><a href="/join/">Join</a></li><li><a href="/news/">News</a></li><li><a href="/admin/">Editor sign-in</a></li><li><AccessibilityEntry /></li></ul></div>
+        <div class="footer-identity">
+          <a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a>
+          {(!footer.draft||import.meta.env.DEV)&&<p class="label">{footer.institution}</p>}
+        </div>
+        <div>
+          <h2 class="footer-heading">Connect</h2>
+          <ul>
+            <li><LabContact /></li>
+            <li><a href="/join/">Join</a></li>
+            {(!location.draft||import.meta.env.DEV)&&<li><a href="/join/#location">{shortAddress}</a></li>}
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-heading">Useful links</h2>
+          <ul>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/people/">People</a></li>
+            <li><AccessibilityEntry /></li>
+            <li><a class="footer-editor" href="/admin/">Editor sign-in</a></li>
+          </ul>
+        </div>
       </div>
     </footer>
     <AccessibilityPanel />

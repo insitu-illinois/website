@@ -288,3 +288,5 @@ Header utility artwork uses Google's filled Material Icons: Dark Mode, Light Mod
 ## Concise homepage preview
 
 Home presents the introduction, one featured project, four title-only theme links, the two newest papers, and the two newest news items. Publication and news previews show titles and date/venue metadata; full descriptions, authors, tags, and resource links remain on their detail and archive pages. The shared-premise explanation remains on About; the complete Support & connections list moved to About at `#support`. Home retains direct links to support and Awards & funding. CMS records, draft status, and existing URLs are unchanged.
+
+The simplified footer has three columns: lab identity, contact/Join/location, and useful links (About, People, Accessibility, editor sign-in). The address links to `/join/#location` and uses the building/room line from the existing CMS Location address, avoiding a second address field. Repeated themes, news, and the homepage slogan are omitted from the footer only. The shared obfuscated email and accessibility controls are unchanged.

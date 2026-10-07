@@ -170,3 +170,8 @@ section:first-child { margin-top:0; }
 .home-support { display:flex; flex-wrap:wrap; gap:var(--space-4) var(--space-6); padding-top:var(--space-5); border-top:var(--border-hairline) solid var(--border-default); }
 .home-support a { display:inline-block; padding-block:var(--space-3); }
 @media (min-width:48rem) { .home-themes { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* A compact footer for identity, contact and practical links. */
+.site-footer .footer-heading { font-family:var(--font-mono); font-size:var(--text-label-md); font-weight:400; line-height:var(--lh-label); letter-spacing:var(--ls-label); color:var(--text-muted-on-chrome); margin:0 0 var(--space-4); }
+.footer-identity p { max-width:28ch; }
+.site-footer .footer-editor { color:var(--text-muted-on-chrome); font-size:var(--text-label-md); margin-top:var(--space-3); }
