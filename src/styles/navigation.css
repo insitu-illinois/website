@@ -46,4 +46,4 @@
 .site-header .header-tools { padding:var(--space-1); border:var(--border-hairline) solid var(--border-chrome); border-radius:var(--radius-md); gap:var(--space-1); }
 .site-header .accessibility-entry.icon-control { border-color:transparent; padding:var(--space-1); }
 .site-header .accessibility-entry.icon-control:hover { background:var(--surface-chrome-hover); border-color:var(--text-muted-on-chrome); }
-.icon-control svg { width:var(--space-6); height:var(--space-6); fill:currentColor; stroke:none; }
+.icon-control svg { width:var(--space-5); height:var(--space-5); fill:currentColor; stroke:none; }

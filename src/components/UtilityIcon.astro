@@ -1,10 +1,10 @@
 ---
-import moon from '../assets/icons/phosphor/moon-stars.svg?raw';
-import sun from '../assets/icons/phosphor/sun.svg?raw';
-import accessibility from '../assets/icons/phosphor/person-arms-spread.svg?raw';
+import moon from '../assets/icons/material/dark-mode.svg?raw';
+import sun from '../assets/icons/material/light-mode.svg?raw';
+import accessibility from '../assets/icons/material/accessibility-new.svg?raw';
 interface Props { name:'moon'|'sun'|'accessibility'; class?:string; }
 const {name,class:className}=Astro.props;
-// Trusted, locally vendored Phosphor SVGs. License is beside the source assets.
+// Trusted, locally vendored Google Material SVGs. License is beside the source assets.
 const paths={moon,sun,accessibility}[name].replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
 ---
-<svg class={className} viewBox="0 0 256 256" aria-hidden="true" focusable="false" set:html={paths} />
+<svg class={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false" set:html={paths} />
