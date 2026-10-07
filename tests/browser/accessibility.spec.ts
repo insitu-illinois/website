@@ -66,7 +66,7 @@ test('storage failure and disabled JavaScript leave accessible alternatives',asy
   await page.goto('/');
   await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
   await page.getByLabel('Higher contrast',{exact:true}).check();
-  await expect(page.getByRole('status')).toContainText('cannot be saved');
+  await expect(page.getByRole('dialog').getByRole('status')).toContainText('cannot be saved');
   await expect(page.locator('html')).toHaveAttribute('data-high-contrast','true');
   const context=await browser.newContext({baseURL,javaScriptEnabled:false});
   const plain=await context.newPage(); await plain.goto('/');

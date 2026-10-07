@@ -30,6 +30,14 @@
 --slate-300:#C4CDD9;
 --slate-500:#67788E;
 --orange-700:#B83B0F;
+/* Night presentation palette. */
+--night-950:#101A29;
+--night-900:#192639;
+--night-text:#F2F5FA;
+--night-muted:#C5D0DF;
+--night-border:#56667C;
+--night-control:#9BABC1;
+--night-accent:#FFB38C;
 /* Semantic aliases */
 --surface-page:var(--white);
 --surface-card:var(--cool-50);
@@ -49,4 +57,24 @@
 --border-on-inverse:var(--ink-700);
 --focus-ring:var(--navy-900);
 --danger:#B4432B;
+--text-on-accent:var(--paper-50);
+--button-hover:var(--ochre-900);
+--header-border:var(--navy-900);
+}
+
+:root { color-scheme:light; }
+:root[data-theme="night"] {
+  color-scheme:dark;
+  --surface-page:var(--night-950);
+  --surface-card:var(--night-900);
+  --text-primary:var(--night-text);
+  --text-heading:var(--white);
+  --text-secondary:var(--night-muted);
+  --accent-heritage-strong:var(--night-accent);
+  --border-default:var(--night-border);
+  --border-strong:var(--night-control);
+  --focus-ring:var(--night-accent);
+  --text-on-accent:var(--night-950);
+  --button-hover:var(--ochre-200);
+  --header-border:var(--night-border);
 }

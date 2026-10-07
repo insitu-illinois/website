@@ -9,7 +9,7 @@ import {homeLists,referenced,recordPeople} from '../lib/derived.mjs';
 import home from '../content/pages/home.json';
 const data=await content(),lists=homeLists(data);
 ---
-<Base title="People, technology, and experience in context">
+<Base homePage title="People, technology, and experience in context">
   <header slot="hero" class="home-hero"><div><p class="label">An interdisciplinary research lab<br/>University of Illinois Urbana-Champaign</p>{(!home.draft||import.meta.env.DEV)?<h1>{home.title}</h1>:<h1>People, technology,<br/>and experience<br/><em>in context.</em></h1>}<p class="lead">We design immersive, game-based, and interactive experiences across archaeological sites, museums, cities, classrooms, and virtual worlds.</p><a class="button" href="/projects/">Explore our projects</a></div><div class="hero-field"><p class="label">IN/SITU</p><div class="field-frame"><span class="label">Field image forthcoming</span></div><p class="label">Situated · Participatory · Accessible</p></div></header>
   <section class="split-section premise"><p class="label">01 · Our shared premise</p><div><h2>Context shapes understanding.</h2>{(!home.draft||import.meta.env.DEV)?<><p class="lead">{home.statement}</p>{home.draft&&<p class="label">Draft statement · Not published</p>}</>:<p class="lead">We ask how physical, cultural, social, and technological contexts shape what people understand and how they belong.</p>}<a class="text-link" href="/about/">About the lab</a></div></section>
   <RecordList data={data} title="Four research themes" records={data.themes} cards/>

@@ -11,6 +11,7 @@ import footer from '../content/pages/footer.json';
 import LabContact from '../components/LabContact.astro';
 import AccessibilityEntry from '../components/AccessibilityEntry.astro';
 import AccessibilityPanel from '../components/AccessibilityPanel.astro';
+import NightMode from '../components/NightMode.astro';
 import preferencesBootstrap from '../scripts/preferences-init.js?raw';
 import '../styles/accessibility.css';
 import { indexingEnabled } from '../config/site.mjs';
@@ -45,10 +46,10 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
         <nav aria-label="Main navigation">
           <ul>{navigation.map(([label,path])=><li><a href={`/${path}/`} aria-current={Astro.url.pathname.startsWith(`/${path}/`) ? 'page' : undefined}>{label}</a></li>)}</ul>
         </nav>
-        <AccessibilityEntry />
+        <div class="header-tools"><NightMode /><AccessibilityEntry /></div>
       </div>
     </header>
-    <main id="main" tabindex="-1">
+    <main id="main" tabindex="-1" class:list={{"home-page":Astro.props.homePage}}>
       {Astro.slots.has('hero') && <div class="home-band"><div class="shell"><slot name="hero" /></div></div>}
       <div class="shell main-content"><slot /></div>
     </main>

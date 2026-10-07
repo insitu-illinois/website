@@ -22,6 +22,7 @@
   <p class="preference-status" role="status" aria-live="polite"></p>
 </dialog>
 <script>
+  import { savePreferences } from '../scripts/preferences';
   const panel = document.querySelector<HTMLDialogElement>('#accessibility-settings');
   if (panel && typeof panel.showModal === 'function') {
     const root = document.documentElement;
@@ -39,13 +40,10 @@
       root.dataset.textSize = textSize.value;
       root.dataset.reduceMotion = String(motion.checked);
       root.dataset.highContrast = String(contrast.checked);
-      try {
-        if (reset) localStorage.removeItem('insitu-accessibility');
-        else localStorage.setItem('insitu-accessibility', JSON.stringify({textSize: textSize.value, reduceMotion: motion.checked, highContrast: contrast.checked}));
-        status.textContent = reset ? 'Preferences reset. Device preferences still apply.' : 'Preferences saved.';
-      } catch {
-        status.textContent = 'Preferences applied to this page. Browser storage is unavailable, so they cannot be saved.';
-      }
+      const saved = savePreferences(reset);
+      status.textContent = saved
+        ? (reset ? 'Preferences reset, including night mode. Device preferences still apply.' : 'Preferences saved.')
+        : 'Preferences applied to this page. Browser storage is unavailable, so they cannot be saved.';
     };
     sync();
     document.querySelectorAll<HTMLButtonElement>('[data-accessibility-open]').forEach(button => {

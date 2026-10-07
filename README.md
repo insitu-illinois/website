@@ -262,3 +262,9 @@ These changes are on `codex/light-presentation-preview`, for local review only. 
 ## Fonts in the local presentation preview
 
 The approved combination is Space Grotesk 600 for headings, Source Sans 3 400 for body text, and IBM Plex Mono for navigation and metadata. Body text remains 18 CSS pixels by default with 1.65 line spacing; accessibility text sizing still applies. Actual Source Sans italic and bold files are bundled for formatted content. Fontsource packages serve all fonts from the site itself without Google Fonts requests. Family, size, and heading-weight tokens live in `design-system/tokens/typography.css`; the approved wordmark remains unchanged.
+
+## Night mode and home-page sections (local review)
+
+**Night mode** in the header switches every public page between light and dark palettes. Its visible on/off label and pressed state work with keyboard and assistive technology. Light is the default even if the device prefers dark mode; only an explicit saved choice activates night mode. Theme and accessibility settings share the same browser preference record, so changing one preserves the others. Reset preferences also turns night mode off. If storage is blocked, changes work on the current page without being saved. `/admin` remains Sveltia's separate editor interface.
+
+Night colors are tokens in `design-system/tokens/colors.css`, including distinct button text and hover colors. Higher contrast has a separate night palette. The home page now uses consistent section spacing and visible separators, without removing, reordering, or rewriting its content. This improves scanning while preserving the full research, publication, and news lists.

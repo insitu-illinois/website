@@ -1,0 +1,23 @@
+<button type="button" class="accessibility-entry" data-night-mode aria-pressed="false" hidden>Night mode <span data-theme-state aria-hidden="true">off</span></button>
+<span class="theme-status" role="status" data-theme-status></span>
+<script>
+  import { savePreferences } from '../scripts/preferences';
+  const button = document.querySelector<HTMLButtonElement>('[data-night-mode]');
+  const status = document.querySelector<HTMLElement>('[data-theme-status]');
+  if (button) {
+    const sync = () => {
+      const night = document.documentElement.dataset.theme === 'night';
+      button.setAttribute('aria-pressed', String(night));
+      button.querySelector('[data-theme-state]')!.textContent = night ? 'on' : 'off';
+    };
+    sync();
+    button.hidden = false;
+    document.addEventListener('insitu:preferences', sync);
+    button.addEventListener('click', () => {
+      const night = document.documentElement.dataset.theme !== 'night';
+      document.documentElement.dataset.theme = night ? 'night' : 'light';
+      const saved = savePreferences();
+      if (status) status.textContent = `Night mode ${night ? 'on' : 'off'}.${saved ? '' : ' Browser storage is unavailable; this choice applies to the current page only.'}`;
+    });
+  }
+</script>

@@ -46,3 +46,13 @@ body:has(.accessibility-panel[open]) { overflow:hidden; }
 html[data-reduce-motion="true"] *,html[data-reduce-motion="true"] *::before,html[data-reduce-motion="true"] *::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
 html[data-reduce-motion="true"] :where(a,button):active { translate:none; }
 @media (forced-colors:active) { .accessibility-panel,.accessibility-entry { border-color:ButtonText; } }
+
+html[data-theme="night"][data-high-contrast="true"] {
+  --surface-card:var(--night-950);
+  --text-primary:var(--white);
+  --text-secondary:var(--white);
+  --text-heading:var(--white);
+  --border-default:var(--white);
+  --border-strong:var(--white);
+  --accent-heritage-strong:var(--ochre-200);
+}

@@ -50,7 +50,7 @@ test('publication citation copies, relationships navigate, and reduced motion di
   await context.grantPermissions(['clipboard-read','clipboard-write']);
   await page.goto('/publications/motivational-support/');
   await page.getByRole('button',{name:'Copy BibTeX'}).click();
-  await expect(page.getByRole('status')).toHaveText('Citation copied.');
+  await expect(page.locator('main').getByRole('status')).toHaveText('Citation copied.');
   expect(await page.evaluate(()=>navigator.clipboard.readText())).toContain('motivational-support2019');
   await page.getByRole('link',{name:'VRchaeology',exact:true}).click();
   await expect(page.getByRole('heading',{level:1})).toHaveText('VRchaeology');
