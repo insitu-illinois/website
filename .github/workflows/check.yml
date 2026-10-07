@@ -11,10 +11,12 @@ concurrency:
   cancel-in-progress: false
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     env:
       ASTRO_TELEMETRY_DISABLED: '1'
       CMS_AUTH_URL: ${{ vars.CMS_AUTH_URL }}
+      PLAYWRIGHT_CHANNEL: chrome
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,7 +27,8 @@ jobs:
       - run: npm test
       - run: npm run check
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      # The hosted runner includes Chrome and its OS dependencies.
+      - run: google-chrome --version
       - run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
