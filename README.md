@@ -115,7 +115,7 @@ When the lab separately authorizes it:
 2. Add it under the site Worker's **Settings → Domains & Routes → Add → Custom Domain**.
 3. Change `site` in `astro.config.mjs` to the new HTTPS origin and redeploy.
 4. Change the GitHub OAuth App's Homepage URL to the new site URL. Its callback stays on the auth Worker's `/callback` URL unless that Worker itself moves.
-5. Add the new hostname to the auth Worker's `ALLOWED_DOMAINS` (comma-separated with the old hostname during transition).
+5. Add the new hostname to the auth Worker's `ALLOWED_DOMAINS` (comma-separated with the old hostname during transition). If running `deploy-auth.mjs`, it sets this variable from the current `site` hostname; re-add the old hostname afterward if keeping both during migration.
 6. Check the homepage, profile and project deep links, `/admin/`, canonical URLs, sitemap, and `robots.txt` over HTTPS.
 7. Decide whether the old `workers.dev` URL should remain reachable or redirect; do not retire it accidentally.
 
@@ -198,8 +198,10 @@ Lily needs role and biography confirmation. Collaborators and alumni need permis
 
 ## Release verification
 
-The initial preview was deployed October 6, 2026; GitHub Actions deployment and editor login were connected October 7. The full-site build has 32 public HTML pages (including 404), plus sitemap, robots.txt, and favicon. All five template types are built. Local verification: 15 unit/security/content tests, zero Astro errors or warnings, and 9 browser checks passed. Live verification of this full release follows the deployment.
+The initial preview was deployed October 6, 2026; GitHub Actions deployment and editor login were connected October 7. The full-site build has 32 public HTML pages (including 404), plus sitemap, robots.txt, and favicon. All five template types are built. Local verification: 15 unit/security/content tests, zero Astro errors or warnings, and 9 browser checks passed. All 9 browser checks also passed against the live URL. The homepage, representative project and publication pages, sitemap, robots.txt, favicon, and CMS configuration matched the local build byte for byte. HTTPS and security headers were verified with Chrome and curl; missing routes return HTTP 404, and `/admin/` carries `noindex`. Public pages are crawlable, with only `/admin/` excluded from robots.txt.
 
 The browser checks use desktop Chrome with viewport emulation, not physical phones, Safari, or a screen reader. Automated axe checks supplement the keyboard and visual checks; they are not a claim of comprehensive manual WCAG certification.
 
 CMS round trip: creation commit `1be1e15`, successful deployment [run 37672009509](https://github.com/insitu-illinois/website/actions/runs/37672009509), deletion commit `b7625ce`. The first CMS save exposed blank optional references; schemas now accept those blanks while still rejecting invalid nonblank references. The temporary record was removed after verifying the successful deployment.
+
+Full website release: October 7, 2026, source commit `538d0107a7514be6e54b517bd3f6aefb2d65160c`, [successful Actions run 37672484614](https://github.com/insitu-illinois/website/actions/runs/37672484614), Cloudflare version `90fd8b7d-19cd-47c8-a8b0-022876bf5e0b`. CMS cleanup [run 37672349472](https://github.com/insitu-illinois/website/actions/runs/37672349472) also succeeded. Subsequent documentation and test-timeout updates do not change public content.

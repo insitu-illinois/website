@@ -28,11 +28,15 @@ test('draft people and papers are absent from every production page',()=>{
 });
 test('all internal links and assets resolve; public pages make no third-party requests',async({page,baseURL})=>{
   const external:string[]=[];
+  const checked=new Set<string>();
   page.on('request',req=>{if(new URL(req.url()).origin!==new URL(baseURL!).origin)external.push(req.url());});
   for(const path of publicPages){
     await page.goto(path.replace(/^dist/,'').replace(/index\.html$/,''));
     const links=await page.locator('[href],[src]').evaluateAll(elements=>elements.flatMap(el=>[el.getAttribute('href'),el.getAttribute('src')]).filter((v):v is string=>!!v&&v.startsWith('/')));
-    for(const href of new Set(links))expect((await page.request.get(href)).status(),href).toBe(200);
+    for(const href of new Set(links))if(!checked.has(href)){
+      expect((await page.request.get(href)).status(),href).toBe(200);
+      checked.add(href);
+    }
   }
   expect(external).toEqual([]);
 });
