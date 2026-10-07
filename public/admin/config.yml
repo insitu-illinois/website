@@ -925,6 +925,29 @@ collections:
             hint: Turn on to hide this entry from the website while you prepare it; GitHub
               files remain public.
             default: false
+      - name: accessibility
+        label: Accessibility
+        file: src/content/pages/accessibility.json
+        fields:
+          - name: title
+            label: Title
+            widget: string
+            required: true
+            hint: Enter the approved title in sentence case, keeping proper names
+              capitalized.
+          - name: body
+            label: Body
+            widget: markdown
+            required: false
+            hint: Write the approved page text; use headings, paragraphs, lists, and links
+              as needed.
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
+            default: false
       - name: location
         label: Lab location
         file: src/content/pages/location.json

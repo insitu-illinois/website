@@ -8,6 +8,10 @@ import '../../design-system/styles.css';
 import '../styles/base.css';
 import footer from '../content/pages/footer.json';
 import LabContact from '../components/LabContact.astro';
+import AccessibilityEntry from '../components/AccessibilityEntry.astro';
+import AccessibilityPanel from '../components/AccessibilityPanel.astro';
+import preferencesBootstrap from '../scripts/preferences-init.js?raw';
+import '../styles/accessibility.css';
 import { indexingEnabled } from '../config/site.mjs';
 import {content} from '../lib/content';
 const {themes}=await content();
@@ -19,6 +23,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script is:inline set:html={preferencesBootstrap} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | IN/SITU</title>
     <meta name="description" content={description} />
@@ -39,6 +44,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
         <nav aria-label="Main navigation">
           <ul>{navigation.map(([label,path])=><li><a href={`/${path}/`} aria-current={Astro.url.pathname.startsWith(`/${path}/`) ? 'page' : undefined}>{label}</a></li>)}</ul>
         </nav>
+        <AccessibilityEntry />
       </div>
     </header>
     <main id="main" tabindex="-1">
@@ -49,8 +55,9 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
       <div class="shell footer-grid">
         <div><a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a><p>People, technology,<br/>and experience in context.</p>{(!footer.draft||import.meta.env.DEV)&&<><p class="label">{footer.institution}</p><p><LabContact /></p></>}</div>
         <div><p class="label">Research themes</p><ul>{themes.map((theme:any)=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}</a></li>)}</ul></div>
-        <div><p class="label">The lab</p><ul><li><a href="/people/">People</a></li><li><a href="/join/">Join</a></li><li><a href="/news/">News</a></li><li><a href="/admin/">Editor sign-in</a></li></ul></div>
+        <div><p class="label">The lab</p><ul><li><a href="/people/">People</a></li><li><a href="/join/">Join</a></li><li><a href="/news/">News</a></li><li><a href="/admin/">Editor sign-in</a></li><li><AccessibilityEntry /></li></ul></div>
       </div>
     </footer>
+    <AccessibilityPanel />
   </body>
 </html>

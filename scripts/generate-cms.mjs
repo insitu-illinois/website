@@ -84,7 +84,7 @@ const collections = Object.keys(models).map(name => ({
 }));
 collections.push({ name: 'pages', label: 'Page text', files: [
   { name: 'home', label: 'Home', file: 'src/content/pages/home.json', fields: [field('title',{required:true}),field('statement',{}),field('draft',{kind:'boolean',default:false})] },
-  ...['about','join'].map(name => ({name,label:label(name),file:`src/content/pages/${name}.json`,fields:[field('title',{required:true}),field('body',{widget:'markdown'}),field('draft',{kind:'boolean',default:false})]})),
+  ...['about','join','accessibility'].map(name => ({name,label:label(name),file:`src/content/pages/${name}.json`,fields:[field('title',{required:true}),field('body',{widget:'markdown'}),field('draft',{kind:'boolean',default:false})]})),
   { name:'location',label:'Lab location',file:'src/content/pages/location.json',fields:[field('address',{widget:'text'}),field('mapEmbedUrl',{kind:'url'}),field('directionsUrl',{kind:'url'}),field('draft',{kind:'boolean',default:true})] },
   { name:'footer',label:'Lab contact',file:'src/content/pages/footer.json',fields:[field('email',{kind:'email',required:true}),field('institution',{}),field('draft',{kind:'boolean',default:false})] },
 ] });

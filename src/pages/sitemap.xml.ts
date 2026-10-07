@@ -2,7 +2,7 @@ import {content} from '../lib/content';
 import {hasPersonPage} from '../lib/format.mjs';
 export async function GET({site}:{site:URL}) {
   const data=await content();
-  const paths=['','about','projects','publications','presentations','awards-funding','people','news','join'];
+  const paths=['','about','projects','publications','presentations','awards-funding','people','news','join','accessibility'];
   for(const collection of ['people','themes','projects','publications','news'])for(const entry of data[collection])if(collection!=='people'||hasPersonPage(entry))paths.push(`${collection}/${entry.id}`);
   for(let p=2;p<=Math.ceil(data.news.length/6);p++)paths.push(`news/${p}`);
   const urls=paths.map(path=>new URL(path?`/${path}/`:'/',site).href);

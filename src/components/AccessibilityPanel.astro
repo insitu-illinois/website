@@ -1,0 +1,77 @@
+<dialog id="accessibility-settings" class="accessibility-panel" aria-labelledby="accessibility-title" aria-describedby="accessibility-intro">
+  <div class="accessibility-heading">
+    <h2 id="accessibility-title">Accessibility settings</h2>
+    <button class="button secondary" type="button" data-accessibility-close autofocus>Close</button>
+  </div>
+  <p id="accessibility-intro">Adjust how this website appears. Preferences are saved in this browser when storage is available.</p>
+  <div class="accessibility-options">
+    <label for="accessibility-text">Text size</label>
+    <select id="accessibility-text" aria-describedby="accessibility-text-hint">
+      <option value="100">Default (100%)</option>
+      <option value="125">Larger (125%)</option>
+      <option value="150">Larger (150%)</option>
+      <option value="200">Largest (200%)</option>
+    </select>
+    <p id="accessibility-text-hint">Browser zoom and your device’s text settings also work.</p>
+    <label class="accessibility-option"><input id="accessibility-motion" type="checkbox" aria-describedby="accessibility-motion-hint" /> <span>Reduce motion</span></label>
+    <p id="accessibility-motion-hint">Removes transitions and interaction movement. Your device’s reduced-motion preference is always respected.</p>
+    <label class="accessibility-option"><input id="accessibility-contrast" type="checkbox" /> <span>Higher contrast</span></label>
+    <p>Strengthens text, links, and borders on reading surfaces.</p>
+  </div>
+  <div class="links"><button type="button" class="button secondary" data-accessibility-reset>Reset preferences</button><a href="/accessibility/">Accessibility statement</a></div>
+  <p class="preference-status" role="status" aria-live="polite"></p>
+</dialog>
+<script>
+  const panel = document.querySelector<HTMLDialogElement>('#accessibility-settings');
+  if (panel && typeof panel.showModal === 'function') {
+    const root = document.documentElement;
+    const textSize = panel.querySelector<HTMLSelectElement>('#accessibility-text')!;
+    const motion = panel.querySelector<HTMLInputElement>('#accessibility-motion')!;
+    const contrast = panel.querySelector<HTMLInputElement>('#accessibility-contrast')!;
+    const status = panel.querySelector<HTMLElement>('.preference-status')!;
+    let opener: HTMLElement | null = null;
+    const sync = () => {
+      textSize.value = root.dataset.textSize || '100';
+      motion.checked = root.dataset.reduceMotion === 'true';
+      contrast.checked = root.dataset.highContrast === 'true';
+    };
+    const save = (reset = false) => {
+      root.dataset.textSize = textSize.value;
+      root.dataset.reduceMotion = String(motion.checked);
+      root.dataset.highContrast = String(contrast.checked);
+      try {
+        if (reset) localStorage.removeItem('insitu-accessibility');
+        else localStorage.setItem('insitu-accessibility', JSON.stringify({textSize: textSize.value, reduceMotion: motion.checked, highContrast: contrast.checked}));
+        status.textContent = reset ? 'Preferences reset. Device preferences still apply.' : 'Preferences saved.';
+      } catch {
+        status.textContent = 'Preferences applied to this page. Browser storage is unavailable, so they cannot be saved.';
+      }
+    };
+    sync();
+    document.querySelectorAll<HTMLButtonElement>('[data-accessibility-open]').forEach(button => {
+      button.hidden = false;
+      button.addEventListener('click', () => {
+        opener = button;
+        sync();
+        status.textContent = '';
+        panel.showModal();
+        panel.scrollTop = 0;
+      });
+    });
+    panel.querySelector('[data-accessibility-close]')!.addEventListener('click', () => panel.close());
+    panel.addEventListener('close', () => opener?.focus());
+    // Keep Tab within the panel, including browsers that otherwise focus browser chrome.
+    panel.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const controls = Array.from(panel.querySelectorAll<HTMLElement>('button,select,input,a[href]'));
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+    // Native Escape handling closes the modal; the close event restores focus.
+    [textSize, motion, contrast].forEach(control => control.addEventListener('change', () => save()));
+    panel.querySelector('[data-accessibility-reset]')!.addEventListener('click', () => {
+      textSize.value = '100'; motion.checked = false; contrast.checked = false; save(true);
+    });
+  }
+</script>

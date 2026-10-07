@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import Prose from '../components/Prose.astro';
+import LabContact from '../components/LabContact.astro';
+import statement from '../content/pages/accessibility.json';
+---
+<Base title={statement.title}>
+  <header class="page-heading"><h1>{statement.title}</h1><p class="lead">Reading preferences, evaluation status, and ways to report barriers.</p></header>
+  {(!statement.draft || import.meta.env.DEV) && <div class="reading-section"><Prose body={statement.body} /><p><LabContact /></p></div>}
+</Base>
