@@ -151,3 +151,10 @@ section:first-child { margin-top:0; }
 .home-page .records>.card { padding:var(--space-5) 0; border:0; border-top:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-none); }
 .home-page .card h3 { font-size:var(--text-body-lg); max-width:none; }
 @media (min-width:48rem) { .home-page .card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-5) var(--space-7); } }
+
+/* Decorative spatial study stays beside, never behind, reading text. */
+.home-hero { align-items:center; }
+.hero-field { position:relative; overflow:hidden; background:var(--surface-card); }
+.hero-field .field-frame { border:0; margin-inline:calc(-1 * var(--space-5)); margin-block:var(--space-3); aspect-ratio:auto; }
+.home-page .featured { position:relative; isolation:isolate; }
+.home-page .featured::before { content:""; position:absolute; inset:0 calc(-1 * var(--space-4)); background:var(--surface-card); border-radius:var(--radius-md); z-index:-1; }

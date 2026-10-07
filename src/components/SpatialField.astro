@@ -1,0 +1,23 @@
+---
+// Abstract spatial contours, not a map or a visualization of research data.
+const rings = Array.from({length:18},(_,i)=>i);
+---
+<svg class="spatial-field" viewBox="0 0 560 440" fill="none" aria-hidden="true" focusable="false">
+  <g class="field-guides">
+    <path d="M40 110H520M40 330H520M140 40V400M420 40V400" />
+    <circle cx="280" cy="220" r="178" />
+    <path d="M36 220H64M50 206V234M496 220H524M510 206V234" />
+  </g>
+  <g class="field-contours" transform="translate(280 220) rotate(-28)">
+    {rings.map(i=><ellipse rx={62+i*7.1} ry={22+i*7.8} transform={`rotate(${i*3.2})`} />)}
+  </g>
+  <path class="field-slash" d="M315 111H338L245 329H222Z" />
+  <g class="field-nodes"><circle cx="140" cy="110" r="4"/><circle cx="420" cy="330" r="4"/><circle cx="50" cy="220" r="3"/><circle cx="510" cy="220" r="3"/></g>
+</svg>
+<style>
+  .spatial-field { display:block; width:100%; height:auto; color:var(--text-heading); }
+  .field-guides { stroke:var(--border-default); stroke-width:1; }
+  .field-contours { stroke:currentColor; stroke-width:1; opacity:.48; }
+  .field-slash { fill:var(--text-heading); stroke:var(--surface-card); stroke-width:4; }
+  .field-nodes { fill:var(--text-heading); }
+</style>
