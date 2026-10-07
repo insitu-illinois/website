@@ -282,3 +282,5 @@ The local review uses a white reading surface, neutral text and outlined actions
 The softer-corner trial uses shared radius tokens: 4 pixels for tags, 8 for controls, and 12 for media, cards and the accessibility panel. Header/footer silhouettes and section dividers remain straight. This is a presentation-only change on the local review branch.
 
 The hero now includes an original decorative SVG spatial study (not a map, lab photograph, or research result); the real-photo placeholder remains labeled. Featured work has a subtle neutral background. Both header utility icons share a local SVG component and retain their accessible names, tooltips, 48-pixel targets, and existing behavior. The artwork is static and hidden from assistive technology.
+
+Header utility artwork now uses Phosphor's duotone Moon Stars, Sun, and Person Arms Spread icons, vendored from the official `phosphor-icons/core` repository in `src/assets/icons/phosphor/`, with its MIT license retained. Icons render at 32 pixels inside the existing 48-pixel controls. No icon CDN or runtime dependency is used.

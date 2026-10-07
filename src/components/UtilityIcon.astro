@@ -1,9 +1,10 @@
 ---
+import moon from '../assets/icons/phosphor/moon-stars.svg?raw';
+import sun from '../assets/icons/phosphor/sun.svg?raw';
+import accessibility from '../assets/icons/phosphor/person-arms-spread.svg?raw';
 interface Props { name:'moon'|'sun'|'accessibility'; class?:string; }
 const {name,class:className}=Astro.props;
+// Trusted, locally vendored Phosphor SVGs. License is beside the source assets.
+const paths={moon,sun,accessibility}[name].replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
 ---
-<svg class={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  {name==='moon'&&<path d="M20.2 14.3A8.6 8.6 0 0 1 9.7 3.8a8.6 8.6 0 1 0 10.5 10.5Z"/>}
-  {name==='sun'&&<><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></>}
-  {name==='accessibility'&&<><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="7" r="1" fill="currentColor" stroke="none"/><path d="m6.8 10 5.2 1 5.2-1M12 11v3m0 0-2.7 4m2.7-4 2.7 4"/></>}
-</svg>
+<svg class={className} viewBox="0 0 256 256" aria-hidden="true" focusable="false" set:html={paths} />
