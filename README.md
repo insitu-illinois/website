@@ -278,3 +278,5 @@ Night mode and Accessibility use compact icons in the header, with 48 CSS-pixel 
 ## Monochrome presentation trial
 
 The local review uses a white reading surface, neutral text and outlined actions, with matching charcoal header and footer. Research themes keep their descriptions and links in an open two-column layout. Night mode uses neutral grays; high contrast and focus indicators remain available. All content, routes, CMS configuration and deployment settings are unchanged. Palette values are centralized in `design-system/tokens/colors.css`. This trial has not been published.
+
+The softer-corner trial uses shared radius tokens: 4 pixels for tags, 8 for controls, and 12 for media, cards and the accessibility panel. Header/footer silhouettes and section dividers remain straight. This is a presentation-only change on the local review branch.

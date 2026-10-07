@@ -41,8 +41,8 @@ nav [aria-current] { text-decoration:underline; text-decoration-thickness:var(--
 .home-hero h1 em { color:var(--accent-heritage-strong); font-style:normal; }
 .home-hero .label { color:var(--text-secondary); }
 .home-hero .lead { max-width:45ch; margin-bottom:var(--space-6); }
-.hero-field { padding:var(--space-5); border:var(--border-hairline) solid var(--border-default); background:var(--surface-card); }
-.field-frame { aspect-ratio:4/3; display:grid; place-items:center; border:var(--border-hairline) solid var(--border-strong); margin-block:var(--space-5); }
+.hero-field { padding:var(--space-5); border:var(--border-hairline) solid var(--border-default); background:var(--surface-card); border-radius:var(--radius-md); }
+.field-frame { aspect-ratio:4/3; display:grid; place-items:center; border:var(--border-hairline) solid var(--border-strong); margin-block:var(--space-5); border-radius:var(--radius-sm); }
 .hero-field>p:last-child { margin:0; padding-top:var(--space-4); border-top:var(--border-hairline) solid var(--accent-lumen); }
 .button { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--space-7); padding:var(--space-3) var(--space-5); background:var(--accent-heritage-strong); color:var(--text-on-accent); border:var(--border-hairline) solid var(--accent-heritage-strong); border-radius:var(--radius-sm); text-decoration:none; transition:background var(--dur-fast) var(--ease-standard); }
 .button:hover { background:var(--button-hover); border-color:var(--button-hover); text-decoration:underline; }
@@ -79,10 +79,10 @@ section:first-child { margin-top:0; }
 .links:empty { display:none; }
 .links a:not(.button) { font-family:var(--font-mono); font-size:var(--text-label-md); letter-spacing:var(--ls-label); padding-block:var(--space-2); }
 .tags { display:flex; flex-wrap:wrap; gap:var(--space-3); list-style:none; padding:0; margin-block:var(--space-5); }
-.tags a { display:block; border:var(--border-hairline) solid var(--border-default); padding:var(--space-3); border-radius:var(--radius-sm); text-decoration:none; }
+.tags a { display:block; border:var(--border-hairline) solid var(--border-default); padding:var(--space-3); border-radius:var(--radius-xs); text-decoration:none; }
 .tags a:hover { border-color:var(--accent-heritage-strong); background:var(--surface-card); }
 .badge { display:inline-block; padding:var(--space-2) var(--space-3); border:var(--border-hairline) solid var(--accent-heritage-strong); color:var(--accent-heritage-strong); }
-.media,.media-placeholder { width:100%; aspect-ratio:16/9; object-fit:cover; border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); }
+.media,.media-placeholder { width:100%; aspect-ratio:16/9; object-fit:cover; border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); }
 .media-placeholder { background:var(--surface-card); display:grid; place-items:center; padding:var(--space-5); text-align:center; }
 .portrait { aspect-ratio:4/5; }
 .feature-project { display:grid; gap:var(--space-6); align-items:center; margin-top:var(--space-6); }
@@ -90,10 +90,10 @@ section:first-child { margin-top:0; }
 .feature-project>div:last-child { padding-block:var(--space-5); }
 .feature-project .button { margin-top:var(--space-4); }
 .person-heading { display:grid; gap:var(--space-7); align-items:start; }
-.portrait-placeholder { width:100%; max-width:20rem; aspect-ratio:4/5; display:grid; place-items:center; background:var(--surface-card); border:var(--border-hairline) solid var(--border-default); color:var(--text-secondary); font-family:var(--font-mono); font-size:var(--text-display-md); }
-.person-heading>img { width:100%; max-width:20rem; aspect-ratio:4/5; object-fit:cover; }
+.portrait-placeholder { width:100%; max-width:20rem; aspect-ratio:4/5; display:grid; place-items:center; background:var(--surface-card); border:var(--border-hairline) solid var(--border-default); color:var(--text-secondary); font-family:var(--font-mono); font-size:var(--text-display-md); border-radius:var(--radius-md); }
+.person-heading>img { width:100%; max-width:20rem; aspect-ratio:4/5; object-fit:cover; border-radius:var(--radius-md); }
 .person-heading h1 { margin-top:var(--space-4); }
-.people-photo,.people-initials { width:100%; aspect-ratio:1; object-fit:cover; object-position:top; border-radius:var(--radius-sm); }
+.people-photo,.people-initials { width:100%; aspect-ratio:1; object-fit:cover; object-position:top; border-radius:var(--radius-md); }
 .people-initials { display:grid; place-items:center; background:var(--surface-page); color:var(--text-secondary); font-family:var(--font-mono); font-size:var(--text-display-md); }
 .people-list h3 { margin-block:var(--space-4) var(--space-3); }
 .people-list p { margin-bottom:0; }
