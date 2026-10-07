@@ -21,18 +21,21 @@ button { cursor:pointer; }
 .lead { font-size:var(--text-body-lg); max-width:58ch; }
 .skip { position:absolute; inset-inline-start:var(--space-4); top:var(--space-4); transform:translateY(-300%); background:var(--surface-page); padding:var(--space-3); z-index:10; }
 .skip:focus { transform:none; }
-.site-header,.home-band { background:var(--surface-page); color:var(--text-primary); }
+.home-band { background:var(--surface-page); color:var(--text-primary); }
 .site-footer { background:var(--surface-card); color:var(--text-primary); }
-.site-header { border-bottom:var(--border-hairline) solid var(--border-default); padding-block:var(--space-5); }
+.site-header { background:var(--navy-900); color:var(--white); border-bottom:var(--border-hairline) solid var(--navy-900); padding-block:var(--space-5); }
 .site-header .shell { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-4) var(--space-6); }
 .wordmark { font-family:var(--font-mono); font-size:var(--text-display-sm); letter-spacing:var(--ls-display); text-decoration:none; white-space:nowrap; }
 .wordmark span { color:var(--accent-heritage); font-size:1.1em; }
-.site-header a,.site-footer a { color:var(--text-heading); }
+.site-footer a { color:var(--text-heading); }
+.site-header a { color:var(--white); }
+.site-header a:focus-visible { outline-color:var(--white); box-shadow:0 0 0 var(--space-2) var(--navy-900); }
 nav ul { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-5); list-style:none; padding:0; margin:0; }
 nav a { display:inline-block; padding-block:var(--space-3); text-decoration:none; }
 nav a:hover,.site-footer a:hover { text-decoration:underline; text-decoration-color:var(--accent-heritage-strong); }
 nav [aria-current] { text-decoration:underline; text-decoration-thickness:var(--border-thick); }
-.site-header nav li:last-child a { border:var(--border-hairline) solid var(--border-strong); padding-inline:var(--space-4); border-radius:var(--radius-sm); }
+.site-header nav a:hover { text-decoration-color:var(--ochre-200); }
+.site-header nav li:last-child a { border:var(--border-hairline) solid var(--slate-300); padding-inline:var(--space-4); border-radius:var(--radius-sm); }
 .home-hero { display:grid; gap:var(--space-7); padding-block:var(--space-8); align-items:end; }
 .home-hero h1 { font-size:var(--text-display-xl); margin-block:var(--space-6); }
 .home-hero h1 em { color:var(--accent-heritage-strong); font-style:normal; }
