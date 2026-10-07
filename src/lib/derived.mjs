@@ -41,6 +41,6 @@ export function personThemes(data, person) {
   return data.themes.filter(theme=>ids.has(theme.id));
 }
 export const relatedPapers = (data,paper) => newest(data.publications.filter(r=>r.id!==paper.id && (paper.data.themes ?? []).some(theme=>includes(r.data.themes,id(theme))))).slice(0,3);
-export const homeLists = data => ({publications:newest(data.publications).slice(0,3),projects:data.projects.filter(r=>r.data.featured).sort(byTitle).slice(0,3),news:newest(data.news).slice(0,3)});
+export const homeLists = data => ({publications:newest(data.publications).slice(0,2),projects:data.projects.filter(r=>r.data.featured).sort(byTitle).slice(0,1),news:newest(data.news).slice(0,2)});
 export const orders = {publications:['journal','conference','chapter','thesis','preprint'],presentations:['invited','conference','poster','demo','workshop','exhibition'],recognition:['award','grant','fellowship','scholarship'],projects:['active','completed']};
 export const grouped = (data,name) => orders[name].map(type=>({type,items:newest(data[name].filter(r=>r.data[name==='projects'?'status':'type']===type))}));

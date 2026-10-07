@@ -158,3 +158,15 @@ section:first-child { margin-top:0; }
 .hero-field .field-frame { border:0; margin-inline:calc(-1 * var(--space-5)); margin-block:var(--space-3); aspect-ratio:auto; }
 .home-page .featured { position:relative; isolation:isolate; }
 .home-page .featured::before { content:""; position:absolute; inset:0 calc(-1 * var(--space-4)); background:var(--surface-card); border-radius:var(--radius-md); z-index:-1; }
+
+/* Home is a concise entry point; complete records live on their own pages. */
+.home-themes { list-style:none; padding:0; margin:0; display:grid; gap:0 var(--space-7); }
+.home-themes li { border-top:var(--border-hairline) solid var(--border-default); }
+.home-themes a { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); min-height:var(--space-7); padding-block:var(--space-5); color:var(--text-heading); text-decoration:none; }
+.home-themes a:hover { text-decoration:underline; }
+.home-themes span { flex-shrink:0; }
+.compact-records h3 { font-size:var(--text-body-lg); line-height:var(--lh-body); max-width:60ch; }
+.compact-records .metadata { margin-bottom:0; }
+.home-support { display:flex; flex-wrap:wrap; gap:var(--space-4) var(--space-6); padding-top:var(--space-5); border-top:var(--border-hairline) solid var(--border-default); }
+.home-support a { display:inline-block; padding-block:var(--space-3); }
+@media (min-width:48rem) { .home-themes { grid-template-columns:repeat(2,minmax(0,1fr)); } }

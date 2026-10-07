@@ -21,7 +21,7 @@ Saving an entry commits it to GitHub. The automatic checks then rebuild and depl
 5. Upload the PDF; add DOI and code links when available. Paste the citation into **BibTeX** to show the copy button. The initial citations contain only the known title, authors, venue, and year; add verified volume, pages, and DOI when available.
 6. For a thumbnail, enable the image section, choose a file, and write meaningful **Alt text**. Both are required together.
 7. Keep **Draft** on until the content is confirmed. Turn it off and save when ready.
-8. Wait for the successful deployment. The paper automatically appears under its lab authors, project, and themes, and on Home if it is one of the three newest.
+8. Wait for the successful deployment. The paper automatically appears under its lab authors, project, and themes, and on Home if it is one of the two newest.
 
 ### Add a person
 
@@ -284,3 +284,7 @@ The softer-corner trial uses shared radius tokens: 4 pixels for tags, 8 for cont
 The hero now includes an original decorative SVG spatial study (not a map, lab photograph, or research result); the real-photo placeholder remains labeled. Featured work has a subtle neutral background. Both header utility icons share a local SVG component and retain their accessible names, tooltips, 48-pixel targets, and existing behavior. The artwork is static and hidden from assistive technology.
 
 Header utility artwork uses Google's filled Material Icons: Dark Mode, Light Mode, and Accessibility New, downloaded from the official `google/material-design-icons` repository and stored in `src/assets/icons/material/` with the Apache 2.0 license. Icons render at their native 24-pixel size inside 48-pixel controls. No icon CDN or runtime dependency is used. Source: https://developers.google.com/fonts/docs/material_icons
+
+## Concise homepage preview
+
+Home presents the introduction, one featured project, four title-only theme links, the two newest papers, and the two newest news items. Publication and news previews show titles and date/venue metadata; full descriptions, authors, tags, and resource links remain on their detail and archive pages. The shared-premise explanation remains on About; the complete Support & connections list moved to About at `#support`. Home retains direct links to support and Awards & funding. CMS records, draft status, and existing URLs are unchanged.

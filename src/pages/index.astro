@@ -4,18 +4,15 @@ import RecordList from '../components/RecordList.astro';
 import Media from '../components/Media.astro';
 import SpatialField from '../components/SpatialField.astro';
 import {content} from '../lib/content';
-import Tags from '../components/Tags.astro';
-import PeopleTags from '../components/PeopleTags.astro';
-import {homeLists,referenced,recordPeople} from '../lib/derived.mjs';
+import {homeLists} from '../lib/derived.mjs';
 import home from '../content/pages/home.json';
 const data=await content(),lists=homeLists(data);
 ---
 <Base homePage title="People, technology, and experience in context">
   <header slot="hero" class="home-hero"><div><p class="label">An interdisciplinary research lab<br/>University of Illinois Urbana-Champaign</p>{(!home.draft||import.meta.env.DEV)?<h1>{home.title}</h1>:<h1>People, technology,<br/>and experience<br/><em>in context.</em></h1>}<p class="lead">We design immersive, game-based, and interactive experiences across archaeological sites, museums, cities, classrooms, and virtual worlds.</p><a class="button" href="/projects/">Explore our projects</a></div><div class="hero-field"><p class="label">IN/SITU</p><div class="field-frame"><SpatialField /></div><p class="label field-caption">Field image forthcoming</p><p class="label">Situated · Participatory · Accessible</p></div></header>
-  <section class="split-section premise"><p class="label">01 · Our shared premise</p><div><h2>Context shapes understanding.</h2>{(!home.draft||import.meta.env.DEV)?<><p class="lead">{home.statement}</p>{home.draft&&<p class="label">Draft statement · Not published</p>}</>:<p class="lead">We ask how physical, cultural, social, and technological contexts shape what people understand and how they belong.</p>}<a class="text-link" href="/about/">About the lab</a></div></section>
-  <RecordList data={data} title="Four research themes" records={data.themes} cards/>
-  <section class="featured"><div class="section-heading"><div><p class="label">02 · Featured work</p><h2>Learning in place.</h2></div><a class="text-link" href="/projects/">All projects</a></div>{lists.projects.map((project:any)=><article class="feature-project"><Media media={project.data.heroMedia}/><div><p class="label">Featured project · {project.data.status}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name}</a></h3><p>{project.data.shortDescription}</p><Tags themes={referenced(data.themes,project.data.themes)}/><PeopleTags people={recordPeople(data,project)}/><a class="button" href={`/projects/${project.id}/`}>View project</a></div></article>)}</section>
-  <RecordList data={data} title="Recent papers" records={lists.publications} more="/publications/"/>
-  <RecordList data={data} title="News" records={lists.news} more="/news/"/>
-  <section class="support-section"><h2>Support & connections</h2><div class="split-section"><div><p class="label">Research support</p><ul><li>National Science Foundation</li><li>Epic MegaGrants</li><li>University of Illinois Urbana-Champaign</li></ul></div><div><p class="label">At Illinois</p><ul><li>The GSD Studio</li><li>VR@Illinois</li></ul></div></div><a class="text-link" href="/awards-funding/">Awards & funding</a></section>
+  <section class="featured"><div class="section-heading"><div><p class="label">Featured work</p><h2>Learning in place.</h2></div><a class="text-link" href="/projects/">All projects</a></div>{lists.projects.map((project:any)=><article class="feature-project"><Media media={project.data.heroMedia}/><div><p class="label">Featured project · {project.data.status}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name}</a></h3><p>{project.data.shortDescription}</p><a class="button" href={`/projects/${project.id}/`}>View project</a></div></article>)}</section>
+  <section class="home-theme-section"><h2>Four research themes</h2><ul class="home-themes">{data.themes.map((theme:any)=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}<span aria-hidden="true">→</span></a></li>)}</ul></section>
+  <RecordList compact title="Recent papers" records={lists.publications} more="/publications/"/>
+  <RecordList compact title="News" records={lists.news} more="/news/"/>
+  <aside class="home-support"><a href="/about/#support">Support & connections</a><a href="/awards-funding/">Awards & funding</a></aside>
 </Base>

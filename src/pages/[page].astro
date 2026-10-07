@@ -27,6 +27,7 @@ const collection=page==='awards-funding'?'recognition':page;
     <RecordList data={data} title="Four research themes" id="themes" records={data.themes} cards/>
     <section class="split-section"><h2>Led by Laura Shackelford</h2><div><p>We are based at the University of Illinois Urbana-Champaign.</p><p><a href="/people/laura-shackelford/">Meet our director</a></p><p><LabContact /></p></div></section>
   </>}
+  {page==='about'&&<section class="support-section" id="support"><h2>Support & connections</h2><div class="split-section"><div><p class="label">Research support</p><ul><li>National Science Foundation</li><li>Epic MegaGrants</li><li>University of Illinois Urbana-Champaign</li></ul></div><div><p class="label">At Illinois</p><ul><li>The GSD Studio</li><li>VR@Illinois</li></ul></div></div><a class="text-link" href="/awards-funding/">Awards & funding</a></section>}
   {page==='projects'&&<Tags themes={data.themes}/>}
   {['projects','publications','presentations','awards-funding'].includes(page)&&grouped(data,collection).map((group:{type:string;items:any[]})=><RecordList data={data} title={page==='presentations'&&group.type==='conference'?'Conference talks':labels[group.type as keyof typeof labels]} records={group.items} cards={page==='projects'}/>)}
   {page==='people'&&<PeopleList people={data.people} data={data}/>}

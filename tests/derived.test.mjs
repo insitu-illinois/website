@@ -47,10 +47,11 @@ test('related papers exclude themselves and cap shared-theme matches at three',(
   const publications=Array.from({length:6},(_,i)=>entry(String(i),{title:String(i),themes:i===5?['other']:['same'],year:2000+i}));
   assert.deepEqual(relatedPapers({...data,publications},publications[0]).map(r=>r.id),['4','3','2']);
 });
-test('home lists sort newest first and cap results at three; featured flag is required',()=>{
+test('home lists select two recent papers, two news items, and one featured project',()=>{
   const result=homeLists({...data,publications:[entry('new',{title:'New',year:2020}),entry('old',{title:'Old',year:2019})],projects:Array.from({length:6},(_,i)=>entry(String(i),{name:String(i),featured:i<4})),news:Array.from({length:6},(_,i)=>entry(String(i),{title:String(i),date:`202${i}`}))});
-  assert.equal(result.publications[0].data.year,2020);assert.equal(result.projects.length,3);
-  assert.deepEqual(result.news.map(r=>r.id),['5','4','3']);
+  assert.equal(result.publications[0].data.year,2020);assert.equal(result.projects.length,1);
+  assert.equal(result.publications.length,2);
+  assert.deepEqual(result.news.map(r=>r.id),['5','4']);
 });
 test('fixed groups include every enum in the required order, including scholarships',()=>{
   for(const name of Object.keys(orders)){
