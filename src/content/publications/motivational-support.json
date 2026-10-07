@@ -17,7 +17,7 @@
   "pdf": "/media/papers/motivational-support.pdf",
   "doi": "",
   "code": "",
-  "bibtex": "",
+  "bibtex": "@article{motivational-support2019,\n  title = {Relationships between motivational support and game features in a game-based virtual reality learning environment},\n  author = {Laura Shackelford and Wenhao David Huang and Alan Craig and Cameron Merrill and Danying Chen},\n  journal = {Educational Media International},\n  year = {2019}\n}",
   "award": "",
   "thumbnail": null
 }

@@ -1,0 +1,5 @@
+---
+import { markdown } from '../lib/markdown.mjs';
+const { body='' }=Astro.props;
+---
+<div class="prose" set:html={markdown(body)} />

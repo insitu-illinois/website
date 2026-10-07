@@ -1,56 +1,56 @@
 # IN/SITU website
 
-Astro static website for IN/SITU at the University of Illinois Urbana-Champaign.
+[Public website](https://insitu-illinois.insituillinois.workers.dev/) · [Edit content](https://insitu-illinois.insituillinois.workers.dev/admin/) · [GitHub repository](https://github.com/insitu-illinois/website)
 
-Preview: https://insitu-illinois.insituillinois.workers.dev
+Astro static site, Sveltia CMS, and Cloudflare Workers static assets. The organization owns the repository. Both Workers are in the lab Cloudflare account. No custom domain or paid service is required.
 
-Repository: https://github.com/insitu-illinois/website
+## For lab members
 
-## Current status
+There is no separate Sveltia account. Sign in to `/admin/` with your own GitHub account after accepting repository Write access. Cloudflare access is not needed to edit content. No terminal is needed.
 
-This is the early preview milestone: seven collections, 55 seed records, five published person pages, nine basic ordinary pages, shared navigation, and tested derived lists. Project, theme, publication, and news detail templates and the full design pass follow the first deployment. CMS forms load, but OAuth login and publishing are not connected yet. The early preview is deployed in the verified lab Cloudflare account. Continuous deployment is active. The OAuth relay is configured with the organization-owned app. End-to-end editor sign-in and publishing still await verification.
+Saving an entry commits it to GitHub. The automatic checks then rebuild and deploy the site, usually within a few minutes. A green **Check and deploy website** run in [Actions](https://github.com/insitu-illinois/website/actions) confirms publication. If a check fails, the previous site stays online: correct the entry and save again, or ask a maintainer to read the failed check. Reload the public page after a successful deployment.
 
-The preview asks search engines not to index it. Remove the temporary `noindex` meta tag and change `public/robots.txt` to `Allow: /` when the full public release is ready. Drafts are excluded from production HTML, but source records are in a public GitHub repository: never enter confidential or anonymous submissions, even as drafts.
+**Draft** hides an entry from the public site, not from GitHub. This repository is public. Never enter private material or anonymous submissions, even as drafts. Do not change an existing slug: other entries use it as a permanent reference.
 
-## Add a paper through /admin
+### Add a paper
 
-Once authentication is connected:
+1. Open `/admin/`, sign in with GitHub, and select **Publications → Create new entry**.
+2. Enter a permanent **Slug** using lowercase letters and hyphens, and the approved title.
+3. **Authors** is the complete author list in citation order, including external co-authors. **Lab authors** separately selects the lab members whose profile pages should show the paper. Keep both fields.
+4. Fill the year, venue, type, and approved summary. Select the related project and research themes. Leave unknown optional fields blank.
+5. Upload the PDF; add DOI and code links when available. Paste the citation into **BibTeX** to show the copy button. The initial citations contain only the known title, authors, venue, and year; add verified volume, pages, and DOI when available.
+6. For a thumbnail, enable the image section, choose a file, and write meaningful **Alt text**. Both are required together.
+7. Keep **Draft** on until the content is confirmed. Turn it off and save when ready.
+8. Wait for the successful deployment. The paper automatically appears under its lab authors, project, and themes, and on Home if it is one of the three newest.
 
-1. Open the site's `/admin/` page and choose GitHub login. Use your own GitHub account with Write access to this repository.
-2. Choose **Publications**, then create an entry.
-3. Enter a short permanent **Slug**, such as `archaeological-learning`. Use lowercase letters and hyphens. Do not change it after other records link to it.
-4. Enter the title. Fill **Authors** with the complete author list in citation order, including people outside the lab. Select all lab members separately in **Lab authors**. Both fields are needed: the text produces the citation; the references update person pages.
-5. Add the year, venue, type, and an approved plain-language summary. Select the related project and themes. Leave unknown information empty.
-6. Upload a PDF under the media folder, and add DOI and code URLs or BibTeX when available. Optional buttons appear only when their fields are filled.
-7. If adding a thumbnail, enable its image section, choose the image, and enter meaningful alt text. Both are required together.
-8. Keep **Draft** on while anything needs confirmation. Turn it off only when the record is approved, then save/publish.
-9. Publishing commits to `main`. Once continuous deployment is connected, wait for its successful build before checking the public page. The paper also appears automatically under its lab authors, project, themes, and the homepage when it is one of the three newest.
+### Add a person
 
-A failed build keeps the previous deployed version. Check the repository's Actions tab and the Worker build log, correct the entry in `/admin`, and publish again. Do not rename referenced slugs or delete a person used by another record; change their role to alumni instead.
+1. Select **People → Create new entry**. Enter their name and a permanent `first-last` slug.
+2. Choose the confirmed role and enter their approved biography. Smaller **Order** values appear first.
+3. Add website, Scholar, and email only when supplied. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
+4. Keep **Draft** on while details need approval, then switch it off and save.
+5. Select that person in project **Team**, publication **Lab authors**, presentation **Presenters**, and recognition **Recipients**. Their four profile lists fill automatically.
 
-## Add a person through /admin
+When someone leaves, change their role to **alumni** rather than deleting them. Remove references before deleting any record. To restore an accidental change, a maintainer can revert the corresponding GitHub commit; do not force-push shared history.
 
-1. Choose **People**, then create an entry.
-2. Enter the person's name and a permanent slug, for example `first-last`.
-3. Choose the confirmed role and enter the approved biography. Lower sort-order numbers appear first.
-4. Add website, Scholar, and email only when supplied. For a photo, enable the photo section and fill both the image file and alt text. Without a photo, the site displays initials.
-5. Save as a draft until the person approves their details. Switch Draft off and publish when ready.
-6. Select this person in project teams, publication lab authors, presentation presenters, and recognition recipients. Their page fills itself from those references.
+### Other edits
 
-**Page text** contains the Home statement, About text, Join text, and footer contact. The proposed Home statement is draft pending approval.
-
-Dates can be a year (`2019`), year and month (`2020-01`), or full date (`2021-03-12`). Leave unknown dates blank. Do not invent a day merely to fill a form. Images are optional objects containing a local `/media/` path and required `alt`; this lets Sveltia prevent saving an image without alt text.
+- **Page text** edits the Home statement, About text, Join text, and footer contact. The proposed Home statement remains draft pending approval; the site shows the approved lab description meanwhile.
+- Themes can be renamed by editing **Name** while keeping the slug. Relationships survive the rename.
+- News dates accept `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`. Leave unknown dates blank rather than inventing a day. The news index paginates automatically after six entries.
+- Project and news bodies support headings, paragraphs, lists, emphasis, and links. Use heading level 2 for sections. Add images with the dedicated image fields.
+- Optional links and badges only appear when filled. Empty collections show a quiet “No entries published yet” message.
 
 ## Invite an editor
 
-An organization Owner handles invitations. Use the existing personal GitHub account; the repository remains owned by `insitu-illinois`.
+The lab organization Owner handles invitations. The existing lab owner is `insituillinois`. The builder `sepehrvafshar` stays an organization Member with repository Admin access; Owner is not needed for routine website work.
 
-1. In the organization's **Settings → Member privileges**, keep base repository permission at **Read**.
+1. In **insitu-illinois → Settings → Member privileges**, keep base repository permission **Read**.
 2. Open **website → Settings → Collaborators and teams / Manage access → Add people**.
-3. Invite the member's own GitHub account with **Write** access to `website` only. Do not grant organization Owner or repository Admin for content editing.
-4. Have them accept the invitation and sign in at `/admin/`.
+3. Invite the member's own GitHub account with **Write** access to `website` only. Do not give content editors organization Owner or repository Admin.
+4. Ask them to accept the invitation, open `/admin/`, and sign in with their own account.
 
-These account-wide permissions have not been changed by the build.
+A separate non-writer identity has not been used for an end-to-end denial test. GitHub enforces repository permissions; verify this with a consenting test account when inviting the next editor. The build did not change organization-wide membership or base permissions.
 
 ## Lab-only Cloudflare deployment
 
@@ -70,7 +70,7 @@ Site Worker settings:
 - Node.js: 24; dependencies installed from `package-lock.json`.
 - Source: `insitu-illinois/website`, branch `main`.
 - URL: use the assigned `insitu-illinois.<lab-account>.workers.dev` URL.
-- Set that URL in **only** `astro.config.mjs` under `site`; canonical URLs and later sitemap generation derive from it.
+- Set that URL in **only** `astro.config.mjs` under `site`; canonical URLs, sitemap, and robots.txt derive from it.
 - Free Workers plan. No domain or paid features are required.
 
 Automatic publication uses GitHub Actions. The app installation flow offered **Authorize & Request** because the builder's personal account is currently an organization Member, although it has Admin access to this repository. No installation request was submitted and the existing personal Cloudflare connection was not changed. The Actions fallback is active. Its first verified deployment succeeded on October 7, 2026: commit `6aa3432`, [run 37664725671](https://github.com/insitu-illinois/website/actions/runs/37664725671), Worker version `a6cc0969-0c4b-42ca-82a5-8c37c36889c5`. The live homepage matched the local build byte for byte, and preview crawler restrictions remained in place.
@@ -101,9 +101,9 @@ Use the official project: https://github.com/sveltia/sveltia-cms-auth. Recheck i
 6. Set the site's build variable `CMS_AUTH_URL` to the auth Worker's origin. `npm run build` generates `public/admin/config.yml` with this value as `backend.base_url`; the backend is GitHub, repo `insitu-illinois/website`, branch `main`, with `auth_scope: public_repo` so editors are not asked for private-repository access. Keep this environment variable in whichever deployment path is active.
 7. Redeploy the site. Test `/admin/` with a permitted editor, create and publish a harmless draft, verify the GitHub commit and successful redeployment, then remove the test entry. Verify that a user without repo Write access cannot publish.
 
-The relay was deployed on October 7, 2026 as version `c8cdd8ea-7bd2-4442-9680-3b561d01fa1f`. The lab owner entered the app credentials in the Cloudflare dashboard. A live check now returns a GitHub authorization redirect requesting only `public_repo`; this confirms configuration is present, while actual sign-in is still awaiting verification. Four local security checks pass: allowed domains, narrow public-repository scope, secure CSRF cookie/state checks, and rejection of missing client credentials. Organization registration uses the existing lab Owner account `insituillinois`. The builder's personal account stays an organization Member with Admin access to `website`; organization Owner access is not required for routine site work. No membership change was made. The lab-owned [IN/SITU content editor app](https://github.com/organizations/insitu-illinois/settings/applications/3912656) is registered. Its client ID and encrypted client secret have been saved in the lab Worker's dashboard. The public relay URL is also configured as the repository Actions variable `CMS_AUTH_URL`. Testing CMS login and publishing is pending.
+The lab-owned [IN/SITU content editor app](https://github.com/organizations/insitu-illinois/settings/applications/3912656) is registered. Its credentials are stored in the lab auth Worker, and `CMS_AUTH_URL` is set in repository Actions variables. Editor sign-in, saving a draft, a successful automatic deployment, draft exclusion on the live site, and deletion of the test record have been verified. The relay requests `public_repo`, validates the requesting hostname, and uses a secure CSRF state cookie. Tokens retain GitHub's expiration behavior. Never post credentials in chat or source control.
 
-The CMS script is pinned to major version `0`, as the official Sveltia release remains in beta. Its configuration is generated from the same field definitions as Astro's Zod schemas, so editing the generated YAML directly will be overwritten.
+The CMS script is pinned to major version `0`. Its YAML is generated from the same field model as Astro's schemas; manual changes to generated YAML are overwritten. Markdown is rendered at build time with Marked and sanitized with sanitize-html. Images belong in the dedicated image fields, which require alt text; embedded Markdown images and executable HTML are not rendered.
 
 ## Attach a custom domain later
 
@@ -121,33 +121,49 @@ When the lab separately authorizes it:
 
 ## Development and checks
 
-A future student needs Node.js 24 and npm. The lab's editors do not need a terminal.
+Editors do not need these commands. A future maintainer needs Node.js 24, npm, Git, and an authorized GitHub account.
 
 ```sh
 npm ci
 npm run dev
 npm test
 npm run check
-npm run build
+CMS_AUTH_URL=https://insitu-cms-auth.insituillinois.workers.dev npm run build
 npx playwright install chromium
 npx playwright test
 ```
 
-`npm run dev` includes drafts and marks them. `npm run build` excludes drafts from pages and lists. `npm run preview` serves the production build. Automated tests exercise every derived rule in handoff section 8, schema and reference integrity, alt-text enforcement, draft exclusion, keyboard navigation, local links, external request absence, and axe WCAG checks at desktop, 390px and 320px widths. CI runs these checks on pushes and pull requests.
+With Chrome already installed, use `PLAYWRIGHT_CHANNEL=chrome npx playwright test`. CI uses Chrome supplied by the Ubuntu 24.04 runner, avoiding an unnecessary OS package download; all accessibility and browser checks still run. See [Playwright browser channels](https://playwright.dev/docs/browsers#google-chrome--microsoft-edge) and [GitHub runner software](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md).
 
-The token files came from the supplied design system. Fonts are self-hosted through Fontsource, with unchanged font-family names. The `sharp` override selects the patched dependency used by the build tooling; review it during future upgrades.
+`npm run dev` includes drafts and labels them; `npm run build` excludes them. `npm run preview` serves the production output. The build validates slugs, references, dates, and image alt text. Tests exercise every derived-list rule, draft exclusion, safe Markdown, OAuth domain/CSRF checks, keyboard navigation, citation copying, reduced motion, links, assets, sitemap, and automated axe checks at 1440, 390, and 320 CSS pixels. Browser screenshots are saved under ignored `test-results/`.
 
-## Preview verification
+Public pages use self-hosted fonts and make no third-party runtime requests. The CMS loads its pinned-major script from a CDN. No analytics or tracking was added. Color, typography, spacing, border, and motion values come from `design-system/`; the font-role assignments are unchanged. The favicon is a temporary typographic slash using the same color tokens, pending the actual logo file.
 
-The local production build generates 15 public pages. Astro type checks pass with zero errors or warnings; nine content and derived-list tests pass; six browser checks pass, including axe and reflow on every public page at 1440px, 390px and 320px. This was desktop Chrome automation and viewport emulation, not physical-device or screen-reader testing. Sveltia loads its configuration without errors; authenticated editing awaits the OAuth relay. The dependency audit reports zero known vulnerabilities. The live preview also passed the browser checks at all three widths. HTTPS, the person deep link, `/admin/`, its configuration, and `robots.txt` match the built files; `robots.txt` returns `text/plain`, security headers are present, and missing pages return 404. The first requests briefly preceded HTTPS certificate availability; rerunning the affected checks succeeded.
+### Repository layout
+
+- `src/content/`: seven collections and ordinary-page text, edited through Sveltia.
+- `src/lib/content-model.mjs`: one model generates Zod schemas and CMS fields.
+- `src/lib/derived.mjs`: shared filtering, sorting, grouping, and reference rules.
+- `src/pages/`: nine ordinary pages and the five record templates; presentations and recognition remain list-only.
+- `src/components/`, `src/layouts/`, `src/styles/`: shared rendering and token-based styling.
+- `public/admin/`, `public/media/`: CMS entry point and uploaded media.
+- `infra/cms-auth/`: pinned official OAuth relay source and license.
+- `scripts/`: content checks, generated CMS configuration, and lab-only deployment guards.
+- `.github/workflows/check.yml`: checks, build artifact, and deployment on `main`.
+
+### Domain and login configuration
+
+`astro.config.mjs → site` is the only website-origin configuration. Do not duplicate the site URL inside templates. The OAuth relay is a separate service origin supplied as `CMS_AUTH_URL`; this does not change when the website gets a custom domain. Local builds need that variable to generate a working `/admin` config. GitHub Actions supplies it automatically.
+
+To authorize a new maintainer's local lab session, from the repo run `XDG_CONFIG_HOME="$PWD/.cloudflare-lab" npx wrangler login`, complete login as the lab account, then run `XDG_CONFIG_HOME="$PWD/.cloudflare-lab" npx wrangler whoami` and verify the exact lab email and ID below. Never reuse a personal login. The guarded deployment scripts additionally clear inherited credential variables and reject a conflicting legacy Wrangler directory. Keep `.cloudflare-lab/` ignored and private.
 
 ## Content provenance and confirmation queue
 
-Content comes only from the supplied seed-content and old-site archive, with the handoff's approved names and structure. The original ZIPs and reference material remain local and are not committed. The first two historical PDFs were preserved under `public/media/papers/`, and their author lists were read from those files. The third PDF returned HTTP 429; its paper remains a draft.
+Facts come from the supplied seed content and old-site archive. The ZIPs and reference files stay local and are not published. Two archived paper PDFs were preserved under `public/media/papers/`, and their author lists were read from those PDFs. The third PDF was unavailable; that paper stays draft. Initial BibTeX entries format already-supplied citation facts without adding new bibliographic claims.
 
-Unconfirmed relationships are left empty: the current VRchaeology team and Sarvin's Chi311 team link. Confirm them before adding references. CITL and ATLAS are not displayed as current partners. Photos, logo, Scholar links, publication summaries, and unknown details are left empty. The website-launch post remains a draft until a public launch date exists. The temporary preview has no favicon because no logo file has been supplied.
+Unconfirmed relationships remain empty, including the current VRchaeology team and Sarvin's Chi311 team link. CITL and ATLAS are not displayed as current partners. Project stubs, absent photography, and missing summaries remain clearly empty or marked forthcoming. The four themes use the approved first-pass names. The real logo can replace the wordmark-only header and temporary favicon when supplied. The Home statement, opening details, and unconfirmed records need lab review, not new code.
 
-Draft records needing review:
+### Every current draft
 
 - `src/content/news/gsd-282-spring-2027.json` — GSD 282: VRchaeology opens in Spring 2027.
 - `src/content/news/website-launch.json` — IN/SITU launches its website.
@@ -178,15 +194,12 @@ Draft records needing review:
 - `src/content/publications/situated-cartographies.json` — Situated Cartographies: Computational Methods for Surfacing Embedded Knowledge in Regional Architectural Heritage.
 - `src/content/recognition/epic-megagrant.json` — Epic MegaGrant.
 
-Lily: role and biography. Collaborators and alumni: permission to list. Beneath the Stone: complete author list. ASCAAD papers: acceptance and author lists. Lincoln Home: exact title and author list. Cognitive-loads paper: obtain PDF and complete author list. Epic MegaGrant: year and recipient. GSD 282 news: approved wording. Home statement: Laura’s approval. Website launch: actual launch date.
+Lily needs role and biography confirmation. Collaborators and alumni need permission to list. Draft papers need complete author lists, titles, or acceptance confirmation as applicable. The Epic grant needs year and recipient confirmation. GSD 282 news needs approved wording. The Home statement needs Laura's approval. The website-launch news record awaits the lab's chosen announcement date and copy.
 
-## Release record
+## Release verification
 
-- First preview: October 6, 2026.
-- Site source commit: `a771992`.
-- Cloudflare version: `0f9a74d5-ad10-4d8f-bd35-d1c867c36463`.
-- Worker: `insitu-illinois`, free `workers.dev` hostname, lab account only.
-- Deployment method for this first release: verified local Wrangler login.
-- Automatic GitHub deployment: verified October 7, 2026.
-- OAuth relay: deployed and configured with the organization-owned app; end-to-end CMS login and publishing are pending.
-- Remaining website work: detail templates, ordinary page sections, full design pass, final accessibility and publishing checks.
+The initial preview was deployed October 6, 2026; GitHub Actions deployment and editor login were connected October 7. The full-site build has 32 public HTML pages (including 404), plus sitemap, robots.txt, and favicon. All five template types are built. Local verification: 15 unit/security/content tests, zero Astro errors or warnings, and 9 browser checks passed. Live verification of this full release follows the deployment.
+
+The browser checks use desktop Chrome with viewport emulation, not physical phones, Safari, or a screen reader. Automated axe checks supplement the keyboard and visual checks; they are not a claim of comprehensive manual WCAG certification.
+
+CMS round trip: creation commit `1be1e15`, successful deployment [run 37672009509](https://github.com/insitu-illinois/website/actions/runs/37672009509), deletion commit `b7625ce`. The first CMS save exposed blank optional references; schemas now accept those blanks while still rejecting invalid nonblank references. The temporary record was removed after verifying the successful deployment.

@@ -1,0 +1,15 @@
+---
+const {bibtex}=Astro.props;
+---
+{bibtex && <section class="citation"><h2>Cite this work</h2><pre tabindex="0" aria-label="BibTeX citation"><code>{bibtex}</code></pre><button class="button copy-citation" type="button" hidden>Copy BibTeX</button><p class="copy-status label" role="status"></p></section>}
+<script>
+  for(const button of document.querySelectorAll<HTMLButtonElement>('.copy-citation')) {
+    button.hidden=false;
+    button.addEventListener('click',async()=>{
+      const section=button.closest('.citation')!;
+      const status=section.querySelector('.copy-status')!;
+      try {await navigator.clipboard.writeText(section.querySelector('code')!.textContent!);status.textContent='Citation copied.';}
+      catch {status.textContent='Copy unavailable. Select and copy the citation above.';}
+    });
+  }
+</script>

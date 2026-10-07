@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import RecordList from '../../components/RecordList.astro';
+import Tags from '../../components/Tags.astro';
+import Citation from '../../components/Citation.astro';
+import {content} from '../../lib/content';
+import {relatedPapers,referenced} from '../../lib/derived.mjs';
+import type { CollectionEntry } from 'astro:content';
+interface Props { entry: CollectionEntry<'publications'>; data: Awaited<ReturnType<typeof content>>; }
+export async function getStaticPaths(){const data=await content();return data.publications.map((entry:any)=>({params:{slug:entry.id},props:{entry,data}}));}
+const {entry,data}=Astro.props,d=entry.data;
+const project=referenced(data.projects,[d.project])[0];
+---
+<Base noindex={d.draft} title={d.title} description={d.summary || `${d.title}. ${d.authors}. ${d.venue}, ${d.year}.`}>
+  <a class="back-link" href="/publications/">All publications</a>
+  <header class="page-heading publication-heading"><p class="label">Publication{d.draft?' · Draft':''}</p><h1>{d.title}</h1><p class="authors">{d.authors}</p><p class="label">{[d.venue,d.year].filter(Boolean).join(' · ')}</p>{d.award&&<p class="badge">{d.award}</p>}<div class="links">{d.pdf&&<a class="button" href={d.pdf}>Read PDF</a>}{d.doi&&<a class="button secondary" href={d.doi}>DOI</a>}{d.code&&<a class="button secondary" href={d.code}>Code</a>}</div></header>
+  {d.thumbnail&&<img class="media" src={d.thumbnail.src} alt={d.thumbnail.alt}/>}
+  {d.summary&&<section class="reading-section"><h2>About this work</h2><p class="lead">{d.summary}</p></section>}
+  <Citation bibtex={d.bibtex}/>
+  <section><h2>Research context</h2>{project&&<p>Project: <a href={`/projects/${project.id}/`}>{project.data.name}</a></p>}<Tags themes={referenced(data.themes,d.themes)}/></section>
+  <RecordList title="Related papers" records={relatedPapers(data,entry)}/>
+</Base>

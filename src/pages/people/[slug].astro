@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const {person,lists}=Astro.props;
 const roles:Record<string,string>={faculty:'Faculty',phd:'PhD student',ms:'Master’s student',undergrad:'Undergraduate',collaborator:'Collaborator',alumni:'Alumni',visitor:'Visitor'};
 ---
-<Base title={person.data.name} description={person.data.bio || undefined}>
+<Base noindex={person.data.draft} title={person.data.name} description={person.data.bio || undefined}>
   <a href="/people/">All people</a>
   <section class="person-heading">
     {person.data.photo ? <img src={person.data.photo.src} alt={person.data.photo.alt} width="320" height="400" /> : <div class="portrait-placeholder" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}

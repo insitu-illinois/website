@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import RecordList from '../../components/RecordList.astro';
+import {content} from '../../lib/content';
+import {newest} from '../../lib/derived.mjs';
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props { page: Page<CollectionEntry<'news'>>; }
+export async function getStaticPaths({paginate}:any){const data=await content();return paginate(newest(data.news),{pageSize:6});}
+const {page}=Astro.props;
+---
+<Base title={page.currentPage===1?'News':`News · Page ${page.currentPage}`} description="Updates and press coverage from IN/SITU and the VRchaeology archive.">
+  <header class="page-heading"><p class="label">IN/SITU · Field notes</p><h1>News</h1><p class="lead">Updates from the lab, alongside stories from the VRchaeology archive.</p></header>
+  <RecordList title="Latest entries" records={page.data}/>
+  {page.lastPage>1&&<nav class="pagination" aria-label="News pagination">{page.url.prev&&<a href={page.url.prev}>Newer entries</a>}<span class="label">Page {page.currentPage} of {page.lastPage}</span>{page.url.next&&<a href={page.url.next}>Older entries</a>}</nav>}
+</Base>

@@ -17,7 +17,7 @@
   "pdf": "",
   "doi": "",
   "code": "",
-  "bibtex": "",
+  "bibtex": "@inproceedings{virtual-archaeology2020,\n  title = {Virtual archaeology: teaching archaeology using virtual reality and game-based learning},\n  author = {Shackelford, L and Verstraete, E and Huang, WD and Merrill, C and Craig, A},\n  booktitle = {Society for Historical Archaeology},\n  year = {2020}\n}",
   "award": "",
   "thumbnail": null
 }

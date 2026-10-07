@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import RecordList from '../../components/RecordList.astro';
+import Tags from '../../components/Tags.astro';
+import Media from '../../components/Media.astro';
+import Prose from '../../components/Prose.astro';
+import {content} from '../../lib/content';
+import {projectLists,referenced} from '../../lib/derived.mjs';
+import type { CollectionEntry } from 'astro:content';
+interface Props { entry: CollectionEntry<'projects'>; data: Awaited<ReturnType<typeof content>>; next: CollectionEntry<'projects'>; }
+export async function getStaticPaths(){const data=await content();return data.projects.map((entry:any,index:number)=>({params:{slug:entry.id},props:{entry,data,next:data.projects[(index+1)%data.projects.length]}}));}
+const {entry,data,next}=Astro.props;
+const d=entry.data,lists=projectLists(data,entry.id);
+---
+<Base noindex={d.draft} title={d.name} description={d.shortDescription || undefined}>
+  <a class="back-link" href="/projects/">All projects</a>
+  <header class="page-heading"><p class="label">Project · {d.status}{d.draft?' · Draft':''}</p><h1>{d.name}</h1><Tags themes={referenced(data.themes,d.themes)}/>{d.shortDescription && <p class="lead">{d.shortDescription}</p>}</header>
+  <Media media={d.heroMedia} eager />
+  <section class="reading-section"><Prose body={d.body}/></section>
+  <RecordList title="Team" records={referenced(data.people,d.team)} cards />
+  <RecordList title="Publications" records={lists.publications}/>
+  <RecordList title="Presentations" records={lists.presentations}/>
+  <RecordList title="Funding" records={referenced(data.recognition,d.funding)}/>
+  {next.id!==entry.id && <aside class="next-entry"><p class="label">Next project</p><h2><a href={`/projects/${next.id}/`}>{next.data.name}</a></h2></aside>}
+</Base>

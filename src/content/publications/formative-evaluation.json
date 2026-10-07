@@ -17,7 +17,7 @@
   "pdf": "/media/papers/formative-evaluation.pdf",
   "doi": "",
   "code": "",
-  "bibtex": "",
+  "bibtex": "@inproceedings{formative-evaluation2018,\n  title = {A formative evaluation on a virtual reality game-based learning system for teaching introductory archaeology},\n  author = {Laura Shackelford and Wenhao David Huang and Alan Craig and Cameron Merrill and Danying Chen and Jamie Arjona},\n  booktitle = {E-Learn 2018},\n  year = {2018}\n}",
   "award": "",
   "thumbnail": null
 }

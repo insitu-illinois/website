@@ -1,0 +1,5 @@
+---
+interface Props { themes: any[]; }
+const {themes}=Astro.props;
+---
+{themes.length>0 && <ul class="tags" aria-label="Research themes">{themes.map(theme=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}</a></li>)}</ul>}

@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import RecordList from '../../components/RecordList.astro';
+import {content} from '../../lib/content';
+import {themeLists} from '../../lib/derived.mjs';
+import type { CollectionEntry } from 'astro:content';
+interface Props { entry: CollectionEntry<'themes'>; data: Awaited<ReturnType<typeof content>>; lists: ReturnType<typeof themeLists>; }
+export async function getStaticPaths(){const data=await content();return data.themes.map((entry:any)=>({params:{slug:entry.id},props:{entry,lists:themeLists(data,entry.id)}}));}
+const {entry,lists}=Astro.props,d=entry.data;
+---
+<Base noindex={d.draft} title={d.name} description={d.description || undefined}>
+  <a class="back-link" href="/about/#themes">All research themes</a>
+  <header class="page-heading"><p class="label">Research theme{d.draft?' · Draft':''}</p><h1>{d.name}</h1>{d.question&&<p class="lead">{d.question}</p>}<p>{d.description}</p></header>
+  {d.image&&<img class="media" src={d.image.src} alt={d.image.alt}/>}
+  <RecordList title="Projects" records={lists.projects} cards/>
+  <RecordList title="Publications" records={lists.publications}/>
+  <RecordList title="Presentations" records={lists.presentations}/>
+  <RecordList title="People" records={lists.people} cards/>
+  <RecordList title="Other themes" records={lists.otherThemes} cards/>
+</Base>

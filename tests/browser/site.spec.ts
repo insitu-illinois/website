@@ -36,3 +36,31 @@ test('all internal links and assets resolve; public pages make no third-party re
   }
   expect(external).toEqual([]);
 });
+test('publication citation copies, relationships navigate, and reduced motion disables transitions',async({page,context})=>{
+  await context.grantPermissions(['clipboard-read','clipboard-write']);
+  await page.goto('/publications/motivational-support/');
+  await page.getByRole('button',{name:'Copy BibTeX'}).click();
+  await expect(page.getByRole('status')).toHaveText('Citation copied.');
+  expect(await page.evaluate(()=>navigator.clipboard.readText())).toContain('motivational-support2019');
+  await page.getByRole('link',{name:'VRchaeology',exact:true}).click();
+  await expect(page.getByRole('heading',{level:1})).toHaveText('VRchaeology');
+  await page.locator('main .tags').getByRole('link',{name:'Accessibility & belonging'}).click();
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Accessibility & belonging');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');
+  expect(await page.locator('.home-hero .button').evaluate(el=>getComputedStyle(el).transitionDuration)).toBe('0s');
+});
+test('public sitemap and crawler policy expose public pages only',async({request})=>{
+  const sitemap=await request.get('/sitemap.xml');expect(sitemap.ok()).toBeTruthy();
+  const xml=await sitemap.text();expect(xml).toContain('/projects/vrchaeology/');expect(xml).not.toContain('cms-publishing-check');expect(xml).not.toContain('/admin/');
+  const robots=await request.get('/robots.txt');expect(robots.headers()['content-type']).toContain('text/plain');expect(await robots.text()).toContain('Allow: /');expect(await robots.text()).toContain('Disallow: /admin/');
+  expect((await request.get('/favicon.svg')).headers()['content-type']).toContain('image/svg+xml');
+});
+test('capture representative layouts and report browser errors',async({page},testInfo)=>{
+  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+  for(const width of [1440,390])for(const path of ['/','/projects/vrchaeology/','/publications/motivational-support/','/people/laura-shackelford/']){
+    await page.setViewportSize({width,height:900});await page.goto(path);await page.evaluate(()=>document.fonts.ready);
+    await page.screenshot({path:testInfo.outputPath(`${width}-${path.replaceAll('/','_')}.png`),fullPage:true});
+  }
+  expect(errors).toEqual([]);
+});

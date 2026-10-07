@@ -1,24 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 import RecordList from '../components/RecordList.astro';
+import Prose from '../components/Prose.astro';
+import Media from '../components/Media.astro';
+import Tags from '../components/Tags.astro';
 import { content } from '../lib/content';
-import { grouped, newest } from '../lib/derived.mjs';
+import { grouped } from '../lib/derived.mjs';
+import { labels } from '../lib/format.mjs';
 import about from '../content/pages/about.json';
 import join from '../content/pages/join.json';
-export function getStaticPaths(){return ['about','projects','publications','presentations','awards-funding','people','news','join'].map(page=>({params:{page}}));}
+export function getStaticPaths(){return ['about','projects','publications','presentations','awards-funding','people','join'].map(page=>({params:{page}}));}
 const page=Astro.params.page!;
-const titles:Record<string,string>={about:'About',projects:'Projects',publications:'Publications',presentations:'Presentations','awards-funding':'Awards & funding',people:'People',news:'News',join:'Join'};
-const labels:Record<string,string>={active:'Active projects',completed:'Completed projects',journal:'Journal articles',conference:page==='presentations'?'Conference talks':'Conference papers',chapter:'Chapters',thesis:'Theses',preprint:'Preprints',invited:'Invited talks',poster:'Posters',demo:'Demos',workshop:'Workshops',exhibition:'Exhibitions',award:'Awards',grant:'Grants',fellowship:'Fellowships',scholarship:'Scholarships'};
+const titles:Record<string,string>={about:'About',projects:'Projects',publications:'Publications',presentations:'Presentations','awards-funding':'Awards & funding',people:'People',join:'Join'};
+const intros:Record<string,string>={about:'People, technology, and experience in context.',projects:'Our work across archaeological sites, museums, cities, classrooms, and virtual worlds.',publications:'Papers, chapters, theses, and preprints from our research.',presentations:'Talks, posters, demonstrations, workshops, and exhibitions.','awards-funding':'Recognition and support for our research.',people:'An interdisciplinary lab at the University of Illinois Urbana-Champaign.',join:'Graduate study in immersive learning and archaeology.'};
+if(page==='about'&&(!about.draft||import.meta.env.DEV))titles.about=about.title;
+if(page==='join'&&(!join.draft||import.meta.env.DEV))titles.join=join.title;
 const data=await content();
 const collection=page==='awards-funding'?'recognition':page;
-const prose=page==='about'?about:page==='join'?join:null;
+const roleGroups=[['faculty','Faculty'],['phd','PhD students'],['ms','Master’s students'],['undergrad','Undergraduates'],['collaborator','Collaborators'],['visitor','Visitors'],['alumni','Alumni']];
 ---
-<Base title={titles[page]}>
-  <h1>{titles[page]}</h1>
-  {prose && (!prose.draft || import.meta.env.DEV) && prose.body.split('\n\n').map(paragraph=><p>{paragraph}</p>)}
-  {page==='join' && <p><a href="mailto:llshacke@illinois.edu">Contact Laura Shackelford</a></p>}
-  {['projects','publications','presentations','awards-funding'].includes(page) && grouped(data,collection).map((group:{type:string;items:any[]})=><RecordList title={labels[group.type]} records={group.items} />)}
-  {page==='people' && <RecordList title="Lab members" records={[...data.people].sort((a,b)=>a.data.order-b.data.order)} peopleLinks />}
-  {page==='news' && <RecordList title="From the archive" records={newest(data.news)} />}
-  {page==='about' && <RecordList title="Research themes" records={data.themes} />}
+<Base title={titles[page]} description={intros[page]}>
+  <header class="page-heading"><p class="label">IN/SITU · {titles[page]}</p><h1>{titles[page]}</h1><p class="lead">{intros[page]}</p></header>
+  {page==='about' && <>
+    {(!about.draft||import.meta.env.DEV)&&<section class="reading-section"><h2>Our shared premise</h2><Prose body={about.body}/></section>}
+    <RecordList title="Four research themes" id="themes" records={data.themes} cards/>
+    <section class="split-section"><h2>Led by Laura Shackelford</h2><div><p>We are based at the University of Illinois Urbana-Champaign.</p><p><a href="/people/laura-shackelford/">Meet our director</a></p><p><a href="mailto:llshacke@illinois.edu">llshacke@illinois.edu</a></p></div></section>
+  </>}
+  {page==='projects'&&<Tags themes={data.themes}/>}
+  {['projects','publications','presentations','awards-funding'].includes(page)&&grouped(data,collection).map((group:{type:string;items:any[]})=><RecordList title={page==='presentations'&&group.type==='conference'?'Conference talks':labels[group.type as keyof typeof labels]} records={group.items} cards={page==='projects'}/>)}
+  {page==='people'&&<><Media label="Lab photograph forthcoming"/>{roleGroups.map(([role,title])=><RecordList title={title} records={data.people.filter((p:any)=>p.data.role===role).sort((a:any,b:any)=>a.data.order-b.data.order)} cards={role!=='alumni'}/>)}</>}
+  {page==='join'&&<>
+    {(!join.draft||import.meta.env.DEV)&&<section class="reading-section"><h2>Graduate study</h2><Prose body={join.body}/></section>}
+    <section class="split-section"><h2>Current opportunities</h2><div><p>Opening details and undergraduate opportunities will be added here when confirmed.</p><p>For questions about graduate study, contact our director.</p><a class="button" href="mailto:llshacke@illinois.edu">Contact Laura Shackelford</a></div></section>
+    <section class="split-section"><h2>Access and participation</h2><div><p>Our work shares a commitment to situated, participatory, and accessible experiences.</p><p><a href="/themes/accessibility/">Accessibility & belonging</a></p></div></section>
+    <aside class="next-entry"><h2><a href="/people/">Meet the team</a></h2></aside>
+  </>}
 </Base>

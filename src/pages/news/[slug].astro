@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import RecordList from '../../components/RecordList.astro';
+import Prose from '../../components/Prose.astro';
+import {content} from '../../lib/content';
+import {newest,referenced} from '../../lib/derived.mjs';
+import {dateLabel,labels} from '../../lib/format.mjs';
+import type { CollectionEntry } from 'astro:content';
+interface Props { entry: CollectionEntry<'news'>; data: Awaited<ReturnType<typeof content>>; }
+export async function getStaticPaths(){const data=await content();return data.news.map((entry:any)=>({params:{slug:entry.id},props:{entry,data}}));}
+const {entry,data}=Astro.props,d=entry.data;
+const related=[...referenced(data.projects,[d.relatedProject]),...referenced(data.publications,[d.relatedPublication])];
+---
+<Base noindex={d.draft} title={d.title} description={`${d.title}. ${dateLabel(d.date)}. News from IN/SITU.`}>
+  <a class="back-link" href="/news/">All news</a>
+  <header class="page-heading"><p class="label"><time datetime={d.date}>{dateLabel(d.date)}</time> · {labels[d.type as keyof typeof labels]}{d.draft?' · Draft':''}</p><h1>{d.title}</h1></header>
+  {d.image&&<img class="media" src={d.image.src} alt={d.image.alt}/>}
+  <section class="reading-section"><Prose body={d.body}/>{d.externalLink&&<p><a class="button" href={d.externalLink}>Read the original story</a></p>}</section>
+  {related.length>0&&<RecordList title="Related work" records={related}/>}
+  <RecordList title="More news" records={newest(data.news.filter((r:any)=>r.id!==entry.id)).slice(0,3)}/>
+</Base>
