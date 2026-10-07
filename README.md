@@ -8,7 +8,7 @@ Repository: https://github.com/insitu-illinois/website
 
 ## Current status
 
-This is the early preview milestone: seven collections, 55 seed records, five published person pages, nine basic ordinary pages, shared navigation, and tested derived lists. Project, theme, publication, and news detail templates and the full design pass follow the first deployment. CMS forms load, but OAuth login and publishing are not connected yet. The early preview is deployed in the verified lab Cloudflare account. Continuous deployment is active. The OAuth relay is deployed but awaits organization-owned app registration and credentials.
+This is the early preview milestone: seven collections, 55 seed records, five published person pages, nine basic ordinary pages, shared navigation, and tested derived lists. Project, theme, publication, and news detail templates and the full design pass follow the first deployment. CMS forms load, but OAuth login and publishing are not connected yet. The early preview is deployed in the verified lab Cloudflare account. Continuous deployment is active. The OAuth relay is configured with the organization-owned app. End-to-end editor sign-in and publishing still await verification.
 
 The preview asks search engines not to index it. Remove the temporary `noindex` meta tag and change `public/robots.txt` to `Allow: /` when the full public release is ready. Drafts are excluded from production HTML, but source records are in a public GitHub repository: never enter confidential or anonymous submissions, even as drafts.
 
@@ -94,14 +94,14 @@ Set **Settings → Secrets and variables → Actions → Variables → CMS_AUTH_
 Use the official project: https://github.com/sveltia/sveltia-cms-auth. Recheck its current README when replacing it, because variable names and setup screens can change.
 
 1. Run `node scripts/deploy-auth.mjs`. It verifies the isolated lab identity with `wrangler whoami`, derives the allowed hostname from `astro.config.mjs`, and deploys the vendored official relay as `insitu-cms-auth` in the **lab** account. Its current origin is `https://insitu-cms-auth.insituillinois.workers.dev`. Source provenance and license are in `infra/cms-auth/`. This command preserves dashboard variables; secrets stay in Cloudflare.
-2. An organization Owner, using their existing personal GitHub account, opens **insitu-illinois → Settings → Developer settings → OAuth Apps → New OAuth App**.
+2. The existing lab organization Owner (`insituillinois`) opens **insitu-illinois → Settings → Developer settings → OAuth Apps → New OAuth App**.
 3. Application name: **IN/SITU content editor**. Homepage URL: the actual site URL from `astro.config.mjs`. Authorization callback URL: the actual auth Worker URL followed by `/callback`.
 4. Register the app and generate its client secret. The owner enters credentials directly in Cloudflare, never in Git, chat, or a source file.
 5. In the auth Worker's **Settings → Variables and Secrets**, set `GITHUB_CLIENT_ID`, encrypted `GITHUB_CLIENT_SECRET`, and `ALLOWED_DOMAINS` to the site's hostname without `https://` or a path. Save and deploy.
-6. Set the site's build variable `CMS_AUTH_URL` to the auth Worker's origin. `npm run build` generates `public/admin/config.yml` with this value as `backend.base_url`; the backend is GitHub, repo `insitu-illinois/website`, branch `main`. Keep this environment variable in whichever deployment path is active.
+6. Set the site's build variable `CMS_AUTH_URL` to the auth Worker's origin. `npm run build` generates `public/admin/config.yml` with this value as `backend.base_url`; the backend is GitHub, repo `insitu-illinois/website`, branch `main`, with `auth_scope: public_repo` so editors are not asked for private-repository access. Keep this environment variable in whichever deployment path is active.
 7. Redeploy the site. Test `/admin/` with a permitted editor, create and publish a harmless draft, verify the GitHub commit and successful redeployment, then remove the test entry. Verify that a user without repo Write access cannot publish.
 
-The relay was deployed on October 7, 2026 as version `c8cdd8ea-7bd2-4442-9680-3b561d01fa1f`. It currently returns `MISCONFIGURED_CLIENT`, as expected until credentials are entered. Four local security checks pass: allowed domains, narrow public-repository scope, secure CSRF cookie/state checks, and rejection of missing client credentials. Organization registration currently requires resolving the builder's Member role; the existing organization Owner is `insituillinois`. No membership change has been made by the builder.
+The relay was deployed on October 7, 2026 as version `c8cdd8ea-7bd2-4442-9680-3b561d01fa1f`. The lab owner entered the app credentials in the Cloudflare dashboard. A live check now returns a GitHub authorization redirect requesting only `public_repo`; this confirms configuration is present, while actual sign-in is still awaiting verification. Four local security checks pass: allowed domains, narrow public-repository scope, secure CSRF cookie/state checks, and rejection of missing client credentials. Organization registration uses the existing lab Owner account `insituillinois`. The builder's personal account stays an organization Member with Admin access to `website`; organization Owner access is not required for routine site work. No membership change was made. The lab-owned [IN/SITU content editor app](https://github.com/organizations/insitu-illinois/settings/applications/3912656) is registered. Its client ID and encrypted client secret have been saved in the lab Worker's dashboard. The public relay URL is also configured as the repository Actions variable `CMS_AUTH_URL`. Testing CMS login and publishing is pending.
 
 The CMS script is pinned to major version `0`, as the official Sveltia release remains in beta. Its configuration is generated from the same field definitions as Astro's Zod schemas, so editing the generated YAML directly will be overwritten.
 
@@ -188,5 +188,5 @@ Lily: role and biography. Collaborators and alumni: permission to list. Beneath 
 - Worker: `insitu-illinois`, free `workers.dev` hostname, lab account only.
 - Deployment method for this first release: verified local Wrangler login.
 - Automatic GitHub deployment: verified October 7, 2026.
-- OAuth relay: deployed in the lab account; organization app registration, credentials, and CMS login are pending.
+- OAuth relay: deployed and configured with the organization-owned app; end-to-end CMS login and publishing are pending.
 - Remaining website work: detail templates, ordinary page sections, full design pass, final accessibility and publishing checks.

@@ -36,7 +36,7 @@ collections.push({ name: 'pages', label: 'Page text', files: [
   { name:'footer',label:'Footer contact',file:'src/content/pages/footer.json',fields:[field('email',{kind:'email'}),field('institution',{}),field('draft',{kind:'boolean',default:false})] },
 ] });
 const config = {
-  backend: { name:'github',repo:'insitu-illinois/website',branch:'main',...(process.env.CMS_AUTH_URL ? {base_url:process.env.CMS_AUTH_URL} : {}) },
+  backend: { name:'github',repo:'insitu-illinois/website',branch:'main',auth_scope:'public_repo',...(process.env.CMS_AUTH_URL ? {base_url:process.env.CMS_AUTH_URL} : {}) },
   media_folder:'public/media', public_folder:'/media', collections,
 };
 writeFileSync('public/admin/config.yml', '# Generated from src/lib/content-model.mjs.\n' + stringify(config));

@@ -3,6 +3,8 @@ backend:
   name: github
   repo: insitu-illinois/website
   branch: main
+  auth_scope: public_repo
+  base_url: https://insitu-cms-auth.insituillinois.workers.dev
 media_folder: public/media
 public_folder: /media
 collections:
