@@ -1,20 +1,21 @@
 :root{
---font-display:"Big Shoulders Display",system-ui,sans-serif;
---font-body:"Source Serif 4",Georgia,serif;
+--font-display:"Space Grotesk",system-ui,sans-serif;
+--font-body:"Source Sans 3",system-ui,sans-serif;
 --font-mono:"IBM Plex Mono",ui-monospace,monospace;
-/* Display scale — condensed architectural grotesk, used tight and heavy */
---text-display-xl:clamp(3.5rem,7vw,6.5rem);
---text-display-lg:clamp(2.75rem,5vw,4.5rem);
+/* Geometric display headings, set in Space Grotesk semibold. */
+--weight-display:600;
+--text-display-xl:clamp(2.5rem,6vw,5.5rem);
+--text-display-lg:clamp(2.25rem,4.5vw,4rem);
 --text-display-md:2.75rem;
 --text-display-sm:2rem;
---lh-display:1.05; /* @kind other */
+--lh-display:1.15; /* @kind other */
 --ls-display:-0.01em;
-/* Body serif scale */
+/* Reading text uses Source Sans 3. */
 --text-body-lg:1.1875rem;
 --text-body-md:1.125rem;
 --text-body-sm:0.9375rem;
 --lh-body:1.65; /* @kind other */
-/* Mono label scale — always small, always tracked, usually uppercase */
+/* Mono labels and navigation use sentence case and restrained tracking. */
 --text-label-md:0.9375rem;
 --text-label-sm:0.6875rem;
 --ls-label:0.01em;

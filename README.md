@@ -258,3 +258,7 @@ The implementation targets WCAG 2.2 AA. Local verification covers automated publ
 Media review still needed: `public/media/papers/motivational-support.pdf` and `public/media/papers/formative-evaluation.pdf` need checks for tagged structure and reading order. External project experiences and externally linked videos need their own caption, transcript, audio-description, and equivalent-participation review. Current presentation records have no video or slides URLs. Written project descriptions and the written lab address remain available without immersive equipment or the Google map, but they are not complete equivalents of every external experience. No original content or asset has been removed by these changes.
 
 These changes are on `codex/light-presentation-preview`, for local review only. They have not been merged or deployed to the public site.
+
+## Fonts in the local presentation preview
+
+The approved combination is Space Grotesk 600 for headings, Source Sans 3 400 for body text, and IBM Plex Mono for navigation and metadata. Body text remains 18 CSS pixels by default with 1.65 line spacing; accessibility text sizing still applies. Actual Source Sans italic and bold files are bundled for formatted content. Fontsource packages serve all fonts from the site itself without Google Fonts requests. Family, size, and heading-weight tokens live in `design-system/tokens/typography.css`; the approved wordmark remains unchanged.

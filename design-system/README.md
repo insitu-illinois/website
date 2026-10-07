@@ -1,6 +1,8 @@
 
 # IN/SITU Design System
 
+**Current website typography (approved local review):** Space Grotesk 600 for headings, Source Sans 3 400 for reading text (with real italic and bold faces), and IBM Plex Mono for navigation, tags, metadata, and the unchanged wordmark. The tokens and self-hosted imports in `src/layouts/Base.astro` are authoritative. This supersedes the original font-substitution notes below.
+
 **IN/SITU** is an interdisciplinary research lab at the University of Illinois, led by Professor Laura Shackelford, designing immersive, game-based, and interactive experiences that help people learn from and participate in the world around them — across archaeological sites, museums, cities, classrooms, and virtual worlds. Members work across anthropology, informatics, architecture, historic preservation, game studies, extended reality, AI, and the learning sciences, organized around a shared research philosophy (situated/contextual experience, immersive technology as means not ends, experiential learning, place/culture/public engagement, accessibility & belonging) rather than a single project or tool.
 
 **Current lab members:** Laura Shackelford (Director — archaeology, human evolution, immersive field education), Sarvin Eshaghi (educational games, digital heritage, playable cities), Sepehr Vaez Afshar (serious games, XR, museums), Ogulcan Durmaz (AI-mediated XR for language learning), Brian Graves (accessibility in games/interactive environments).
