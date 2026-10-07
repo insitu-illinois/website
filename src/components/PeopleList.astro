@@ -1,0 +1,20 @@
+---
+import { peopleGroups } from '../lib/derived.mjs';
+import { entryUrl, roles } from '../lib/format.mjs';
+const { people } = Astro.props;
+---
+{peopleGroups(people).map(group => <section aria-labelledby={`people-${group.key}`}>
+  <h2 id={`people-${group.key}`}>{group.title}</h2>
+  <ul class:list={['records','people-list',group.key==='alumni' ? 'people-compact' : 'card-grid']}>
+    {group.items.map((person:any) => {
+      const href=entryUrl(person);
+      return <li class:list={{card:group.key!=='alumni'}}>
+        {person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy" /> : <div class="people-initials" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}
+        <div>
+          <h3>{href ? <a href={href}>{person.data.name}</a> : person.data.name}</h3>
+          {group.key==='current' && <p class="label">{roles[person.data.role as keyof typeof roles]}</p>}
+        </div>
+      </li>;
+    })}
+  </ul>
+</section>)}

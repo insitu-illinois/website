@@ -1,9 +1,12 @@
 {
   "slug": "jamie-arjona",
-  "draft": true,
+  "draft": false,
   "name": "Jamie Arjona",
   "role": "alumni",
   "bio": "",
-  "photo": null,
+  "photo": {
+    "src": "/media/people/jamie-arjona.png",
+    "alt": "Portrait of Jamie Arjona"
+  },
   "order": 100
 }

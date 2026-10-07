@@ -7,6 +7,8 @@ import '@fontsource/ibm-plex-mono/latin-500';
 import '../../design-system/styles.css';
 import '../styles/base.css';
 import footer from '../content/pages/footer.json';
+import LabContact from '../components/LabContact.astro';
+import { indexingEnabled } from '../config/site.mjs';
 import {content} from '../lib/content';
 const {themes}=await content();
 const { title, noindex=false, description = 'IN/SITU at the University of Illinois Urbana-Champaign. People, technology, and experience in context.' } = Astro.props;
@@ -20,7 +22,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | IN/SITU</title>
     <meta name="description" content={description} />
-    {(noindex||import.meta.env.DEV) && <meta name="robots" content="noindex, nofollow" />}
+    {(!indexingEnabled||noindex||import.meta.env.DEV) && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <link rel="canonical" href={canonical} />
@@ -45,7 +47,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
     </main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div><a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a><p>People, technology,<br/>and experience in context.</p>{(!footer.draft||import.meta.env.DEV)&&<><p class="label">{footer.institution}</p><p><a href={`mailto:${footer.email}`}>{footer.email}</a></p></>}</div>
+        <div><a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a><p>People, technology,<br/>and experience in context.</p>{(!footer.draft||import.meta.env.DEV)&&<><p class="label">{footer.institution}</p><p><LabContact /></p></>}</div>
         <div><p class="label">Research themes</p><ul>{themes.map((theme:any)=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}</a></li>)}</ul></div>
         <div><p class="label">The lab</p><ul><li><a href="/people/">People</a></li><li><a href="/join/">Join</a></li><li><a href="/news/">News</a></li><li><a href="/admin/">Editor sign-in</a></li></ul></div>
       </div>

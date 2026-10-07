@@ -1,0 +1,18 @@
+---
+import contact from '../content/pages/footer.json';
+const { button = false } = Astro.props;
+const [user, domain] = contact.email.split('@');
+const readable = `${user} [at] ${domain.replaceAll('.', ' [dot] ')}`;
+---
+{(!contact.draft || import.meta.env.DEV) && <span class="lab-contact" data-user={user} data-domain={domain}>
+  <a hidden class:list={{button}} aria-label={`Email the IN/SITU lab at ${readable}`}>Email the lab</a>
+  <noscript><span>Email the lab: {readable}</span></noscript>
+</span>}
+<script>
+  document.querySelectorAll<HTMLElement>('.lab-contact').forEach(contact => {
+    const link = contact.querySelector('a');
+    if (!link || !contact.dataset.user || !contact.dataset.domain) return;
+    link.href = 'mailto:' + contact.dataset.user + '@' + contact.dataset.domain;
+    link.hidden = false;
+  });
+</script>

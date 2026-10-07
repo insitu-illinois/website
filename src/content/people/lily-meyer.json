@@ -1,8 +1,8 @@
 {
   "slug": "lily-meyer",
-  "draft": true,
+  "draft": false,
   "name": "Lily Meyer",
-  "role": null,
+  "role": "member",
   "bio": "",
   "photo": null,
   "order": 5

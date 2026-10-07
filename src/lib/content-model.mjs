@@ -15,7 +15,7 @@ export const common = {
 export const models = {
   themes: { name: text(true), question: long(), description: long(), image: image() },
   people: {
-    name: text(true), role: select('faculty', 'phd', 'ms', 'undergrad', 'collaborator', 'alumni', 'visitor'),
+    name: text(true), role: select('director', 'member', 'faculty', 'phd', 'ms', 'undergrad', 'collaborator', 'alumni', 'visitor'),
     photo: image(), bio: long(), website: url(), scholar: url(), email: { kind: 'email' },
     order: { kind: 'number', default: 100, min: 0 },
   },

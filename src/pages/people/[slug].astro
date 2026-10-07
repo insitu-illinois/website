@@ -3,14 +3,14 @@ import Base from '../../layouts/Base.astro';
 import RecordList from '../../components/RecordList.astro';
 import { content } from '../../lib/content';
 import { personLists } from '../../lib/derived.mjs';
+import { hasPersonPage, roles } from '../../lib/format.mjs';
 import type { CollectionEntry } from 'astro:content';
 interface Props { person: CollectionEntry<'people'>; lists: ReturnType<typeof personLists>; }
 export async function getStaticPaths() {
   const data=await content();
-  return data.people.map((person:any)=>({params:{slug:person.id},props:{person,lists:personLists(data,person.id)}}));
+  return data.people.filter(hasPersonPage).map((person:any)=>({params:{slug:person.id},props:{person,lists:personLists(data,person.id)}}));
 }
 const {person,lists}=Astro.props;
-const roles:Record<string,string>={faculty:'Faculty',phd:'PhD student',ms:'Master’s student',undergrad:'Undergraduate',collaborator:'Collaborator',alumni:'Alumni',visitor:'Visitor'};
 ---
 <Base noindex={person.data.draft} title={person.data.name} description={person.data.bio || undefined}>
   <a href="/people/">All people</a>
@@ -18,9 +18,9 @@ const roles:Record<string,string>={faculty:'Faculty',phd:'PhD student',ms:'Maste
     {person.data.photo ? <img src={person.data.photo.src} alt={person.data.photo.alt} width="320" height="400" /> : <div class="portrait-placeholder" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}
     <div>
       {person.data.draft && <p class="label">Draft · Not published</p>}
-      <p class="label">{person.id==='laura-shackelford'?'Director · ':''}{roles[person.data.role] ?? 'Role awaiting confirmation'}</p>
+      <p class="label">{roles[person.data.role as keyof typeof roles] ?? 'Member'}</p>
       <h1>{person.data.name}</h1>
-      {person.data.bio && <p>{person.data.bio}</p>}
+      {person.data.bio?.split('\n\n').map((paragraph:string) => <p>{paragraph}</p>)}
       <div class="links">
         {person.data.website && <a href={person.data.website}>Website</a>}
         {person.data.scholar && <a href={person.data.scholar}>Google Scholar</a>}

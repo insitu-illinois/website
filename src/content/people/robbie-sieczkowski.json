@@ -1,9 +1,9 @@
 {
   "slug": "robbie-sieczkowski",
-  "draft": true,
+  "draft": false,
   "name": "Robbie Sieczkowski",
-  "role": "alumni",
-  "bio": "",
+  "role": "collaborator",
+  "bio": "Robbie graduated from UIUC with a degree in Media and Cinema Studies, where he was also president of the VR Club and the Illini Esports VR Community Coordinator. In 2022, he planned to pursue a graduate degree in Informatics at UIUC beginning that fall.",
   "photo": null,
-  "order": 100
+  "order": 2
 }

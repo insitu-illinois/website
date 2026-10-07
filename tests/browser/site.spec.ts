@@ -2,6 +2,12 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { indexingEnabled, crawlerPolicy } from '../../src/config/site.mjs';
+import { loadRaw } from '../../scripts/validate-content.mjs';
+import { hasPersonPage } from '../../src/lib/format.mjs';
+const labEmail=JSON.parse(readFileSync('src/content/pages/footer.json','utf8')).email;
+const [emailUser,emailDomain]=labEmail.split('@');
+const readableEmail=`${emailUser} [at] ${emailDomain.replaceAll('.', ' [dot] ')}`;
 const pages=(dir='dist'):string[]=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?pages(join(dir,entry.name)):entry.name.endsWith('.html')?[join(dir,entry.name)]:[]);
 const publicPages=pages().filter(p=>!p.includes('/admin/'));
 for(const width of [1440,390,320]) {
@@ -24,7 +30,7 @@ test('keyboard skip link reaches main and people links open the correct profile'
 });
 test('draft people and papers are absent from every production page',()=>{
   const html=publicPages.map(p=>readFileSync(p,'utf8')).join('');
-  for(const name of ['Lily Meyer','Beneath the Stone','Situated Cartographies','Computation in Context','cognitive-loads']) expect(html).not.toContain(name);
+  for(const record of Object.values(loadRaw()).flat() as any[]) if(record.data.draft) expect(html).not.toContain(`/${record.collection}/${record.id}/`);
 });
 test('all internal links and assets resolve; public pages make no third-party requests',async({page,baseURL})=>{
   const external:string[]=[];
@@ -57,14 +63,44 @@ test('publication citation copies, relationships navigate, and reduced motion di
 test('public sitemap and crawler policy expose public pages only',async({request})=>{
   const sitemap=await request.get('/sitemap.xml');expect(sitemap.ok()).toBeTruthy();
   const xml=await sitemap.text();expect(xml).toContain('/projects/vrchaeology/');expect(xml).not.toContain('cms-publishing-check');expect(xml).not.toContain('/admin/');
-  const robots=await request.get('/robots.txt');expect(robots.headers()['content-type']).toContain('text/plain');expect(await robots.text()).toContain('Allow: /');expect(await robots.text()).toContain('Disallow: /admin/');
+  const robots=await request.get('/robots.txt');expect(robots.headers()['content-type']).toContain('text/plain');expect(await robots.text()).toBe(crawlerPolicy(indexingEnabled,new URL(sitemap.url().replace('/sitemap.xml','/'))));
   expect((await request.get('/favicon.svg')).headers()['content-type']).toContain('image/svg+xml');
 });
 test('capture representative layouts and report browser errors',async({page},testInfo)=>{
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
-  for(const width of [1440,390])for(const path of ['/','/projects/vrchaeology/','/publications/motivational-support/','/people/laura-shackelford/']){
-    await page.setViewportSize({width,height:900});await page.goto(path);await page.evaluate(()=>document.fonts.ready);
+  for(const width of [1440,390])for(const path of ['/','/projects/vrchaeology/','/publications/motivational-support/','/people/laura-shackelford/','/people/','/join/']){
+    await page.setViewportSize({width,height:900});await page.goto(path);await page.evaluate(async()=>{await document.fonts.ready;const images=[...document.images];images.forEach(img=>img.loading='eager');await Promise.all(images.map(img=>img.decode().catch(()=>{})));});
     await page.screenshot({path:testInfo.outputPath(`${width}-${path.replaceAll('/','_')}.png`),fullPage:true});
   }
   expect(errors).toEqual([]);
+});
+
+test('review pages carry noindex and the shared email is assembled only at runtime',async({page,request})=>{
+  for(const path of pages()) {
+    const response=await request.get(path.replace(/^dist/,'').replace(/index\.html$/,''));
+    const html=await response.text();
+    if(!indexingEnabled) expect(html,path).toMatch(/<meta[^>]+name="robots"[^>]+content="noindex, nofollow"/);
+    expect(html,path).not.toContain(labEmail);
+  }
+  await page.goto('/join/');
+  const contact=page.locator('main .lab-contact a');
+  await expect(contact).toHaveAttribute('href','mailto:'+labEmail);
+  await expect(contact).toHaveAccessibleName('Email the IN/SITU lab at '+readableEmail);
+  await contact.focus();await expect(contact).toBeFocused();
+  expect(await contact.evaluate(el=>getComputedStyle(el).outlineStyle)).not.toBe('none');
+  await page.goto('/people/');
+  await expect(page.locator('main h2')).toHaveText(['Current members','Collaborators','Alumni']);
+  const xml=await (await request.get('/sitemap.xml')).text();
+  for(const person of loadRaw().people) {
+    const path=`/people/${person.id}/`;
+    if(hasPersonPage(person)&&!person.data.draft) expect(xml).toContain(path);
+    else {expect(xml).not.toContain(path);expect((await request.get(path)).status()).toBe(404);}
+  }
+});
+test('the lab email stays readable without JavaScript',async({browser,baseURL})=>{
+  const context=await browser.newContext({javaScriptEnabled:false,baseURL});
+  const page=await context.newPage();await page.goto('/join/');
+  await expect(page.locator('main noscript span')).toHaveText('Email the lab: '+readableEmail);
+  await expect(page.locator('main .lab-contact a')).toBeHidden();
+  await context.close();
 });

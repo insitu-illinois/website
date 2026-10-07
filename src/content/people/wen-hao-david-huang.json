@@ -1,9 +1,12 @@
 {
   "slug": "wen-hao-david-huang",
-  "draft": true,
+  "draft": false,
   "name": "Wen-Hao David Huang",
   "role": "collaborator",
-  "bio": "Decision-making across learning contexts and motivational systems. Designed the evaluation research for the game-based VR archaeology project.",
-  "photo": null,
-  "order": 100
+  "bio": "David studies how individuals and organizations make informed decisions across learning and development contexts. By understanding how decision-making processes work, he designs motivational and engagement systems to facilitate favorable decision-making behaviors by individuals and organizations. He works with a variety of learning environments, ranging from technology-enriched and enabled learning environments (TEELE) to community-based learning environments.\n\nRegardless of the characteristics and purposes of these learning environments, his work informs the underlying theoretical and empirical foundations of motivation, engagement, and design thinking.\n\nFor the Game-Based Virtual Reality Archaeology project, he is responsible for designing and implementing research and evaluative activities to delineate the relationships among motivational support, cognitive processes, and learning outcomes perceived by study participants.\n\nHe believes the output of this project can meaningfully inform the design and implementation of VR-based learning environments in terms of their instructional efficacy, accessibility, and scalability for learning and development applications across contexts.",
+  "photo": {
+    "src": "/media/people/wen-hao-david-huang.jpg",
+    "alt": "Portrait of Wen-Hao David Huang"
+  },
+  "order": 0
 }

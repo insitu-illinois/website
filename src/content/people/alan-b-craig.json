@@ -1,9 +1,9 @@
 {
   "slug": "alan-b-craig",
-  "draft": true,
+  "draft": false,
   "name": "Alan B. Craig",
   "role": "collaborator",
-  "bio": "Advisor; author of Understanding Virtual Reality and Developing Virtual Reality Applications.",
+  "bio": "Alan serves as an advisor to the Game-Based Virtual Reality Archaeology project. He has written several related books, including Understanding Virtual Reality (first and second editions), Developing Virtual Reality Applications, and Understanding Augmented Reality. He holds three patents.",
   "photo": null,
-  "order": 100
+  "order": 1
 }

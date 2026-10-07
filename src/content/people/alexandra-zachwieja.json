@@ -1,9 +1,12 @@
 {
   "slug": "alexandra-zachwieja",
-  "draft": true,
+  "draft": false,
   "name": "Alexandra Zachwieja",
   "role": "alumni",
   "bio": "",
-  "photo": null,
+  "photo": {
+    "src": "/media/people/alexandra-zachwieja.jpg",
+    "alt": "Portrait of Alexandra Zachwieja"
+  },
   "order": 100
 }

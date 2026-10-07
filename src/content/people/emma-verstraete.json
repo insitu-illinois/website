@@ -1,9 +1,12 @@
 {
   "slug": "emma-verstraete",
-  "draft": true,
+  "draft": false,
   "name": "Emma Verstraete",
   "role": "alumni",
   "bio": "",
-  "photo": null,
+  "photo": {
+    "src": "/media/people/emma-verstraete.jpg",
+    "alt": "Portrait of Emma Verstraete"
+  },
   "order": 100
 }

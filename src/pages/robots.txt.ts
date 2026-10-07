@@ -1,3 +1,4 @@
+import { indexingEnabled, crawlerPolicy } from '../config/site.mjs';
 export function GET({site}:{site:URL}) {
-  return new Response(`User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: ${new URL('/sitemap.xml',site)}\n`,{headers:{'Content-Type':'text/plain'}});
+  return new Response(crawlerPolicy(indexingEnabled,site),{headers:{'Content-Type':'text/plain'}});
 }

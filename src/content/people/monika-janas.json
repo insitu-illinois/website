@@ -1,9 +1,12 @@
 {
   "slug": "monika-janas",
-  "draft": true,
+  "draft": false,
   "name": "Monika Janas",
   "role": "alumni",
   "bio": "",
-  "photo": null,
+  "photo": {
+    "src": "/media/people/monika-janas.jpg",
+    "alt": "Portrait of Monika Janas"
+  },
   "order": 100
 }

@@ -1,9 +1,9 @@
 {
   "slug": "nan-kang",
-  "draft": true,
+  "draft": false,
   "name": "Nan Kang",
-  "role": "alumni",
-  "bio": "",
+  "role": "collaborator",
+  "bio": "Nan studied Computer Engineering and Statistics as an undergraduate at UIUC.",
   "photo": null,
-  "order": 100
+  "order": 4
 }

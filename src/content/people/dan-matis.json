@@ -1,9 +1,12 @@
 {
   "slug": "dan-matis",
-  "draft": true,
+  "draft": false,
   "name": "Dan Matis",
   "role": "alumni",
-  "bio": "",
-  "photo": null,
+  "bio": "Dan joined the project in spring 2019 as a part-time student employee while a graduate student in Anthropology. His interests included photogrammetry and 3D modeling applications in archaeology.",
+  "photo": {
+    "src": "/media/people/dan-matis.jpg",
+    "alt": "Portrait of Dan Matis"
+  },
   "order": 100
 }

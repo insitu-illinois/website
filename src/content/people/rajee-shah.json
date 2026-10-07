@@ -1,9 +1,12 @@
 {
   "slug": "rajee-shah",
-  "draft": true,
+  "draft": false,
   "name": "Rajee Shah",
   "role": "alumni",
   "bio": "",
-  "photo": null,
+  "photo": {
+    "src": "/media/people/rajee-shah.jpeg",
+    "alt": "Portrait of Rajee Shah"
+  },
   "order": 100
 }

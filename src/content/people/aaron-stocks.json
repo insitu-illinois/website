@@ -1,9 +1,12 @@
 {
   "slug": "aaron-stocks",
-  "draft": true,
+  "draft": false,
   "name": "Aaron Stocks",
   "role": "alumni",
   "bio": "",
-  "photo": null,
+  "photo": {
+    "src": "/media/people/aaron-stocks.jpg",
+    "alt": "Portrait of Aaron Stocks"
+  },
   "order": 100
 }

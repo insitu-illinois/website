@@ -21,39 +21,45 @@ collections:
         label: Slug
         widget: string
         required: true
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
         pattern:
           - ^[a-z0-9]+(?:-[a-z0-9]+)*$
           - Use lowercase letters, numbers, and hyphens.
-        hint: Permanent identifier. Do not change after publishing; other records refer
-          to it.
       - name: draft
         label: Draft
         widget: boolean
         required: false
+        hint: Turn on to hide this entry from the website while you prepare it; GitHub
+          files remain public.
         default: false
       - name: name
         label: Name
         widget: string
         required: true
+        hint: Enter the name as it should appear on the website.
       - name: question
         label: Question
         widget: text
         required: false
+        hint: Write the guiding research question for this theme.
       - name: description
         label: Description
         widget: text
         required: false
+        hint: Write a short, approved description for readers.
       - name: image
         label: Image
         widget: object
         required: false
-        collapsed: true
         hint: Optional. Adding an image requires both a file and meaningful alt text.
+        collapsed: true
         fields:
           - name: src
             label: Image
             widget: image
             required: true
+            hint: Upload or choose the image file you have permission to publish.
             pattern:
               - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
               - Upload an image to the media folder.
@@ -62,6 +68,8 @@ collections:
             label: Alt text
             widget: string
             required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
             pattern:
               - .*\S.*
               - Describe the image.
@@ -78,43 +86,60 @@ collections:
         label: Slug
         widget: string
         required: true
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
         pattern:
           - ^[a-z0-9]+(?:-[a-z0-9]+)*$
           - Use lowercase letters, numbers, and hyphens.
-        hint: Permanent identifier. Do not change after publishing; other records refer
-          to it.
       - name: draft
         label: Draft
         widget: boolean
         required: false
+        hint: Turn on to hide this entry from the website while you prepare it; GitHub
+          files remain public.
         default: false
       - name: name
         label: Name
         widget: string
         required: true
+        hint: Enter the name as it should appear on the website.
       - name: role
         label: Role
         widget: select
         required: false
+        hint: Collaborator and Alumni have their own sections; all other roles appear
+          under Current members.
         options:
-          - faculty
-          - phd
-          - ms
-          - undergrad
-          - collaborator
-          - alumni
-          - visitor
+          - label: Director
+            value: director
+          - label: Member
+            value: member
+          - label: Faculty
+            value: faculty
+          - label: PhD student
+            value: phd
+          - label: Master’s student
+            value: ms
+          - label: Undergraduate
+            value: undergrad
+          - label: Collaborator
+            value: collaborator
+          - label: Alumni
+            value: alumni
+          - label: Visitor
+            value: visitor
       - name: photo
         label: Photo
         widget: object
         required: false
-        collapsed: true
         hint: Optional. Adding an image requires both a file and meaningful alt text.
+        collapsed: true
         fields:
           - name: src
             label: Image
             widget: image
             required: true
+            hint: Upload or choose the image file you have permission to publish.
             pattern:
               - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
               - Upload an image to the media folder.
@@ -123,6 +148,8 @@ collections:
             label: Alt text
             widget: string
             required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
             pattern:
               - .*\S.*
               - Describe the image.
@@ -130,10 +157,13 @@ collections:
         label: Bio
         widget: text
         required: false
+        hint: Use an approved biography; leave blank to show this person in lists
+          without a separate profile page.
       - name: website
         label: Website
         widget: string
         required: false
+        hint: Paste the full address of the person’s website, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -141,6 +171,7 @@ collections:
         label: Scholar
         widget: string
         required: false
+        hint: Paste the person’s Google Scholar profile address, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -148,6 +179,8 @@ collections:
         label: Email
         widget: string
         required: false
+        hint: Enter the contact email; in Lab contact, this single address is shared by
+          Join, About, and the footer.
         pattern:
           - ^[^@\s]+@[^@\s]+\.[^@\s]+$
           - Use an email address.
@@ -155,6 +188,8 @@ collections:
         label: Order
         widget: number
         required: false
+        hint: Smaller numbers appear first within the person’s section; equal numbers
+          sort by name.
         default: 100
         value_type: int
         min: 0
@@ -171,35 +206,40 @@ collections:
         label: Slug
         widget: string
         required: true
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
         pattern:
           - ^[a-z0-9]+(?:-[a-z0-9]+)*$
           - Use lowercase letters, numbers, and hyphens.
-        hint: Permanent identifier. Do not change after publishing; other records refer
-          to it.
       - name: draft
         label: Draft
         widget: boolean
         required: false
+        hint: Turn on to hide this entry from the website while you prepare it; GitHub
+          files remain public.
         default: false
       - name: name
         label: Name
         widget: string
         required: true
+        hint: Enter the name as it should appear on the website.
       - name: shortDescription
         label: Short description
         widget: text
         required: false
+        hint: Summarize the project briefly for project lists.
       - name: heroMedia
         label: Hero image
         widget: object
         required: false
-        collapsed: true
         hint: Optional. Adding an image requires both a file and meaningful alt text.
+        collapsed: true
         fields:
           - name: src
             label: Image
             widget: image
             required: true
+            hint: Upload or choose the image file you have permission to publish.
             pattern:
               - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
               - Upload an image to the media folder.
@@ -208,6 +248,8 @@ collections:
             label: Alt text
             widget: string
             required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
             pattern:
               - .*\S.*
               - Describe the image.
@@ -215,10 +257,13 @@ collections:
         label: Body
         widget: markdown
         required: false
+        hint: Write the approved page text; use headings, paragraphs, lists, and links
+          as needed.
       - name: status
         label: Status
         widget: select
         required: true
+        hint: Choose whether this project is active or completed.
         options:
           - active
           - completed
@@ -226,11 +271,14 @@ collections:
         label: Featured
         widget: boolean
         required: false
+        hint: Turn on to make this project eligible for the three featured spots on
+          Home.
         default: false
       - name: themes
         label: Themes
         widget: relation
         required: false
+        hint: Choose the research themes connected to this work.
         collection: themes
         search_fields:
           - name
@@ -242,6 +290,8 @@ collections:
         label: Team
         widget: relation
         required: false
+        hint: Choose the people involved; the project will also appear on their profile
+          pages.
         collection: people
         search_fields:
           - name
@@ -253,6 +303,7 @@ collections:
         label: Funding
         widget: relation
         required: false
+        hint: Choose the awards or grants supporting this project.
         collection: recognition
         search_fields:
           - title
@@ -273,28 +324,36 @@ collections:
         label: Slug
         widget: string
         required: true
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
         pattern:
           - ^[a-z0-9]+(?:-[a-z0-9]+)*$
           - Use lowercase letters, numbers, and hyphens.
-        hint: Permanent identifier. Do not change after publishing; other records refer
-          to it.
       - name: draft
         label: Draft
         widget: boolean
         required: false
+        hint: Turn on to hide this entry from the website while you prepare it; GitHub
+          files remain public.
         default: false
       - name: title
         label: Title
         widget: string
         required: true
+        hint: Enter the approved title in sentence case, keeping proper names
+          capitalized.
       - name: authors
         label: Authors
         widget: text
         required: false
+        hint: Enter every author in citation order, including external co-authors; also
+          fill Lab authors separately.
       - name: labAuthors
         label: Lab authors
         widget: relation
         required: false
+        hint: Select the lab people who authored this paper so it appears on their
+          profiles; keep the full Authors text too.
         collection: people
         search_fields:
           - name
@@ -306,10 +365,12 @@ collections:
         label: Summary
         widget: text
         required: false
+        hint: Write a short, approved summary of the paper.
       - name: year
         label: Year
         widget: number
         required: false
+        hint: Enter the four-digit year, or leave blank if it is unknown.
         value_type: int
         min: 1000
         max: 9999
@@ -317,10 +378,12 @@ collections:
         label: Venue
         widget: string
         required: false
+        hint: Enter the journal, conference, or host institution as appropriate.
       - name: type
         label: Type
         widget: select
         required: true
+        hint: Choose the category that best describes this entry.
         options:
           - journal
           - conference
@@ -331,10 +394,12 @@ collections:
         label: Award
         widget: string
         required: false
+        hint: Enter a confirmed award label for this paper, or leave blank.
       - name: pdf
         label: PDF
         widget: file
         required: false
+        hint: Upload the paper PDF, or leave blank if no shareable copy is available.
         choose_url: false
         pattern:
           - ^/media/(?!.*\.\.).+$
@@ -343,6 +408,7 @@ collections:
         label: DOI URL
         widget: string
         required: false
+        hint: Paste the full DOI link, starting with https://doi.org/, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -350,6 +416,7 @@ collections:
         label: Code
         widget: string
         required: false
+        hint: Paste the full link to the code repository, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -357,10 +424,13 @@ collections:
         label: BibTeX
         widget: text
         required: false
+        hint: Paste the verified BibTeX citation to enable the copy-citation button.
       - name: project
         label: Project
         widget: relation
         required: false
+        hint: Choose the related lab project, or leave blank if there is no confirmed
+          connection.
         collection: projects
         search_fields:
           - name
@@ -372,6 +442,7 @@ collections:
         label: Themes
         widget: relation
         required: false
+        hint: Choose the research themes connected to this work.
         collection: themes
         search_fields:
           - name
@@ -383,13 +454,14 @@ collections:
         label: Thumbnail
         widget: object
         required: false
-        collapsed: true
         hint: Optional. Adding an image requires both a file and meaningful alt text.
+        collapsed: true
         fields:
           - name: src
             label: Image
             widget: image
             required: true
+            hint: Upload or choose the image file you have permission to publish.
             pattern:
               - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
               - Upload an image to the media folder.
@@ -398,6 +470,8 @@ collections:
             label: Alt text
             widget: string
             required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
             pattern:
               - .*\S.*
               - Describe the image.
@@ -414,24 +488,29 @@ collections:
         label: Slug
         widget: string
         required: true
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
         pattern:
           - ^[a-z0-9]+(?:-[a-z0-9]+)*$
           - Use lowercase letters, numbers, and hyphens.
-        hint: Permanent identifier. Do not change after publishing; other records refer
-          to it.
       - name: draft
         label: Draft
         widget: boolean
         required: false
+        hint: Turn on to hide this entry from the website while you prepare it; GitHub
+          files remain public.
         default: false
       - name: title
         label: Title
         widget: string
         required: true
+        hint: Enter the approved title in sentence case, keeping proper names
+          capitalized.
       - name: type
         label: Type
         widget: select
         required: true
+        hint: Choose the category that best describes this entry.
         options:
           - invited
           - conference
@@ -443,22 +522,25 @@ collections:
         label: Venue
         widget: string
         required: false
+        hint: Enter the journal, conference, or host institution as appropriate.
       - name: location
         label: Location
         widget: string
         required: false
+        hint: Enter the city or event location, or leave blank if unknown.
       - name: date
         label: Date
         widget: string
         required: false
+        hint: Keep only the precision that is known. Leave blank if the date is unknown.
         pattern:
           - ^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$
           - Use YYYY, YYYY-MM, or YYYY-MM-DD.
-        hint: Keep only the precision that is known. Leave blank if the date is unknown.
       - name: presenters
         label: Presenters
         widget: relation
         required: false
+        hint: Choose the people who presented this work so it appears on their profiles.
         collection: people
         search_fields:
           - name
@@ -470,6 +552,8 @@ collections:
         label: Project
         widget: relation
         required: false
+        hint: Choose the related lab project, or leave blank if there is no confirmed
+          connection.
         collection: projects
         search_fields:
           - name
@@ -481,6 +565,7 @@ collections:
         label: Themes
         widget: relation
         required: false
+        hint: Choose the research themes connected to this work.
         collection: themes
         search_fields:
           - name
@@ -492,6 +577,7 @@ collections:
         label: Slides
         widget: string
         required: false
+        hint: Paste the full link to publicly available slides, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -499,6 +585,7 @@ collections:
         label: Video
         widget: string
         required: false
+        hint: Paste the full link to the presentation video, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -515,24 +602,29 @@ collections:
         label: Slug
         widget: string
         required: true
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
         pattern:
           - ^[a-z0-9]+(?:-[a-z0-9]+)*$
           - Use lowercase letters, numbers, and hyphens.
-        hint: Permanent identifier. Do not change after publishing; other records refer
-          to it.
       - name: draft
         label: Draft
         widget: boolean
         required: false
+        hint: Turn on to hide this entry from the website while you prepare it; GitHub
+          files remain public.
         default: false
       - name: title
         label: Title
         widget: string
         required: true
+        hint: Enter the approved title in sentence case, keeping proper names
+          capitalized.
       - name: type
         label: Type
         widget: select
         required: true
+        hint: Choose the category that best describes this entry.
         options:
           - award
           - grant
@@ -542,6 +634,8 @@ collections:
         label: Recipients
         widget: relation
         required: false
+        hint: Choose the people who received this recognition so it appears on their
+          profiles.
         collection: people
         search_fields:
           - name
@@ -553,10 +647,12 @@ collections:
         label: Awarding body
         widget: string
         required: false
+        hint: Enter the organization that gave the award or funding.
       - name: year
         label: Year
         widget: number
         required: false
+        hint: Enter the four-digit year, or leave blank if it is unknown.
         value_type: int
         min: 1000
         max: 9999
@@ -564,6 +660,7 @@ collections:
         label: Link
         widget: string
         required: false
+        hint: Paste the full link to the award or grant announcement, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -571,6 +668,7 @@ collections:
         label: Description
         widget: text
         required: false
+        hint: Write a short, approved description for readers.
   - name: news
     label: News
     folder: src/content/news
@@ -584,32 +682,37 @@ collections:
         label: Slug
         widget: string
         required: true
+        hint: Permanent identifier. Do not change after publishing; other records refer
+          to it.
         pattern:
           - ^[a-z0-9]+(?:-[a-z0-9]+)*$
           - Use lowercase letters, numbers, and hyphens.
-        hint: Permanent identifier. Do not change after publishing; other records refer
-          to it.
       - name: draft
         label: Draft
         widget: boolean
         required: false
+        hint: Turn on to hide this entry from the website while you prepare it; GitHub
+          files remain public.
         default: false
       - name: title
         label: Title
         widget: string
         required: true
+        hint: Enter the approved title in sentence case, keeping proper names
+          capitalized.
       - name: date
         label: Date
         widget: string
         required: false
+        hint: Keep only the precision that is known. Leave blank if the date is unknown.
         pattern:
           - ^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$
           - Use YYYY, YYYY-MM, or YYYY-MM-DD.
-        hint: Keep only the precision that is known. Leave blank if the date is unknown.
       - name: type
         label: Type
         widget: select
         required: true
+        hint: Choose the category that best describes this entry.
         options:
           - paper
           - award
@@ -620,17 +723,20 @@ collections:
         label: Body
         widget: markdown
         required: false
+        hint: Write the approved page text; use headings, paragraphs, lists, and links
+          as needed.
       - name: image
         label: Image
         widget: object
         required: false
-        collapsed: true
         hint: Optional. Adding an image requires both a file and meaningful alt text.
+        collapsed: true
         fields:
           - name: src
             label: Image
             widget: image
             required: true
+            hint: Upload or choose the image file you have permission to publish.
             pattern:
               - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
               - Upload an image to the media folder.
@@ -639,6 +745,8 @@ collections:
             label: Alt text
             widget: string
             required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
             pattern:
               - .*\S.*
               - Describe the image.
@@ -646,6 +754,7 @@ collections:
         label: External link
         widget: string
         required: false
+        hint: Paste the full link to the original news story, or leave blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -653,6 +762,7 @@ collections:
         label: Related publication
         widget: relation
         required: false
+        hint: Choose the paper mentioned in this news item, or leave blank.
         collection: publications
         search_fields:
           - title
@@ -664,6 +774,7 @@ collections:
         label: Related project
         widget: relation
         required: false
+        hint: Choose the project mentioned in this news item, or leave blank.
         collection: projects
         search_fields:
           - name
@@ -682,14 +793,19 @@ collections:
             label: Title
             widget: string
             required: true
+            hint: Enter the approved title in sentence case, keeping proper names
+              capitalized.
           - name: statement
             label: Statement
             widget: string
             required: false
+            hint: Enter the approved introductory statement for Home.
           - name: draft
             label: Draft
             widget: boolean
             required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
             default: false
       - name: about
         label: About
@@ -699,14 +815,20 @@ collections:
             label: Title
             widget: string
             required: true
+            hint: Enter the approved title in sentence case, keeping proper names
+              capitalized.
           - name: body
             label: Body
             widget: markdown
             required: false
+            hint: Write the approved page text; use headings, paragraphs, lists, and links
+              as needed.
           - name: draft
             label: Draft
             widget: boolean
             required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
             default: false
       - name: join
         label: Join
@@ -716,23 +838,31 @@ collections:
             label: Title
             widget: string
             required: true
+            hint: Enter the approved title in sentence case, keeping proper names
+              capitalized.
           - name: body
             label: Body
             widget: markdown
             required: false
+            hint: Write the approved page text; use headings, paragraphs, lists, and links
+              as needed.
           - name: draft
             label: Draft
             widget: boolean
             required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
             default: false
       - name: footer
-        label: Footer contact
+        label: Lab contact
         file: src/content/pages/footer.json
         fields:
           - name: email
             label: Email
             widget: string
-            required: false
+            required: true
+            hint: Enter the contact email; in Lab contact, this single address is shared by
+              Join, About, and the footer.
             pattern:
               - ^[^@\s]+@[^@\s]+\.[^@\s]+$
               - Use an email address.
@@ -740,8 +870,11 @@ collections:
             label: Institution
             widget: string
             required: false
+            hint: Enter the university affiliation displayed in the footer.
           - name: draft
             label: Draft
             widget: boolean
             required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
             default: false

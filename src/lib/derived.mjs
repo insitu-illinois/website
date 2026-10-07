@@ -4,6 +4,14 @@ const byTitle = (a,b) => (a.data.name ?? a.data.title).localeCompare(b.data.name
 export const newest = records => [...records].sort((a,b)=>(String(b.data.date ?? b.data.year ?? '')).localeCompare(String(a.data.date ?? a.data.year ?? '')) || byTitle(a,b));
 export const visible = (data, development=false) => Object.fromEntries(Object.entries(data).map(([name,records])=>[name,records.filter(r=>development || !r.data.draft)]));
 export const referenced = (records, references) => (references ?? []).map(ref=>records.find(r=>r.id===id(ref))).filter(Boolean);
+export const peopleGroups = people => [
+  { title:'Current members', key:'current' },
+  { title:'Collaborators', key:'collaborator' },
+  { title:'Alumni', key:'alumni' },
+].map(group => ({...group, items: people.filter(person => {
+  const role = person.data.role;
+  return (['collaborator','alumni'].includes(role) ? role : 'current') === group.key;
+}).sort((a,b) => (a.data.order ?? 100) - (b.data.order ?? 100) || byTitle(a,b))}));
 export function personLists(data, person) {
   return {
     publications:newest(data.publications.filter(r=>includes(r.data.labAuthors,person))),

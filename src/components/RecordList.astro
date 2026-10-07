@@ -7,7 +7,7 @@ const {title,records,peopleLinks=false,more,cards=false,id}=Astro.props;
   <div class="section-heading"><h2>{title}</h2>{more && <a class="text-link" href={more}>View all {title.toLowerCase()}</a>}</div>
   {records.length ? <ul class:list={['records',{'card-grid':cards}]}>
     {records.map(record => {
-      const href=peopleLinks?`/people/${record.id}/`:entryUrl(record);
+      const href=entryUrl(peopleLinks ? {...record,collection:'people'} : record);
       const d=record.data;
       return <li class:list={{card:cards}}>
         {(d.type||d.status||d.role) && <p class="label record-kind">{d.role ? roles[d.role as keyof typeof roles] : record.collection==='presentations'&&d.type==='conference'?'Conference talk':labels[(d.type||d.status) as keyof typeof labels] || d.type}</p>}

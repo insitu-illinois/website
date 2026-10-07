@@ -1,9 +1,9 @@
 {
   "slug": "zade-lobo",
-  "draft": true,
+  "draft": false,
   "name": "Zade Lobo",
   "role": "alumni",
-  "bio": "",
+  "bio": "Zade studied Electrical Engineering, Computer Science, and Game Studies and Design as an undergraduate at UIUC. In summer 2022, he worked as an XR Research Intern for PlayStation’s VR/XR group.",
   "photo": null,
   "order": 100
 }

@@ -1,6 +1,6 @@
 # IN/SITU website
 
-[Public website](https://insitu-illinois.insituillinois.workers.dev/) · [Edit content](https://insitu-illinois.insituillinois.workers.dev/admin/) · [GitHub repository](https://github.com/insitu-illinois/website)
+[Review preview](https://insitu-illinois.insituillinois.workers.dev/) · [Edit content](https://insitu-illinois.insituillinois.workers.dev/admin/) · [GitHub repository](https://github.com/insitu-illinois/website)
 
 Astro static site, Sveltia CMS, and Cloudflare Workers static assets. The organization owns the repository. Both Workers are in the lab Cloudflare account. No custom domain or paid service is required.
 
@@ -26,8 +26,8 @@ Saving an entry commits it to GitHub. The automatic checks then rebuild and depl
 ### Add a person
 
 1. Select **People → Create new entry**. Enter their name and a permanent `first-last` slug.
-2. Choose the confirmed role and enter their approved biography. Smaller **Order** values appear first.
-3. Add website, Scholar, and email only when supplied. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
+2. Choose the confirmed role. **Collaborator** and **Alumni** have their own sections; every other role appears under **Current members**. Changing the role moves the person automatically. Smaller **Order** values appear first.
+3. Enter an approved biography to create a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
 4. Keep **Draft** on while details need approval, then switch it off and save.
 5. Select that person in project **Team**, publication **Lab authors**, presentation **Presenters**, and recognition **Recipients**. Their four profile lists fill automatically.
 
@@ -35,7 +35,7 @@ When someone leaves, change their role to **alumni** rather than deleting them. 
 
 ### Other edits
 
-- **Page text** edits the Home statement, About text, Join text, and footer contact. The proposed Home statement remains draft pending approval; the site shows the approved lab description meanwhile.
+- **Page text** edits the Home statement, About text, Join text, and shared lab contact. The proposed Home statement remains draft pending approval; the site shows the approved lab description meanwhile.
 - Themes can be renamed by editing **Name** while keeping the slug. Relationships survive the rename.
 - News dates accept `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`. Leave unknown dates blank rather than inventing a day. The news index paginates automatically after six entries.
 - Project and news bodies support headings, paragraphs, lists, emphasis, and links. Use heading level 2 for sections. Add images with the dedicated image fields.
@@ -51,6 +51,22 @@ The lab organization Owner handles invitations. The existing lab owner is `insit
 4. Ask them to accept the invitation, open `/admin/`, and sign in with their own account.
 
 A separate non-writer identity has not been used for an end-to-end denial test. GitHub enforces repository permissions; verify this with a consenting test account when inviting the next editor. The build did not change organization-wide membership or base permissions.
+
+## Review mode and launch
+
+The preview URL is publicly reachable, but indexing is disabled. `src/config/site.mjs` contains the single switch, `indexingEnabled = false`. In this state, `robots.txt` disallows every crawler and every generated HTML page carries `noindex, nofollow`, including 404 and `/admin/`. These directives do not make the site private or immediately remove a previously indexed URL.
+
+Only after the lab explicitly approves launch, a maintainer changes that one value to `true`, commits, and pushes to `main`. The next successful deployment allows public crawling and removes the public-page noindex tags. `/admin/` and the 404 page remain noindex. Verify the deployed robots.txt and a public page’s source. To return to review mode, set the same value back to `false` and deploy.
+
+### Change the public lab email
+
+In `/admin/`, open **Page text → Lab contact → Email**, enter the new address, and save. This single field updates Join, About, and every footer. For example, it can later change to `contact@insitu-illinois.org`. Laura’s own People entry retains her university email independently.
+
+The site emits separate address parts and readable `[at]` / `[dot]` text, then a small script constructs the keyboard-accessible email link at runtime. The accessible name and no-JavaScript fallback spell out the address without exposing the full address in HTML source. This deters simple scrapers; it is not secrecy from JavaScript-capable bots or readers of this public repository.
+
+### CMS version and field help
+
+Every editable field, including nested image fields, has a plain-English hint. Sveltia is pinned to `0.231.0` in `public/admin/index.html`. To upgrade, choose and review an exact release, change that version, check sign-in and forms, and deploy; do not replace it with a floating `@0` tag. `scripts/generate-cms.mjs` generates the form configuration and fails if a top-level field lacks a hint.
 
 ## Lab-only Cloudflare deployment
 
@@ -137,7 +153,7 @@ With Chrome already installed, use `PLAYWRIGHT_CHANNEL=chrome npx playwright tes
 
 `npm run dev` includes drafts and labels them; `npm run build` excludes them. `npm run preview` serves the production output. The build validates slugs, references, dates, and image alt text. Tests exercise every derived-list rule, draft exclusion, safe Markdown, OAuth domain/CSRF checks, keyboard navigation, citation copying, reduced motion, links, assets, sitemap, and automated axe checks at 1440, 390, and 320 CSS pixels. Browser screenshots are saved under ignored `test-results/`.
 
-Public pages use self-hosted fonts and make no third-party runtime requests. The CMS loads its pinned-major script from a CDN. No analytics or tracking was added. Color, typography, spacing, border, and motion values come from `design-system/`; the font-role assignments are unchanged. The favicon is a temporary typographic slash using the same color tokens, pending the actual logo file.
+Public pages use self-hosted fonts and make no third-party runtime requests. The CMS loads its exact-version script (`@sveltia/cms@0.231.0`) from a CDN. No analytics or tracking was added. Color, typography, spacing, border, and motion values come from `design-system/`; the font-role assignments are unchanged. The favicon is a temporary typographic slash using the same color tokens, pending the actual logo file.
 
 ### Repository layout
 
@@ -159,49 +175,36 @@ To authorize a new maintainer's local lab session, from the repo run `XDG_CONFIG
 
 ## Content provenance and confirmation queue
 
-Facts come from the supplied seed content and old-site archive. The ZIPs and reference files stay local and are not published. Two archived paper PDFs were preserved under `public/media/papers/`, and their author lists were read from those PDFs. The third PDF was unavailable; that paper stays draft. Initial BibTeX entries format already-supplied citation facts without adding new bibliographic claims.
+Facts come from the supplied seed content, old-site archive, and the old Team page explicitly authorized in the October 7 review request. The ZIPs and reference files stay local and are not published. Two archived paper PDFs were preserved under `public/media/papers/`, and their author lists were read from those PDFs. The third PDF was unavailable; that paper stays draft. Initial BibTeX entries format already-supplied citation facts without adding new bibliographic claims.
 
 Unconfirmed relationships remain empty, including the current VRchaeology team and Sarvin's Chi311 team link. CITL and ATLAS are not displayed as current partners. Project stubs, absent photography, and missing summaries remain clearly empty or marked forthcoming. The four themes use the approved first-pass names. The real logo can replace the wordmark-only header and temporary favicon when supplied. The Home statement, opening details, and unconfirmed records need lab review, not new code.
 
 ### Every current draft
 
-- `src/content/news/gsd-282-spring-2027.json` — GSD 282: VRchaeology opens in Spring 2027.
-- `src/content/news/website-launch.json` — IN/SITU launches its website.
-- `src/content/pages/home.json` — People, technology, and experience in context..
-- `src/content/people/aaron-stocks.json` — Aaron Stocks.
-- `src/content/people/alan-b-craig.json` — Alan B. Craig.
-- `src/content/people/alexandra-zachwieja.json` — Alexandra Zachwieja.
-- `src/content/people/alice-xuehui-chao.json` — Alice (Xuehui) Chao.
-- `src/content/people/cameron-merrill.json` — Cameron Merrill.
-- `src/content/people/dan-matis.json` — Dan Matis.
-- `src/content/people/david-hopping.json` — David Hopping.
-- `src/content/people/emma-verstraete.json` — Emma Verstraete.
-- `src/content/people/isaac-smith.json` — Isaac Smith.
-- `src/content/people/jamie-arjona.json` — Jamie Arjona.
-- `src/content/people/janny-chen.json` — Janny Chen.
-- `src/content/people/jin-jang.json` — Jin Jang.
-- `src/content/people/lily-meyer.json` — Lily Meyer.
-- `src/content/people/monika-janas.json` — Monika Janas.
-- `src/content/people/nan-kang.json` — Nan Kang.
-- `src/content/people/rajee-shah.json` — Rajee Shah.
-- `src/content/people/robbie-sieczkowski.json` — Robbie Sieczkowski.
-- `src/content/people/wen-hao-david-huang.json` — Wen-Hao David Huang.
-- `src/content/people/zade-lobo.json` — Zade Lobo.
-- `src/content/publications/beneath-the-stone.json` — Beneath the Stone: A Low-Resource Text-Based Design Framework for Ethical Digital Representation of Marginalized Heritage Sites.
-- `src/content/publications/cognitive-loads.json` — Relationships between cognitive loads and motivational support in a VR game-based learning system for teaching introductory archaeology.
-- `src/content/publications/computation-in-context.json` — Computation in Context: A Cross-Industry Framework for Assessing the Situated Challenges of XR in Environmental Conservation.
-- `src/content/publications/lincoln-home-ar.json` — Lincoln Home augmented reality case study (title to confirm).
-- `src/content/publications/situated-cartographies.json` — Situated Cartographies: Computational Methods for Surfacing Embedded Knowledge in Regional Architectural Heritage.
-- `src/content/recognition/epic-megagrant.json` — Epic MegaGrant.
+- `src/content/news/gsd-282-spring-2027.json` — GSD 282 announcement, pending approved wording.
+- `src/content/news/website-launch.json` — Launch announcement, pending date and copy.
+- `src/content/pages/home.json` — Proposed Home statement, pending Laura’s approval.
+- `src/content/publications/cognitive-loads.json` — Bibliographic details and shareable PDF need confirmation.
+- `src/content/recognition/epic-megagrant.json` — Year and recipients need confirmation.
 
-Lily needs role and biography confirmation. Collaborators and alumni need permission to list. Draft papers need complete author lists, titles, or acceptance confirmation as applicable. The Epic grant needs year and recipient confirmation. GSD 282 news needs approved wording. The Home statement needs Laura's approval. The website-launch news record awaits the lab's chosen announcement date and copy.
+All 24 people are approved for listing by the October 7 review request. The six current members, five collaborators, and thirteen alumni are public records. Lily’s biography and photo remain blank as supplied; only her listing status and role changed. Twelve people have biographies and receive profile pages; the other twelve appear only in lists.
+
+### Old Team page import
+
+On October 7, 2026, the lab requested import from [the old Team page](https://www.vrchaeologyillinois.com/the-team). Eight biographies were imported with light tense edits. References to planned Fall 2022 degrees remain plans, not claims of completed degrees. The four existing approved current-member biographies were retained. Eleven assigned images were downloaded successfully into `public/media/people/`, with `Portrait of <name>` alt text. No image download remains failed. The source assigns pet photos to Laura Shackelford, Wen-Hao David Huang, Dan Matis, and Alexandra Zachwieja, and a VR figurine to Emma Verstraete. The lab explicitly confirmed preserving those assigned images; six others are headshots.
+
+The old page used a silhouette for Alan B. Craig, Alice (Xuehui) Chao, Cameron Merrill, and Jin Jang; a lab logo for David Hopping, Robbie Sieczkowski, Nan Kang, and Zade Lobo. Those generic placeholders are not imported. Sepehr Vaez Afshar, Sarvin Eshaghi, Ogulcan Durmaz, Brian Graves, and Lily Meyer had no entry on that old page, so no old portrait was available for them.
+
+The old alumni list provided no biographies for Alexandra Zachwieja, Jamie Arjona, Janny Chen, Monika Janas, Alice (Xuehui) Chao, Aaron Stocks, Isaac Smith, Cameron Merrill, Rajee Shah, Jin Jang, or Emma Verstraete. Those entries and Lily remain list-only until an approved biography is added. Photos still appear in the compact Alumni list where available.
 
 ## Release verification
 
-The initial preview was deployed October 6, 2026; GitHub Actions deployment and editor login were connected October 7. The full-site build has 32 public HTML pages (including 404), plus sitemap, robots.txt, and favicon. All five template types are built. Local verification: 15 unit/security/content tests, zero Astro errors or warnings, and 9 browser checks passed. All 9 browser checks also passed against the live URL. The homepage, representative project and publication pages, sitemap, robots.txt, favicon, and CMS configuration matched the local build byte for byte. HTTPS and security headers were verified with Chrome and curl; missing routes return HTTP 404, and `/admin/` carries `noindex`. Public pages are crawlable, with only `/admin/` excluded from robots.txt.
+The initial preview was deployed October 6, 2026; GitHub Actions deployment and editor login were connected October 7. The initial full-site build had 32 public HTML pages (including 404), plus sitemap, robots.txt, and favicon. All five template types are built. Local verification: 15 unit/security/content tests, zero Astro errors or warnings, and 9 browser checks passed. All 9 browser checks also passed against the live URL. The homepage, representative project and publication pages, sitemap, robots.txt, favicon, and CMS configuration matched the local build byte for byte. HTTPS and security headers were verified with Chrome and curl; missing routes return HTTP 404, and `/admin/` carries `noindex`. The October 7 review corrections supersede that initial crawler policy: indexing is disabled across the site until launch approval.
 
 The browser checks use desktop Chrome with viewport emulation, not physical phones, Safari, or a screen reader. Automated axe checks supplement the keyboard and visual checks; they are not a claim of comprehensive manual WCAG certification.
 
 CMS round trip: creation commit `1be1e15`, successful deployment [run 37672009509](https://github.com/insitu-illinois/website/actions/runs/37672009509), deletion commit `b7625ce`. The first CMS save exposed blank optional references; schemas now accept those blanks while still rejecting invalid nonblank references. The temporary record was removed after verifying the successful deployment.
 
 Full website release: October 7, 2026, source commit `538d0107a7514be6e54b517bd3f6aefb2d65160c`, [successful Actions run 37672484614](https://github.com/insitu-illinois/website/actions/runs/37672484614), Cloudflare version `90fd8b7d-19cd-47c8-a8b0-022876bf5e0b`. CMS cleanup [run 37672349472](https://github.com/insitu-illinois/website/actions/runs/37672349472) also succeeded. Subsequent documentation and test-timeout updates do not change public content.
+
+Review corrections verified locally on October 7 (20 unit/content/security tests, zero Astro diagnostics, and 11 browser checks): 51 collection records, 24 visible people, 12 biography-based profiles, and 11 imported images. One launch switch controls robots and public-page indexing. All editable fields have hints, and the shared lab contact is assembled at runtime. The four withdrawn publication records were deleted from the current repository contents. Automated checks include both JavaScript and no-JavaScript contact rendering, source-level email exclusion, role regrouping, and absence of empty profile routes.
