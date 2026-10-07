@@ -8,5 +8,8 @@
   "externalLink": "https://dailyillini.com/features/2018/09/20/dig-deep-vr-redefines-learning-about-archaeology/",
   "relatedProject": "vrchaeology",
   "relatedPublication": null,
-  "image": null
+  "image": null,
+  "themes": [
+    "situated-learning"
+  ]
 }

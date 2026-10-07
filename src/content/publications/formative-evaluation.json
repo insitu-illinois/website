@@ -7,7 +7,11 @@
   "type": "conference",
   "authors": "Laura Shackelford, Wenhao David Huang, Alan Craig, Cameron Merrill, Danying Chen, Jamie Arjona",
   "labAuthors": [
-    "laura-shackelford"
+    "laura-shackelford",
+    "wen-hao-david-huang",
+    "alan-b-craig",
+    "cameron-merrill",
+    "jamie-arjona"
   ],
   "themes": [
     "situated-learning"

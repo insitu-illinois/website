@@ -3,10 +3,18 @@
   "draft": false,
   "name": "Sepehr Vaez Afshar",
   "role": "phd",
-  "bio": "Serious games, extended reality, digital heritage, museums, and frameworks for studying immersive technologies in cultural institutions. PhD student in Informatics.",
+  "bio": "Sepehr is a PhD student in Informatics whose work connects educational games, extended reality, and cultural heritage. With a background in architecture, landscape architecture, and computer science, he studies game and museum data to understand player experiences and support public learning. His research includes data analytics and information visualization, and he is advised by Laura Shackelford.",
   "order": 1,
-  "photo": null,
-  "website": "",
+  "photo": {
+    "src": "/media/people/sepehr-vaez-afshar-university.jpg",
+    "alt": "Portrait of Sepehr Vaez Afshar"
+  },
+  "website": "https://www.researchgate.net/profile/Sepehr-Vaez-Afshar",
   "scholar": "",
-  "email": ""
+  "email": "",
+  "themes": [
+    "heritage-public-space",
+    "situated-learning"
+  ],
+  "universityProfile": "https://informatics.ischool.illinois.edu/people/sepehr-vaez-afshar/"
 }

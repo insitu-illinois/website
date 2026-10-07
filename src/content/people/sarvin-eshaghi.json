@@ -3,10 +3,18 @@
   "draft": false,
   "name": "Sarvin Eshaghi",
   "role": "phd",
-  "bio": "Educational games, digital heritage, collaborative learning, playable cities, participatory urbanism, and civic engagement.",
+  "bio": "Sarvin is a PhD student in Informatics studying games, digital heritage, and education. Her background spans architecture, landscape architecture, and historic preservation. She explores how cooperative play can encourage participation, community, and a sense of place in cultural and urban settings. She is an associate producer and quality assurance lead at the GSD Studio, and is advised by Laura Shackelford.",
   "order": 2,
-  "photo": null,
-  "website": "",
+  "photo": {
+    "src": "/media/people/sarvin-eshaghi-university.jpg",
+    "alt": "Portrait of Sarvin Eshaghi"
+  },
+  "website": "https://www.researchgate.net/profile/Sarvin-Eshaghi",
   "scholar": "",
-  "email": ""
+  "email": "",
+  "themes": [
+    "heritage-public-space",
+    "situated-learning"
+  ],
+  "universityProfile": "https://informatics.ischool.illinois.edu/people/sarvin-eshaghi/"
 }

@@ -16,7 +16,7 @@ export const models = {
   themes: { name: text(true), question: long(), description: long(), image: image() },
   people: {
     name: text(true), role: select('director', 'member', 'faculty', 'phd', 'ms', 'undergrad', 'collaborator', 'alumni', 'visitor'),
-    photo: image(), bio: long(), website: url(), scholar: url(), email: { kind: 'email' },
+    photo: image(), bio: long(), affiliations: long(), website: url(), universityProfile: url(), scholar: url(), email: { kind: 'email' }, themes: refs('themes'),
     order: { kind: 'number', default: 100, min: 0 },
   },
   projects: {
@@ -25,7 +25,7 @@ export const models = {
     featured: { kind: 'boolean', default: false }, themes: refs('themes'), team: refs('people'), funding: refs('recognition'),
   },
   publications: {
-    title: text(true), authors: long(), labAuthors: refs('people'), summary: long(), year: year(), venue: text(),
+    title: text(true), authors: long(), labAuthors: refs('people'), summary: long(), year: year(), publicationDate: date(), venue: text(),
     type: { ...select('journal', 'conference', 'chapter', 'thesis', 'preprint'), required: true },
     award: text(), pdf: { kind: 'file' }, doi: url(), code: url(), bibtex: long(),
     project: refs('projects', false), themes: refs('themes'), thumbnail: image(),
@@ -37,11 +37,11 @@ export const models = {
   },
   recognition: {
     title: text(true), type: { ...select('award', 'grant', 'fellowship', 'scholarship'), required: true },
-    recipients: refs('people'), awardingBody: text(), year: year(), link: url(), description: long(),
+    recipients: refs('people'), awardingBody: text(), year: year(), link: url(), description: long(), themes: refs('themes'),
   },
   news: {
     title: text(true), date: date(), type: { ...select('paper', 'award', 'talk', 'lab-life', 'press'), required: true },
-    body: body(), image: image(), externalLink: url(), relatedPublication: refs('publications', false), relatedProject: refs('projects', false),
+    body: body(), image: image(), externalLink: url(), relatedPublication: refs('publications', false), relatedProject: refs('projects', false), people: refs('people'), themes: refs('themes'),
   },
 };
 export const slugPattern = '^[a-z0-9]+(?:-[a-z0-9]+)*$';

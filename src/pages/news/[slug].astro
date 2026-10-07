@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Tags from '../../components/Tags.astro';
+import PeopleTags from '../../components/PeopleTags.astro';
 import RecordList from '../../components/RecordList.astro';
 import Prose from '../../components/Prose.astro';
 import {content} from '../../lib/content';
@@ -15,7 +17,9 @@ const related=[...referenced(data.projects,[d.relatedProject]),...referenced(dat
   <a class="back-link" href="/news/">All news</a>
   <header class="page-heading"><p class="label"><time datetime={d.date}>{dateLabel(d.date)}</time> · {labels[d.type as keyof typeof labels]}{d.draft?' · Draft':''}</p><h1>{d.title}</h1></header>
   {d.image&&<img class="media" src={d.image.src} alt={d.image.alt}/>}
+  <Tags themes={referenced(data.themes,d.themes)}/>
+  <PeopleTags people={referenced(data.people,d.people)}/>
   <section class="reading-section"><Prose body={d.body}/>{d.externalLink&&<p><a class="button" href={d.externalLink}>Read the original story</a></p>}</section>
-  {related.length>0&&<RecordList title="Related work" records={related}/>}
-  <RecordList title="More news" records={newest(data.news.filter((r:any)=>r.id!==entry.id)).slice(0,3)}/>
+  {related.length>0&&<RecordList data={data} title="Related work" records={related}/>}
+  <RecordList data={data} title="More news" records={newest(data.news.filter((r:any)=>r.id!==entry.id)).slice(0,3)}/>
 </Base>

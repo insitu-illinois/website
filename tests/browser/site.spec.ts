@@ -104,3 +104,29 @@ test('the lab email stays readable without JavaScript',async({browser,baseURL})=
   await expect(page.locator('main .lab-contact a')).toBeHidden();
   await context.close();
 });
+
+test('person and theme tags connect the new paper and news to their profiles',async({page})=>{
+  await page.goto('/publications/bridging-anatomy-curricular-gaps/');
+  await page.locator('main .main-content > .people-tags').getByRole('link',{name:'Laura Shackelford',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Appointments & affiliations'})).toBeVisible();
+  await expect(page.getByText('Health Innovation Professor, Carle Illinois College of Medicine',{exact:true})).toBeVisible();
+  await expect(page.getByRole('link',{name:'Bridging anatomy curricular gaps: Leveraging student-created video resources in elective courses',exact:true})).toBeVisible();
+  await page.goto('/news/brian-graves-research-live-2026/');
+  await page.locator('main .main-content > .people-tags').getByRole('link',{name:'Brian Graves',exact:true}).click();
+  await expect(page.getByRole('link',{name:'Brian Graves named a Research Live finalist',exact:true})).toBeVisible();
+  await page.goto('/themes/accessibility/');
+  await expect(page.getByRole('link',{name:'Brian Graves named a Research Live finalist',exact:true})).toBeVisible();
+});
+
+test('the lab map loads inside the page only after keyboard activation',async({page})=>{
+  await page.goto('/join/');
+  await expect(page.locator('address')).toContainText('Davenport 209J');
+  await expect(page.locator('iframe')).toHaveCount(0);
+  const button=page.getByRole('button',{name:'Show lab map'});
+  await button.focus();await expect(button).toBeFocused();await button.press('Enter');
+  const frame=page.locator('iframe.lab-map');
+  await expect(frame).toHaveAttribute('title','Google map of the lab location');
+  await expect(frame).toHaveAttribute('src',/^https:\/\/www\.google\.com\/maps\/embed\?pb=/);
+  await expect(frame).toBeVisible();
+  await expect(button).toHaveCount(0);
+});

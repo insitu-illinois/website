@@ -27,7 +27,7 @@ Saving an entry commits it to GitHub. The automatic checks then rebuild and depl
 
 1. Select **People → Create new entry**. Enter their name and a permanent `first-last` slug.
 2. Choose the confirmed role. **Collaborator** and **Alumni** have their own sections; every other role appears under **Current members**. Changing the role moves the person automatically. Smaller **Order** values appear first.
-3. Enter an approved biography to create a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
+3. Enter an approved biography to create a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied or verified against an identity-matched public profile. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
 4. Keep **Draft** on while details need approval, then switch it off and save.
 5. Select that person in project **Team**, publication **Lab authors**, presentation **Presenters**, and recognition **Recipients**. Their four profile lists fill automatically.
 
@@ -175,7 +175,7 @@ To authorize a new maintainer's local lab session, from the repo run `XDG_CONFIG
 
 ## Content provenance and confirmation queue
 
-Facts come from the supplied seed content, old-site archive, and the old Team page explicitly authorized in the October 7 review request. The ZIPs and reference files stay local and are not published. Two archived paper PDFs were preserved under `public/media/papers/`, and their author lists were read from those PDFs. The third PDF was unavailable; that paper stays draft. Initial BibTeX entries format already-supplied citation facts without adding new bibliographic claims.
+Initial facts came from the supplied seed content, old-site archive, and the old Team page explicitly authorized in the October 7 review request. The later profile update also uses the lab-authorized online sources listed below. The ZIPs and reference files stay local and are not published. Two archived paper PDFs were preserved under `public/media/papers/`, and their author lists were read from those PDFs. The third PDF was unavailable; that paper stays draft. Initial BibTeX entries format already-supplied citation facts without adding new bibliographic claims.
 
 Unconfirmed relationships remain empty, including the current VRchaeology team and Sarvin's Chi311 team link. CITL and ATLAS are not displayed as current partners. Project stubs, absent photography, and missing summaries remain clearly empty or marked forthcoming. The four themes use the approved first-pass names. The real logo can replace the wordmark-only header and temporary favicon when supplied. The Home statement, opening details, and unconfirmed records need lab review, not new code.
 
@@ -208,3 +208,39 @@ CMS round trip: creation commit `1be1e15`, successful deployment [run 3767200950
 Full website release: October 7, 2026, source commit `538d0107a7514be6e54b517bd3f6aefb2d65160c`, [successful Actions run 37672484614](https://github.com/insitu-illinois/website/actions/runs/37672484614), Cloudflare version `90fd8b7d-19cd-47c8-a8b0-022876bf5e0b`. CMS cleanup [run 37672349472](https://github.com/insitu-illinois/website/actions/runs/37672349472) also succeeded. Subsequent documentation and test-timeout updates do not change public content.
 
 Review corrections verified locally on October 7 (20 unit/content/security tests, zero Astro diagnostics, and 11 browser checks): 51 collection records, 24 visible people, 12 biography-based profiles, and 11 imported images. One launch switch controls robots and public-page indexing. All editable fields have hints, and the shared lab contact is assembled at runtime. The four withdrawn publication records were deleted from the current repository contents. Automated checks include both JavaScript and no-JavaScript contact rendering, source-level email exclusion, role regrouping, and absence of empty profile routes.
+
+## People and topic tags
+
+In `/admin`, choose names from the searchable relationship fields; you do not need to type an ID or add a hashtag in the text. Save the entry and wait for the successful deployment before checking the website.
+
+- **Projects → Team** connects a project to each selected person's profile.
+- **Publications → Authors** keeps the complete citation in order. **Lab authors** separately selects lab people and alumni to connect their profiles. Always maintain both fields.
+- **Presentations → Presenters** and **Recognition → Recipients** connect those entries to people.
+- **News → People** tags the people mentioned in a post. **Related project** connects the same post to its project page. **Related publication** adds a link to the paper.
+- **Themes** selects topics for any of these records. People also have a Themes field for confirmed interests; their profiles combine these with themes from their projects, papers, and talks. Theme pages collect related work, news, recognition, and people. A news mention does not automatically become a person's research interest.
+
+Name tags open a biography page when one exists; otherwise they jump to that person's entry on People. Changing a relationship updates the derived lists on the next build. Draft entries stay out of published lists. Removing a person or theme while other entries still refer to it causes validation to fail: remove those selections first.
+
+**People → Affiliations** holds confirmed appointments, one per line, separately from the biography. **University profile**, **Website**, and **Google Scholar** accept verified profile URLs. Leave a link blank if the identity is uncertain. Do not change existing slugs when updating a name.
+
+## Lab address and embedded map
+
+Open **Page text → Lab location** to edit the single address shared by About and Join. The confirmed location is Davenport 209J, 607 S. Mathews Ave., Urbana, IL 61801. The map identifies the building; the written address identifies the room.
+
+To replace the map, find the building in Google Maps, choose **Share → Embed a map**, and copy only the URL between `src="` and the next `"` in the supplied iframe code into **Map embed URL**. Keep the directions link in **Directions link**. The build accepts only HTTPS `www.google.com/maps/embed?pb=...` URLs. No API token or paid Maps account is needed. Visitors choose **Show lab map** to load Google Maps inside the page. Before that action, the public site makes no third-party requests; the address and directions link also work without JavaScript.
+
+## October 7 profile research and publication sources
+
+The lab authorized online research in addition to the original handoff. Five official university portraits were downloaded successfully and are served locally. Laura's earlier assigned image remains in the media archive; her profile now uses her university headshot. Lily Meyer's approved record remains unchanged because no matching biography or portrait was verified.
+
+- Laura: [Anthropology directory](https://anthro.illinois.edu/directory/profile/llshacke) and [Illinois Experts](https://experts.illinois.edu/en/persons/laura-lynn-shackelford/). Current appointments come from the email signature supplied and confirmed by the lab on October 7, 2026; these supersede older appointment descriptions.
+- Sepehr: [Informatics profile](https://informatics.ischool.illinois.edu/people/sepehr-vaez-afshar/), including its linked ResearchGate profile.
+- Sarvin: [Informatics profile](https://informatics.ischool.illinois.edu/people/sarvin-eshaghi/), including its linked ResearchGate profile.
+- Ogulcan: [Informatics profile](https://informatics.ischool.illinois.edu/people/ogulcan-durmaz/) and [ResearchGate](https://www.researchgate.net/profile/Ogulcan-Durmaz).
+- Brian: [SIB directory](https://sib.illinois.edu/directory/profile/brianag3), [March 27 university announcement](https://sib.illinois.edu/news/2026-03-27/two-peec-students-amongst-finalists-research-live), and his matched LinkedIn profile. The announcement supplies the portrait, candidacy, and news item. No sensitive personal details from the announcement were imported.
+
+New publication search window: October 7, 2025–October 7, 2026. One identity-matched paper was verified: [Bridging anatomy curricular gaps](https://doi.org/10.1002/ca.70118), Clinical Anatomy, first published online April 10, 2026. Author order and date come from [publisher-deposited Crossref metadata](https://api.crossref.org/works/10.1002/ca.70118), corroborated by Laura's university page. It is connected to Laura and Situated learning, without inventing a lab project association. Existing older papers remain; the four withdrawn records remain deleted. Matching names already in their citations were connected to the corresponding lab people/alumni without changing the Authors text.
+
+This is a verified addition, not an exhaustive annual bibliography. Direct Google Scholar profile lookup was unavailable during research, and no unverified Scholar IDs were saved. Publisher searches can omit unindexed work. Same-name authors in unrelated fields were excluded. Ogulcan's June 2025 DIVE-L article and 2024 thesis fall outside the requested window. The new news item demonstrates editable People and Themes tags with a sourced announcement rather than invented sample content.
+
+Profile/tag/map update verified locally on October 7: 53 collection records, five new university portraits, one new paper and one sourced news item, 24 passing unit/content/security tests, zero Astro diagnostics, and 13 passing browser checks. Browser coverage includes all public pages at 1440, 390, and 320 CSS pixels, keyboard navigation, relationship links, map activation, robots/noindex, draft exclusion, and both email fallbacks. The Google map was also visually checked after loading and identifies Davenport Hall. Publication uses the existing lab-only GitHub Actions deployment; the release commit and exact workflow result are available in the repository Actions history.

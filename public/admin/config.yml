@@ -159,11 +159,26 @@ collections:
         required: false
         hint: Use an approved biography; leave blank to show this person in lists
           without a separate profile page.
+      - name: affiliations
+        label: Affiliations
+        widget: text
+        required: false
+        hint: List confirmed current appointments and affiliations, one per line; leave
+          blank if not supplied.
       - name: website
         label: Website
         widget: string
         required: false
         hint: Paste the full address of the person’s website, or leave blank.
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: universityProfile
+        label: University profile
+        widget: string
+        required: false
+        hint: Paste the verified university directory page for this person, or leave
+          blank.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
@@ -184,6 +199,18 @@ collections:
         pattern:
           - ^[^@\s]+@[^@\s]+\.[^@\s]+$
           - Use an email address.
+      - name: themes
+        label: Themes
+        widget: relation
+        required: false
+        hint: Choose the research themes connected to this work.
+        collection: themes
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
       - name: order
         label: Order
         widget: number
@@ -374,6 +401,14 @@ collections:
         value_type: int
         min: 1000
         max: 9999
+      - name: publicationDate
+        label: Publication date
+        widget: string
+        required: false
+        hint: Keep only the precision that is known. Leave blank if the date is unknown.
+        pattern:
+          - ^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$
+          - Use YYYY, YYYY-MM, or YYYY-MM-DD.
       - name: venue
         label: Venue
         widget: string
@@ -669,6 +704,18 @@ collections:
         widget: text
         required: false
         hint: Write a short, approved description for readers.
+      - name: themes
+        label: Themes
+        widget: relation
+        required: false
+        hint: Choose the research themes connected to this work.
+        collection: themes
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
   - name: news
     label: News
     folder: src/content/news
@@ -782,6 +829,31 @@ collections:
         display_fields:
           - name
         multiple: false
+      - name: people
+        label: People
+        widget: relation
+        required: false
+        hint: Select the people mentioned in this news item; it will appear on their
+          profiles automatically.
+        collection: people
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
+      - name: themes
+        label: Themes
+        widget: relation
+        required: false
+        hint: Choose the research themes connected to this work.
+        collection: themes
+        search_fields:
+          - name
+        value_field: "{{slug}}"
+        display_fields:
+          - name
+        multiple: true
   - name: pages
     label: Page text
     files:
@@ -853,6 +925,40 @@ collections:
             hint: Turn on to hide this entry from the website while you prepare it; GitHub
               files remain public.
             default: false
+      - name: location
+        label: Lab location
+        file: src/content/pages/location.json
+        fields:
+          - name: address
+            label: Address
+            widget: text
+            required: false
+            hint: Enter the public lab address, including the building and room if visitors
+              need them.
+          - name: mapEmbedUrl
+            label: Map embed URL
+            widget: string
+            required: false
+            hint: Paste only the Google Maps embed URL from Share → Embed a map, not the
+              full iframe code.
+            pattern:
+              - ^https?://\S+$
+              - Use a full http or https URL.
+          - name: directionsUrl
+            label: Directions link
+            widget: string
+            required: false
+            hint: Paste the Google Maps link visitors should open for directions.
+            pattern:
+              - ^https?://\S+$
+              - Use a full http or https URL.
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
+            default: true
       - name: footer
         label: Lab contact
         file: src/content/pages/footer.json

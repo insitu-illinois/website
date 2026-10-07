@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PeopleTags from '../../components/PeopleTags.astro';
 import RecordList from '../../components/RecordList.astro';
 import Tags from '../../components/Tags.astro';
 import Media from '../../components/Media.astro';
@@ -16,10 +17,12 @@ const d=entry.data,lists=projectLists(data,entry.id);
   <a class="back-link" href="/projects/">All projects</a>
   <header class="page-heading"><p class="label">Project · {d.status}{d.draft?' · Draft':''}</p><h1>{d.name}</h1><Tags themes={referenced(data.themes,d.themes)}/>{d.shortDescription && <p class="lead">{d.shortDescription}</p>}</header>
   <Media media={d.heroMedia} eager />
+  <PeopleTags people={referenced(data.people,d.team)} label="Project team"/>
   <section class="reading-section"><Prose body={d.body}/></section>
-  <RecordList title="Team" records={referenced(data.people,d.team)} cards />
-  <RecordList title="Publications" records={lists.publications}/>
-  <RecordList title="Presentations" records={lists.presentations}/>
-  <RecordList title="Funding" records={referenced(data.recognition,d.funding)}/>
+  <RecordList data={data} title="Team" records={referenced(data.people,d.team)} cards />
+  <RecordList data={data} title="Publications" records={lists.publications}/>
+  <RecordList data={data} title="Presentations" records={lists.presentations}/>
+  <RecordList data={data} title="Funding" records={referenced(data.recognition,d.funding)}/>
+  {lists.news.length>0&&<RecordList title="News" records={lists.news} data={data}/>}
   {next.id!==entry.id && <aside class="next-entry"><p class="label">Next project</p><h2><a href={`/projects/${next.id}/`}>{next.data.name}</a></h2></aside>}
 </Base>

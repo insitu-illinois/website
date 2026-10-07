@@ -1,0 +1,20 @@
+{
+  "slug": "bridging-anatomy-curricular-gaps",
+  "draft": false,
+  "title": "Bridging anatomy curricular gaps: Leveraging student-created video resources in elective courses",
+  "authors": "Megan A. Lim, Laura Shackelford, Wessam Ibrahim",
+  "labAuthors": [
+    "laura-shackelford"
+  ],
+  "summary": "A study of a student-developed anatomy module combining a dissection guide with a virtual reality video to support learning about facial muscles.",
+  "year": 2026,
+  "publicationDate": "2026-04-10",
+  "venue": "Clinical Anatomy",
+  "type": "journal",
+  "doi": "https://doi.org/10.1002/ca.70118",
+  "themes": [
+    "situated-learning"
+  ],
+  "project": "",
+  "bibtex": "@article{lim2026bridging,\n  title = {Bridging anatomy curricular gaps: Leveraging student-created video resources in elective courses},\n  author = {Lim, Megan A. and Shackelford, Laura and Ibrahim, Wessam},\n  journal = {Clinical Anatomy},\n  year = {2026},\n  doi = {10.1002/ca.70118}\n}"
+}

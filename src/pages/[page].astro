@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import RecordList from '../components/RecordList.astro';
 import PeopleList from '../components/PeopleList.astro';
 import LabContact from '../components/LabContact.astro';
+import LabLocation from '../components/LabLocation.astro';
 import Prose from '../components/Prose.astro';
 import Tags from '../components/Tags.astro';
 import { content } from '../lib/content';
@@ -23,16 +24,17 @@ const collection=page==='awards-funding'?'recognition':page;
   <header class="page-heading"><p class="label">IN/SITU · {titles[page]}</p><h1>{titles[page]}</h1><p class="lead">{intros[page]}</p></header>
   {page==='about' && <>
     {(!about.draft||import.meta.env.DEV)&&<section class="reading-section"><h2>Our shared premise</h2><Prose body={about.body}/></section>}
-    <RecordList title="Four research themes" id="themes" records={data.themes} cards/>
+    <RecordList data={data} title="Four research themes" id="themes" records={data.themes} cards/>
     <section class="split-section"><h2>Led by Laura Shackelford</h2><div><p>We are based at the University of Illinois Urbana-Champaign.</p><p><a href="/people/laura-shackelford/">Meet our director</a></p><p><LabContact /></p></div></section>
   </>}
   {page==='projects'&&<Tags themes={data.themes}/>}
-  {['projects','publications','presentations','awards-funding'].includes(page)&&grouped(data,collection).map((group:{type:string;items:any[]})=><RecordList title={page==='presentations'&&group.type==='conference'?'Conference talks':labels[group.type as keyof typeof labels]} records={group.items} cards={page==='projects'}/>)}
-  {page==='people'&&<PeopleList people={data.people}/>}
+  {['projects','publications','presentations','awards-funding'].includes(page)&&grouped(data,collection).map((group:{type:string;items:any[]})=><RecordList data={data} title={page==='presentations'&&group.type==='conference'?'Conference talks':labels[group.type as keyof typeof labels]} records={group.items} cards={page==='projects'}/>)}
+  {page==='people'&&<PeopleList people={data.people} data={data}/>}
   {page==='join'&&<>
     {(!join.draft||import.meta.env.DEV)&&<section class="reading-section"><h2>Graduate study</h2><Prose body={join.body}/></section>}
     <section class="split-section"><h2>Current opportunities</h2><div><p>Opening details and undergraduate opportunities will be added here when confirmed.</p><p>For questions about graduate study, contact the lab.</p><LabContact button /></div></section>
     <section class="split-section"><h2>Access and participation</h2><div><p>Our work shares a commitment to situated, participatory, and accessible experiences.</p><p><a href="/themes/accessibility/">Accessibility & belonging</a></p></div></section>
     <aside class="next-entry"><h2><a href="/people/">Meet the team</a></h2></aside>
   </>}
+  {['about','join'].includes(page)&&<LabLocation/>}
 </Base>

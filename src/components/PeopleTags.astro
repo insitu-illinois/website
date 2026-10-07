@@ -1,0 +1,6 @@
+---
+import {hasPersonPage} from '../lib/format.mjs';
+interface Props { people: any[]; label?:string; }
+const {people,label='People'}=Astro.props;
+---
+{people.length>0 && <ul class="tags people-tags" aria-label={label}>{people.map(person=><li><a href={hasPersonPage(person)?`/people/${person.id}/`:`/people/#person-${person.id}`}>{person.data.name}</a></li>)}</ul>}

@@ -118,3 +118,10 @@ section:first-child { margin-top:0; }
  section { margin-block:var(--space-9); }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; } }
+
+.affiliations h2 { font-size:var(--text-display-sm); margin-top:var(--space-6); }
+.affiliations li { margin-bottom:var(--space-3); }
+.lab-location address { font-style:normal; margin-bottom:var(--space-4); }
+.map-panel { margin-top:var(--space-6); padding:var(--space-5); background:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); }
+.lab-map { display:block; width:100%; aspect-ratio:4/3; border:0; }
+.people-tags a { border-style:dashed; }

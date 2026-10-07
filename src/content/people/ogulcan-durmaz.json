@@ -3,10 +3,18 @@
   "draft": false,
   "name": "Ogulcan Durmaz",
   "role": "phd",
-  "bio": "AI-mediated extended reality for language learning, communication, and situated educational experiences.",
+  "bio": "Ogulcan is a PhD student in Informatics studying language learning in virtual environments. His research connects formal and informal learning and explores how theories of language education can guide the design of virtual spaces using game engines and design frameworks.",
   "order": 3,
-  "photo": null,
-  "website": "",
+  "photo": {
+    "src": "/media/people/ogulcan-durmaz-university.png",
+    "alt": "Portrait of Ogulcan Durmaz"
+  },
+  "website": "https://www.researchgate.net/profile/Ogulcan-Durmaz",
   "scholar": "",
-  "email": ""
+  "email": "",
+  "themes": [
+    "ai-language",
+    "situated-learning"
+  ],
+  "universityProfile": "https://informatics.ischool.illinois.edu/people/ogulcan-durmaz/"
 }

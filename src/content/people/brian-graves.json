@@ -3,10 +3,17 @@
   "draft": false,
   "name": "Brian Graves",
   "role": "phd",
-  "bio": "Accessibility in games and interactive environments for people with diverse abilities. He designs games for education, outreach, and science communication, and is building a VR exergame for wheelchair users and seated players with limited limb use. PhD student in the Program in Ecology, Evolution, and Conservation Biology, advised by Laura Shackelford.",
+  "bio": "Brian is a PhD candidate in the Program in Ecology, Evolution, and Conservation Biology, advised by Laura Shackelford. He studies accessibility in virtual reality, including the experiences and preferences of wheelchair users. His work uses Unity game development and Blender models to investigate how virtual environments can support more inclusive participation.",
   "order": 4,
-  "photo": null,
-  "website": "",
+  "photo": {
+    "src": "/media/people/brian-graves-university.jpg",
+    "alt": "Portrait of Brian Graves"
+  },
+  "website": "https://www.linkedin.com/in/brian-graves-3749412b6",
   "scholar": "",
-  "email": ""
+  "email": "",
+  "universityProfile": "https://sib.illinois.edu/directory/profile/brianag3",
+  "themes": [
+    "accessibility"
+  ]
 }

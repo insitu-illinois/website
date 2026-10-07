@@ -10,7 +10,12 @@
     "situated-learning",
     "accessibility"
   ],
-  "team": [],
+  "team": [
+    "laura-shackelford",
+    "wen-hao-david-huang",
+    "cameron-merrill",
+    "sepehr-vaez-afshar"
+  ],
   "funding": [
     "nsf-1736235",
     "nsf-2021460"

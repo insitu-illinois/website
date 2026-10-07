@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadRaw, validate } from '../scripts/validate-content.mjs';
-import { visible, personLists, projectLists, themeLists, relatedPapers, homeLists, grouped, orders, referenced, peopleGroups } from '../src/lib/derived.mjs';
+import { visible, personLists, projectLists, themeLists, relatedPapers, homeLists, grouped, orders, referenced, peopleGroups, recordPeople, personThemes, newest } from '../src/lib/derived.mjs';
 const raw=loadRaw();
 const data=visible(raw);
 const entry=(id,data)=>({id,data});
@@ -20,14 +20,14 @@ test('an entry saved by the CMS may leave optional relationships blank',()=>{
   fixture.news.at(-1).data.relatedProject='missing-project';
   assert.throws(()=>validate(fixture), /Unknown projects reference/);
 });
-test('all four person lists use references, never citation string matching',()=>{
+test('all person lists use references, never citation string matching',()=>{
   const fixture={...data,
     publications:[entry('yes',{labAuthors:[{id:'person'}],authors:'External author',year:2020}),entry('no',{labAuthors:[],authors:'person',year:2021})],
     presentations:[entry('talk',{presenters:['person'],date:'2020'})],
     recognition:[entry('grant',{recipients:['person'],year:2017})],
     projects:[entry('project',{team:['person'],name:'Project'})],
   };
-  assert.deepEqual(Object.fromEntries(Object.entries(personLists(fixture,'person')).map(([k,v])=>[k,v.map(r=>r.id)])),{publications:['yes'],presentations:['talk'],recognition:['grant'],projects:['project']});
+  assert.deepEqual(Object.fromEntries(Object.entries(personLists(fixture,'person')).map(([k,v])=>[k,v.map(r=>r.id)])),{publications:['yes'],presentations:['talk'],recognition:['grant'],projects:['project'],news:[]});
 
 });
 test('project lists match the project reference',()=>{
@@ -90,4 +90,28 @@ test('the launch switch controls both crawler-policy states',()=>{
   const site=new URL('https://example.org');
   assert.equal(crawlerPolicy(false,site),'User-agent: *\nDisallow: /\n');
   assert.equal(crawlerPolicy(true,site),'User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: https://example.org/sitemap.xml\n');
+});
+
+import { mapUrl } from '../src/lib/location.mjs';
+test('news tags connect people, themes, and projects without matching body text',()=>{
+ const news=[entry('tagged',{title:'Tagged',people:['laura-shackelford'],themes:['situated-learning'],relatedProject:'vrchaeology'}),entry('text-only',{title:'Laura Shackelford',people:[],themes:[]})];
+ const fixture={...data,news};
+ assert.deepEqual(personLists(fixture,'laura-shackelford').news.map(r=>r.id),['tagged']);
+ assert.deepEqual(themeLists(fixture,'situated-learning').news.map(r=>r.id),['tagged']);
+ assert.deepEqual(projectLists(fixture,'vrchaeology').news.map(r=>r.id),['tagged']);
+ assert.deepEqual(recordPeople(fixture,{...news[0],collection:'news'}).map(r=>r.id),['laura-shackelford']);
+});
+test('direct interests and work themes merge without duplicates, excluding draft work',()=>{
+ const fixture=visible({...data,projects:[entry('hidden',{draft:true,name:'Hidden',themes:['accessibility'],team:['sarvin-eshaghi']})]});
+ const person=entry('sarvin-eshaghi',{name:'Sarvin',themes:['heritage-public-space','heritage-public-space']});
+ assert.deepEqual(personThemes(fixture,person).map(r=>r.id),['heritage-public-space']);
+ assert.ok(themeLists({...fixture,people:[person]},'heritage-public-space').people.some(r=>r.id===person.id));
+});
+test('publication dates sort within a year and blank dates fall back to the year',()=>{
+ assert.deepEqual(newest([entry('year',{title:'Year',year:2025,publicationDate:''}),entry('early',{title:'Early',year:2026,publicationDate:'2026-01-01'}),entry('late',{title:'Late',year:2026,publicationDate:'2026-04-10'})]).map(r=>r.id),['late','early','year']);
+});
+test('only Google-provided map embed URLs are accepted',()=>{
+ assert.equal(mapUrl(''), '');
+ assert.ok(mapUrl('https://www.google.com/maps/embed?pb=verified').startsWith('https://www.google.com/maps/embed?'));
+ for(const url of ['javascript:alert(1)','https://evil.example/maps/embed?pb=a','https://www.google.com/maps?pb=a','https://user:password@www.google.com/maps/embed?pb=a']) assert.throws(()=>mapUrl(url));
 });

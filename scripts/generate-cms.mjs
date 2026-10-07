@@ -9,6 +9,12 @@ const hints = {
   role: 'Collaborator and Alumni have their own sections; all other roles appear under Current members.',
   bio: 'Use an approved biography; leave blank to show this person in lists without a separate profile page.',
   website: 'Paste the full address of the person’s website, or leave blank.',
+  universityProfile: 'Paste the verified university directory page for this person, or leave blank.',
+  affiliations: 'List confirmed current appointments and affiliations, one per line; leave blank if not supplied.',
+  people: 'Select the people mentioned in this news item; it will appear on their profiles automatically.',
+  address: 'Enter the public lab address, including the building and room if visitors need them.',
+  mapEmbedUrl: 'Paste only the Google Maps embed URL from Share → Embed a map, not the full iframe code.',
+  directionsUrl: 'Paste the Google Maps link visitors should open for directions.',
   scholar: 'Paste the person’s Google Scholar profile address, or leave blank.',
   email: 'Enter the contact email; in Lab contact, this single address is shared by Join, About, and the footer.',
   order: 'Smaller numbers appear first within the person’s section; equal numbers sort by name.',
@@ -46,7 +52,7 @@ const hints = {
   statement: 'Enter the approved introductory statement for Home.',
   institution: 'Enter the university affiliation displayed in the footer.',
 };
-const labels = { labAuthors: 'Lab authors', heroMedia: 'Hero image', shortDescription: 'Short description', relatedPublication: 'Related publication', relatedProject: 'Related project', awardingBody: 'Awarding body', externalLink: 'External link', bibtex: 'BibTeX', doi: 'DOI URL', pdf: 'PDF', phd: 'PhD' };
+const labels = { universityProfile: 'University profile', publicationDate: 'Publication date', mapEmbedUrl: 'Map embed URL', directionsUrl: 'Directions link', labAuthors: 'Lab authors', heroMedia: 'Hero image', shortDescription: 'Short description', relatedPublication: 'Related publication', relatedProject: 'Related project', awardingBody: 'Awarding body', externalLink: 'External link', bibtex: 'BibTeX', doi: 'DOI URL', pdf: 'PDF', phd: 'PhD' };
 const label = name => labels[name] ?? name[0].toUpperCase() + name.slice(1);
 function field(name, f) {
   const result = { name, label: label(name), widget: f.widget ?? 'string', required: Boolean(f.required), hint: hints[name] };
@@ -79,6 +85,7 @@ const collections = Object.keys(models).map(name => ({
 collections.push({ name: 'pages', label: 'Page text', files: [
   { name: 'home', label: 'Home', file: 'src/content/pages/home.json', fields: [field('title',{required:true}),field('statement',{}),field('draft',{kind:'boolean',default:false})] },
   ...['about','join'].map(name => ({name,label:label(name),file:`src/content/pages/${name}.json`,fields:[field('title',{required:true}),field('body',{widget:'markdown'}),field('draft',{kind:'boolean',default:false})]})),
+  { name:'location',label:'Lab location',file:'src/content/pages/location.json',fields:[field('address',{widget:'text'}),field('mapEmbedUrl',{kind:'url'}),field('directionsUrl',{kind:'url'}),field('draft',{kind:'boolean',default:true})] },
   { name:'footer',label:'Lab contact',file:'src/content/pages/footer.json',fields:[field('email',{kind:'email',required:true}),field('institution',{}),field('draft',{kind:'boolean',default:false})] },
 ] });
 const config = {

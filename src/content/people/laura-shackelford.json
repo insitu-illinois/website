@@ -3,13 +3,19 @@
   "draft": false,
   "name": "Laura Shackelford",
   "role": "director",
-  "bio": "Laura is a Professor of Anthropology and an affiliate in the Department of Informatics and Game Studies & Design at UIUC, and a Professor of Biomedical and Translational Sciences and the Anatomy Director for the Carle Illinois College of Medicine. Her research focuses on the evolution of our species, Homo sapiens, as a background to understanding recent human diversity. She has a geographic focus in Southeast Asia and has co-directed ongoing field research in northern Laos since 2008.\n\nHer research also explores virtual reality and technology in education to make human prehistory and archaeological fieldwork accessible to more students.",
+  "bio": "Laura studies human evolution and recent human diversity, with a focus on Southeast Asia. She co-directs archaeological field research in northern Laos. Her work also explores how virtual reality and educational games can make human prehistory and archaeological fieldwork accessible to more learners.",
   "order": 0,
   "photo": {
-    "src": "/media/people/laura-shackelford.jpg",
+    "src": "/media/people/laura-shackelford-university.jpg",
     "alt": "Portrait of Laura Shackelford"
   },
-  "website": "",
+  "website": "https://experts.illinois.edu/en/persons/laura-lynn-shackelford/",
   "scholar": "",
-  "email": "llshacke@illinois.edu"
+  "email": "llshacke@illinois.edu",
+  "universityProfile": "https://anthro.illinois.edu/directory/profile/llshacke",
+  "themes": [
+    "situated-learning",
+    "heritage-public-space"
+  ],
+  "affiliations": "Professor, Department of Anthropology\nFaculty Affiliate, Illinois Informatics, School of Information Sciences\nFaculty Affiliate, Game Studies & Design program\nFaculty Affiliate, Center for East Asian & Pacific Studies\nFaculty Fellow, Center for Social and Behavioral Sciences\nIMMERSE Education Theme co-Lead\nProfessor, Department of Biomedical & Translational Sciences, Carle Illinois College of Medicine\nHealth Innovation Professor, Carle Illinois College of Medicine"
 }

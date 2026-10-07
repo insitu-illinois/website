@@ -7,7 +7,11 @@
   "type": "conference",
   "authors": "Shackelford L, Verstraete E, Huang WD, Merrill C, Craig A",
   "labAuthors": [
-    "laura-shackelford"
+    "laura-shackelford",
+    "wen-hao-david-huang",
+    "alan-b-craig",
+    "cameron-merrill",
+    "emma-verstraete"
   ],
   "themes": [
     "situated-learning"

@@ -1,0 +1,33 @@
+---
+import location from '../content/pages/location.json';
+import { mapUrl } from '../lib/location.mjs';
+const embed=mapUrl(location.mapEmbedUrl);
+---
+{(!location.draft || import.meta.env.DEV) && <section class="lab-location" aria-labelledby="location-heading">
+  <div class="split-section"><h2 id="location-heading">Find us</h2><div><address>{location.address.split('\n').map(line=><>{line}<br/></>)}</address>
+    <p>The map shows the building. Use the room number in the address above.</p>
+    {location.directionsUrl&&<a class="text-link" href={location.directionsUrl}>Open directions in Google Maps</a>}
+  </div></div>
+  {embed&&<div class="map-panel" data-map-url={embed}>
+    <p>Load the interactive map here. Google receives connection information when the map loads.</p>
+    <button class="button" type="button" data-load-map hidden>Show lab map</button>
+    <noscript><p>Use the directions link above to view the map without JavaScript.</p></noscript>
+  </div>}
+</section>}
+<script>
+  document.querySelectorAll<HTMLElement>('[data-map-url]').forEach(panel=>{
+    const button=panel.querySelector<HTMLButtonElement>('[data-load-map]');
+    if(!button)return;
+    button.hidden=false;
+    button.addEventListener('click',()=>{
+      const frame=document.createElement('iframe');
+      frame.src=panel.dataset.mapUrl!;
+      frame.title='Google map of the lab location';
+      frame.className='lab-map';
+      frame.referrerPolicy='strict-origin-when-cross-origin';
+      frame.allowFullscreen=true;
+      panel.replaceChildren(frame);
+      frame.focus();
+    },{once:true});
+  });
+</script>
