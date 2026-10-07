@@ -62,7 +62,6 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
           <h2 class="footer-heading">Connect</h2>
           <ul>
             <li><LabContact /></li>
-            <li><a href="/join/">Join</a></li>
             {(!location.draft||import.meta.env.DEV)&&<li><a href="/join/#location">{shortAddress}</a></li>}
           </ul>
         </div>
@@ -72,7 +71,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
             <li><a href="/about/">About</a></li>
             <li><a href="/people/">People</a></li>
             <li><AccessibilityEntry /></li>
-            <li><a class="footer-editor" href="/admin/">Editor sign-in</a></li>
+            <li><a class="footer-editor" href="/admin/">Sign in</a></li>
           </ul>
         </div>
       </div>

@@ -20,7 +20,6 @@ html[data-high-contrast="true"] {
 }
 .site-header .accessibility-entry { background:transparent; color:var(--white); border-color:var(--text-muted-on-chrome); }
 .site-header .accessibility-entry:focus-visible { outline-color:var(--white); box-shadow:0 0 0 var(--space-2) var(--surface-chrome); }
-.site-footer .accessibility-entry { margin-top:var(--space-3); }
 .accessibility-entry:hover { text-decoration:underline; }
 .accessibility-panel {
   width:min(36rem,calc(100% - var(--space-6))); max-width:calc(100% - var(--space-6));
@@ -57,4 +56,5 @@ html[data-theme="night"][data-high-contrast="true"] {
   --accent-heritage-strong:var(--text-on-chrome);
 }
 
-.site-footer .accessibility-entry { background:transparent; color:var(--text-on-chrome); border-color:var(--text-muted-on-chrome); }
+.site-footer .accessibility-entry { display:inline-block; font:inherit; min-height:0; margin:0; padding:var(--space-2) 0; background:transparent; color:var(--text-on-chrome); border:0; border-radius:0; text-align:start; text-decoration:underline; text-decoration-thickness:var(--border-hairline); text-underline-offset:var(--space-1); }
+.site-footer .accessibility-entry:hover { text-decoration-thickness:var(--border-thick); }
