@@ -78,3 +78,49 @@
   --button-hover:var(--ochre-200);
   --header-border:var(--night-border);
 }
+
+/* Monochrome presentation trial, approved for local review. */
+:root {
+  --neutral-50:#F7F7F7;
+  --neutral-200:#D1D1D1;
+  --neutral-300:#B8B8B8;
+  --neutral-500:#737373;
+  --neutral-600:#525252;
+  --neutral-800:#333333;
+  --neutral-900:#242424;
+  --neutral-950:#161616;
+  --surface-page:var(--white);
+  --surface-card:var(--neutral-50);
+  --surface-chrome:var(--neutral-900);
+  --surface-chrome-hover:var(--neutral-800);
+  --text-on-chrome:var(--white);
+  --text-muted-on-chrome:var(--neutral-200);
+  --border-chrome:var(--neutral-500);
+  --text-primary:var(--neutral-900);
+  --text-heading:var(--neutral-950);
+  --text-secondary:var(--neutral-600);
+  --accent-heritage:var(--neutral-300);
+  --accent-heritage-strong:var(--neutral-950);
+  --accent-lumen:var(--neutral-300);
+  --accent-lumen-strong:var(--neutral-600);
+  --border-default:var(--neutral-200);
+  --border-strong:var(--neutral-500);
+  --focus-ring:var(--neutral-950);
+  --text-on-accent:var(--white);
+  --button-hover:var(--neutral-800);
+  --header-border:var(--neutral-800);
+}
+:root[data-theme="night"] {
+  --surface-page:var(--neutral-950);
+  --surface-card:var(--neutral-900);
+  --text-primary:var(--neutral-50);
+  --text-heading:var(--white);
+  --text-secondary:var(--neutral-200);
+  --accent-heritage-strong:var(--neutral-50);
+  --border-default:var(--neutral-600);
+  --border-strong:var(--neutral-300);
+  --focus-ring:var(--white);
+  --text-on-accent:var(--neutral-950);
+  --button-hover:var(--neutral-200);
+  --header-border:var(--neutral-600);
+}

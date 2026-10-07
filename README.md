@@ -274,3 +274,7 @@ Night colors are tokens in `design-system/tokens/colors.css`, including distinct
 The six primary destinations are About, Research, People, Publications, News, and Join. Research opens a single submenu containing Projects, Research themes (the existing About section), Presentations, and Awards & funding. Existing URLs and content remain unchanged. The submenu opens by click, Enter, or Space; Escape closes it and restores focus. Smaller screens have a labeled Menu button. Without JavaScript, the links remain available through native HTML disclosure.
 
 Night mode and Accessibility use compact icons in the header, with 48 CSS-pixel touch targets, accessible names, and hover/focus tooltips dismissible with Escape. The footer retains a text Accessibility entry. Navigation checks cover submenu links, keyboard behavior, no-JavaScript access, and enlarged text on mobile, alongside the existing light/night accessibility checks.
+
+## Monochrome presentation trial
+
+The local review uses a white reading surface, neutral text and outlined actions, with matching charcoal header and footer. Research themes keep their descriptions and links in an open two-column layout. Night mode uses neutral grays; high contrast and focus indicators remain available. All content, routes, CMS configuration and deployment settings are unchanged. Palette values are centralized in `design-system/tokens/colors.css`. This trial has not been published.

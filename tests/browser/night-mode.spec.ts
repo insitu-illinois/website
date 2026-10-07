@@ -12,7 +12,7 @@ test('night mode is explicit, keyboard accessible, persistent, and resettable',a
   await expect(page.locator('body')).toHaveCSS('background-color','rgb(255, 255, 255)');
   await toggle.focus(); await toggle.press('Space');
   await expect(toggle).toHaveAttribute('aria-pressed','true');
-  await expect(page.locator('body')).toHaveCSS('background-color','rgb(16, 26, 41)');
+  await expect(page.locator('body')).toHaveCSS('background-color','rgb(22, 22, 22)');
   await page.goto('/publications/');
   await expect(toggle).toHaveAttribute('aria-pressed','true');
   await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
