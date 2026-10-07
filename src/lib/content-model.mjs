@@ -62,7 +62,7 @@ export function makeSchema(z, reference, fields) {
       case 'select': s = z.enum(field.options); if (!field.required) s = s.nullish(); break;
       case 'reference':
         s = reference(field.collection);
-        s = field.multiple ? z.array(s).nullish().transform(v => v ?? []) : s.nullish(); break;
+        s = field.multiple ? z.array(s).nullish().transform(v => v ?? []) : z.preprocess(v => v === '' ? undefined : v, s.nullish()); break;
       case 'image':
         s = z.object({ src: z.string().regex(new RegExp(mediaPattern)), alt: z.string().trim().min(1) }).strict().nullish(); break;
       case 'date':

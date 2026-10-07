@@ -13,6 +13,13 @@ test('all seed records validate; drafts are visible only in development',()=>{
   assert.ok(!Object.values(data).flat().some(r=>r.data.draft));
   assert.equal(data.publications.length,3);
 });
+test('an entry saved by the CMS may leave optional relationships blank',()=>{
+  const fixture=structuredClone(raw);
+  fixture.news.push({id:'cms-empty-relations',collection:'news',data:{slug:'cms-empty-relations',draft:true,title:'CMS test',type:'lab-life',relatedPublication:'',relatedProject:'',image:null}});
+  assert.doesNotThrow(()=>validate(fixture));
+  fixture.news.at(-1).data.relatedProject='missing-project';
+  assert.throws(()=>validate(fixture), /Unknown projects reference/);
+});
 test('all four person lists use references, never citation string matching',()=>{
   const fixture={...data,
     publications:[entry('yes',{labAuthors:[{id:'person'}],authors:'External author',year:2020}),entry('no',{labAuthors:[],authors:'person',year:2021})],
