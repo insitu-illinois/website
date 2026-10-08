@@ -157,7 +157,7 @@ collections:
         label: Bio
         widget: text
         required: false
-        hint: Use an approved biography. Alumni biographies expand on the People page;
+        hint: Use an approved biography. Alumni biographies are saved but not displayed;
           other roles get a profile page. Leave blank for a list entry only.
       - name: affiliations
         label: Affiliations

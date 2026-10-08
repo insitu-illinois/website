@@ -2,14 +2,14 @@
 import linkedin from '../assets/icons/bootstrap/linkedin.svg?raw';
 import website from '../assets/icons/bootstrap/globe.svg?raw';
 import scholar from '../assets/icons/simple-icons/google-scholar.svg?raw';
-const { person, linkedinOnly = false } = Astro.props;
+const { person, alumni = false, iconsOnly = false } = Astro.props;
 const items = [
   { key:'linkedin', label:'LinkedIn', svg:linkedin, size:16 },
   { key:'scholar', label:'Google Scholar', svg:scholar, size:24 },
   { key:'website', label:'Website', svg:website, size:16 },
-].filter(item=>(!linkedinOnly || item.key==='linkedin') && person[item.key] && !(item.key==='website' && person.website===person.linkedin));
+].filter(item=>(!alumni || item.key!=='scholar') && person[item.key] && !(item.key==='website' && person.website===person.linkedin));
 const paths=(svg:string)=>svg.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'').replace(/<title>.*?<\/title>/g,'');
 ---
-{items.length>0&&<ul class="profile-links" aria-label={`${person.name} profiles`}>
-  {items.map(item=><li><a href={person[item.key]} aria-label={`${person.name} on ${item.label}`}><svg viewBox={`0 0 ${item.size} ${item.size}`} aria-hidden="true" focusable="false" set:html={paths(item.svg)}/><span>{item.label}</span></a></li>)}
+{items.length>0&&<ul class:list={['profile-links',{'profile-icons':iconsOnly}]} aria-label={`${person.name} profiles`}>
+  {items.map(item=><li><a href={person[item.key]} aria-label={`${person.name} on ${item.label}`} title={item.label}><svg viewBox={`0 0 ${item.size} ${item.size}`} aria-hidden="true" focusable="false" set:html={paths(item.svg)}/>{!iconsOnly&&<span>{item.label}</span>}</a></li>)}
 </ul>}

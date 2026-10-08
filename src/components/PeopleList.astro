@@ -12,19 +12,11 @@ const { people, data } = Astro.props;
     {group.items.map((person:any) => {
       const href=entryUrl(person);
       return group.key==='alumni' ? <li id={`person-${person.id}`} tabindex="-1">
-        {person.data.bio?.trim() ? <details class="alumni-details">
-          <summary>
-            {person.data.photo && <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="64" height="64" loading="lazy"/>}
-            <h3>{person.data.name}</h3>
-          </summary>
-          <div class="alumni-bio">
-            {person.data.bio.split('\n\n').map((paragraph:string)=><p>{paragraph}</p>)}
-            <ProfileLinks person={person.data} linkedinOnly/>
-          </div>
-        </details> : <div class="alumni-entry">
+        <div class="alumni-entry">
           {person.data.photo && <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="64" height="64" loading="lazy"/>}
-          <div><h3>{person.data.name}</h3><ProfileLinks person={person.data} linkedinOnly/></div>
-        </div>}
+          <h3>{person.data.name}</h3>
+          <ProfileLinks person={person.data} alumni iconsOnly/>
+        </div>
       </li> : <li id={`person-${person.id}`} class="card" tabindex="-1">
         {person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy" /> : <div class="people-initials" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}
         <div>
@@ -37,15 +29,3 @@ const { people, data } = Astro.props;
     })}
   </ul>
 </section>)}
-
-<script>
-  function revealAlumnus() {
-    const id=decodeURIComponent(location.hash.slice(1));
-    if(!id.startsWith('person-')) return;
-    const target=document.getElementById(id);
-    const details=target?.querySelector('details');
-    if(details) { details.open=true; target?.scrollIntoView(); }
-  }
-  revealAlumnus();
-  window.addEventListener('hashchange',revealAlumnus);
-</script>

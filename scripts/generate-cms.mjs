@@ -7,7 +7,7 @@ const hints = {
   name: 'Enter the name as it should appear on the website.',
   title: 'Enter the approved title in sentence case, keeping proper names capitalized.',
   role: 'Collaborator and Alumni have their own sections; all other roles appear under Current members.',
-  bio: 'Use an approved biography. Alumni biographies expand on the People page; other roles get a profile page. Leave blank for a list entry only.',
+  bio: 'Use an approved biography. Alumni biographies are saved but not displayed; other roles get a profile page. Leave blank for a list entry only.',
   linkedin: 'Paste this person’s verified LinkedIn profile URL, or leave blank; do not use a search results page.',
   proposed: 'Keep on while the lab is reviewing these values; the website will clearly label them as proposed.',
   participation: 'Write one sentence about accessibility and participation; it appears on Home and About.',

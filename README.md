@@ -27,7 +27,7 @@ Saving an entry commits it to GitHub. The automatic checks then rebuild and depl
 
 1. Select **People → Create new entry**. Enter their name and a permanent `first-last` slug.
 2. Choose the confirmed role. **Collaborator** and **Alumni** have their own sections; every other role appears under **Current members**. Changing the role moves the person automatically. Smaller **Order** values appear first.
-3. Enter an approved biography: alumni biographies expand on People, while other roles receive a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied or verified against an identity-matched public profile. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
+3. Enter an approved biography: alumni remain compact list entries without a displayed biography, while other roles receive a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied or verified against an identity-matched public profile. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
 4. Keep **Draft** on while details need approval, then switch it off and save.
 5. Select that person in project **Team**, publication **Lab authors**, presentation **Presenters**, and recognition **Recipients**. Their four profile lists fill automatically.
 
@@ -187,7 +187,7 @@ Unconfirmed relationships remain empty, including the current VRchaeology team a
 - `src/content/publications/cognitive-loads.json` — Bibliographic details and shareable PDF need confirmation.
 - `src/content/recognition/epic-megagrant.json` — Year and recipients need confirmation.
 
-All 24 people are approved for listing by the October 7 review request. The six current members, five collaborators, and thirteen alumni are public records. At that initial review, Lily’s biography and photo were blank. Her subsequently supplied biography and LinkedIn are now included; her photo remains blank. Alumni now use inline disclosures instead of biography pages.
+All 24 people are approved for listing by the October 7 review request. The six current members, five collaborators, and thirteen alumni are public records. At that initial review, Lily’s biography and photo were blank. Her subsequently supplied biography and LinkedIn are now included; her photo remains blank. Alumni now use compact list entries instead of biography pages.
 
 ### Old Team page import
 
@@ -295,9 +295,9 @@ The footer has three columns: lab identity, Explore (Projects, Publications, Lab
 
 Edit **Page text → Lab values** to change the three shared sentences on Home and About, plus the longer explanation on About. **Proposed** displays “Proposed values · Pending lab review”; turn it off only once the lab approves the wording. **Draft** hides the entire section and its footer link from static builds. The initial proposal is visible with the owner’s explicit approval, and is not presented as an adopted lab policy.
 
-Every People entry has optional **LinkedIn**, **Google Scholar**, and **Website** fields. Only enter verified personal URLs; blanks produce no placeholder link. Icons accompany readable labels and screen-reader names. Current members and collaborators with biographies have a detail page; alumni biographies expand on People with LinkedIn only. Otherwise verified profile links appear in the People list. Existing roles, ordering, and relationships are preserved. Profile source notes and remaining blank channels are recorded in `docs/people-source-review.json`.
+Every People entry has optional **LinkedIn**, **Google Scholar**, and **Website** fields. Only enter verified personal URLs; blanks produce no placeholder link. Icons accompany readable labels and screen-reader names. Current members and collaborators with biographies have a detail page; alumni show only their names, photos, and verified LinkedIn/website icons on People. Otherwise verified profile links appear in the People list. Existing roles, ordering, and relationships are preserved. Profile source notes and remaining blank channels are recorded in `docs/people-source-review.json`.
 
 The night-mode button always shows a crescent: an outline in light mode and a filled moon in night mode. Filling/unfilling takes the shared 600 ms decorative transition token. Device and site reduced-motion preferences disable that transition. No sun is shown. Google Material Icons remain under Apache 2.0. Profile icons use Bootstrap Icons (LinkedIn and globe, MIT) and Simple Icons (Google Scholar, CC0), with licenses in their asset directories. SVGs are stored locally with no third-party requests.
 
 
-Alumni appear as a compact list on People. Their biographies open in native, keyboard-accessible disclosure controls, with only a verified LinkedIn link displayed. Website and Scholar values remain stored for future use. Former biography URLs redirect to the person's expanded entry on People; alumni are excluded from the profile sitemap. Changing a person's role in `/admin` automatically changes this behavior. A blank biography produces a simple list entry.
+Alumni appear as a compact list on People: name, optional photo, and verified LinkedIn/website icons only. There are no disclosures or visible biographies, and no Scholar links. Biography and Scholar values remain stored for future use. Former biography URLs redirect to the person's entry on People; alumni are excluded from the profile sitemap. Changing a person's role in `/admin` automatically changes this behavior. Icon links have accessible names, visible keyboard focus, and 48-pixel touch targets.

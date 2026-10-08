@@ -190,11 +190,8 @@ section:first-child { margin-top:0; }
 /* Keep Zade visible in the landscape photograph supplied by the VR Club. */
 img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
 
-.alumni-details { width:100%; }
-.alumni-details summary { cursor:pointer; min-height:var(--space-7); padding-block:var(--space-3); }
-.alumni-details summary h3 { display:inline; }
-.alumni-details summary .people-photo { display:inline-block; vertical-align:middle; margin-inline:var(--space-3); }
-.alumni-details[open] summary { margin-bottom:var(--space-3); }
-.alumni-bio { max-width:70ch; }
-.alumni-entry { display:flex; align-items:center; gap:var(--space-4); }
+.alumni-entry { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-4); width:100%; }
+.alumni-entry h3 { flex:1; }
+.alumni-entry .profile-icons { margin:0; }
+.profile-icons a { display:inline-flex; align-items:center; justify-content:center; width:var(--space-7); min-height:var(--space-7); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); }
 .people-compact>li + li { border-top:var(--border-hairline) solid var(--border-default); }
