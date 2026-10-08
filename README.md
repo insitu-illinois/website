@@ -195,7 +195,7 @@ On October 7, 2026, the lab requested import from [the old Team page](https://ww
 
 The old page used a silhouette for Alan B. Craig, Alice (Xuehui) Chao, Cameron Merrill, and Jin Jang; a lab logo for David Hopping, Robbie Sieczkowski, Nan Kang, and Zade Lobo. Those generic placeholders are not imported. Sepehr Vaez Afshar, Sarvin Eshaghi, Ogulcan Durmaz, Brian Graves, and Lily Meyer had no entry on that old page, so no old portrait was available for them.
 
-The old alumni list provided no biographies for Alexandra Zachwieja, Jamie Arjona, Janny Chen, Monika Janas, Alice (Xuehui) Chao, Aaron Stocks, Isaac Smith, Cameron Merrill, Rajee Shah, Jin Jang, or Emma Verstraete. Those entries and Lily remain list-only until an approved biography is added. Photos still appear in the compact Alumni list where available.
+The old alumni list provided no biographies for Alexandra Zachwieja, Jamie Arjona, Janny Chen, Monika Janas, Alice (Xuehui) Chao, Aaron Stocks, Isaac Smith, Cameron Merrill, Rajee Shah, Jin Jang, or Emma Verstraete. Those alumni remain compact list entries with photos and verified website/LinkedIn icons where available. Alumni biographies are not displayed. Lily now has a profile using the biography supplied by the lab.
 
 ## Release verification
 
@@ -214,7 +214,7 @@ Review corrections verified locally on October 7 (20 unit/content/security tests
 In `/admin`, choose names from the searchable relationship fields; you do not need to type an ID or add a hashtag in the text. Save the entry and wait for the successful deployment before checking the website.
 
 - **Projects → Team** connects a project to each selected person's profile.
-- **Publications → Authors** keeps the complete citation in order. **Lab authors** separately selects lab people and alumni to connect their profiles. Always maintain both fields.
+- **Publications → Authors** keeps the complete citation in order. **Lab authors** separately selects lab people and alumni to preserve person relationships. Always maintain both fields.
 - **Presentations → Presenters** and **Recognition → Recipients** connect those entries to people.
 - **News → People** tags the people mentioned in a post. **Related project** connects the same post to its project page. **Related publication** adds a link to the paper.
 - **Themes** selects topics for any of these records. People also have a Themes field for confirmed interests; their profiles combine these with themes from their projects, papers, and talks. Theme pages collect related work, news, recognition, and people. A news mention does not automatically become a person's research interest.
@@ -301,3 +301,19 @@ The night-mode button always shows a crescent: an outline in light mode and a fi
 
 
 Alumni appear as a compact list on People: name, optional photo, and verified LinkedIn/website icons only. There are no disclosures or visible biographies, and no Scholar links. Biography and Scholar values remain stored for future use. Former biography URLs redirect to the person's entry on People; alumni are excluded from the profile sitemap. Changing a person's role in `/admin` automatically changes this behavior. Icon links have accessible names, visible keyboard focus, and 48-pixel touch targets.
+
+
+## Verified release — October 7, 2026
+
+- Live site: https://insitu-illinois.insituillinois.workers.dev/
+- Repository: https://github.com/insitu-illinois/website
+- Deployed source commit: `d9905e007430e44a7db809b8e851be4fd6bba163`.
+- Successful verification and deployment: [Actions run 37709223363](https://github.com/insitu-illinois/website/actions/runs/37709223363).
+- Cloudflare Worker version: `960f453a-5768-4b3c-b0bc-4c0a7bf82b6d`, in the existing lab account. The workflow builds with `npm run build`, uploads only `dist/`, checks the lab account ID, and deploys using `wrangler.jsonc`.
+- Delivered the reviewed monochrome design, accessibility preferences, persistent night mode with an animated filling crescent, verified profile updates and portraits, editable proposed lab values, and revised footer credit. Alumni display names, optional photos, and verified website/LinkedIn icons only; no biographies, disclosures, Scholar icons, or separate biography pages. Old biography URLs redirect to the corresponding People entry.
+- Preserved all 24 people and their roles, order, draft status, and theme relationships. Projects, publications, themes, news, presentations, and recognition content remained unchanged in this presentation release.
+- Validation: 24 unit/content/security tests; zero Astro diagnostics; 27 browser tests passed in CI. Browser checks cover keyboard use, 320/390-pixel mobile layouts, light/night contrast, 200% text, reduced motion, preferences, relationships, drafts, links, and crawler policy. A delayed-script regression test verifies that opening Research during loading is preserved.
+- Live verification: Chrome smoke checks covered alumni links, preferences, night mode, and mobile/no-JavaScript navigation. A desktop navigation timing issue found during the first live pass was fixed; all four navigation tests then passed on the final deployed version. HTTPS root, People, Lily, the former Zade URL, robots.txt, favicon, CMS configuration, and Zade's portrait returned 200 and matched local build bytes. `robots.txt` remains text/plain with `Disallow: /`; public pages retain noindex. Launch still requires explicit approval.
+- Manual visual review was performed on the local preview. A repeat manual browser visit to the live URL was blocked by the tool's approval-service usage limit; this did not affect deployment or the independently initiated automated checks. Full manual screen-reader testing and evaluation of external PDFs/videos remain outstanding as described on the Accessibility page. Proposed values still require lab approval; unverifiable profile links stay blank.
+
+Subsequent content changes through `/admin` continue to deploy through the same checked `main` workflow. Documentation-only release records may use a `[skip ci]` commit: they do not change the already verified deployed assets.
