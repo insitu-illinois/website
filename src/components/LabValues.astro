@@ -1,0 +1,11 @@
+---
+import values from '../content/pages/values.json';
+import Prose from './Prose.astro';
+const { compact=false }=Astro.props;
+---
+{(!values.draft||import.meta.env.DEV)&&<section class="lab-values" id="values" aria-labelledby="values-heading">
+  <div class="section-heading"><h2 id="values-heading">{values.title}</h2>{compact&&<a class="text-link" href="/about/#values">Read our values</a>}</div>
+  {values.proposed&&<p class="label values-status">Proposed values · Pending lab review</p>}
+  <ul class="values-statements"><li>{values.participation}</li><li>{values.context}</li><li>{values.collaboration}</li></ul>
+  {!compact&&values.body&&<div class="reading-section"><Prose body={values.body}/></div>}
+</section>}

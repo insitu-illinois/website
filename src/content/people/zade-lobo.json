@@ -1,9 +1,15 @@
 {
   "slug": "zade-lobo",
   "draft": false,
-  "name": "Zade Lobo",
+  "name": "Zade Bosco Lobo",
   "role": "alumni",
-  "bio": "Zade studied Electrical Engineering, Computer Science, and Game Studies and Design as an undergraduate at UIUC. In summer 2022, he worked as an XR Research Intern for PlayStation’s VR/XR group.",
-  "photo": null,
-  "order": 100
+  "bio": "Zade has been with the VR Club since its founding in 2019. He and his friend Daniel started UIUC’s VR Esports team, competing in the Beat Saber season in spring 2020. He was the VR Club’s first treasurer, served as vice president for two years, and became president during his senior year. His focus was welcoming everyone and introducing VR to as many people as possible.\n\nHis work on campus outside the VR Club centered on VR natural interaction and game design, including a VR accessibility project, virtual labs for classes, and the first professional game studio at UIUC. He graduated in 2023 with a major in Electrical Engineering and minors in Computer Science and Game Studies and Design.\n\nAfter graduation, he started working at PlayStation as an XR Researcher, exploring how XR technologies can create better gaming experiences. He also contributes to community XR groups including CVRE, AWE, and ICXR.",
+  "photo": {
+    "src": "/media/people/zade-lobo.jpg",
+    "alt": "Portrait of Zade Bosco Lobo"
+  },
+  "order": 100,
+  "linkedin": "https://www.linkedin.com/in/zadelobo/",
+  "website": "https://zadelobo.com/",
+  "scholar": ""
 }

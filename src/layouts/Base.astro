@@ -8,8 +8,7 @@ import '@fontsource/ibm-plex-mono/latin-500';
 import '../../design-system/styles.css';
 import '../styles/base.css';
 import footer from '../content/pages/footer.json';
-import location from '../content/pages/location.json';
-import LabContact from '../components/LabContact.astro';
+import values from '../content/pages/values.json';
 import AccessibilityEntry from '../components/AccessibilityEntry.astro';
 import AccessibilityPanel from '../components/AccessibilityPanel.astro';
 import NightMode from '../components/NightMode.astro';
@@ -18,7 +17,7 @@ import '../styles/navigation.css';
 import preferencesBootstrap from '../scripts/preferences-init.js?raw';
 import '../styles/accessibility.css';
 import { indexingEnabled } from '../config/site.mjs';
-const shortAddress=location.address.split('\n').map(line=>line.trim()).filter(Boolean)[1] || location.address;
+const copyrightYear=new Date().getUTCFullYear();
 const { title, noindex=false, description = 'IN/SITU at the University of Illinois Urbana-Champaign. People, technology, and experience in context.' } = Astro.props;
 const canonical=new URL(Astro.url.pathname,Astro.site);
 ---
@@ -59,10 +58,11 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
           {(!footer.draft||import.meta.env.DEV)&&<p class="label">{footer.institution}</p>}
         </div>
         <div>
-          <h2 class="footer-heading">Connect</h2>
+          <h2 class="footer-heading">Explore</h2>
           <ul>
-            <li><LabContact /></li>
-            {(!location.draft||import.meta.env.DEV)&&<li><a href="/join/#location">{shortAddress}</a></li>}
+            <li><a href="/projects/">Projects</a></li>
+            <li><a href="/publications/">Publications</a></li>
+            {(!values.draft||import.meta.env.DEV)&&<li><a href="/about/#values">Lab values</a></li>}
           </ul>
         </div>
         <div>
@@ -75,6 +75,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
           </ul>
         </div>
       </div>
+      <div class="shell footer-bottom"><p>© {copyrightYear} IN/SITU</p>{(!footer.draft||import.meta.env.DEV)&&footer.developerName&&<p>Developed by {footer.developerName}</p>}<a href="/accessibility/">Accessibility statement</a></div>
     </footer>
     <AccessibilityPanel />
   </body>

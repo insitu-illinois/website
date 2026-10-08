@@ -5,5 +5,9 @@
   "role": "collaborator",
   "bio": "David graduated from UIUC with a degree in Anthropology + Computer Science. In 2022, he planned to pursue a graduate degree in Informatics at UIUC beginning that fall.",
   "photo": null,
-  "order": 3
+  "order": 3,
+  "universityProfile": "https://informatics.ischool.illinois.edu/people/david-hopping/",
+  "linkedin": "",
+  "scholar": "",
+  "website": ""
 }

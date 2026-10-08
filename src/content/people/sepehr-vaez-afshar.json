@@ -9,12 +9,13 @@
     "src": "/media/people/sepehr-vaez-afshar-university.jpg",
     "alt": "Portrait of Sepehr Vaez Afshar"
   },
-  "website": "https://www.researchgate.net/profile/Sepehr-Vaez-Afshar",
-  "scholar": "",
+  "website": "https://vaezafshar.com/",
+  "scholar": "https://scholar.google.com/citations?user=qQFXEvcAAAAJ",
   "email": "",
   "themes": [
     "heritage-public-space",
     "situated-learning"
   ],
-  "universityProfile": "https://informatics.ischool.illinois.edu/people/sepehr-vaez-afshar/"
+  "universityProfile": "https://informatics.ischool.illinois.edu/people/sepehr-vaez-afshar/",
+  "linkedin": "https://www.linkedin.com/in/sepehrvafshar"
 }

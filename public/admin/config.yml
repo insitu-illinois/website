@@ -157,8 +157,8 @@ collections:
         label: Bio
         widget: text
         required: false
-        hint: Use an approved biography; leave blank to show this person in lists
-          without a separate profile page.
+        hint: Use an approved biography. Alumni biographies expand on the People page;
+          other roles get a profile page. Leave blank for a list entry only.
       - name: affiliations
         label: Affiliations
         widget: text
@@ -182,8 +182,17 @@ collections:
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
+      - name: linkedin
+        label: LinkedIn
+        widget: string
+        required: false
+        hint: Paste this person’s verified LinkedIn profile URL, or leave blank; do not
+          use a search results page.
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
       - name: scholar
-        label: Scholar
+        label: Google Scholar
         widget: string
         required: false
         hint: Paste the person’s Google Scholar profile address, or leave blank.
@@ -948,6 +957,54 @@ collections:
             hint: Turn on to hide this entry from the website while you prepare it; GitHub
               files remain public.
             default: false
+      - name: values
+        label: Lab values
+        file: src/content/pages/values.json
+        fields:
+          - name: title
+            label: Title
+            widget: string
+            required: true
+            hint: Enter the approved title in sentence case, keeping proper names
+              capitalized.
+          - name: participation
+            label: Participation
+            widget: text
+            required: true
+            hint: Write one sentence about accessibility and participation; it appears on
+              Home and About.
+          - name: context
+            label: Context
+            widget: text
+            required: true
+            hint: Write one sentence about people and their real-world contexts; it appears
+              on Home and About.
+          - name: collaboration
+            label: Collaboration
+            widget: text
+            required: true
+            hint: Write one sentence about collaboration across disciplines; it appears on
+              Home and About.
+          - name: body
+            label: Body
+            widget: markdown
+            required: false
+            hint: Write the approved page text; use headings, paragraphs, lists, and links
+              as needed.
+          - name: proposed
+            label: Proposed
+            widget: boolean
+            required: false
+            hint: Keep on while the lab is reviewing these values; the website will clearly
+              label them as proposed.
+            default: true
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
+            default: true
       - name: location
         label: Lab location
         file: src/content/pages/location.json
@@ -1000,6 +1057,12 @@ collections:
             widget: string
             required: false
             hint: Enter the university affiliation displayed in the footer.
+          - name: developerName
+            label: Developer name
+            widget: string
+            required: false
+            hint: Enter the name to credit for website development, or leave blank to hide
+              the credit.
           - name: draft
             label: Draft
             widget: boolean

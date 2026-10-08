@@ -3,8 +3,10 @@ import UtilityIcon from './UtilityIcon.astro';
 ---
 <span class="utility-control">
   <button type="button" class="accessibility-entry icon-control" data-night-mode aria-label="Night mode" aria-pressed="false" hidden>
-    <UtilityIcon name="moon" class="night-moon" />
-    <UtilityIcon name="sun" class="night-sun" />
+    <span class="night-moon" aria-hidden="true">
+      <UtilityIcon name="moon" class="moon-outline" />
+      <UtilityIcon name="moonFilled" class="moon-fill" />
+    </span>
   </button>
   <span class="utility-tooltip" data-theme-state aria-hidden="true">Turn on night mode</span>
 </span>

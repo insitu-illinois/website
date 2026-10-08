@@ -3,7 +3,14 @@
   "draft": false,
   "name": "Robbie Sieczkowski",
   "role": "collaborator",
-  "bio": "Robbie graduated from UIUC with a degree in Media and Cinema Studies, where he was also president of the VR Club and the Illini Esports VR Community Coordinator. In 2022, he planned to pursue a graduate degree in Informatics at UIUC beginning that fall.",
-  "photo": null,
-  "order": 2
+  "bio": "Robbie is a PhD student in Informatics at the University of Illinois Urbana-Champaign, with a focus on Design, Technology and Society. He studies how serious games and immersive technologies are made and how they affect learning, prosocial behavior, and reflection on real-world systems.\n\nHe leads production of educational games in the Game Studies and Design program’s student-run studio and contributes to teaching in game studies and cinema production.",
+  "photo": {
+    "src": "/media/people/robbie-sieczkowski.png",
+    "alt": "Portrait of Robbie Sieczkowski"
+  },
+  "order": 2,
+  "universityProfile": "https://informatics.ischool.illinois.edu/people/robbie-sieczkowski/",
+  "linkedin": "https://www.linkedin.com/in/robert-sieczkowski",
+  "scholar": "",
+  "website": ""
 }

@@ -18,9 +18,12 @@
 .site-header .icon-control { width:var(--space-7); min-height:var(--space-7); padding:var(--space-3); display:inline-flex; align-items:center; justify-content:center; border-color:transparent; }
 .icon-control svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
 .site-header .icon-control:hover { background:var(--surface-chrome-hover); border-color:var(--text-muted-on-chrome); }
-.icon-control .night-sun { display:none; }
-.icon-control[aria-pressed="true"] .night-moon { display:none; }
-.icon-control[aria-pressed="true"] .night-sun { display:block; }
+.night-moon { display:grid; width:var(--space-5); height:var(--space-5); }
+.night-moon svg { grid-area:1 / 1; }
+.moon-fill { clip-path:inset(100% 0 0); transition:clip-path var(--dur-decorative) var(--ease-standard); }
+.icon-control[aria-pressed="true"] .moon-fill { clip-path:inset(0 0 0); }
+@media (prefers-reduced-motion:reduce) { .moon-fill { transition:none; } }
+html[data-reduce-motion="true"] .moon-fill { transition:none; }
 .utility-tooltip { display:none; position:absolute; inset-inline-end:0; inset-block-start:100%; z-index:6; width:max-content; max-width:min(12rem,calc(100vw - var(--space-10))); padding:var(--space-2) var(--space-3); border:var(--border-hairline) solid var(--text-muted-on-chrome); border-radius:var(--radius-sm); background:var(--surface-chrome); color:var(--white); font-family:var(--font-mono); font-size:var(--text-label-md); line-height:var(--lh-label); pointer-events:auto; }
 .utility-control:is(:hover,:focus-within) .utility-tooltip { display:block; }
 .utility-control.tooltip-dismissed .utility-tooltip { display:none; }

@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import LabValues from '../components/LabValues.astro';
 import RecordList from '../components/RecordList.astro';
 import Media from '../components/Media.astro';
 import SpatialField from '../components/SpatialField.astro';
@@ -14,5 +15,6 @@ const data=await content(),lists=homeLists(data);
   <section class="home-theme-section"><h2>Four research themes</h2><ul class="home-themes">{data.themes.map((theme:any)=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}<span aria-hidden="true">→</span></a></li>)}</ul></section>
   <RecordList compact title="Recent papers" records={lists.publications} more="/publications/"/>
   <RecordList compact title="News" records={lists.news} more="/news/"/>
+  <LabValues compact />
   <aside class="home-support"><a href="/about/#support">Support & connections</a><a href="/awards-funding/">Awards & funding</a></aside>
 </Base>

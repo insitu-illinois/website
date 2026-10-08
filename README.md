@@ -27,7 +27,7 @@ Saving an entry commits it to GitHub. The automatic checks then rebuild and depl
 
 1. Select **People → Create new entry**. Enter their name and a permanent `first-last` slug.
 2. Choose the confirmed role. **Collaborator** and **Alumni** have their own sections; every other role appears under **Current members**. Changing the role moves the person automatically. Smaller **Order** values appear first.
-3. Enter an approved biography to create a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied or verified against an identity-matched public profile. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
+3. Enter an approved biography: alumni biographies expand on People, while other roles receive a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied or verified against an identity-matched public profile. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
 4. Keep **Draft** on while details need approval, then switch it off and save.
 5. Select that person in project **Team**, publication **Lab authors**, presentation **Presenters**, and recognition **Recipients**. Their four profile lists fill automatically.
 
@@ -60,7 +60,7 @@ Only after the lab explicitly approves launch, a maintainer changes that one val
 
 ### Change the public lab email
 
-In `/admin/`, open **Page text → Lab contact → Email**, enter the new address, and save. This single field updates Join, About, and every footer. For example, it can later change to `contact@insitu-illinois.org`. Laura’s own People entry retains her university email independently.
+In `/admin/`, open **Page text → Lab contact → Email**, enter the new address, and save. This single field updates Join and About. For example, it can later change to `contact@insitu-illinois.org`. Laura’s own People entry retains her university email independently.
 
 The site emits separate address parts and readable `[at]` / `[dot]` text, then a small script constructs the keyboard-accessible email link at runtime. The accessible name and no-JavaScript fallback spell out the address without exposing the full address in HTML source. This deters simple scrapers; it is not secrecy from JavaScript-capable bots or readers of this public repository.
 
@@ -187,7 +187,7 @@ Unconfirmed relationships remain empty, including the current VRchaeology team a
 - `src/content/publications/cognitive-loads.json` — Bibliographic details and shareable PDF need confirmation.
 - `src/content/recognition/epic-megagrant.json` — Year and recipients need confirmation.
 
-All 24 people are approved for listing by the October 7 review request. The six current members, five collaborators, and thirteen alumni are public records. Lily’s biography and photo remain blank as supplied; only her listing status and role changed. Twelve people have biographies and receive profile pages; the other twelve appear only in lists.
+All 24 people are approved for listing by the October 7 review request. The six current members, five collaborators, and thirteen alumni are public records. At that initial review, Lily’s biography and photo were blank. Her subsequently supplied biography and LinkedIn are now included; her photo remains blank. Alumni now use inline disclosures instead of biography pages.
 
 ### Old Team page import
 
@@ -231,7 +231,7 @@ To replace the map, find the building in Google Maps, choose **Share → Embed a
 
 ## October 7 profile research and publication sources
 
-The lab authorized online research in addition to the original handoff. Five official university portraits were downloaded successfully and are served locally. Laura's earlier assigned image remains in the media archive; her profile now uses her university headshot. Lily Meyer's approved record remains unchanged because no matching biography or portrait was verified.
+The lab authorized online research in addition to the original handoff. Five official university portraits were downloaded successfully and are served locally. Laura's earlier assigned image remains in the media archive; her profile now uses her university headshot. Lily Meyer's later biography and LinkedIn were supplied by the lab; no portrait has been supplied or verified.
 
 - Laura: [Anthropology directory](https://anthro.illinois.edu/directory/profile/llshacke) and [Illinois Experts](https://experts.illinois.edu/en/persons/laura-lynn-shackelford/). Current appointments come from the email signature supplied and confirmed by the lab on October 7, 2026; these supersede older appointment descriptions.
 - Sepehr: [Informatics profile](https://informatics.ischool.illinois.edu/people/sepehr-vaez-afshar/), including its linked ResearchGate profile.
@@ -265,7 +265,7 @@ The approved combination is Space Grotesk 600 for headings, Source Sans 3 400 fo
 
 ## Night mode and home-page sections (local review)
 
-**Night mode** in the header switches every public page between light and dark palettes. Its moon/sun icon, descriptive tooltip, accessible name, and pressed state work with keyboard and assistive technology. Light is the default even if the device prefers dark mode; only an explicit saved choice activates night mode. Theme and accessibility settings share the same browser preference record, so changing one preserves the others. Reset preferences also turns night mode off. If storage is blocked, changes work on the current page without being saved. `/admin` remains Sveltia's separate editor interface.
+**Night mode** in the header switches every public page between light and dark palettes. Its outlined/filled moon icon, descriptive tooltip, accessible name, and pressed state work with keyboard and assistive technology. Light is the default even if the device prefers dark mode; only an explicit saved choice activates night mode. Theme and accessibility settings share the same browser preference record, so changing one preserves the others. Reset preferences also turns night mode off. If storage is blocked, changes work on the current page without being saved. `/admin` remains Sveltia's separate editor interface.
 
 Night colors are tokens in `design-system/tokens/colors.css`, including distinct button text and hover colors. Higher contrast has a separate night palette. The home page now uses consistent section spacing and visible separators, without removing, reordering, or rewriting its content. This improves scanning while preserving the full research, publication, and news lists.
 
@@ -283,10 +283,21 @@ The softer-corner trial uses shared radius tokens: 4 pixels for tags, 8 for cont
 
 The hero now includes an original decorative SVG spatial study (not a map, lab photograph, or research result); the real-photo placeholder remains labeled. Featured work has a subtle neutral background. Both header utility icons share a local SVG component and retain their accessible names, tooltips, 48-pixel targets, and existing behavior. The artwork is static and hidden from assistive technology.
 
-Header utility artwork uses Google's Material Icons: the outlined Bedtime crescent for night mode, plus filled Light Mode and Accessibility New, downloaded from the official `google/material-design-icons` repository and stored in `src/assets/icons/material/` with the Apache 2.0 license. The crescent source is `src/image/bedtime/materialiconsoutlined/24px.svg` in that repository. Icons render at their native 24-pixel size inside 48-pixel controls. No icon CDN or runtime dependency is used. Source: https://developers.google.com/fonts/docs/material_icons
+Header utility artwork uses Google's Material Icons: the outlined Bedtime crescent for night mode, plus filled Bedtime and Accessibility New, downloaded from the official `google/material-design-icons` repository and stored in `src/assets/icons/material/` with the Apache 2.0 license. The crescent source is `src/image/bedtime/materialiconsoutlined/24px.svg` in that repository. Icons render at their native 24-pixel size inside 48-pixel controls. No icon CDN or runtime dependency is used. Source: https://developers.google.com/fonts/docs/material_icons
 
 ## Concise homepage preview
 
 Home presents the introduction, one featured project, four title-only theme links, the two newest papers, and the two newest news items. Publication and news previews show titles and date/venue metadata; full descriptions, authors, tags, and resource links remain on their detail and archive pages. The shared-premise explanation remains on About; the complete Support & connections list moved to About at `#support`. Home retains direct links to support and Awards & funding. CMS records, draft status, and existing URLs are unchanged.
 
-The simplified footer has three columns: lab identity, contact/location, and useful links (About, People, Accessibility, Sign in). Join stays in the main navigation. The address links to `/join/#location` and uses the building/room line from the existing CMS Location address, avoiding a second address field. Repeated themes, news, and the homepage slogan are omitted from the footer only. Accessibility looks like the adjacent text links and remains a native button opening the settings dialog. The mobile menu uses a three-line icon with an accessible Menu label. The shared obfuscated email and control behavior are unchanged.
+The footer has three columns: lab identity, Explore (Projects, Publications, Lab values), and useful links (About, People, Accessibility, Sign in). Contact and directions remain on Join and About. The bottom row displays the build year, IN/SITU copyright, the editable developer credit, and the accessibility statement. Edit the credit in **Page text → Lab contact → Developer name**; leave blank to hide it. This notice does not change third-party content ownership or licenses. The mobile menu uses a three-line icon with an accessible Menu label.
+
+## Lab review updates
+
+Edit **Page text → Lab values** to change the three shared sentences on Home and About, plus the longer explanation on About. **Proposed** displays “Proposed values · Pending lab review”; turn it off only once the lab approves the wording. **Draft** hides the entire section and its footer link from static builds. The initial proposal is visible with the owner’s explicit approval, and is not presented as an adopted lab policy.
+
+Every People entry has optional **LinkedIn**, **Google Scholar**, and **Website** fields. Only enter verified personal URLs; blanks produce no placeholder link. Icons accompany readable labels and screen-reader names. Current members and collaborators with biographies have a detail page; alumni biographies expand on People with LinkedIn only. Otherwise verified profile links appear in the People list. Existing roles, ordering, and relationships are preserved. Profile source notes and remaining blank channels are recorded in `docs/people-source-review.json`.
+
+The night-mode button always shows a crescent: an outline in light mode and a filled moon in night mode. Filling/unfilling takes the shared 600 ms decorative transition token. Device and site reduced-motion preferences disable that transition. No sun is shown. Google Material Icons remain under Apache 2.0. Profile icons use Bootstrap Icons (LinkedIn and globe, MIT) and Simple Icons (Google Scholar, CC0), with licenses in their asset directories. SVGs are stored locally with no third-party requests.
+
+
+Alumni appear as a compact list on People. Their biographies open in native, keyboard-accessible disclosure controls, with only a verified LinkedIn link displayed. Website and Scholar values remain stored for future use. Former biography URLs redirect to the person's expanded entry on People; alumni are excluded from the profile sitemap. Changing a person's role in `/admin` automatically changes this behavior. A blank biography produces a simple list entry.

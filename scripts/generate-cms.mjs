@@ -7,7 +7,13 @@ const hints = {
   name: 'Enter the name as it should appear on the website.',
   title: 'Enter the approved title in sentence case, keeping proper names capitalized.',
   role: 'Collaborator and Alumni have their own sections; all other roles appear under Current members.',
-  bio: 'Use an approved biography; leave blank to show this person in lists without a separate profile page.',
+  bio: 'Use an approved biography. Alumni biographies expand on the People page; other roles get a profile page. Leave blank for a list entry only.',
+  linkedin: 'Paste this person’s verified LinkedIn profile URL, or leave blank; do not use a search results page.',
+  proposed: 'Keep on while the lab is reviewing these values; the website will clearly label them as proposed.',
+  participation: 'Write one sentence about accessibility and participation; it appears on Home and About.',
+  context: 'Write one sentence about people and their real-world contexts; it appears on Home and About.',
+  collaboration: 'Write one sentence about collaboration across disciplines; it appears on Home and About.',
+  developerName: 'Enter the name to credit for website development, or leave blank to hide the credit.',
   website: 'Paste the full address of the person’s website, or leave blank.',
   universityProfile: 'Paste the verified university directory page for this person, or leave blank.',
   affiliations: 'List confirmed current appointments and affiliations, one per line; leave blank if not supplied.',
@@ -52,7 +58,7 @@ const hints = {
   statement: 'Enter the approved introductory statement for Home.',
   institution: 'Enter the university affiliation displayed in the footer.',
 };
-const labels = { universityProfile: 'University profile', publicationDate: 'Publication date', mapEmbedUrl: 'Map embed URL', directionsUrl: 'Directions link', labAuthors: 'Lab authors', heroMedia: 'Hero image', shortDescription: 'Short description', relatedPublication: 'Related publication', relatedProject: 'Related project', awardingBody: 'Awarding body', externalLink: 'External link', bibtex: 'BibTeX', doi: 'DOI URL', pdf: 'PDF', phd: 'PhD' };
+const labels = { linkedin: 'LinkedIn', scholar: 'Google Scholar', developerName: 'Developer name', universityProfile: 'University profile', publicationDate: 'Publication date', mapEmbedUrl: 'Map embed URL', directionsUrl: 'Directions link', labAuthors: 'Lab authors', heroMedia: 'Hero image', shortDescription: 'Short description', relatedPublication: 'Related publication', relatedProject: 'Related project', awardingBody: 'Awarding body', externalLink: 'External link', bibtex: 'BibTeX', doi: 'DOI URL', pdf: 'PDF', phd: 'PhD' };
 const label = name => labels[name] ?? name[0].toUpperCase() + name.slice(1);
 function field(name, f) {
   const result = { name, label: label(name), widget: f.widget ?? 'string', required: Boolean(f.required), hint: hints[name] };
@@ -85,8 +91,9 @@ const collections = Object.keys(models).map(name => ({
 collections.push({ name: 'pages', label: 'Page text', files: [
   { name: 'home', label: 'Home', file: 'src/content/pages/home.json', fields: [field('title',{required:true}),field('statement',{}),field('draft',{kind:'boolean',default:false})] },
   ...['about','join','accessibility'].map(name => ({name,label:label(name),file:`src/content/pages/${name}.json`,fields:[field('title',{required:true}),field('body',{widget:'markdown'}),field('draft',{kind:'boolean',default:false})]})),
+  { name:'values',label:'Lab values',file:'src/content/pages/values.json',fields:[field('title',{required:true}),field('participation',{widget:'text',required:true}),field('context',{widget:'text',required:true}),field('collaboration',{widget:'text',required:true}),field('body',{widget:'markdown'}),field('proposed',{kind:'boolean',default:true}),field('draft',{kind:'boolean',default:true})] },
   { name:'location',label:'Lab location',file:'src/content/pages/location.json',fields:[field('address',{widget:'text'}),field('mapEmbedUrl',{kind:'url'}),field('directionsUrl',{kind:'url'}),field('draft',{kind:'boolean',default:true})] },
-  { name:'footer',label:'Lab contact',file:'src/content/pages/footer.json',fields:[field('email',{kind:'email',required:true}),field('institution',{}),field('draft',{kind:'boolean',default:false})] },
+  { name:'footer',label:'Lab contact',file:'src/content/pages/footer.json',fields:[field('email',{kind:'email',required:true}),field('institution',{}),field('developerName',{}),field('draft',{kind:'boolean',default:false})] },
 ] });
 const config = {
   backend: { name:'github',repo:'insitu-illinois/website',branch:'main',auth_scope:'public_repo',...(process.env.CMS_AUTH_URL ? {base_url:process.env.CMS_AUTH_URL} : {}) },

@@ -43,7 +43,8 @@ test('mobile navigation and icon controls remain usable with enlarged text',asyn
     await expect(button.locator('svg').first()).toBeVisible();
   }
   await night.focus(); await page.keyboard.press('Space'); await expect(night).toHaveAttribute('aria-pressed','true');
-  await expect(night.locator('.night-sun')).toBeVisible(); await expect(night.locator('.night-moon')).toBeHidden();
+  await expect(night.locator('.night-moon')).toBeVisible();
+  await expect(night.locator('.moon-fill')).toHaveCSS('clip-path','inset(0px)');
   await page.keyboard.press('Escape'); await expect(page.locator('[data-theme-state]')).toBeHidden();
   await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
   await page.getByLabel('Text size',{exact:true}).selectOption('200'); await page.keyboard.press('Escape');

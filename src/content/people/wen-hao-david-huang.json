@@ -3,10 +3,14 @@
   "draft": false,
   "name": "Wen-Hao David Huang",
   "role": "collaborator",
-  "bio": "David studies how individuals and organizations make informed decisions across learning and development contexts. By understanding how decision-making processes work, he designs motivational and engagement systems to facilitate favorable decision-making behaviors by individuals and organizations. He works with a variety of learning environments, ranging from technology-enriched and enabled learning environments (TEELE) to community-based learning environments.\n\nRegardless of the characteristics and purposes of these learning environments, his work informs the underlying theoretical and empirical foundations of motivation, engagement, and design thinking.\n\nFor the Game-Based Virtual Reality Archaeology project, he is responsible for designing and implementing research and evaluative activities to delineate the relationships among motivational support, cognitive processes, and learning outcomes perceived by study participants.\n\nHe believes the output of this project can meaningfully inform the design and implementation of VR-based learning environments in terms of their instructional efficacy, accessibility, and scalability for learning and development applications across contexts.",
+  "bio": "David is a professor in Education Policy, Organization & Leadership at the University of Illinois Urbana-Champaign. His research examines what helps people, organizations, and communities engage with interventions intended to support change. He studies motivation, capability, and the conditions that shape decisions in learning and performance settings.\n\nHis research includes organizational adoption of technology, engagement in game-based learning, instructional systems design, support for career decisions, and digital divides.\n\nFor the Game-Based Virtual Reality Archaeology project, he is responsible for designing and implementing research and evaluative activities to delineate the relationships among motivational support, cognitive processes, and learning outcomes perceived by study participants.\n\nHe believes the output of this project can meaningfully inform the design and implementation of VR-based learning environments in terms of their instructional efficacy, accessibility, and scalability for learning and development applications across contexts.",
   "photo": {
-    "src": "/media/people/wen-hao-david-huang.jpg",
+    "src": "/media/people/wen-hao-david-huang.webp",
     "alt": "Portrait of Wen-Hao David Huang"
   },
-  "order": 0
+  "order": 0,
+  "universityProfile": "https://education.illinois.edu/profile/wenhao-david-huang",
+  "website": "https://experts.illinois.edu/en/persons/wenhao-david-huang/",
+  "linkedin": "https://www.linkedin.com/in/wdhuang/",
+  "scholar": ""
 }

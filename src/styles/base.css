@@ -175,3 +175,26 @@ section:first-child { margin-top:0; }
 .site-footer .footer-heading { font-family:var(--font-mono); font-size:var(--text-label-md); font-weight:400; line-height:var(--lh-label); letter-spacing:var(--ls-label); color:var(--text-muted-on-chrome); margin:0 0 var(--space-4); }
 .footer-identity p { max-width:28ch; }
 .site-footer .footer-editor { color:var(--text-muted-on-chrome); font-size:var(--text-label-md); margin-top:var(--space-3); }
+
+/* Shared values keep the home introduction concise and the fuller explanation on About. */
+.values-statements { list-style:none; padding:0; display:grid; gap:var(--space-5); }
+.values-statements li { padding-inline-start:var(--space-4); border-inline-start:var(--border-thick) solid var(--border-strong); }
+.values-status { color:var(--text-secondary); }
+.footer-bottom { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-3) var(--space-5); margin-top:var(--space-7); padding-top:var(--space-5); border-top:var(--border-hairline) solid var(--border-chrome); font-size:var(--text-body-sm); color:var(--text-muted-on-chrome); }
+.footer-bottom p { margin:0; }
+.footer-bottom a { padding-block:var(--space-2); }
+@media (min-width:48rem) { .values-statements { grid-template-columns:repeat(3,minmax(0,1fr)); } .footer-bottom a { margin-inline-start:auto; } }
+.profile-links { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-4); list-style:none; padding:0; margin-block:var(--space-4); }
+.profile-links a { display:inline-flex; align-items:center; gap:var(--space-2); min-height:var(--space-7); }
+.profile-links svg { width:var(--space-5); height:var(--space-5); fill:currentColor; flex-shrink:0; }
+/* Keep Zade visible in the landscape photograph supplied by the VR Club. */
+img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
+
+.alumni-details { width:100%; }
+.alumni-details summary { cursor:pointer; min-height:var(--space-7); padding-block:var(--space-3); }
+.alumni-details summary h3 { display:inline; }
+.alumni-details summary .people-photo { display:inline-block; vertical-align:middle; margin-inline:var(--space-3); }
+.alumni-details[open] summary { margin-bottom:var(--space-3); }
+.alumni-bio { max-width:70ch; }
+.alumni-entry { display:flex; align-items:center; gap:var(--space-4); }
+.people-compact>li + li { border-top:var(--border-hairline) solid var(--border-default); }

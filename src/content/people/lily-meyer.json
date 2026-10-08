@@ -3,7 +3,11 @@
   "draft": false,
   "name": "Lily Meyer",
   "role": "member",
-  "bio": "",
+  "bio": "As an imaginative and diligent student, I am passionate about the intersection of computer science and music education. I believe that educational technology can and will bring music education to a truly universal audience.",
   "photo": null,
-  "order": 5
+  "order": 5,
+  "affiliations": "Computer Science + Education Student at the University of Illinois Urbana-Champaign",
+  "linkedin": "https://www.linkedin.com/in/lily-i-meyer",
+  "scholar": "",
+  "website": ""
 }

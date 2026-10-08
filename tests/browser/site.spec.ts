@@ -15,6 +15,8 @@ for(const width of [1440,390,320]) {
     await page.setViewportSize({width,height:900});
     for(const path of publicPages) {
       await page.goto(path.replace(/^dist/,'').replace(/index\.html$/,''));
+      const redirect=readFileSync(path,'utf8').match(/http-equiv="refresh" content="0;url=([^"]+)/)?.[1];
+      if(redirect) await page.waitForURL(url=>url.pathname+url.hash===redirect);
       const results=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();
       expect(results.violations, path).toEqual([]);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),path).toBe(true);
@@ -38,6 +40,8 @@ test('all internal links and assets resolve; public pages make no third-party re
   page.on('request',req=>{if(new URL(req.url()).origin!==new URL(baseURL!).origin)external.push(req.url());});
   for(const path of publicPages){
     await page.goto(path.replace(/^dist/,'').replace(/index\.html$/,''));
+      const redirect=readFileSync(path,'utf8').match(/http-equiv="refresh" content="0;url=([^"]+)/)?.[1];
+      if(redirect) await page.waitForURL(url=>url.pathname+url.hash===redirect);
     const links=await page.locator('[href],[src]').evaluateAll(elements=>elements.flatMap(el=>[el.getAttribute('href'),el.getAttribute('src')]).filter((v):v is string=>!!v&&v.startsWith('/')));
     for(const href of new Set(links))if(!checked.has(href)){
       expect((await page.request.get(href)).status(),href).toBe(200);
@@ -94,7 +98,14 @@ test('review pages carry noindex and the shared email is assembled only at runti
   for(const person of loadRaw().people) {
     const path=`/people/${person.id}/`;
     if(hasPersonPage(person)&&!person.data.draft) expect(xml).toContain(path);
-    else {expect(xml).not.toContain(path);expect((await request.get(path)).status()).toBe(404);}
+    else {
+      expect(xml).not.toContain(path);
+      const response=await request.get(path);
+      if(person.data.role==='alumni' && person.data.bio?.trim() && !person.data.draft) {
+        expect(response.status()).toBe(200);
+        expect(await response.text()).toContain(`0;url=/people/#person-${person.id}`);
+      } else expect(response.status()).toBe(404);
+    }
   }
 });
 test('the lab email stays readable without JavaScript',async({browser,baseURL})=>{

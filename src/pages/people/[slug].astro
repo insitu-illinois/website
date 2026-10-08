@@ -2,18 +2,25 @@
 import Base from '../../layouts/Base.astro';
 import RecordList from '../../components/RecordList.astro';
 import Tags from '../../components/Tags.astro';
+import ProfileLinks from '../../components/ProfileLinks.astro';
 import { content } from '../../lib/content';
 import { personLists, personThemes } from '../../lib/derived.mjs';
-import { hasPersonPage, roles } from '../../lib/format.mjs';
+import { roles } from '../../lib/format.mjs';
 import type { CollectionEntry } from 'astro:content';
 interface Props { person: CollectionEntry<'people'>; lists: ReturnType<typeof personLists>; data: Awaited<ReturnType<typeof content>>; }
 export async function getStaticPaths() {
   const data=await content();
-  return data.people.filter(hasPersonPage).map((person:any)=>({params:{slug:person.id},props:{person,data,lists:personLists(data,person.id)}}));
+  return data.people.filter((person:any)=>Boolean(person.data.bio?.trim())).map((person:any)=>({params:{slug:person.id},props:{person,data,lists:personLists(data,person.id)}}));
 }
 const {person,lists,data}=Astro.props;
+const alumniTarget=`/people/#person-${person.id}`;
 ---
-<Base noindex={person.data.draft} title={person.data.name} description={person.data.bio || undefined}>
+{person.data.role==='alumni' ? <html lang="en"><head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <meta http-equiv="refresh" content={`0;url=${alumniTarget}`}/>
+  <title>{person.data.name} · IN/SITU alumni</title>
+</head><body><main><h1>Alumni</h1><p><a href={alumniTarget}>Read about {person.data.name} on the People page</a>.</p></main></body></html> : <Base noindex={person.data.draft} title={person.data.name} description={person.data.bio || undefined}>
   <a href="/people/">All people</a>
   <section class="person-heading">
     {person.data.photo ? <img src={person.data.photo.src} alt={person.data.photo.alt} width="320" height="400" /> : <div class="portrait-placeholder" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}
@@ -24,10 +31,9 @@ const {person,lists,data}=Astro.props;
       {person.data.bio?.split('\n\n').map((paragraph:string) => <p>{paragraph}</p>)}
       {person.data.affiliations && <div class="affiliations"><h2>Appointments & affiliations</h2><ul>{person.data.affiliations.split('\n').filter(Boolean).map((line:string)=><li>{line}</li>)}</ul></div>}
       <Tags themes={personThemes(data,person)}/>
+      <ProfileLinks person={person.data}/>
       <div class="links">
-        {person.data.website && <a href={person.data.website}>Website</a>}
         {person.data.universityProfile && <a href={person.data.universityProfile}>University profile</a>}
-        {person.data.scholar && <a href={person.data.scholar}>Google Scholar</a>}
         {person.data.email && <a href={`mailto:${person.data.email}`}>Email</a>}
       </div>
     </div>
@@ -37,4 +43,4 @@ const {person,lists,data}=Astro.props;
   <RecordList title="Presentations" records={lists.presentations} data={data}/>
   <RecordList title="Awards & funding" records={lists.recognition} data={data}/>
   {lists.news.length>0&&<RecordList title="News" records={lists.news} data={data}/>}
-</Base>
+</Base>}

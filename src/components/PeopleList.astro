@@ -3,6 +3,7 @@ import { peopleGroups } from '../lib/derived.mjs';
 import { entryUrl, roles } from '../lib/format.mjs';
 import {personThemes} from '../lib/derived.mjs';
 import Tags from './Tags.astro';
+import ProfileLinks from './ProfileLinks.astro';
 const { people, data } = Astro.props;
 ---
 {peopleGroups(people).map(group => <section aria-labelledby={`people-${group.key}`}>
@@ -10,14 +11,41 @@ const { people, data } = Astro.props;
   <ul class:list={['records','people-list',group.key==='alumni' ? 'people-compact' : 'card-grid']}>
     {group.items.map((person:any) => {
       const href=entryUrl(person);
-      return <li id={`person-${person.id}`} class:list={{card:group.key!=='alumni'}} tabindex="-1">
+      return group.key==='alumni' ? <li id={`person-${person.id}`} tabindex="-1">
+        {person.data.bio?.trim() ? <details class="alumni-details">
+          <summary>
+            {person.data.photo && <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="64" height="64" loading="lazy"/>}
+            <h3>{person.data.name}</h3>
+          </summary>
+          <div class="alumni-bio">
+            {person.data.bio.split('\n\n').map((paragraph:string)=><p>{paragraph}</p>)}
+            <ProfileLinks person={person.data} linkedinOnly/>
+          </div>
+        </details> : <div class="alumni-entry">
+          {person.data.photo && <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="64" height="64" loading="lazy"/>}
+          <div><h3>{person.data.name}</h3><ProfileLinks person={person.data} linkedinOnly/></div>
+        </div>}
+      </li> : <li id={`person-${person.id}`} class="card" tabindex="-1">
         {person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy" /> : <div class="people-initials" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}
         <div>
           <h3>{href ? <a href={href}>{person.data.name}</a> : person.data.name}</h3>
           {group.key==='current' && <p class="label">{roles[person.data.role as keyof typeof roles]}</p>}
-          {group.key!=='alumni' && data && <Tags themes={personThemes(data,person)}/>}
+          {data && <Tags themes={personThemes(data,person)}/>}
+          {!href&&<ProfileLinks person={person.data}/>}
         </div>
       </li>;
     })}
   </ul>
 </section>)}
+
+<script>
+  function revealAlumnus() {
+    const id=decodeURIComponent(location.hash.slice(1));
+    if(!id.startsWith('person-')) return;
+    const target=document.getElementById(id);
+    const details=target?.querySelector('details');
+    if(details) { details.open=true; target?.scrollIntoView(); }
+  }
+  revealAlumnus();
+  window.addEventListener('hashchange',revealAlumnus);
+</script>

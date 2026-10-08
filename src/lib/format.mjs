@@ -4,5 +4,5 @@ export function dateLabel(value) {
   if (!value || value.length === 4) return value;
   return new Intl.DateTimeFormat('en-US', {year:'numeric', month:'long', ...(value.length === 10 ? {day:'numeric'} : {}),timeZone:'UTC'}).format(new Date(value.length === 7 ? value+'-01T12:00:00Z' : value+'T12:00:00Z'));
 }
-export const hasPersonPage = record => Boolean(record.data.bio?.trim());
+export const hasPersonPage = record => record.data.role !== 'alumni' && Boolean(record.data.bio?.trim());
 export const entryUrl = record => ['people','projects','themes','publications','news'].includes(record.collection) && (record.collection !== 'people' || hasPersonPage(record)) ? `/${record.collection}/${record.id}/` : undefined;

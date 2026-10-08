@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import {readdirSync} from 'node:fs';
+import {readdirSync,readFileSync} from 'node:fs';
 import {join} from 'node:path';
 const pages=(dir='dist'):string[]=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?pages(join(dir,entry.name)):entry.name.endsWith('.html')?[join(dir,entry.name)]:[]);
 
@@ -12,6 +12,9 @@ test('night mode is explicit, keyboard accessible, persistent, and resettable',a
   await expect(page.locator('body')).toHaveCSS('background-color','rgb(255, 255, 255)');
   await toggle.focus(); await toggle.press('Space');
   await expect(toggle).toHaveAttribute('aria-pressed','true');
+  await expect(toggle.locator('.night-moon')).toBeVisible();
+  await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(0px)');
+  await expect(toggle.locator('.night-sun')).toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('background-color','rgb(22, 22, 22)');
   await page.goto('/publications/');
   await expect(toggle).toHaveAttribute('aria-pressed','true');
@@ -25,7 +28,20 @@ test('night mode is explicit, keyboard accessible, persistent, and resettable',a
   await page.getByRole('button',{name:'Reset preferences'}).click();
   await page.keyboard.press('Escape');
   await expect(toggle).toHaveAttribute('aria-pressed','false');
+  await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(100% 0px 0px)');
   await page.reload(); await expect(toggle).toHaveAttribute('aria-pressed','false');
+});
+
+test('moon filling honors both device and site reduced-motion preferences',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'}); await page.goto('/');
+  const moon=page.locator('.moon-fill');
+  await expect(moon).toHaveCSS('transition-duration','0s');
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await expect(moon).toHaveCSS('transition-duration','0.6s');
+  await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
+  await page.getByLabel('Reduce motion',{exact:true}).check();
+  await page.keyboard.press('Escape');
+  await expect(moon).toHaveCSS('transition-duration','0s');
 });
 
 for(const width of [1440,320]) {
@@ -34,6 +50,8 @@ for(const width of [1440,320]) {
     await page.addInitScript(()=>localStorage.setItem('insitu-accessibility',JSON.stringify({theme:'night'})));
     for(const path of pages().filter(p=>!p.includes('/admin/'))) {
       await page.goto(path.replace(/^dist/,'').replace(/index\.html$/,''));
+      const redirect=readFileSync(path,'utf8').match(/http-equiv="refresh" content="0;url=([^"]+)/)?.[1];
+      if(redirect) await page.waitForURL(url=>url.pathname+url.hash===redirect);
       await page.evaluate(()=>document.fonts.ready);
       expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()).violations,path).toEqual([]);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),path).toBe(true);

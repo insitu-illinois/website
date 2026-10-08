@@ -81,11 +81,13 @@ test('roles automatically choose the three People sections',()=>{
   changed.find(p=>p.id==='member').data.role='alumni';
   assert.deepEqual(peopleGroups(changed).map(g=>g.items.length),[1,1,2]);
 });
-test('only people with a nonblank biography get profile links',()=>{
+test('non-alumni with a nonblank biography get profile links',()=>{
   const person={collection:'people',id:'person',data:{bio:'  '}};
   assert.equal(hasPersonPage(person),false);assert.equal(entryUrl(person),undefined);
   person.data.bio='Approved biography';
   assert.equal(hasPersonPage(person),true);assert.equal(entryUrl(person),'/people/person/');
+  person.data.role='alumni';
+  assert.equal(hasPersonPage(person),false);assert.equal(entryUrl(person),undefined);
 });
 test('the launch switch controls both crawler-policy states',()=>{
   const site=new URL('https://example.org');

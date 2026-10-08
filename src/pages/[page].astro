@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import LabValues from '../components/LabValues.astro';
 import RecordList from '../components/RecordList.astro';
 import PeopleList from '../components/PeopleList.astro';
 import LabContact from '../components/LabContact.astro';
@@ -24,6 +25,7 @@ const collection=page==='awards-funding'?'recognition':page;
   <header class="page-heading"><p class="label">IN/SITU · {titles[page]}</p><h1>{titles[page]}</h1><p class="lead">{intros[page]}</p></header>
   {page==='about' && <>
     {(!about.draft||import.meta.env.DEV)&&<section class="reading-section"><h2>Our shared premise</h2><Prose body={about.body}/></section>}
+    <LabValues />
     <RecordList data={data} title="Four research themes" id="themes" records={data.themes} cards/>
     <section class="split-section"><h2>Led by Laura Shackelford</h2><div><p>We are based at the University of Illinois Urbana-Champaign.</p><p><a href="/people/laura-shackelford/">Meet our director</a></p><p><LabContact /></p></div></section>
   </>}

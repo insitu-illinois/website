@@ -1,0 +1,395 @@
+{
+  "reviewDate": "2026-10-07",
+  "scope": "Public professional profiles only; no sign-ins. Missing means not verified in this review, not that the account does not exist.",
+  "sources": {
+    "lily-meyer": {
+      "bio": "User-supplied biography and student title",
+      "linkedin": "https://www.linkedin.com/in/lily-i-meyer/"
+    },
+    "robbie-sieczkowski": {
+      "bioAndPhoto": "https://informatics.ischool.illinois.edu/people/robbie-sieczkowski/",
+      "linkedin": "https://www.linkedin.com/in/robert-sieczkowski"
+    },
+    "wen-hao-david-huang": {
+      "bioAndPhoto": "https://education.illinois.edu/profile/wenhao-david-huang",
+      "directoryData": "https://directoryapi.wigg.illinois.edu/api/Directory/GetProfile/education/wenhao-david-huang",
+      "note": "Current university biography summarized; existing VRchaeology-specific paragraphs retained. Photo downloaded from imageUrl. LinkedIn verified by the old lab Team page."
+    },
+    "zade-lobo": {
+      "bio": "User-supplied VR Club biography, lightly edited",
+      "photo": "https://uiucvrclub.web.illinois.edu/alumni/",
+      "website": "https://zadelobo.com/",
+      "linkedin": "User-supplied https://www.linkedin.com/in/zadelobo/"
+    },
+    "sepehr-vaez-afshar": {
+      "linkedin": "User-supplied https://www.linkedin.com/in/sepehrvafshar",
+      "websiteAndScholar": "Linked from the same LinkedIn profile; Scholar identity and Illinois affiliation verified in public browser."
+    },
+    "sarvin-eshaghi": {
+      "linkedin": "User-supplied https://www.linkedin.com/in/sarvin-eshaghi/",
+      "scholar": "https://scholar.google.com/citations?user=eaGAiMsAAAAJ — linked as a coauthor on Sepehr’s verified profile; identity and Illinois affiliation verified."
+    },
+    "ogulcan-durmaz": {
+      "linkedin": "User-supplied https://www.linkedin.com/in/ogulcandurmaz/"
+    },
+    "brian-graves": {
+      "linkedin": "Existing verified website URL retained, now also labeled LinkedIn; duplicate display suppressed."
+    },
+    "alan-b-craig": {
+      "linkedin": "https://www.linkedin.com/in/alan-craig-b0b0b05 — Illinois, VR expertise, and named book publications match."
+    },
+    "nan-kang": {
+      "linkedin": "https://www.linkedin.com/in/nan-kang2 — Illinois, computer engineering and VR development match."
+    },
+    "alexandra-zachwieja": {
+      "linkedin": "https://www.linkedin.com/in/alexandra-zachwieja-5561b0168",
+      "websiteAndScholar": "https://med.umn.edu/Biomedical/research/zachwieja-lab-page — official page links to Scholar uI51s9sAAAAJ."
+    },
+    "rajee-shah": {
+      "linkedin": "https://www.linkedin.com/in/rajeeshah — profile explicitly references her Illinois VR archaeology research team."
+    },
+    "david-hopping": {
+      "universityProfile": "https://informatics.ischool.illinois.edu/people/david-hopping/",
+      "note": "Excluded a same-name sociology faculty LinkedIn profile; it is not this Informatics student."
+    },
+    "emma-verstraete": {
+      "universityProfile": "https://anthro.illinois.edu/directory/profile/elv2",
+      "website": "https://experts.umn.edu/en/persons/emma-l-verstraete — linked by her Illinois directory entry."
+    }
+  },
+  "people": [
+    {
+      "name": "Aaron Stocks",
+      "slug": "aaron-stocks",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Alan B. Craig",
+      "slug": "alan-b-craig",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/alan-craig-b0b0b05",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Alexandra Zachwieja",
+      "slug": "alexandra-zachwieja",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/alexandra-zachwieja-5561b0168",
+        "scholar": "https://scholar.google.com/citations?user=uI51s9sAAAAJ",
+        "website": "https://med.umn.edu/Biomedical/research/zachwieja-lab-page",
+        "universityProfile": ""
+      },
+      "missingChannels": []
+    },
+    {
+      "name": "Alice (Xuehui) Chao",
+      "slug": "alice-xuehui-chao",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Brian Graves",
+      "slug": "brian-graves",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/brian-graves-3749412b6",
+        "scholar": "",
+        "website": "https://www.linkedin.com/in/brian-graves-3749412b6",
+        "universityProfile": "https://sib.illinois.edu/directory/profile/brianag3"
+      },
+      "missingChannels": [
+        "scholar"
+      ]
+    },
+    {
+      "name": "Cameron Merrill",
+      "slug": "cameron-merrill",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Dan Matis",
+      "slug": "dan-matis",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "David Hopping",
+      "slug": "david-hopping",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": "https://informatics.ischool.illinois.edu/people/david-hopping/"
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Emma Verstraete",
+      "slug": "emma-verstraete",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "https://experts.umn.edu/en/persons/emma-l-verstraete",
+        "universityProfile": "https://anthro.illinois.edu/directory/profile/elv2"
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar"
+      ]
+    },
+    {
+      "name": "Isaac Smith",
+      "slug": "isaac-smith",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Jamie Arjona",
+      "slug": "jamie-arjona",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Janny Chen",
+      "slug": "janny-chen",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Jin Jang",
+      "slug": "jin-jang",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Laura Shackelford",
+      "slug": "laura-shackelford",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "https://experts.illinois.edu/en/persons/laura-lynn-shackelford/",
+        "universityProfile": "https://anthro.illinois.edu/directory/profile/llshacke"
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar"
+      ]
+    },
+    {
+      "name": "Lily Meyer",
+      "slug": "lily-meyer",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/lily-i-meyer",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Monika Janas",
+      "slug": "monika-janas",
+      "links": {
+        "linkedin": "",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "linkedin",
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Nan Kang",
+      "slug": "nan-kang",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/nan-kang2",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Ogulcan Durmaz",
+      "slug": "ogulcan-durmaz",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/ogulcandurmaz",
+        "scholar": "",
+        "website": "https://www.researchgate.net/profile/Ogulcan-Durmaz",
+        "universityProfile": "https://informatics.ischool.illinois.edu/people/ogulcan-durmaz/"
+      },
+      "missingChannels": [
+        "scholar"
+      ]
+    },
+    {
+      "name": "Rajee Shah",
+      "slug": "rajee-shah",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/rajeeshah",
+        "scholar": "",
+        "website": "",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Robbie Sieczkowski",
+      "slug": "robbie-sieczkowski",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/robert-sieczkowski",
+        "scholar": "",
+        "website": "",
+        "universityProfile": "https://informatics.ischool.illinois.edu/people/robbie-sieczkowski/"
+      },
+      "missingChannels": [
+        "scholar",
+        "website"
+      ]
+    },
+    {
+      "name": "Sarvin Eshaghi",
+      "slug": "sarvin-eshaghi",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/sarvin-eshaghi",
+        "scholar": "https://scholar.google.com/citations?user=eaGAiMsAAAAJ",
+        "website": "https://www.researchgate.net/profile/Sarvin-Eshaghi",
+        "universityProfile": "https://informatics.ischool.illinois.edu/people/sarvin-eshaghi/"
+      },
+      "missingChannels": []
+    },
+    {
+      "name": "Sepehr Vaez Afshar",
+      "slug": "sepehr-vaez-afshar",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/sepehrvafshar",
+        "scholar": "https://scholar.google.com/citations?user=qQFXEvcAAAAJ",
+        "website": "https://vaezafshar.com/",
+        "universityProfile": "https://informatics.ischool.illinois.edu/people/sepehr-vaez-afshar/"
+      },
+      "missingChannels": []
+    },
+    {
+      "name": "Wen-Hao David Huang",
+      "slug": "wen-hao-david-huang",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/wdhuang/",
+        "scholar": "",
+        "website": "https://experts.illinois.edu/en/persons/wenhao-david-huang/",
+        "universityProfile": "https://education.illinois.edu/profile/wenhao-david-huang"
+      },
+      "missingChannels": [
+        "scholar"
+      ]
+    },
+    {
+      "name": "Zade Bosco Lobo",
+      "slug": "zade-lobo",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/zadelobo/",
+        "scholar": "",
+        "website": "https://zadelobo.com/",
+        "universityProfile": ""
+      },
+      "missingChannels": [
+        "scholar"
+      ]
+    }
+  ]
+}
