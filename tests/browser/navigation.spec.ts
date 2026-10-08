@@ -67,3 +67,34 @@ test('all navigation destinations are reachable without JavaScript',async({brows
   await page.locator('header').getByRole('link',{name:'Accessibility',exact:true}).click();
   await expect(page).toHaveURL(/\/accessibility\/$/); await context.close();
 });
+
+test('a research menu opened during loading stays open after enhancement',async({page})=>{
+  let releaseNavigation!:()=>void;
+  let navigationScript='';
+  const navigationReady=new Promise<void>(resolve=>{releaseNavigation=resolve;});
+  await page.route('**/',async route=>{
+    const response=await route.fetch();
+    const html=(await response.text()).replace(/<script type="module">([\s\S]*?)<\/script>/g,(script,body)=>{
+      if(!body.includes('.primary-navigation')) return script;
+      navigationScript=body;
+      return '<script type="module" src="/delayed-navigation.js"></script>';
+    });
+    await route.fulfill({response,body:html});
+  });
+  await page.route('**/delayed-navigation.js',async route=>{
+    await navigationReady;
+    await route.fulfill({contentType:'text/javascript',body:navigationScript});
+  });
+  await page.setViewportSize({width:1440,height:900});
+  await page.goto('/',{waitUntil:'commit'});
+  const research=page.locator('.research-menu');
+  try {
+    await research.locator('summary').click();
+    await expect(research).toHaveAttribute('open','');
+    expect(navigationScript).toContain('.primary-navigation');
+  } finally { releaseNavigation(); }
+  await page.waitForLoadState('load');
+  await expect(research).toHaveAttribute('open','');
+  await research.getByRole('link',{name:'Projects',exact:true}).click();
+  await expect(page).toHaveURL(/\/projects\/$/);
+});

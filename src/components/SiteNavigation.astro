@@ -35,7 +35,9 @@ const inResearch = ['/projects/','/themes/','/presentations/','/awards-funding/'
     closeMobile();
     if (narrow.matches && hadFocus) toggle.focus();
   };
-  resize();
+  // Preserve a disclosure the visitor opened before this module finished loading.
+  toggle.hidden = !narrow.matches;
+  list.hidden = narrow.matches;
   narrow.addEventListener('change',resize);
   toggle.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
