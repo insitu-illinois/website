@@ -320,3 +320,5 @@ Subsequent content changes through `/admin` continue to deploy through the same 
 
 
 Missing people photos use the same neutral silhouette template in member/collaborator cards, the compact Alumni list, and person pages. It follows the shared light/night color tokens and is decorative for assistive technology; the adjacent name identifies the person. Uploading a real photo in `/admin` automatically replaces the template. No placeholder images or invented portraits are saved into people records.
+
+Placeholder release verified October 9, 2026: source `81892a9b27c0f3427f0b737e426576afe964a711`, [successful run 37890361331](https://github.com/insitu-illinois/website/actions/runs/37890361331), Worker version `7ea3f1cb-23b3-41c5-9f21-24ffd9fabdd3`. All seven published people without photos use the template. Build and Astro check passed, and CI passed all 24 unit checks and 27 browser checks. The live People view was visually inspected; root, People, Lily, the former Zade URL, robots, favicon, CMS config, and portrait bytes matched the build. No content records changed; noindex remains enabled.
