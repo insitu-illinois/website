@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import RecordList from '../../components/RecordList.astro';
 import Tags from '../../components/Tags.astro';
 import ProfileLinks from '../../components/ProfileLinks.astro';
+import PersonPlaceholder from '../../components/PersonPlaceholder.astro';
 import { content } from '../../lib/content';
 import { personLists, personThemes } from '../../lib/derived.mjs';
 import { roles } from '../../lib/format.mjs';
@@ -23,7 +24,7 @@ const alumniTarget=`/people/#person-${person.id}`;
 </head><body><main><h1>Alumni</h1><p><a href={alumniTarget}>Read about {person.data.name} on the People page</a>.</p></main></body></html> : <Base noindex={person.data.draft} title={person.data.name} description={person.data.bio || undefined}>
   <a href="/people/">All people</a>
   <section class="person-heading">
-    {person.data.photo ? <img src={person.data.photo.src} alt={person.data.photo.alt} width="320" height="400" /> : <div class="portrait-placeholder" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}
+    {person.data.photo ? <img src={person.data.photo.src} alt={person.data.photo.alt} width="320" height="400" /> : <PersonPlaceholder profile/>}
     <div>
       {person.data.draft && <p class="label">Draft · Not published</p>}
       <p class="label">{roles[person.data.role as keyof typeof roles] ?? 'Member'}</p>

@@ -27,7 +27,7 @@ Saving an entry commits it to GitHub. The automatic checks then rebuild and depl
 
 1. Select **People → Create new entry**. Enter their name and a permanent `first-last` slug.
 2. Choose the confirmed role. **Collaborator** and **Alumni** have their own sections; every other role appears under **Current members**. Changing the role moves the person automatically. Smaller **Order** values appear first.
-3. Enter an approved biography: alumni remain compact list entries without a displayed biography, while other roles receive a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied or verified against an identity-matched public profile. A photo is optional; enable it and fill both file and alt text. Without one, the profile shows initials.
+3. Enter an approved biography: alumni remain compact list entries without a displayed biography, while other roles receive a profile page. Without a biography, the person appears in the People list only, even if they have a photo. Add website, Scholar, and email only when supplied or verified against an identity-matched public profile. A photo is optional; enable it and fill both file and alt text. Without one, a neutral silhouette placeholder appears automatically.
 4. Keep **Draft** on while details need approval, then switch it off and save.
 5. Select that person in project **Team**, publication **Lab authors**, presentation **Presenters**, and recognition **Recipients**. Their four profile lists fill automatically.
 
@@ -317,3 +317,6 @@ Alumni appear as a compact list on People: name, optional photo, and verified Li
 - Manual visual review was performed on the local preview. A repeat manual browser visit to the live URL was blocked by the tool's approval-service usage limit; this did not affect deployment or the independently initiated automated checks. Full manual screen-reader testing and evaluation of external PDFs/videos remain outstanding as described on the Accessibility page. Proposed values still require lab approval; unverifiable profile links stay blank.
 
 Subsequent content changes through `/admin` continue to deploy through the same checked `main` workflow. Documentation-only release records may use a `[skip ci]` commit: they do not change the already verified deployed assets.
+
+
+Missing people photos use the same neutral silhouette template in member/collaborator cards, the compact Alumni list, and person pages. It follows the shared light/night color tokens and is decorative for assistive technology; the adjacent name identifies the person. Uploading a real photo in `/admin` automatically replaces the template. No placeholder images or invented portraits are saved into people records.

@@ -4,6 +4,7 @@ import { entryUrl, roles } from '../lib/format.mjs';
 import {personThemes} from '../lib/derived.mjs';
 import Tags from './Tags.astro';
 import ProfileLinks from './ProfileLinks.astro';
+import PersonPlaceholder from './PersonPlaceholder.astro';
 const { people, data } = Astro.props;
 ---
 {peopleGroups(people).map(group => <section aria-labelledby={`people-${group.key}`}>
@@ -13,12 +14,12 @@ const { people, data } = Astro.props;
       const href=entryUrl(person);
       return group.key==='alumni' ? <li id={`person-${person.id}`} tabindex="-1">
         <div class="alumni-entry">
-          {person.data.photo && <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="64" height="64" loading="lazy"/>}
+          {person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="64" height="64" loading="lazy"/> : <PersonPlaceholder/>}
           <h3>{person.data.name}</h3>
           <ProfileLinks person={person.data} alumni iconsOnly/>
         </div>
       </li> : <li id={`person-${person.id}`} class="card" tabindex="-1">
-        {person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy" /> : <div class="people-initials" aria-hidden="true">{person.data.name.split(' ').map((part:string)=>part[0]).join('')}</div>}
+        {person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy" /> : <PersonPlaceholder/>}
         <div>
           <h3>{href ? <a href={href}>{person.data.name}</a> : person.data.name}</h3>
           {group.key==='current' && <p class="label">{roles[person.data.role as keyof typeof roles]}</p>}

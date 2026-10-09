@@ -1,0 +1,9 @@
+---
+const { profile = false } = Astro.props;
+---
+<div class:list={['person-placeholder', profile ? 'portrait-placeholder' : 'people-photo']} aria-hidden="true">
+  <svg viewBox="0 0 120 120" fill="currentColor" focusable="false">
+    <circle cx="60" cy="40" r="19" />
+    <path d="M23 102v-9c0-20 16-31 37-31s37 11 37 31v9a5 5 0 0 1-5 5H28a5 5 0 0 1-5-5Z" />
+  </svg>
+</div>
