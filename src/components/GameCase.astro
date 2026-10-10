@@ -1,34 +1,51 @@
 ---
+import QuestIllustration from './QuestIllustration.astro';
 interface Image { src:string; alt:string; caption?:string; }
-interface Props { cover:Image; images:Image[]; name:string; }
-const {cover,images,name}=Astro.props;
+interface Props { cover:Image; images:Image[]; name:string; availability?:string; }
+const {cover,images,name,availability}=Astro.props;
 ---
 <div class="game-case" data-game-case>
-  <button class="case-toggle" data-case-toggle hidden type="button" aria-expanded="false" aria-controls="case-booklet" aria-label={`Open the case: ${name} artwork`} aria-describedby="case-description" data-name={name}>
-    <span class="case-stage" aria-hidden="true">
-      <span class="case-object">
-        <span class="case-tray"><span class="case-disc"><img src={images[0].src} alt=""/></span></span>
-        <span class="case-lid">
-          <span class="case-front"><img class="case-cover-art" src={cover.src} alt="" loading="eager" width="1200" height="1800"/></span>
-          <span class="case-back"><span class="case-paper"><span class="paper-images">{images.slice(0,4).map(image=><img src={image.src} alt="" loading="lazy"/>)}</span></span></span>
-        </span>
-      </span>
-    </span>
-    <span class="case-action" data-case-action>Open the case <span aria-hidden="true">↗</span></span>
-  </button>
-  <span id="case-description" class="visually-hidden">{cover.alt} Interactive artwork presentation; opens a disc case and a booklet of game images.</span>
-  <noscript><img class="media media-natural" src={cover.src} alt={cover.alt} width="1200" height="1800"/><p><a href="#gallery-heading">Explore the game images</a></p></noscript>
-  <div class="case-booklet" id="case-booklet" hidden>
-    <div class="booklet-toolbar"><p class="label" role="status" data-scene-status>Scene 1 of {images.length}</p><div class="booklet-buttons"><button type="button" class="button secondary" data-scene-prev aria-label="Previous game image">←</button><button type="button" class="button secondary" data-scene-next aria-label="Next game image">→</button></div></div>
-    {images.map((image,index)=><figure data-scene hidden={index!==0}><img src={image.src} alt={image.alt} width="1600" height="1000" loading="lazy"/><figcaption>{image.caption}</figcaption></figure>)}
-    <a class="text-link" href="#gallery-heading">View the full gallery</a>
+  <div class="artwork-layout" data-case-interactive hidden>
+    <div class="case-stage">
+      <button class="case-toggle" data-case-toggle type="button" aria-expanded="false" aria-controls="case-interior" aria-label={`Open the case: ${name} artwork`} aria-describedby="case-description" data-name={name}>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m8 4 8 8-8 8"/></svg>
+      </button>
+      <div class="case-object" id="case-interior">
+        <div class="case-tray" aria-hidden="true"><span class="case-disc"><img src={images[0].src} alt=""/><span class="disc-title">{name}</span></span></div>
+        <div class="case-lid">
+          <div class="case-front"><img class="case-cover-art" src={cover.src} alt="" loading="eager" width="1200" height="1800"/></div>
+          <div class="case-back">
+            <button class="case-paper" type="button" data-booklet-open disabled aria-label={`Explore the ${name} image booklet`} aria-haspopup="dialog" aria-controls="case-booklet">
+              <span class="paper-images" aria-hidden="true">{images.slice(0,4).map(image=><img src={image.src} alt="" loading="lazy"/>)}</span>
+              <svg class="paper-expand" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M8 8l-5-5m13 5 5-5M8 16l-5 5m13-5 5 5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    {availability&&<div class="headset-area">
+      <button class="headset-toggle" type="button" data-headset-toggle aria-expanded="false" aria-controls="experience-availability" aria-label="Meta Quest 3 illustration: game availability"><QuestIllustration/></button>
+      <p class="label headset-label">Meta Quest 3 <span aria-hidden="true">↗</span></p>
+      <div id="experience-availability" class="availability-note" hidden><p>{availability}</p></div>
+    </div>}
   </div>
+  <span id="case-description" class="visually-hidden">{cover.alt} Open the case, then select the booklet to explore the game images.</span>
+  <noscript><img class="media media-natural" src={cover.src} alt={cover.alt} width="1200" height="1800"/><p><a href="#gallery-heading">Explore the game images</a></p>{availability&&<p>{availability}</p>}</noscript>
+  <dialog class="case-booklet" id="case-booklet" aria-labelledby="booklet-title">
+    <div class="booklet-heading"><div><p class="label">Inside the experience</p><h2 id="booklet-title">{name}</h2></div><button class="button secondary" type="button" data-booklet-close autofocus>Close booklet</button></div>
+    {images.map((image,index)=><figure class="booklet-spread" data-scene hidden={index!==0}>
+      <div class="booklet-image"><img src={image.src} alt={image.alt} width="1600" height="1000" loading="lazy"/></div>
+      <figcaption><span class="booklet-number" aria-hidden="true">{String(index+1).padStart(2,'0')}</span><h3>{image.caption||'Game image'}</h3><p>{image.alt}</p><a href={image.src}>View full image<span class="visually-hidden">: {image.caption||image.alt}</span></a></figcaption>
+    </figure>)}
+    <div class="booklet-toolbar"><p class="label" role="status" data-scene-status>Scene 1 of {images.length}</p><div class="booklet-buttons"><button type="button" class="button secondary" data-scene-prev aria-label="Previous game image">←</button><button type="button" class="button secondary" data-scene-next aria-label="Next game image">→</button></div></div>
+  </dialog>
 </div>
 <script>
   document.querySelectorAll<HTMLElement>('[data-game-case]').forEach(root=>{
     const toggle=root.querySelector<HTMLButtonElement>('[data-case-toggle]')!;
-    const action=root.querySelector<HTMLElement>('[data-case-action]')!;
-    const booklet=root.querySelector<HTMLElement>('.case-booklet')!;
+    const opener=root.querySelector<HTMLButtonElement>('[data-booklet-open]')!;
+    const booklet=root.querySelector<HTMLDialogElement>('.case-booklet')!;
     const scenes=[...root.querySelectorAll<HTMLElement>('[data-scene]')];
     const status=root.querySelector<HTMLElement>('[data-scene-status]')!;
     let current=0;
@@ -36,13 +53,25 @@ const {cover,images,name}=Astro.props;
       root.dataset.open=String(open);
       toggle.setAttribute('aria-expanded',String(open));
       toggle.setAttribute('aria-label',`${open?'Close':'Open'} the case: ${toggle.dataset.name} artwork`);
-      action.textContent=open?'Close the case':'Open the case ↗';
-      booklet.hidden=!open;
+      opener.disabled=!open;
     }
-    toggle.hidden=false;
+    root.querySelector<HTMLElement>('[data-case-interactive]')!.hidden=false;
     toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));
+    // The closed cover is also a generous pointer target; keyboard users use the named control.
+    root.querySelector('.case-front')!.addEventListener('click',()=>setOpen(true));
+    opener.addEventListener('click',()=>{booklet.showModal();booklet.scrollTop=0;});
+    root.querySelector('[data-booklet-close]')!.addEventListener('click',()=>booklet.close());
+    booklet.addEventListener('close',()=>opener.focus());
+    booklet.addEventListener('keydown',event=>{
+      if(event.key==='Escape'){event.stopPropagation();return;}
+      if(event.key!=='Tab')return;
+      const controls=[...booklet.querySelectorAll<HTMLElement>('button,a[href]')].filter(el=>!el.closest('[hidden]'));
+      const first=controls[0],last=controls[controls.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+    });
     root.addEventListener('keydown',event=>{
-      if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true') {
+      if(event.key==='Escape'&&!booklet.open&&toggle.getAttribute('aria-expanded')==='true') {
         event.preventDefault();setOpen(false);toggle.focus();
       }
     });
@@ -53,40 +82,71 @@ const {cover,images,name}=Astro.props;
     }
     root.querySelector('[data-scene-prev]')!.addEventListener('click',()=>showScene(-1));
     root.querySelector('[data-scene-next]')!.addEventListener('click',()=>showScene(1));
+    const headset=root.querySelector<HTMLButtonElement>('[data-headset-toggle]');
+    headset?.addEventListener('click',()=>{
+      const open=headset.getAttribute('aria-expanded')!=='true';
+      headset.setAttribute('aria-expanded',String(open));
+      root.querySelector<HTMLElement>('#experience-availability')!.hidden=!open;
+    });
   });
 </script>
 <style>
   .game-case { min-width:0; }
-  .case-toggle { display:block; width:100%; border:0; padding:0; background:transparent; color:var(--text-heading); font:inherit; border-radius:var(--radius-md); }
-  .case-stage { display:block; position:relative; width:100%; aspect-ratio:5/4; perspective:calc(var(--space-10) * 10); background:radial-gradient(ellipse at 50% 75%,var(--border-default),transparent 62%); }
-  .case-object { display:block; position:absolute; top:10%; left:49%; width:43%; aspect-ratio:2/3; transform:translateX(-50%) rotateY(-16deg) rotateX(5deg); transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); }
-  .case-tray,.case-lid,.case-front,.case-back { position:absolute; inset:0; display:block; border-radius:var(--radius-xs); }
+  .artwork-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); align-items:center; gap:var(--space-5); }
+  .case-stage { position:relative; width:100%; aspect-ratio:5/4; perspective:calc(var(--space-10) * 10); background:radial-gradient(ellipse at 50% 80%,var(--border-default),transparent 62%); }
+  .case-object { position:absolute; top:3%; left:49%; width:47%; aspect-ratio:2/3; transform:translateX(-50%) rotateY(-16deg) rotateX(5deg); transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); }
+  .case-tray,.case-lid,.case-front,.case-back { position:absolute; inset:0; border-radius:var(--radius-xs); }
   .case-tray { display:grid; place-items:center; background:var(--neutral-900); border:var(--space-1) solid var(--neutral-800); box-shadow:var(--shadow-inverse); transform:translateZ(calc(-1 * var(--space-2))); }
   .case-tray::before { content:""; position:absolute; inset:var(--space-2); border:var(--border-hairline) solid var(--neutral-600); border-radius:var(--radius-xs); }
   .case-lid { transform-origin:left center; transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); box-shadow:var(--shadow-raised); }
   .case-front,.case-back { backface-visibility:hidden; overflow:hidden; border:var(--border-thick) solid var(--neutral-800); }
-  .case-front { background:var(--neutral-950); }
+  .case-front { background:var(--neutral-950); cursor:pointer; }
   .case-cover-art { width:100%; height:100%; object-fit:contain; aspect-ratio:auto; }
   .case-front::after { content:""; position:absolute; inset:0; background:linear-gradient(100deg,transparent 2%,color-mix(in srgb,var(--white) 25%,transparent) 4%,transparent 8%,transparent 75%,color-mix(in srgb,var(--white) 10%,transparent)); box-shadow:inset var(--space-1) 0 var(--space-2) var(--neutral-950); }
-  .case-back { transform:rotateY(180deg); background:var(--neutral-900); padding:var(--space-2); }
-  .case-paper { display:flex; height:100%; flex-direction:column; justify-content:space-between; background:var(--white); color:var(--neutral-950); padding:var(--space-2); transform:rotate(-2deg); box-shadow:var(--shadow-card); }
-  .paper-images { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-1); margin-block:auto; }
+  .case-back { transform:rotateY(180deg); background:var(--neutral-900); padding:var(--space-3); }
+  .case-paper { position:relative; display:grid; place-items:center; width:100%; height:100%; background:var(--white); color:var(--neutral-950); padding:var(--space-2); border:0; transform:rotate(-2deg); box-shadow:var(--shadow-card); transition:transform var(--dur-decorative) var(--ease-standard); }
+  .case-paper:disabled { cursor:default; }
+  .paper-images { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-1); }
   .paper-images img { width:100%; aspect-ratio:1; object-fit:cover; }
-  .case-disc { position:relative; display:block; width:88%; aspect-ratio:1; border-radius:50%; padding:var(--space-1); background:conic-gradient(var(--white),var(--neutral-600),var(--neutral-200),var(--white),var(--neutral-500),var(--white)); box-shadow:var(--shadow-inverse); }
+  .paper-expand { position:absolute; bottom:var(--space-2); right:var(--space-2); width:var(--space-5); height:var(--space-5); }
+  .case-disc { container-type:inline-size; position:relative; display:block; width:88%; aspect-ratio:1; border-radius:50%; padding:var(--space-1); background:conic-gradient(var(--white),var(--neutral-600),var(--neutral-200),var(--white),var(--neutral-500),var(--white)); box-shadow:var(--shadow-inverse); }
   .case-disc img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .disc-title { position:absolute; inset:22% 6% auto; text-align:center; background:var(--neutral-950); color:var(--white); font:var(--weight-display) 11cqi/1.4 var(--font-display); letter-spacing:var(--ls-display); }
   .case-disc::after { content:""; position:absolute; width:18%; aspect-ratio:1; inset:41%; border-radius:50%; background:var(--neutral-900); border:var(--border-thick) solid var(--neutral-300); }
-  .case-action { display:inline-flex; align-items:center; min-height:var(--space-7); font-family:var(--font-mono); font-size:var(--text-label-md); text-decoration:underline; text-underline-offset:var(--space-1); gap:var(--space-2); }
+  .case-toggle { position:absolute; bottom:0; right:var(--space-2); display:grid; place-items:center; width:var(--space-7); height:var(--space-7); padding:var(--space-3); border:var(--border-hairline) solid var(--border-strong); border-radius:var(--radius-full); background:var(--surface-page); color:var(--text-heading); }
+  .case-toggle svg { width:100%; height:100%; transition:transform var(--dur-med); }
+  [data-open="true"] .case-toggle svg { transform:rotate(180deg); }
   [data-open="true"] .case-object { transform:translateX(0) rotateY(-5deg); }
   [data-open="true"] .case-lid { transform:rotateY(-155deg); }
-  .case-booklet { margin-top:var(--space-5); padding:var(--space-4); background:var(--surface-page); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); box-shadow:var(--shadow-card); }
-  .booklet-toolbar { display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between; margin-bottom:var(--space-4); }
+  .headset-area { text-align:center; min-width:0; }
+  .headset-toggle { width:100%; display:block; background:transparent; border:0; padding:var(--space-3); border-radius:var(--radius-md); }
+  .headset-label { color:var(--text-secondary); }
+  .availability-note { padding:var(--space-4); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); background:var(--surface-page); font-size:var(--text-body-sm); text-align:left; }
+  .availability-note p { margin:0; }
+  .case-booklet { width:min(calc(100% - var(--space-6)),var(--grid-max)); max-height:calc(100dvh - var(--space-6)); margin:auto; padding:var(--space-5); color:var(--text-primary); background:var(--surface-page); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); box-shadow:var(--shadow-raised); overflow:auto; }
+  .case-booklet[open] { animation:unfold-booklet var(--dur-decorative) var(--ease-standard); }
+  .case-booklet::backdrop { background:color-mix(in srgb,var(--neutral-950) 78%,transparent); }
+  :global(body:has(.case-booklet[open])) { overflow:hidden; }
+  .booklet-heading,.booklet-toolbar { display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:center; justify-content:space-between; }
+  .booklet-heading { padding-bottom:var(--space-5); border-bottom:var(--border-hairline) solid var(--border-default); }
+  .booklet-heading h2 { font-size:var(--text-display-sm); margin:0; }
+  .booklet-heading p { margin:0 0 var(--space-2); }
+  .booklet-spread { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr); margin:var(--space-5) 0; background:var(--surface-card); border:var(--border-hairline) solid var(--border-default); }
+  .booklet-image { display:grid; place-items:center; padding:var(--space-4); min-width:0; }
+  .booklet-image img { width:100%; height:auto; object-fit:contain; }
+  .booklet-spread figcaption { border-left:var(--border-hairline) solid var(--border-default); padding:var(--space-5); min-width:0; }
+  .booklet-number { display:block; font:var(--text-display-sm)/1 var(--font-mono); color:var(--text-secondary); margin-bottom:var(--space-5); }
+  .booklet-spread h3 { font-size:var(--text-body-lg); }
+  .booklet-spread p,.booklet-spread a { font-size:var(--text-body-md); }
   .booklet-toolbar p { margin:0; }
   .booklet-buttons { display:flex; gap:var(--space-2); }
   .booklet-buttons button { min-width:var(--space-7); padding:var(--space-2); }
-  .case-booklet figure { margin:0; }
-  .case-booklet figure img { width:100%; height:auto; aspect-ratio:8/5; object-fit:contain; background:var(--surface-card); }
-  .case-booklet figcaption { margin-top:var(--space-3); font-size:var(--text-body-sm); }
-  @media (hover:hover) and (prefers-reduced-motion:no-preference) { :global(html:not([data-reduce-motion="true"])) .game-case:not([data-open="true"]) .case-toggle:hover .case-object { transform:translateX(-50%) rotateY(-8deg) rotateX(2deg) translateY(calc(-1 * var(--space-1))); } }
-  @media (prefers-reduced-motion:reduce) { .case-object,.case-lid { transition:none; } }
-  :global(html[data-reduce-motion="true"]) .case-object,:global(html[data-reduce-motion="true"]) .case-lid { transition:none; }
+  @keyframes unfold-booklet { from { opacity:0; transform:translateY(var(--space-7)) rotate(-5deg) scale(.84); } to { opacity:1; transform:none; } }
+  @media (hover:hover) and (prefers-reduced-motion:no-preference) {
+    :global(html:not([data-reduce-motion="true"])) .game-case:not([data-open="true"]) .case-stage:hover .case-object { transform:translateX(-50%) rotateY(-8deg) rotateX(2deg) translateY(calc(-1 * var(--space-1))); }
+    :global(html:not([data-reduce-motion="true"])) .case-paper:not(:disabled):is(:hover,:focus-visible) { transform:rotate(2deg) translateY(calc(-1 * var(--space-2))); }
+  }
+  @media(max-width:48rem) { .artwork-layout { grid-template-columns:minmax(0,1fr); } .headset-area { width:min(100%,calc(var(--space-10) * 3)); justify-self:center; } .booklet-spread { grid-template-columns:minmax(0,1fr); } .booklet-spread figcaption { border-left:0; border-top:var(--border-hairline) solid var(--border-default); padding:var(--space-4); } .case-booklet { padding:var(--space-4); } }
+  @media (prefers-reduced-motion:reduce) { .case-object,.case-lid,.case-paper { transition:none; } }
+  :global(html[data-reduce-motion="true"]) :is(.case-object,.case-lid,.case-paper) { transition:none; }
 </style>

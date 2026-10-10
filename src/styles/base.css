@@ -248,3 +248,9 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
 @media (max-width:30rem) {
   .main-content > section,.home-page .main-content > section,.main-content > div.reading-section,.project-intro.has-cover { padding:var(--space-4); }
 }
+
+/* Artwork leads the VRchaeology introduction; copy stays compact in the corner. */
+.project-intro.has-game-case { display:block; }
+.project-intro.has-game-case .page-heading { max-width:60ch; padding-top:0; margin-bottom:var(--space-5); }
+.project-intro.has-game-case h1 { font-size:var(--text-display-sm); }
+.project-intro.has-game-case .lead { font-size:var(--text-body-md); }

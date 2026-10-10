@@ -1,18 +1,20 @@
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 
-test('VRchaeology shows the full cover, classroom status, editable gallery, and complete credits',async({page})=>{
+test('VRchaeology shows the full cover, image booklet, availability, and complete credits',async({page})=>{
   const project=JSON.parse(readFileSync('src/content/projects/vrchaeology.json','utf8'));
   await page.goto('/projects/vrchaeology/');
   const cover=page.locator('.project-cover .case-cover-art');
   await expect(cover).toHaveAttribute('src',project.heroMedia.src);
   await expect(cover).toHaveCSS('object-fit','contain');
   await expect(cover).toHaveCSS('aspect-ratio','auto');
-  await expect(page.locator('main')).toContainText('VRchaeology is ready for classroom use.');
+  await expect(page.getByRole('heading',{name:'Ready for the classroom'})).toHaveCount(0);
   await expect(page.locator('main')).toContainText('Development continues at the Game Studies and Design (GSD) Stu/dio');
   await expect(page.getByRole('heading',{name:'Lab contributors',exact:true})).toHaveCount(0);
   await expect(page.getByRole('list',{name:'Project team'}).getByRole('link',{name:'Sepehr Vaez Afshar',exact:true})).toBeVisible();
-  const gallery=page.locator('.project-gallery');
+  await page.locator('[data-case-toggle]').click();
+  await page.locator('[data-booklet-open]').click();
+  const gallery=page.locator('#case-booklet');
   await expect(gallery.locator('figure')).toHaveCount(project.gallery.length);
   for(const [index,media] of project.gallery.entries()) {
     const figure=gallery.locator('figure').nth(index);
@@ -22,14 +24,16 @@ test('VRchaeology shows the full cover, classroom status, editable gallery, and 
     const link=figure.getByRole('link');
     await expect(link).toHaveAttribute('href',media.src);
     await link.focus();await expect(link).toBeFocused();
+    if(index<project.gallery.length-1)await page.getByRole('button',{name:'Next game image'}).click();
   }
+  await page.keyboard.press('Escape');
   const groups=page.locator('.credit-group');
   await expect(groups).toHaveCount(project.credits.length);
   for(const [index,credit] of project.credits.entries()) {
     await expect(groups.nth(index).getByRole('heading')).toHaveText(credit.role);
     await expect(groups.nth(index).locator('li')).toHaveText(credit.names.split('\n'));
   }
-  await page.getByRole('link',{name:'Ask about classroom use',exact:true}).click();
+  await page.goto('/join/#classroom-use');
   await expect(page).toHaveURL(/\/join\/#classroom-use$/);
   const contact=page.locator('#classroom-use .lab-contact a');
   await expect(contact).toHaveAttribute('href',/^mailto:/);

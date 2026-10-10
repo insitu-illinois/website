@@ -1,0 +1,36 @@
+<!-- Original schematic illustration, not a product photograph or an endorsement. -->
+<svg class="quest-illustration" viewBox="0 0 480 370" fill="none" aria-hidden="true">
+  <defs><linearGradient id="quest-shell" x1="130" y1="80" x2="310" y2="270" gradientUnits="userSpaceOnUse"><stop stop-color="var(--white)"/><stop offset="1" stop-color="var(--neutral-300)"/></linearGradient></defs>
+  <ellipse cx="240" cy="324" rx="156" ry="14" fill="var(--border-default)" opacity=".5"/>
+  <g class="quest-headset">
+    <path d="M140 143C107 33 373 10 356 143" stroke="var(--neutral-300)" stroke-width="24"/>
+    <path d="M140 141C111 41 364 20 355 141" stroke="var(--neutral-50)" stroke-width="16"/>
+    <path d="m244 51-10 72" stroke="var(--neutral-200)" stroke-width="25"/>
+    <path d="M114 136c4-36 213-57 251-9l5 64c-25 51-217 74-256 17z" fill="var(--neutral-800)"/>
+    <path d="M108 140c3-29 206-52 254-14 12 10 15 42 8 62-12 36-212 61-254 27-11-9-16-49-8-75Z" fill="url(#quest-shell)" stroke="var(--neutral-300)" stroke-width="2"/>
+    <path d="M118 190c58 30 189 8 245-19" stroke="var(--neutral-50)" stroke-width="2"/>
+    <g fill="var(--neutral-950)" stroke="var(--neutral-500)" stroke-width="3" transform="rotate(-7 240 170)">
+      <rect x="151" y="144" width="22" height="49" rx="11"/><rect x="229" y="136" width="22" height="50" rx="11"/><rect x="307" y="129" width="22" height="49" rx="11"/>
+    </g>
+    <g fill="var(--neutral-500)"><circle cx="160" cy="158" r="5"/><circle cx="162" cy="179" r="4"/><circle cx="238" cy="161" r="5"/><circle cx="316" cy="140" r="5"/><circle cx="318" cy="162" r="4"/></g>
+  </g>
+  <g class="quest-controller quest-left" transform="translate(94 235) rotate(24)">
+    <path d="M-25 0c-12 16-6 57 7 79 8 14 30 14 36-2 11-27 14-58 3-77Z" fill="url(#quest-shell)" stroke="var(--neutral-300)" stroke-width="2"/>
+    <ellipse rx="36" ry="24" fill="var(--neutral-50)" stroke="var(--neutral-300)" stroke-width="2"/>
+    <ellipse cx="-9" cy="-3" rx="11" ry="8" fill="var(--neutral-800)"/><circle cx="16" cy="-6" r="4" fill="var(--neutral-800)"/><circle cx="20" cy="7" r="4" fill="var(--neutral-800)"/>
+  </g>
+  <g class="quest-controller quest-right" transform="translate(387 211) rotate(-24)">
+    <path d="M-25 0c-12 16-6 57 7 79 8 14 30 14 36-2 11-27 14-58 3-77Z" fill="url(#quest-shell)" stroke="var(--neutral-300)" stroke-width="2"/>
+    <ellipse rx="36" ry="24" fill="var(--neutral-50)" stroke="var(--neutral-300)" stroke-width="2"/>
+    <ellipse cx="9" cy="-3" rx="11" ry="8" fill="var(--neutral-800)"/><circle cx="-16" cy="-6" r="4" fill="var(--neutral-800)"/><circle cx="-20" cy="7" r="4" fill="var(--neutral-800)"/>
+  </g>
+</svg>
+<style>
+.quest-illustration { display:block; width:100%; height:auto; overflow:visible; }
+.quest-headset,.quest-controller { transition:translate var(--dur-decorative) var(--ease-standard),rotate var(--dur-decorative) var(--ease-standard); transform-box:fill-box; transform-origin:center; }
+@media(prefers-reduced-motion:no-preference) {
+ :global(html:not([data-reduce-motion="true"]) .headset-toggle:is(:hover,:focus-visible)) .quest-headset { translate:0 calc(-1 * var(--space-3)); rotate:-3deg; }
+ :global(html:not([data-reduce-motion="true"]) .headset-toggle:is(:hover,:focus-visible)) .quest-left { translate:calc(-1 * var(--space-2)) var(--space-1); rotate:-5deg; }
+ :global(html:not([data-reduce-motion="true"]) .headset-toggle:is(:hover,:focus-visible)) .quest-right { translate:var(--space-2) calc(-1 * var(--space-2)); rotate:5deg; }
+}
+</style>

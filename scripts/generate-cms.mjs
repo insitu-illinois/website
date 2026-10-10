@@ -27,6 +27,7 @@ const hints = {
   question: 'Write the guiding research question for this theme.',
   description: 'Write a short, approved description for readers.',
   shortDescription: 'Summarize the project briefly for project lists.',
+  availability: 'For the VRchaeology headset panel, describe how the game can be used now; keep future possibilities clearly conditional.',
   gallery: 'Add approved project images in display order; each needs alt text and may include a caption.',
   credits: 'List the confirmed production credits by role, including contributors who are not lab members.',
   body: 'Write the approved page text; use headings, paragraphs, lists, and links as needed.',

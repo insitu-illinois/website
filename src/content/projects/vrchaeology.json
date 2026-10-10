@@ -28,7 +28,7 @@
     "nsf-1736235",
     "nsf-2021460"
   ],
-  "body": "## Ready for the classroom\n\nVRchaeology is ready for classroom use. Development continues at the Game Studies and Design (GSD) Stu/dio, with work on new labs and improvements to the experience.\n\n[Ask about classroom use](/join/#classroom-use)\n\n## Learning through fieldwork\n\nVRchaeology teaches archaeological field methods using immersive virtual reality, allowing students to learn archaeology without leaving the classroom. It serves as a test case for field sciences more broadly.\n\nStudents set up research grids, locate artifacts, map features, excavate, photograph finds, and run lab analyses. The experience is built in Unreal Engine.\n\n## Project history\n\nFirst taught as ANTH 399, the virtual field school began with 15 undergraduates working in pairs. Its virtual cave is modeled partly on a real cave excavated in the 1930s. Students transferred skills to real excavations.\n\nThe original team included Laura Shackelford, Wen-Hao David Huang, and Cameron Merrill. The work was presented at the Society for Historical Archaeology meeting in Boston in 2020.\n\n## Project strands\n\n- Archaeology Lab Class\n- Field School Prep\n- Virtual Reality for Wheelchair Users\n\n## Teaching\n\nGSD 282: VRchaeology, Spring 2027, was co-created by Laura Shackelford and Sepehr Vaez Afshar.\n\n## Support\n\nNational Science Foundation awards 1736235 and 2021460, and Epic MegaGrants.",
+  "body": "## Learning through fieldwork\n\nStudents learn archaeological field methods in an immersive virtual cave: setting up grids, locating and excavating artifacts, mapping features, photographing finds, and running lab analyses. Built in Unreal Engine, VRchaeology connects classroom learning with field practice.\n\nDevelopment continues at the Game Studies and Design (GSD) Stu/dio, with new labs and improvements to the experience. GSD 282: VRchaeology, Spring 2027, was co-created by Laura Shackelford and Sepehr Vaez Afshar. The project is supported by NSF awards 1736235 and 2021460, and Epic MegaGrants.",
   "gallery": [
     {
       "src": "/media/projects/vrchaeology/cave-waterfall.webp",
@@ -126,5 +126,6 @@
       "role": "Archaeology content support",
       "names": "Emma Verstraete\nAlexandra Zachwieja"
     }
-  ]
+  ],
+  "availability": "VRchaeology is currently used offline. Online play may become available in the future."
 }

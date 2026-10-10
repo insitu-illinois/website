@@ -15,13 +15,14 @@ interface Props { entry: CollectionEntry<'projects'>; data: Awaited<ReturnType<t
 export async function getStaticPaths(){const data=await content();return data.projects.map((entry:any,index:number)=>({params:{slug:entry.id},props:{entry,data,next:data.projects[(index+1)%data.projects.length]}}));}
 const {entry,data,next}=Astro.props;
 const d=entry.data,lists=projectLists(data,entry.id);
+const hasGameCase=Boolean(d.heroMedia)&&entry.id==='vrchaeology'&&(d.gallery?.length??0)>0;
 ---
 <Base noindex={d.draft} title={d.name} description={d.shortDescription || undefined}>
   <a class="back-link" href="/projects/">All projects</a>
-  <div class:list={['project-intro',{'has-cover':Boolean(d.heroMedia)}]}><header class="page-heading"><p class="label">Project · {d.status}{d.draft?' · Draft':''}</p><h1>{d.name}</h1><Tags themes={referenced(data.themes,d.themes)}/>{d.shortDescription && <p class="lead">{d.shortDescription}</p>}</header>
-  {d.heroMedia&&<div class="project-cover">{entry.id==='vrchaeology'&&(d.gallery?.length??0)>0 ? <GameCase cover={d.heroMedia} images={d.gallery} name={d.name}/> : <Media media={d.heroMedia} natural eager />}</div>}</div>
+  <div class:list={['project-intro',{'has-cover':Boolean(d.heroMedia),'has-game-case':hasGameCase}]}><header class="page-heading"><p class="label">Project · {d.status}{d.draft?' · Draft':''}</p><h1>{d.name}</h1><Tags themes={referenced(data.themes,d.themes)}/>{d.shortDescription && <p class="lead">{d.shortDescription}</p>}</header>
+  {d.heroMedia&&<div class="project-cover">{hasGameCase ? <GameCase cover={d.heroMedia} images={d.gallery} name={d.name} availability={d.availability}/> : <Media media={d.heroMedia} natural eager />}</div>}</div>
   <section class="reading-section"><Prose body={d.body}/></section>
-  <ProjectGallery images={d.gallery??[]}/>
+  {hasGameCase ? <noscript><ProjectGallery images={d.gallery??[]}/></noscript> : <ProjectGallery images={d.gallery??[]}/>}
   <ProjectCredits credits={d.credits??[]}/>
   <RecordList data={data} title="Publications" records={lists.publications}/>
   <RecordList data={data} title="Presentations" records={lists.presentations}/>

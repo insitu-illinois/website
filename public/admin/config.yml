@@ -264,6 +264,12 @@ collections:
         widget: text
         required: false
         hint: Summarize the project briefly for project lists.
+      - name: availability
+        label: Availability
+        widget: text
+        required: false
+        hint: For the VRchaeology headset panel, describe how the game can be used now;
+          keep future possibilities clearly conditional.
       - name: heroMedia
         label: Hero image
         widget: object

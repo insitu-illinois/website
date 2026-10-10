@@ -20,7 +20,7 @@ export const models = {
     order: { kind: 'number', default: 100, min: 0 },
   },
   projects: {
-    name: text(true), shortDescription: long(), heroMedia: image(), body: body(),
+    name: text(true), shortDescription: long(), availability: long(), heroMedia: image(), body: body(),
     gallery: { kind: 'gallery' }, credits: { kind: 'credits' },
     status: { ...select('active', 'completed'), required: true },
     featured: { kind: 'boolean', default: false }, themes: refs('themes'), team: refs('people'), funding: refs('recognition'),
