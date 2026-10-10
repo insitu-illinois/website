@@ -22,7 +22,6 @@ const d=entry.data,lists=projectLists(data,entry.id);
   <PeopleTags people={referenced(data.people,d.team)} label="Project team"/>
   <section class="reading-section"><Prose body={d.body}/></section>
   <ProjectGallery images={d.gallery??[]}/>
-  <RecordList data={data} title={d.credits?.length ? "Lab contributors" : "Team"} records={referenced(data.people,d.team)} cards />
   <ProjectCredits credits={d.credits??[]}/>
   <RecordList data={data} title="Publications" records={lists.publications}/>
   <RecordList data={data} title="Presentations" records={lists.presentations}/>

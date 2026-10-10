@@ -10,6 +10,8 @@ test('VRchaeology shows the full cover, classroom status, editable gallery, and 
   await expect(cover).toHaveCSS('aspect-ratio','auto');
   await expect(page.locator('main')).toContainText('VRchaeology is ready for classroom use.');
   await expect(page.locator('main')).toContainText('Development continues at the Game Studies and Design (GSD) Stu/dio');
+  await expect(page.getByRole('heading',{name:'Lab contributors',exact:true})).toHaveCount(0);
+  await expect(page.getByRole('list',{name:'Project team'}).getByRole('link',{name:'Sepehr Vaez Afshar',exact:true})).toBeVisible();
   const gallery=page.locator('.project-gallery');
   await expect(gallery.locator('figure')).toHaveCount(project.gallery.length);
   for(const [index,media] of project.gallery.entries()) {
@@ -27,6 +29,11 @@ test('VRchaeology shows the full cover, classroom status, editable gallery, and 
     await expect(groups.nth(index).getByRole('heading')).toHaveText(credit.role);
     await expect(groups.nth(index).locator('li')).toHaveText(credit.names.split('\n'));
   }
+  await page.getByRole('link',{name:'Ask about classroom use',exact:true}).click();
+  await expect(page).toHaveURL(/\/join\/#classroom-use$/);
+  const contact=page.locator('#classroom-use .lab-contact a');
+  await expect(contact).toHaveAttribute('href',/^mailto:/);
+  await contact.focus();await expect(contact).toBeFocused();
   await page.goto('/');
   await expect(page.locator('.feature-project img')).toHaveAttribute('src',project.heroMedia.src);
   await expect(page.locator('.feature-project img')).toHaveCSS('object-fit','contain');

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { indexingEnabled, crawlerPolicy } from '../../src/config/site.mjs';
+import { indexingEnabled, crawlerPolicy, showResearchTags } from '../../src/config/site.mjs';
 import { loadRaw } from '../../scripts/validate-content.mjs';
 import { hasPersonPage } from '../../src/lib/format.mjs';
 const labEmail=JSON.parse(readFileSync('src/content/pages/footer.json','utf8')).email;
@@ -19,6 +19,7 @@ for(const width of [1440,390,320]) {
       if(redirect) await page.waitForURL(url=>url.pathname+url.hash===redirect);
       const results=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();
       expect(results.violations, path).toEqual([]);
+      if(!showResearchTags) await expect(page.locator('ul.tags:not(.people-tags)')).toHaveCount(0);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),path).toBe(true);
     }
   });
@@ -58,7 +59,9 @@ test('publication citation copies, relationships navigate, and reduced motion di
   expect(await page.evaluate(()=>navigator.clipboard.readText())).toContain('motivational-support2019');
   await page.getByRole('link',{name:'VRchaeology',exact:true}).click();
   await expect(page.getByRole('heading',{level:1})).toHaveText('VRchaeology');
-  await page.locator('main .tags').getByRole('link',{name:'Accessibility & belonging'}).click();
+  await page.getByRole('navigation',{name:'Main navigation'}).locator('summary').click();
+  await page.getByRole('navigation',{name:'Main navigation'}).getByRole('link',{name:'Research themes',exact:true}).click();
+  await page.locator('main').getByRole('link',{name:'Accessibility & belonging',exact:true}).click();
   await expect(page.getByRole('heading',{level:1})).toHaveText('Accessibility & belonging');
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');

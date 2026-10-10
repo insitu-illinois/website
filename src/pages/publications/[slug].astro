@@ -4,6 +4,7 @@ import PeopleTags from '../../components/PeopleTags.astro';
 import RecordList from '../../components/RecordList.astro';
 import Tags from '../../components/Tags.astro';
 import Citation from '../../components/Citation.astro';
+import {showResearchTags} from '../../config/site.mjs';
 import {content} from '../../lib/content';
 import {relatedPapers,referenced} from '../../lib/derived.mjs';
 import type { CollectionEntry } from 'astro:content';
@@ -19,6 +20,6 @@ const project=referenced(data.projects,[d.project])[0];
   {d.summary&&<section class="reading-section"><h2>About this work</h2><p class="lead">{d.summary}</p></section>}
   <PeopleTags people={referenced(data.people,d.labAuthors)} label="Lab authors"/>
   <Citation bibtex={d.bibtex}/>
-  <section><h2>Research context</h2>{project&&<p>Project: <a href={`/projects/${project.id}/`}>{project.data.name}</a></p>}<Tags themes={referenced(data.themes,d.themes)}/></section>
+  {(project||(showResearchTags&&d.themes.length>0))&&<section><h2>Research context</h2>{project&&<p>Project: <a href={`/projects/${project.id}/`}>{project.data.name}</a></p>}<Tags themes={referenced(data.themes,d.themes)}/></section>}
   <RecordList data={data} title="Related papers" records={relatedPapers(data,entry)}/>
 </Base>
