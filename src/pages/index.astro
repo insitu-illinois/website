@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import LabValues from '../components/LabValues.astro';
 import RecordList from '../components/RecordList.astro';
 import Media from '../components/Media.astro';
+import GameCase from '../components/GameCase.astro';
 import SpatialField from '../components/SpatialField.astro';
 import {content} from '../lib/content';
 import {homeLists} from '../lib/derived.mjs';
@@ -11,7 +12,7 @@ const data=await content(),lists=homeLists(data);
 ---
 <Base homePage title="People, technology, and experience in context">
   <header slot="hero" class="home-hero"><div><p class="label">An interdisciplinary research lab<br/>University of Illinois Urbana-Champaign</p>{(!home.draft||import.meta.env.DEV)?<h1>{home.title}</h1>:<h1>People, technology,<br/>and experience<br/><em>in context.</em></h1>}<p class="lead">We design immersive, game-based, and interactive experiences across archaeological sites, museums, cities, classrooms, and virtual worlds.</p><a class="button" href="/projects/">Explore our projects</a></div><div class="hero-field"><p class="label">IN/SITU</p><div class="field-frame"><SpatialField /></div><p class="label field-caption">Field image forthcoming</p><p class="label">Situated · Participatory · Accessible</p></div></header>
-  <section class="featured"><div class="section-heading"><div><p class="label">Featured work</p><h2>Learning in place.</h2></div><a class="text-link" href="/projects/">All projects</a></div>{lists.projects.map((project:any)=><article class="feature-project"><Media media={project.data.heroMedia} natural/><div><p class="label">Featured project · {project.data.status}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name}</a></h3><p>{project.data.shortDescription}</p><a class="button" href={`/projects/${project.id}/`}>View project</a></div></article>)}</section>
+  <section class="featured"><div class="section-heading"><div><p class="label">Featured work</p><h2>Learning in place.</h2></div><a class="text-link" href="/projects/">All projects</a></div>{lists.projects.map((project:any)=><article class="feature-project"><div class="feature-artwork">{project.id==='vrchaeology'&&project.data.heroMedia&&project.data.gallery?.length?<GameCase cover={project.data.heroMedia} images={project.data.gallery} name={project.data.name} description={project.data.shortDescription} credits={project.data.credits||[]} creditsHref={`/projects/${project.id}/#credits-heading`} galleryHref={`/projects/${project.id}/#gallery-heading`}/>:<Media media={project.data.heroMedia} natural/>}</div><div><p class="label">Featured project · {project.data.status}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name}</a></h3><p>{project.data.shortDescription}</p><a class="button" href={`/projects/${project.id}/`}>View project</a></div></article>)}</section>
   <section class="home-theme-section"><h2>Four research themes</h2><ul class="home-themes">{data.themes.map((theme:any)=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}<span aria-hidden="true">→</span></a></li>)}</ul></section>
   <RecordList compact title="Recent papers" records={lists.publications} more="/publications/"/>
   <RecordList compact title="News" records={lists.news} more="/news/"/>

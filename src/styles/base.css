@@ -88,7 +88,7 @@ section:first-child { margin-top:0; }
 .feature-project { display:grid; gap:var(--space-6); align-items:center; margin-top:var(--space-6); }
 .feature-project h3 { font-size:var(--text-display-lg); }
 .feature-project>div:last-child { padding-block:var(--space-5); }
-.feature-project .button { margin-top:var(--space-4); }
+.feature-project>div:last-child>.button { margin-top:var(--space-4); }
 .person-heading { display:grid; gap:var(--space-7); align-items:start; }
 .portrait-placeholder { width:100%; max-width:20rem; aspect-ratio:4/5; display:grid; place-items:center; background:var(--surface-card); border:var(--border-hairline) solid var(--border-default); color:var(--text-secondary); font-family:var(--font-mono); font-size:var(--text-display-md); border-radius:var(--radius-md); }
 .person-heading>img { width:100%; max-width:20rem; aspect-ratio:4/5; object-fit:cover; border-radius:var(--radius-md); }

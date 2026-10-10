@@ -2,12 +2,12 @@
 import DiscArtwork from './DiscArtwork.astro';
 import GameBookletPage from './GameBookletPage.astro';
 interface Image { src:string; alt:string; caption?:string; }
-interface Props { cover:Image; images:Image[]; name:string; availability?:string; description:string; credits:{role:string;names:string}[]; }
-const {cover,images,name,availability,description,credits}=Astro.props;
+interface Props { cover:Image; images:Image[]; name:string; availability?:string; creditsHref?:string; galleryHref?:string; description:string; credits:{role:string;names:string}[]; }
+const {cover,images,name,availability,description,credits,creditsHref='#credits-heading',galleryHref='#gallery-heading'}=Astro.props;
 const bookletCredits=credits.slice(0,4);
 ---
 <div class="game-case" data-game-case>
-  <div class="artwork-layout" data-case-interactive hidden>
+  <div class:list={["artwork-layout", {"case-only":!availability}]} data-case-interactive hidden>
     <div class="case-stage">
       <div class="case-object" id="case-interior" tabindex="-1">
         <div class="case-tray">
@@ -37,17 +37,17 @@ const bookletCredits=credits.slice(0,4);
     </div>}
   </div>
   <span id="case-description" class="visually-hidden">{cover.alt} Open the case, then select the booklet to explore the game images.</span>
-  <noscript><img class="media media-natural" src={cover.src} alt={cover.alt} width="1200" height="1800"/><p><a href="#gallery-heading">Explore the game images</a></p>{availability&&<p>{availability}</p>}</noscript>
+  <noscript><img class="media media-natural" src={cover.src} alt={cover.alt} width="1200" height="1800"/><p><a href={galleryHref}>Explore the game images</a></p>{availability&&<p>{availability}</p>}</noscript>
   <dialog class="case-booklet" id="case-booklet" aria-label={`${name} game booklet`}>
-    <div class="booklet-heading"><p class="label" role="status" data-scene-status>Scene 1 of {images.length}</p><button class="button secondary" type="button" data-booklet-close autofocus>Close booklet</button></div>
+    <div class="booklet-heading"><p class="label" role="status" data-scene-status>Scene 1 of {images.length}</p><button class="booklet-close" type="button" data-booklet-close aria-label="Close booklet" title="Close booklet" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     {images.map((image,index)=><figure data-scene hidden={index!==0}>
       <GameBookletPage name={name} image={image} description={description} credits={bookletCredits} index={index}/>
       <figcaption><a href={image.src}>View full image<span class="visually-hidden">: {image.caption||image.alt}</span></a></figcaption>
     </figure>)}
-    <div class="booklet-toolbar"><a href="#credits-heading" data-booklet-credits>Full project credits</a><div class="booklet-buttons"><button type="button" class="button secondary" data-scene-prev aria-label="Previous game image">←</button><button type="button" class="button secondary" data-scene-next aria-label="Next game image">→</button></div></div>
+    <div class="booklet-toolbar"><a href={creditsHref} data-booklet-credits>Full project credits</a><div class="booklet-buttons"><button type="button" class="button secondary" data-scene-prev aria-label="Previous game image">←</button><button type="button" class="button secondary" data-scene-next aria-label="Next game image">→</button></div></div>
   </dialog>
   <p id="disc-instructions" class="visually-hidden">Click to lift or return the disc. When lifted, drag or use arrow keys to rotate it. Home returns it to the tray.</p>
-  <details class="model-credit"><summary>3D model credits</summary><p><a href="https://sketchfab.com/3d-models/meta-quest-3-65a813833dc04eeeb7d33bdca58c184c">Meta Quest 3</a> by <a href="https://sketchfab.com/ElinHohler">Elin</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Controllers by <a href="https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/meta-quest-touch-plus">WebXR Input Profiles contributors</a>, <a href="/media/models/quest-3/CONTROLLERS-LICENSE.txt">MIT license</a>. Models scaled, positioned, lit, and animated for this presentation.</p></details>
+  {availability&&<details class="model-credit"><summary>3D model credits</summary><p><a href="https://sketchfab.com/3d-models/meta-quest-3-65a813833dc04eeeb7d33bdca58c184c">Meta Quest 3</a> by <a href="https://sketchfab.com/ElinHohler">Elin</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Controllers by <a href="https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/meta-quest-touch-plus">WebXR Input Profiles contributors</a>, <a href="/media/models/quest-3/CONTROLLERS-LICENSE.txt">MIT license</a>. Models scaled, positioned, lit, and animated for this presentation.</p></details>}
 </div>
 <script>
   import {closeDialog,setVisible,animateSurface} from '../scripts/motion';
@@ -91,7 +91,7 @@ const bookletCredits=credits.slice(0,4);
     root.querySelector('[data-booklet-close]')!.addEventListener('click',()=>void closeDialog(booklet));
     booklet.addEventListener('cancel',event=>{event.preventDefault();void closeDialog(booklet);});
     booklet.addEventListener('close',()=>opener.focus({preventScroll:true}));
-    root.querySelector('[data-booklet-credits]')!.addEventListener('click',()=>{booklet.close();requestAnimationFrame(()=>{const heading=document.querySelector<HTMLElement>('#credits-heading');heading?.setAttribute('tabindex','-1');heading?.focus();});});
+    root.querySelector<HTMLAnchorElement>('[data-booklet-credits]')!.addEventListener('click',event=>{if(!(event.currentTarget as HTMLAnchorElement).getAttribute('href')?.startsWith('#'))return;booklet.close();requestAnimationFrame(()=>{const heading=document.querySelector<HTMLElement>('#credits-heading');heading?.setAttribute('tabindex','-1');heading?.focus();});});
     booklet.addEventListener('keydown',event=>{
       if(event.key==='Escape'){event.stopPropagation();return;}
       if(event.key!=='Tab')return;
@@ -113,6 +113,7 @@ const bookletCredits=credits.slice(0,4);
 <style>
   .game-case { min-width:0; }
   .artwork-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); align-items:start; gap:var(--space-5); }
+  .artwork-layout.case-only { grid-template-columns:minmax(0,1fr); }
   .case-stage { position:relative; width:100%; aspect-ratio:5/4; perspective:calc(var(--space-10) * 10); background:radial-gradient(ellipse at 50% 80%,var(--border-default),transparent 62%); }
   .case-object { pointer-events:none; position:absolute; top:3%; left:49%; width:47%; aspect-ratio:2/3; transform:translateX(-50%) rotateY(-16deg) rotateX(5deg); transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); }
   .case-object button { pointer-events:auto; }
@@ -156,6 +157,8 @@ const bookletCredits=credits.slice(0,4);
   .case-booklet figure { margin:var(--space-4) 0; }
   .case-booklet figcaption { font-size:var(--text-body-sm); padding:var(--space-3) 0; }
   .booklet-heading,.booklet-toolbar { display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between; }
+  .case-booklet .booklet-close { display:grid; place-items:center; width:var(--space-7); min-height:var(--space-7); padding:var(--space-2); background:transparent; border:0; border-radius:var(--radius-sm); }
+  .booklet-close svg { width:var(--space-4); height:var(--space-4); fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; }
   .booklet-heading p { margin:0; }
   .booklet-toolbar { font-size:var(--text-body-sm); }
   .booklet-buttons { display:flex; gap:var(--space-2); }

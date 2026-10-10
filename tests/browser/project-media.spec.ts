@@ -39,6 +39,6 @@ test('VRchaeology shows the full cover, image booklet, availability, and complet
   await expect(contact).toHaveAttribute('href',/^mailto:/);
   await contact.focus();await expect(contact).toBeFocused();
   await page.goto('/');
-  await expect(page.locator('.feature-project img')).toHaveAttribute('src',project.heroMedia.src);
-  await expect(page.locator('.feature-project img')).toHaveCSS('object-fit','contain');
+  await expect(page.locator('.feature-project .case-cover-art')).toHaveAttribute('src',project.heroMedia.src);
+  await expect(page.locator('.feature-project .case-cover-art')).toHaveCSS('object-fit','contain');
 });
