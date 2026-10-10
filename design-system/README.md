@@ -83,3 +83,10 @@ No logo file was provided, so no logo was drawn or approximated. The "IN/SITU" w
 ## Caveats & ask
 
 The lab's mission, roster, research themes, and site structure are now real (provided by the user); the visual system (palette, type pairing, component inventory) is still a first-pass interpretation — no Figma, codebase, logo, or photography was attached. Publications, News, Opportunities, Resources, and Contact are stubbed with a disclaimer rather than invented content. **Please review and flag anything that should match real IN/SITU materials** — brand fonts, an existing logo, real photography, and any existing component library — so the next pass can correct toward ground truth instead of iterating on invention.
+
+
+## Approved site-wide presentation — October 10, 2026
+
+Use calm white and light-gray section surfaces with restrained borders and the existing soft corners; use corresponding semantic surfaces in night mode. Apply this hierarchy across page types, including Home, so long pages have clear visual sections. Keep readable prose widths inside the wider section surface. Research content and approved media lead the page. Person references are quiet, small, unboxed text links at the end of detail pages and list entries; they must not compete with the work. Keep names, relationships, routes, and citation authors intact. Topic chips remain temporarily hidden by the existing config switch.
+
+VRchaeology has a CSS 3D disc-case presentation using its actual cover and game images. Opening the cover reveals a decorative disc and image sheet, with native controls for the readable image booklet. Essential information and the full gallery remain available independently of this effect. No continuous motion, automatic slideshow, fake game screenshots, or new 3D dependency. Respect site/device reduced motion, keyboard operation, no-JavaScript access, text resizing, and light/night contrast. Keep surrounding headings stationary when the booklet opens.

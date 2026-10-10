@@ -17,7 +17,7 @@
 --lh-body:1.65; /* @kind other */
 /* Mono labels and navigation use sentence case and restrained tracking. */
 --text-label-md:0.9375rem;
---text-person-tag:0.875rem;
+--text-person-tag:0.8125rem;
 --text-label-sm:0.6875rem;
 --ls-label:0.01em;
 --lh-label:1.45; /* @kind other */

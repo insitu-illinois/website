@@ -342,3 +342,10 @@ The VRchaeology body includes an editable **Ask about classroom use** link to `/
 
 
 Compact-tag release verified October 10, 2026: source `ef080c2aabcce9cef8eb1c059551afba29494600`, [successful run 38091070143](https://github.com/insitu-illinois/website/actions/runs/38091070143), lab Worker version `98abe2c4-3513-468f-8e8a-0f93e7d57470`. Build and Astro check passed with zero diagnostics; 25 unit/content checks passed. All 28 browser checks passed in CI, including no topic-chip rendering across public pages, light/night contrast, 320/390-pixel reflow, navigation, preferences, and the new classroom enquiry path. The initial local run stopped at a stale selector for the Research disclosure; that selector was corrected and the affected and remaining checks passed before publication. Desktop and mobile layouts and the contact destination were visually inspected. Production's focused project/contact test passed, and checked HTML, CSS, images, CMS config, favicon, and robots matched the local build. Research records/routes and all credits remain intact, including the user-confirmed spelling Dr. David Wen-hau Huang. Noindex remains enabled.
+
+
+### Shared section surfaces and the VRchaeology artwork case
+
+The approved presentation rules for future pages are recorded in `design-system/README.md`. Shared sections alternate white and gray semantic surfaces; person metadata appears as quiet, unboxed links at the end of detail pages and records. CMS relationships and publication author text are unchanged.
+
+VRchaeology's interactive case reads **Hero image** and **Gallery** from its Projects entry in `/admin`; updating those assets also updates the case and booklet. Click the cover or press Enter/Space to open it, use Previous/Next to browse the game images, and press Escape to close and return focus. The CSS hinge transition respects both device and site Reduce motion. Without JavaScript, the full cover and normal gallery remain available. This is an artwork presentation, not a game download or a claim that a physical edition exists.

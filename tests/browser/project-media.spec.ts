@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 test('VRchaeology shows the full cover, classroom status, editable gallery, and complete credits',async({page})=>{
   const project=JSON.parse(readFileSync('src/content/projects/vrchaeology.json','utf8'));
   await page.goto('/projects/vrchaeology/');
-  const cover=page.locator('.project-cover img');
+  const cover=page.locator('.project-cover .case-cover-art');
   await expect(cover).toHaveAttribute('src',project.heroMedia.src);
   await expect(cover).toHaveCSS('object-fit','contain');
   await expect(cover).toHaveCSS('aspect-ratio','auto');

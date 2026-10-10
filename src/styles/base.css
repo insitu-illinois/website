@@ -127,8 +127,12 @@ section:first-child { margin-top:0; }
 .lab-location address { font-style:normal; margin-bottom:var(--space-4); }
 .map-panel { margin-top:var(--space-6); padding:var(--space-5); background:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); }
 .lab-map { display:block; width:100%; aspect-ratio:4/3; border:0; }
-.people-tags { font-size:var(--text-person-tag); gap:var(--space-2); margin-block:var(--space-4); }
-.people-tags a { display:flex; align-items:center; min-height:var(--space-6); padding:var(--space-1) var(--space-2); border-style:dashed; }
+.people-metadata { margin-top:var(--space-5); padding-top:var(--space-3); border-top:var(--border-hairline) solid var(--border-default); color:var(--text-secondary); }
+.people-caption { font-size:var(--text-body-sm); }
+.people-tags { display:flex; flex-wrap:wrap; list-style:none; padding:0; margin:0; font-family:var(--font-mono); font-size:var(--text-person-tag); line-height:var(--lh-label); gap:0 var(--space-3); }
+.people-tags a { display:inline-flex; align-items:center; min-height:var(--space-6); padding-block:var(--space-1); color:var(--text-secondary); text-decoration:underline; }
+.people-tags a:hover { color:var(--text-heading); }
+.main-content > .people-metadata { margin-block:var(--space-7); }
 
 .header-tools { display:flex; flex-wrap:wrap; gap:var(--space-3); max-width:100%; }
 .home-page .home-band { border-bottom:var(--border-hairline) solid var(--border-default); }
@@ -222,4 +226,25 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
   .project-cover { margin:0; }
   .gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .credits-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+
+/* Shared white and gray reading sections, including the home page. */
+.main-content > section,.home-page .main-content > section,.main-content > div.reading-section {
+  margin-block:var(--space-7); padding:var(--space-5); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); background:var(--surface-page);
+}
+.main-content > section:nth-of-type(odd),.home-page .main-content > section:nth-of-type(odd),.main-content > div.reading-section { background:var(--surface-card); }
+.home-page .main-content > section + section { border-top-color:var(--border-default); }
+.home-page .featured::before { content:none; }
+.main-content > .reading-section { max-width:none; }
+.reading-section > .prose { max-width:72ch; }
+.prose h2:not(:first-child) { padding-top:var(--space-6); border-top:var(--border-hairline) solid var(--border-default); }
+.project-intro.has-cover { padding:var(--space-5); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); background:var(--surface-card); }
+.project-intro.has-cover > * { min-width:0; }
+.project-intro.has-cover .page-heading { align-self:start; }
+@media (min-width:48rem) {
+  .main-content > section,.home-page .main-content > section,.main-content > div.reading-section,.project-intro.has-cover { padding:var(--space-6); }
+  .project-intro.has-cover .page-heading { padding-top:var(--space-6); }
+}
+@media (max-width:30rem) {
+  .main-content > section,.home-page .main-content > section,.main-content > div.reading-section,.project-intro.has-cover { padding:var(--space-4); }
 }

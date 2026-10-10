@@ -18,8 +18,8 @@ const project=referenced(data.projects,[d.project])[0];
   <header class="page-heading publication-heading"><p class="label">Publication{d.draft?' · Draft':''}</p><h1>{d.title}</h1><p class="authors">{d.authors}</p><p class="label">{[d.venue,d.year].filter(Boolean).join(' · ')}</p>{d.award&&<p class="badge">{d.award}</p>}<div class="links">{d.pdf&&<a class="button" href={d.pdf}>Read PDF</a>}{d.doi&&<a class="button secondary" href={d.doi}>DOI</a>}{d.code&&<a class="button secondary" href={d.code}>Code</a>}</div></header>
   {d.thumbnail&&<img class="media" src={d.thumbnail.src} alt={d.thumbnail.alt}/>}
   {d.summary&&<section class="reading-section"><h2>About this work</h2><p class="lead">{d.summary}</p></section>}
-  <PeopleTags people={referenced(data.people,d.labAuthors)} label="Lab authors"/>
   <Citation bibtex={d.bibtex}/>
   {(project||(showResearchTags&&d.themes.length>0))&&<section><h2>Research context</h2>{project&&<p>Project: <a href={`/projects/${project.id}/`}>{project.data.name}</a></p>}<Tags themes={referenced(data.themes,d.themes)}/></section>}
   <RecordList data={data} title="Related papers" records={relatedPapers(data,entry)}/>
+  <PeopleTags people={referenced(data.people,d.labAuthors)} label="Lab authors"/>
 </Base>

@@ -19,7 +19,7 @@ const {title,records,peopleLinks=false,more,cards=false,id,data,compact=false}=A
         {!compact && d.authors && <p class="authors">{d.authors}</p>}
         {(d.venue || d.year || d.date || d.awardingBody) && <p class="label metadata">{[d.venue || d.awardingBody,d.location,d.year || dateLabel(d.date)].filter(Boolean).join(' · ')}</p>}
         {!compact && (d.shortDescription || d.summary || d.description) && <p>{d.shortDescription || d.summary || d.description}</p>}
-        {!compact && data && <><Tags themes={referenced(data.themes,d.themes)}/><PeopleTags people={recordPeople(data,record)}/></>}
+        {!compact && data && <Tags themes={referenced(data.themes,d.themes)}/>}
         {!compact && <div class="links">
           {d.award && <span class="badge">{d.award}</span>}
           {d.pdf && <a href={d.pdf}>PDF</a>}{d.doi && <a href={d.doi}>DOI</a>}{d.code && <a href={d.code}>Code</a>}
@@ -27,6 +27,7 @@ const {title,records,peopleLinks=false,more,cards=false,id,data,compact=false}=A
           {d.link && <a href={d.link}>Award details</a>}
           {d.externalLink && <a href={d.externalLink}>Read the source</a>}
         </div>}
+        {!compact && data && <PeopleTags people={recordPeople(data,record)}/>}
       </li>;
     })}
   </ul> : <p class="empty-note">No entries published yet.</p>}

@@ -121,12 +121,12 @@ test('the lab email stays readable without JavaScript',async({browser,baseURL})=
 
 test('person and theme tags connect the new paper and news to their profiles',async({page})=>{
   await page.goto('/publications/bridging-anatomy-curricular-gaps/');
-  await page.locator('main .main-content > .people-tags').getByRole('link',{name:'Laura Shackelford',exact:true}).click();
+  await page.locator('main .main-content > .people-metadata .people-tags').getByRole('link',{name:'Laura Shackelford',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Appointments & affiliations'})).toBeVisible();
   await expect(page.getByText('Health Innovation Professor, Carle Illinois College of Medicine',{exact:true})).toBeVisible();
   await expect(page.getByRole('link',{name:'Bridging anatomy curricular gaps: Leveraging student-created video resources in elective courses',exact:true})).toBeVisible();
   await page.goto('/news/brian-graves-research-live-2026/');
-  await page.locator('main .main-content > .people-tags').getByRole('link',{name:'Brian Graves',exact:true}).click();
+  await page.locator('main .main-content > .people-metadata .people-tags').getByRole('link',{name:'Brian Graves',exact:true}).click();
   await expect(page.getByRole('link',{name:'Brian Graves named a Research Live finalist',exact:true})).toBeVisible();
   await page.goto('/themes/accessibility/');
   await expect(page.getByRole('link',{name:'Brian Graves named a Research Live finalist',exact:true})).toBeVisible();

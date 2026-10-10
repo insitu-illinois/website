@@ -7,6 +7,7 @@ import Media from '../../components/Media.astro';
 import Prose from '../../components/Prose.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
 import ProjectCredits from '../../components/ProjectCredits.astro';
+import GameCase from '../../components/GameCase.astro';
 import {content} from '../../lib/content';
 import {projectLists,referenced} from '../../lib/derived.mjs';
 import type { CollectionEntry } from 'astro:content';
@@ -18,8 +19,7 @@ const d=entry.data,lists=projectLists(data,entry.id);
 <Base noindex={d.draft} title={d.name} description={d.shortDescription || undefined}>
   <a class="back-link" href="/projects/">All projects</a>
   <div class:list={['project-intro',{'has-cover':Boolean(d.heroMedia)}]}><header class="page-heading"><p class="label">Project · {d.status}{d.draft?' · Draft':''}</p><h1>{d.name}</h1><Tags themes={referenced(data.themes,d.themes)}/>{d.shortDescription && <p class="lead">{d.shortDescription}</p>}</header>
-  {d.heroMedia&&<div class="project-cover"><Media media={d.heroMedia} natural eager /></div>}</div>
-  <PeopleTags people={referenced(data.people,d.team)} label="Project team"/>
+  {d.heroMedia&&<div class="project-cover">{entry.id==='vrchaeology'&&(d.gallery?.length??0)>0 ? <GameCase cover={d.heroMedia} images={d.gallery} name={d.name}/> : <Media media={d.heroMedia} natural eager />}</div>}</div>
   <section class="reading-section"><Prose body={d.body}/></section>
   <ProjectGallery images={d.gallery??[]}/>
   <ProjectCredits credits={d.credits??[]}/>
@@ -27,5 +27,6 @@ const d=entry.data,lists=projectLists(data,entry.id);
   <RecordList data={data} title="Presentations" records={lists.presentations}/>
   <RecordList data={data} title="Funding" records={referenced(data.recognition,d.funding)}/>
   {lists.news.length>0&&<RecordList title="News" records={lists.news} data={data}/>}
+  <PeopleTags people={referenced(data.people,d.team)} label="Project team"/>
   {next.id!==entry.id && <aside class="next-entry"><p class="label">Next project</p><h2><a href={`/projects/${next.id}/`}>{next.data.name}</a></h2></aside>}
 </Base>
