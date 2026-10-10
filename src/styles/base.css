@@ -44,7 +44,7 @@ nav [aria-current] { text-decoration:underline; text-decoration-thickness:var(--
 .hero-field { padding:var(--space-5); border:var(--border-hairline) solid var(--border-default); background:var(--surface-card); border-radius:var(--radius-md); }
 .field-frame { aspect-ratio:4/3; display:grid; place-items:center; border:var(--border-hairline) solid var(--border-strong); margin-block:var(--space-5); border-radius:var(--radius-sm); }
 .hero-field>p:last-child { margin:0; padding-top:var(--space-4); border-top:var(--border-hairline) solid var(--accent-lumen); }
-.button { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--space-7); padding:var(--space-3) var(--space-5); background:var(--accent-heritage-strong); color:var(--text-on-accent); border:var(--border-hairline) solid var(--accent-heritage-strong); border-radius:var(--radius-sm); text-decoration:none; transition:background var(--dur-fast) var(--ease-standard); }
+.button { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--space-7); padding:var(--space-3) var(--space-5); background:var(--accent-heritage-strong); color:var(--text-on-accent); border:var(--border-hairline) solid var(--accent-heritage-strong); border-radius:var(--radius-sm); text-decoration:none; transition:background var(--dur-med) var(--ease-standard) var(--delay-settle); }
 .button:hover { background:var(--button-hover); border-color:var(--button-hover); text-decoration:underline; }
 .button.secondary { background:transparent; color:var(--accent-heritage-strong); }
 .button.secondary:hover { background:var(--surface-card); }

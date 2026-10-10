@@ -1,0 +1,22 @@
+---
+interface Props { cover:string; scene:string; }
+const {cover}=Astro.props;
+---
+<span class="disc-front" aria-hidden="true">
+  <img class="disc-scene" src={cover} alt=""/>
+  <span class="disc-edition">Game Studies and Design<strong>The stu/dio</strong></span>
+</span>
+<span class="disc-edge" aria-hidden="true"></span>
+<span class="disc-back" aria-hidden="true"></span>
+<style>
+  .disc-front,.disc-back,.disc-edge { pointer-events:none; position:absolute; inset:0; border-radius:50%; overflow:hidden; mask-image:radial-gradient(circle,transparent 0 8%,var(--white) 8.5%); border:var(--border-thick) solid var(--neutral-300); }
+  .disc-front,.disc-back { backface-visibility:hidden; }
+  .disc-front { background:var(--neutral-950); transform:translateZ(var(--border-thick)); }
+  .disc-scene { width:100%; height:100%; object-fit:cover; object-position:50% 88%; }
+  .disc-front::after { content:""; position:absolute; inset:39%; border-radius:50%; border:var(--border-thick) solid var(--neutral-300); background:color-mix(in srgb,var(--neutral-200) 30%,transparent); }
+  .disc-edition { position:absolute; inset:16% 15% auto; color:var(--white); text-align:center; font:3.3cqi/1.3 var(--font-body); }
+  .disc-edition strong { display:block; margin-top:2%; font-size:6cqi; line-height:1.1; }
+  .disc-edge { background:var(--neutral-300); transform:translateZ(0); }
+  .disc-back { transform:rotateY(180deg) translateZ(var(--border-thick)); background:conic-gradient(from 15deg,var(--neutral-300),var(--white) 15%,var(--neutral-500) 28%,var(--neutral-300) 42%,var(--white) 56%,var(--slate-300) 68%,var(--neutral-500) 82%,var(--neutral-300)); }
+  .disc-back::after { content:""; position:absolute; inset:38%; border-radius:50%; border:var(--border-hairline) solid var(--neutral-500); background:color-mix(in srgb,var(--neutral-950) 18%,transparent); }
+</style>

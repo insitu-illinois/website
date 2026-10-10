@@ -1,0 +1,18 @@
+/* One rhythm across public controls, disclosures and dialogs. */
+:where(a,button,summary,input,select) {
+  transition-property:background-color,color,border-color,box-shadow,opacity,translate;
+  transition-duration:var(--dur-med);
+  transition-timing-function:var(--ease-standard);
+  transition-delay:var(--delay-settle);
+}
+.research-menu summary svg { transition:rotate var(--dur-med) var(--ease-standard) var(--delay-settle); }
+.accessibility-panel[open] { animation:surface-arrive var(--dur-med) var(--ease-standard) var(--delay-settle) both; }
+dialog[open]::backdrop { animation:scrim-arrive var(--dur-med) var(--ease-standard) both; }
+@keyframes surface-arrive { from { opacity:0; transform:translateY(calc(-1 * var(--space-1))); } to { opacity:1; transform:none; } }
+@keyframes scrim-arrive { from { opacity:0; } }
+
+dialog[data-closing]::backdrop { animation:scrim-leave var(--dur-med) var(--ease-standard) var(--delay-settle) both; }
+@keyframes scrim-leave { to { opacity:0; } }
+:where(body,.site-header,.site-footer,.home-band,.main-content > section,.card) {
+  transition:background-color var(--dur-med) var(--ease-standard) var(--delay-settle),color var(--dur-med) var(--ease-standard) var(--delay-settle),border-color var(--dur-med) var(--ease-standard) var(--delay-settle);
+}

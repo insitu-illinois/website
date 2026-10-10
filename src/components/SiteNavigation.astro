@@ -21,14 +21,15 @@ const inResearch = ['/projects/','/themes/','/presentations/','/awards-funding/'
   </ul>
 </nav>
 <script>
+  import {setVisible,setDetailsOpen} from '../scripts/motion';
   const nav = document.querySelector<HTMLElement>('.primary-navigation')!;
   const toggle = nav.querySelector<HTMLButtonElement>('.mobile-menu-toggle')!;
   const list = nav.querySelector<HTMLElement>('.nav-list')!;
   const research = nav.querySelector<HTMLDetailsElement>('.research-menu')!;
   const summary = research.querySelector('summary')!;
   const narrow = matchMedia('(max-width: 51.999rem)');
-  const closeResearch = () => { research.open = false; };
-  const closeMobile = () => { toggle.setAttribute('aria-expanded','false'); list.hidden = narrow.matches; closeResearch(); };
+  const closeResearch = () => { void setDetailsOpen(research,false); };
+  const closeMobile = () => { toggle.setAttribute('aria-expanded','false'); void setVisible(list,!narrow.matches); closeResearch(); };
   const resize = () => {
     const hadFocus = list.contains(document.activeElement);
     toggle.hidden = !narrow.matches;
@@ -41,12 +42,12 @@ const inResearch = ['/projects/','/themes/','/presentations/','/awards-funding/'
   narrow.addEventListener('change',resize);
   toggle.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
-    toggle.setAttribute('aria-expanded',String(open)); list.hidden = !open;
+    toggle.setAttribute('aria-expanded',String(open)); void setVisible(list,open);
     if (!open) closeResearch();
   });
   nav.addEventListener('keydown',event=>{
     if (event.key !== 'Escape') return;
-    if (research.open) { event.preventDefault(); closeResearch(); summary.focus(); }
+    if ((research.dataset.expanded??String(research.open))==='true') { event.preventDefault(); closeResearch(); summary.focus(); }
     else if (narrow.matches && toggle.getAttribute('aria-expanded') === 'true') { event.preventDefault(); closeMobile(); toggle.focus(); }
   });
   nav.addEventListener('focusout',event=>{

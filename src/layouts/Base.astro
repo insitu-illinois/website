@@ -15,6 +15,7 @@ import NightMode from '../components/NightMode.astro';
 import SiteNavigation from '../components/SiteNavigation.astro';
 import '../styles/navigation.css';
 import preferencesBootstrap from '../scripts/preferences-init.js?raw';
+import '../styles/motion.css';
 import '../styles/accessibility.css';
 import { indexingEnabled } from '../config/site.mjs';
 const copyrightYear=new Date().getUTCFullYear();
@@ -80,3 +81,11 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
     <AccessibilityPanel />
   </body>
 </html>
+
+<script>
+  import {setDetailsOpen} from '../scripts/motion';
+  document.querySelectorAll<HTMLDetailsElement>('details').forEach(details=>{
+    const summary=details.querySelector('summary');
+    summary?.addEventListener('click',event=>{event.preventDefault();void setDetailsOpen(details,(details.dataset.expanded??String(details.open))!=='true');});
+  });
+</script>

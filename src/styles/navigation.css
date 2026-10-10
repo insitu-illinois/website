@@ -24,9 +24,9 @@
 .icon-control[aria-pressed="true"] .moon-fill { clip-path:inset(0 0 0); }
 @media (prefers-reduced-motion:reduce) { .moon-fill { transition:none; } }
 html[data-reduce-motion="true"] .moon-fill { transition:none; }
-.utility-tooltip { display:none; position:absolute; inset-inline-end:0; inset-block-start:100%; z-index:6; width:max-content; max-width:min(12rem,calc(100vw - var(--space-10))); padding:var(--space-2) var(--space-3); border:var(--border-hairline) solid var(--text-muted-on-chrome); border-radius:var(--radius-sm); background:var(--surface-chrome); color:var(--white); font-family:var(--font-mono); font-size:var(--text-label-md); line-height:var(--lh-label); pointer-events:auto; }
-.utility-control:is(:hover,:focus-within) .utility-tooltip { display:block; }
-.utility-control.tooltip-dismissed .utility-tooltip { display:none; }
+.utility-tooltip { display:block; opacity:0; visibility:hidden; transition:opacity var(--dur-med) var(--ease-standard) var(--delay-settle),visibility var(--dur-med) var(--ease-standard) var(--delay-settle); position:absolute; inset-inline-end:0; inset-block-start:100%; z-index:6; width:max-content; max-width:min(12rem,calc(100vw - var(--space-10))); padding:var(--space-2) var(--space-3); border:var(--border-hairline) solid var(--text-muted-on-chrome); border-radius:var(--radius-sm); background:var(--surface-chrome); color:var(--white); font-family:var(--font-mono); font-size:var(--text-label-md); line-height:var(--lh-label); pointer-events:auto; }
+.utility-control:is(:hover,:focus-within) .utility-tooltip { opacity:1; visibility:visible; }
+.utility-control.tooltip-dismissed .utility-tooltip { display:block; opacity:0; visibility:hidden; transition:opacity var(--dur-med) var(--ease-standard) var(--delay-settle),visibility var(--dur-med) var(--ease-standard) var(--delay-settle); }
 .visually-hidden { position:absolute; width:var(--border-hairline); height:var(--border-hairline); overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 .mobile-menu-toggle { display:flex; align-items:center; justify-content:center; width:var(--space-7); color:var(--white); background:transparent; border:var(--border-hairline) solid var(--text-muted-on-chrome); padding:var(--space-3); border-radius:var(--radius-sm); font:inherit; }
 .mobile-menu-toggle svg { width:var(--space-5); height:var(--space-5); }

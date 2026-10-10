@@ -34,26 +34,64 @@ export async function mountQuest(button) {
     headset.position.set(0,.25,0);headset.rotation.set(.12,.22,0);
     left.position.set(-.95,-.6,.25);left.rotation.set(1.1,Math.PI+.2,-.35);left.rotateOnWorldAxis(new THREE.Vector3(0,0,1),Math.PI);
     right.position.set(.95,-.6,.25);right.rotation.set(1.1,Math.PI-.2,.35);right.rotateOnWorldAxis(new THREE.Vector3(0,0,1),Math.PI);
-    let targetX=0,targetY=0,frame=0;
+    const area=button.closest('.headset-area');
+    const initial=groups.map(group=>group.quaternion.clone());
+    const target=initial.map(value=>value.clone());
+    const angles=groups.map(()=>[0,0]);
+    groups.forEach((group,index)=>group.traverse(child=>{child.userData.part=index;}));
+    let selected=0,frame=0,drag=null,suppressClick=false;
     const reduced=()=>matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.reduceMotion==='true';
     const draw=()=>renderer.render(scene,camera);
     function animate(){
-      frame=0;
-      assembly.rotation.x+=(targetX-assembly.rotation.x)*.13;
-      assembly.rotation.y+=(targetY-assembly.rotation.y)*.13;
-      left.position.y=-.6+assembly.rotation.y*.25;right.position.y=-.6-assembly.rotation.y*.25;
-      draw();
-      if(Math.abs(targetX-assembly.rotation.x)+Math.abs(targetY-assembly.rotation.y)>.001)frame=requestAnimationFrame(animate);
+      frame=0;let moving=false;
+      groups.forEach((group,index)=>{
+        if(reduced())group.quaternion.copy(target[index]);
+        else group.quaternion.slerp(target[index],.2);
+        if(group.quaternion.angleTo(target[index])>.001)moving=true;
+      });
+      draw();if(moving)frame=requestAnimationFrame(animate);
     }
-    function move(x,y){
-      targetX=reduced()?0:x;targetY=reduced()?0:y;
-      if(reduced()){cancelAnimationFrame(frame);frame=0;assembly.rotation.set(0,0,0);left.position.y=-.6;right.position.y=-.6;draw();}
-      else if(!frame)frame=requestAnimationFrame(animate);
+    function schedule(){if(!frame)frame=requestAnimationFrame(animate);}
+    function choose(index,announce=true){selected=index;button.dataset.selected=String(index);if(announce)area.querySelector('[data-model-status]').textContent=['Headset','Left controller','Right controller'][index]+' selected.';}
+    function rotate(dx,dy){
+      const qx=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),dx*Math.PI/180);
+      const qy=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),dy*Math.PI/180);
+      target[selected].premultiply(qx).premultiply(qy).normalize();
+      angles[selected][0]+=dx;angles[selected][1]+=dy;
+      button.dataset.rotations=JSON.stringify(angles);schedule();
     }
-    button.addEventListener('pointermove',event=>{if(event.pointerType==='touch')return;const box=button.getBoundingClientRect();move((event.clientY-box.top-box.height/2)/box.height*.18,(event.clientX-box.left-box.width/2)/box.width*.35);});
-    button.addEventListener('pointerleave',()=>move(0,0));button.addEventListener('focus',()=>move(-.03,.12));button.addEventListener('blur',()=>move(0,0));
-    const motion=matchMedia('(prefers-reduced-motion:reduce)');motion.addEventListener('change',()=>move(0,0));
-    const preferences=new MutationObserver(()=>move(0,0));preferences.observe(document.documentElement,{attributes:true,attributeFilter:['data-reduce-motion']});
+    function reset(){target[selected].copy(initial[selected]);angles[selected]=[0,0];button.dataset.rotations=JSON.stringify(angles);schedule();}
+    button.addEventListener('keydown',event=>{
+      const directions={ArrowLeft:[0,-30],ArrowRight:[0,30],ArrowUp:[-30,0],ArrowDown:[30,0]};
+      if(directions[event.key]){event.preventDefault();rotate(...directions[event.key]);}
+      else if(['1','2','3'].includes(event.key)){event.preventDefault();choose(Number(event.key)-1);}
+      else if(event.key==='Home'){event.preventDefault();reset();}
+    });
+    const raycaster=new THREE.Raycaster();
+    button.addEventListener('pointerdown',event=>{
+      if(event.button!==0)return;
+      suppressClick=false;
+      const rect=canvas.getBoundingClientRect();
+      raycaster.setFromCamera(new THREE.Vector2((event.clientX-rect.left)/rect.width*2-1,1-(event.clientY-rect.top)/rect.height*2),camera);
+      const hit=raycaster.intersectObjects(groups,true)[0];
+      if(!hit)return;
+      choose(hit.object.userData.part);
+      drag={id:event.pointerId,x:event.clientX,y:event.clientY,total:0};button.setPointerCapture(event.pointerId);
+    });
+    button.addEventListener('pointermove',event=>{
+      if(!drag)return;
+      const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
+      drag.total+=Math.abs(dx)+Math.abs(dy);
+      if(drag.total>5){suppressClick=true;button.dataset.dragging='true';rotate(dy*.65,dx*.65);}
+      drag.x=event.clientX;drag.y=event.clientY;
+    });
+    const stop=()=>{drag=null;delete button.dataset.dragging;};
+    button.addEventListener('pointerup',stop);button.addEventListener('pointercancel',stop);
+    // A drag rotates a part; it must not accidentally activate the availability note.
+    button.addEventListener('click',event=>{if(suppressClick&&event.detail!==0){event.preventDefault();event.stopImmediatePropagation();suppressClick=false;}},true);
+    const motion=matchMedia('(prefers-reduced-motion:reduce)');motion.addEventListener('change',schedule);
+    const preferences=new MutationObserver(schedule);preferences.observe(document.documentElement,{attributes:true,attributeFilter:['data-reduce-motion']});
+    choose(0,false);button.dataset.rotations=JSON.stringify(angles);
     const resize=new ResizeObserver(()=>{const {width,height}=button.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();draw();});resize.observe(button);
     canvas.hidden=false;fallback.hidden=true;button.dataset.model='ready';draw();
     canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();canvas.hidden=true;fallback.hidden=false;fallback.textContent='View game availability';button.dataset.model='unavailable';});

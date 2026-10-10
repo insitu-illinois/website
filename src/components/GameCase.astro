@@ -1,4 +1,5 @@
 ---
+import DiscArtwork from './DiscArtwork.astro';
 import GameBookletPage from './GameBookletPage.astro';
 interface Image { src:string; alt:string; caption?:string; }
 interface Props { cover:Image; images:Image[]; name:string; availability?:string; description:string; credits:{role:string;names:string}[]; }
@@ -8,13 +9,16 @@ const bookletCredits=credits.slice(0,4);
 <div class="game-case" data-game-case>
   <div class="artwork-layout" data-case-interactive hidden>
     <div class="case-stage">
-      <div class="case-object" id="case-interior">
+      <div class="case-object" id="case-interior" tabindex="-1">
         <div class="case-tray">
-          <button class="tray-close" data-case-close type="button" disabled aria-label="Close the game case"></button>
-          <button class="case-disc" data-disc-spin type="button" disabled aria-label="Lift and spin the VRchaeology disc">
-            <span class="disc-front" aria-hidden="true"><img src={images[0].src} alt=""/><span class="disc-title">{name}</span><span class="disc-edition">Game Studies and Design<br/>The stu/dio</span></span>
-            <span class="disc-back" aria-hidden="true"></span>
+          <button class="tray-close" data-case-close type="button" disabled aria-label="Close the game case"><span class="case-close-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></span></button>
+          <button class="case-disc" data-disc-spin type="button" disabled aria-label="Lift and turn the VRchaeology disc" aria-pressed="false" aria-describedby="disc-instructions">
+            <span class="disc-form" data-disc-model><DiscArtwork cover={cover.src} scene={images[0].src}/></span>
           </button>
+          <div class="disc-actions" data-disc-actions hidden>
+            <button type="button" data-disc-flip aria-label="Flip disc" title="Flip disc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14m-4-4 4 4-4 4M19 17H5m4-4-4 4 4 4"/></svg></button>
+            <button type="button" data-disc-turn aria-label="Spin disc" title="Spin disc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8a8 8 0 1 0 1 7M19 3v5h-5"/></svg></button>
+          </div>
         </div>
         <div class="case-lid">
           <button class="case-front" data-case-toggle type="button" aria-expanded="false" aria-controls="case-interior" aria-label={`Open the case: ${name} artwork`} aria-describedby="case-description"><img class="case-cover-art" src={cover.src} alt="" loading="eager" width="1200" height="1800"/></button>
@@ -26,8 +30,10 @@ const bookletCredits=credits.slice(0,4);
       </div>
     </div>
     {availability&&<div class="headset-area">
-      <button class="headset-toggle" type="button" data-headset-toggle data-quest-model aria-expanded="false" aria-controls="experience-availability" aria-label="VR headset: game availability"><canvas hidden aria-hidden="true"></canvas><span data-model-fallback>Loading headset…</span></button>
-      <div id="experience-availability" class="availability-note" hidden><p>{availability}</p></div>
+      <button class="headset-toggle" type="button" data-headset-toggle data-quest-model aria-expanded="false" aria-controls="experience-availability" aria-label="VR headset: game availability" aria-describedby="model-instructions model-keyboard"><canvas hidden aria-hidden="true"></canvas><span data-model-fallback>Loading headset…</span></button>
+      <div id="experience-availability" class="availability-note" aria-hidden="true" inert style="visibility:hidden"><p>{availability}</p></div>
+      <p class="model-hint" id="model-instructions">Drag a model to rotate it. Click for availability.</p>
+      <span id="model-keyboard" class="visually-hidden">When the headset is focused, use arrow keys to rotate, keys 1, 2 and 3 to select the headset or a controller, and Home to reset the selected part.</span><span class="visually-hidden" role="status" data-model-status></span>
     </div>}
   </div>
   <span id="case-description" class="visually-hidden">{cover.alt} Open the case, then select the booklet to explore the game images.</span>
@@ -40,9 +46,12 @@ const bookletCredits=credits.slice(0,4);
     </figure>)}
     <div class="booklet-toolbar"><a href="#credits-heading" data-booklet-credits>Full project credits</a><div class="booklet-buttons"><button type="button" class="button secondary" data-scene-prev aria-label="Previous game image">←</button><button type="button" class="button secondary" data-scene-next aria-label="Next game image">→</button></div></div>
   </dialog>
+  <p id="disc-instructions" class="visually-hidden">Click to lift or return the disc. When lifted, drag or use arrow keys to rotate it. Home returns it to the tray.</p>
   <details class="model-credit"><summary>3D model credits</summary><p><a href="https://sketchfab.com/3d-models/meta-quest-3-65a813833dc04eeeb7d33bdca58c184c">Meta Quest 3</a> by <a href="https://sketchfab.com/ElinHohler">Elin</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Controllers by <a href="https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/meta-quest-touch-plus">WebXR Input Profiles contributors</a>, <a href="/media/models/quest-3/CONTROLLERS-LICENSE.txt">MIT license</a>. Models scaled, positioned, lit, and animated for this presentation.</p></details>
 </div>
 <script>
+  import {closeDialog,setVisible,animateSurface} from '../scripts/motion';
+  import {mountDisc} from '../scripts/disc-viewer';
   document.querySelectorAll<HTMLElement>('[data-game-case]').forEach(root=>{
     const toggle=root.querySelector<HTMLButtonElement>('[data-case-toggle]')!;
     const closer=root.querySelector<HTMLButtonElement>('[data-case-close]')!;
@@ -51,19 +60,27 @@ const bookletCredits=credits.slice(0,4);
     const booklet=root.querySelector<HTMLDialogElement>('.case-booklet')!;
     const scenes=[...root.querySelectorAll<HTMLElement>('[data-scene]')];
     const status=root.querySelector<HTMLElement>('[data-scene-status]')!;
-    let current=0;
+    let current=0,caseTransition=0;
     function setOpen(open:boolean) {
       root.dataset.open=String(open);toggle.setAttribute('aria-expanded',String(open));
       toggle.disabled=open;toggle.setAttribute('aria-hidden',String(open));
-      [opener,closer,disc].forEach(button=>{button.disabled=!open;});
-      disc.classList.remove('spinning');
-      (open?opener:toggle).focus({preventScroll:true});
+      const version=++caseTransition;
+      [opener,closer,disc].forEach(button=>{button.disabled=true;});
+      if(!open){toggle.focus({preventScroll:true});return;}
+      const object=root.querySelector<HTMLElement>('.case-object')!;
+      object.focus({preventScroll:true});
+      // Moving 3D targets can change between pointerdown and pointerup. Enable
+      // the inside controls after the hinge settles, including zero-motion mode.
+      requestAnimationFrame(async()=>{
+        const animations=[object,root.querySelector<HTMLElement>('.case-lid')!].flatMap(el=>el.getAnimations());
+        await Promise.allSettled(animations.map(animation=>animation.finished));
+        if(caseTransition!==version||root.dataset.open!=='true')return;
+        [opener,closer,disc].forEach(button=>{button.disabled=false;});opener.focus({preventScroll:true});
+      });
     }
     root.querySelector<HTMLElement>('[data-case-interactive]')!.hidden=false;
     toggle.addEventListener('click',()=>setOpen(true));closer.addEventListener('click',()=>setOpen(false));
-    disc.addEventListener('click',()=>{if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&document.documentElement.dataset.reduceMotion!=='true')disc.classList.add('spinning');});
-    disc.addEventListener('animationend',()=>disc.classList.remove('spinning'));
-    disc.addEventListener('animationcancel',()=>disc.classList.remove('spinning'));
+    mountDisc(root);
     opener.addEventListener('click',()=>{
       booklet.showModal();booklet.scrollTop=0;
       const from=opener.getBoundingClientRect(),to=booklet.getBoundingClientRect();
@@ -71,7 +88,8 @@ const bookletCredits=credits.slice(0,4);
       booklet.style.setProperty('--paper-from-y',`${from.y+from.height/2-to.y-to.height/2}px`);
       booklet.style.setProperty('--paper-scale',String(Math.max(.15,Math.min(.9,from.width/to.width))));
     });
-    root.querySelector('[data-booklet-close]')!.addEventListener('click',()=>booklet.close());
+    root.querySelector('[data-booklet-close]')!.addEventListener('click',()=>void closeDialog(booklet));
+    booklet.addEventListener('cancel',event=>{event.preventDefault();void closeDialog(booklet);});
     booklet.addEventListener('close',()=>opener.focus({preventScroll:true}));
     root.querySelector('[data-booklet-credits]')!.addEventListener('click',()=>{booklet.close();requestAnimationFrame(()=>{const heading=document.querySelector<HTMLElement>('#credits-heading');heading?.setAttribute('tabindex','-1');heading?.focus();});});
     booklet.addEventListener('keydown',event=>{
@@ -84,21 +102,22 @@ const bookletCredits=credits.slice(0,4);
     });
     root.addEventListener('keydown',event=>{if(event.key==='Escape'&&!booklet.open&&toggle.getAttribute('aria-expanded')==='true'){event.preventDefault();setOpen(false);}});
     function showScene(step:number) {
-      current=(current+step+scenes.length)%scenes.length;scenes.forEach((scene,index)=>{scene.hidden=index!==current;});status.textContent=`Scene ${current+1} of ${scenes.length}`;
+      current=(current+step+scenes.length)%scenes.length;scenes.forEach((scene,index)=>{scene.hidden=index!==current;});status.textContent=`Scene ${current+1} of ${scenes.length}`;void animateSurface(scenes[current],true);
     }
     root.querySelector('[data-scene-prev]')!.addEventListener('click',()=>showScene(-1));root.querySelector('[data-scene-next]')!.addEventListener('click',()=>showScene(1));
     const headset=root.querySelector<HTMLButtonElement>('[data-headset-toggle]');
-    headset?.addEventListener('click',()=>{const open=headset.getAttribute('aria-expanded')!=='true';headset.setAttribute('aria-expanded',String(open));root.querySelector<HTMLElement>('#experience-availability')!.hidden=!open;});
+    headset?.addEventListener('click',()=>{const open=headset.getAttribute('aria-expanded')!=='true';headset.setAttribute('aria-expanded',String(open));void setVisible(root.querySelector<HTMLElement>('#experience-availability')!,open,true);});
     if(headset){const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();import('../scripts/quest-viewer.mjs').then(module=>module.mountQuest(headset)).catch(()=>{const fallback=headset.querySelector<HTMLElement>('[data-model-fallback]');if(fallback)fallback.textContent='View game availability';});}},{rootMargin:'100px'});observer.observe(headset);}
   });
 </script>
 <style>
   .game-case { min-width:0; }
-  .artwork-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); align-items:center; gap:var(--space-5); }
+  .artwork-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); align-items:start; gap:var(--space-5); }
   .case-stage { position:relative; width:100%; aspect-ratio:5/4; perspective:calc(var(--space-10) * 10); background:radial-gradient(ellipse at 50% 80%,var(--border-default),transparent 62%); }
-  .case-object { position:absolute; top:3%; left:49%; width:47%; aspect-ratio:2/3; transform:translateX(-50%) rotateY(-16deg) rotateX(5deg); transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); }
+  .case-object { pointer-events:none; position:absolute; top:3%; left:49%; width:47%; aspect-ratio:2/3; transform:translateX(-50%) rotateY(-16deg) rotateX(5deg); transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); }
+  .case-object button { pointer-events:auto; }
   .case-tray,.case-lid,.case-front,.case-back { position:absolute; inset:0; border-radius:var(--radius-xs); }
-  .case-tray { display:grid; place-items:center; background:var(--neutral-900); border:var(--space-1) solid var(--neutral-800); box-shadow:var(--shadow-inverse); transform:translateZ(calc(-1 * var(--space-2))); }
+  .case-tray { display:grid; place-items:center; background:var(--neutral-900); border:var(--space-1) solid var(--neutral-800); box-shadow:var(--shadow-inverse); transform:translateZ(0); }
   .case-tray::before { content:""; position:absolute; inset:var(--space-2); border:var(--border-hairline) solid var(--neutral-600); border-radius:var(--radius-xs); }
   .case-lid { transform-origin:left center; transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); box-shadow:var(--shadow-raised); }
   .case-front,.case-back { backface-visibility:hidden; overflow:hidden; border:var(--border-thick) solid var(--neutral-800); }
@@ -110,28 +129,26 @@ const bookletCredits=credits.slice(0,4);
   .paper-preview { container-type:inline-size; height:100%; }
   .paper-hitbox { position:absolute; inset:0; width:100%; height:100%; padding:0; border:var(--border-hairline) solid transparent; background:transparent; border-radius:0; }
   .paper-hitbox:is(:hover,:focus-visible) { border-color:var(--white); outline:var(--border-thick) solid var(--white); outline-offset:var(--space-1); }
+  .case-close-icon { transition:transform var(--dur-med) var(--ease-standard) var(--delay-settle); position:absolute; top:var(--space-2); right:var(--space-2); display:grid; place-items:center; width:var(--space-5); height:var(--space-5); color:var(--neutral-300); background:transparent; }
+  .case-close-icon svg { width:var(--space-4); height:var(--space-4); fill:none; stroke:currentColor; stroke-width:1.5; }
+  .case-tray:has(.tray-close:is(:hover,:focus-visible)) { border-color:var(--neutral-300); }
+  .case-tray { transition:border-color var(--dur-med) var(--ease-standard) var(--delay-settle); }
   .tray-close { position:absolute; inset:0; width:100%; height:100%; border:0; background:transparent; border-radius:var(--radius-xs); }
-  .case-disc { container-type:inline-size; position:relative; width:88%; aspect-ratio:1; padding:0; border:0; border-radius:50%; background:transparent; transform-style:preserve-3d; z-index:2; }
-  .disc-front,.disc-back { position:absolute; inset:0; border-radius:50%; overflow:hidden; backface-visibility:hidden; mask-image:radial-gradient(circle,transparent 0 8%,var(--white) 8.5%); border:var(--border-thick) solid var(--neutral-300); }
-  .disc-front { background:var(--neutral-950); }
-  .disc-front img { width:100%; height:100%; object-fit:cover; opacity:.65; }
-  .disc-front::after { content:""; position:absolute; inset:39%; border-radius:50%; border:var(--border-thick) solid var(--neutral-300); background:color-mix(in srgb,var(--neutral-200) 30%,transparent); }
-  .disc-title { position:absolute; inset:20% 5% auto; color:var(--paper-200); text-align:center; font:var(--weight-display) 11cqi/1.4 var(--font-display); letter-spacing:var(--ls-display); text-shadow:0 var(--border-hairline) var(--border-thick) var(--neutral-950); }
-  .disc-edition { position:absolute; inset:auto 10% 20%; color:var(--white); text-align:center; font:3.3cqi/1.4 var(--font-mono); }
-  .disc-back { transform:rotateY(180deg); background:repeating-radial-gradient(circle,transparent 0 2%,color-mix(in srgb,var(--white) 30%,transparent) 2.2% 2.4%),conic-gradient(var(--neutral-200),var(--white),var(--slate-300),var(--neutral-500),var(--white),var(--paper-200),var(--neutral-200)); }
-  .case-disc.spinning { animation:disc-turn calc(var(--dur-decorative) * 3) var(--ease-standard); }
-  @keyframes disc-turn { 0%,100% { transform:translateZ(0) rotateY(0) rotateZ(0); } 25% { transform:translateZ(var(--space-9)) translateY(-8%) rotateY(-30deg) rotateZ(-15deg); } 60% { transform:translateZ(var(--space-9)) translateY(-8%) rotateY(180deg) rotateZ(160deg); } 100% { transform:translateZ(0) rotateY(360deg) rotateZ(360deg); } }
+  .case-disc { position:relative; width:88%; aspect-ratio:1; padding:0; border:0; border-radius:50%; background:transparent; z-index:2; touch-action:pan-y pinch-zoom; }
   [data-open="true"] .case-object { transform:translateX(0) rotateY(-5deg); }
   [data-open="true"] .case-lid { transform:rotateY(-155deg); }
-  .headset-area { text-align:center; min-width:0; }
+  .headset-area { text-align:center; min-width:0; padding-top:var(--space-6); }
   .headset-toggle { position:relative; width:100%; aspect-ratio:1; display:grid; place-items:center; background:transparent; color:var(--text-primary); border:0; padding:0; border-radius:var(--radius-md); }
   .headset-toggle canvas { width:100%; height:100%; display:block; }
+  .headset-toggle:active { translate:none; }
+  .headset-toggle canvas { touch-action:pan-y pinch-zoom; cursor:grab; }
+  .headset-toggle[data-dragging="true"] canvas { cursor:grabbing; }
   .availability-note { padding:var(--space-3); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); background:var(--surface-page); font-size:var(--text-body-sm); }
   .availability-note p { margin:0; }
   .model-credit { margin-top:var(--space-4); font-size:var(--text-person-tag); color:var(--text-secondary); }
   .model-credit summary { min-height:var(--space-6); cursor:pointer; }
   .case-booklet { --text-heading:var(--white); --text-primary:var(--neutral-200); --text-secondary:var(--neutral-300); --border-strong:var(--neutral-300); --surface-page:var(--neutral-950); --focus-ring:var(--white); --accent-heritage-strong:var(--white); width:min(calc(100% - var(--space-6)),calc(var(--space-10) * 5)); max-height:calc(100dvh - var(--space-6)); margin:auto; padding:var(--space-4); color:var(--neutral-200); background:var(--neutral-950); border:var(--border-hairline) solid var(--neutral-600); border-radius:var(--radius-xs); box-shadow:var(--shadow-inverse); overflow:auto; }
-  .case-booklet[open] { animation:unfold-booklet var(--dur-decorative) var(--ease-standard); }
+  .case-booklet[open] { animation:unfold-booklet var(--dur-decorative) var(--ease-standard) var(--delay-settle) both; }
   .case-booklet::backdrop { background:color-mix(in srgb,var(--neutral-950) 78%,transparent); }
   :global(body:has(.case-booklet[open])) { overflow:hidden; }
   .case-booklet a { color:var(--white); }
@@ -148,6 +165,16 @@ const bookletCredits=credits.slice(0,4);
     :global(html:not([data-reduce-motion="true"])) .game-case:not([data-open="true"]) .case-stage:hover .case-object { transform:translateX(-50%) rotateY(-8deg) rotateX(2deg) translateY(calc(-1 * var(--space-1))); }
     :global(html:not([data-reduce-motion="true"])) .case-paper:has(.paper-hitbox:not(:disabled):is(:hover,:focus-visible)) { transform:rotate(0deg) translateY(calc(-1 * var(--space-1))); }
   }
+  .model-hint { font-size:var(--text-body-sm); color:var(--text-secondary); margin:var(--space-3) 0; }
+  .case-disc:active { translate:none; }
+  .disc-form { position:absolute; inset:0; container-type:inline-size; transform-style:preserve-3d; pointer-events:none; transition:transform var(--dur-decorative) var(--ease-standard) var(--delay-settle); }
+  .case-disc[data-dragging="true"] { cursor:grabbing; }
+  .case-disc[data-dragging="true"] .disc-form { transition:none; }
+  .case-disc[aria-pressed="true"] { cursor:grab; }
+  .disc-actions { position:absolute; bottom:var(--space-3); left:0; width:100%; display:flex; justify-content:center; gap:var(--space-2); z-index:3; }
+  .disc-actions button { width:var(--space-7); min-height:var(--space-7); display:grid; place-items:center; border:var(--border-hairline) solid var(--neutral-600); border-radius:var(--radius-full); color:var(--white); background:var(--neutral-900); padding:var(--space-2); }
+  .disc-actions svg { width:var(--space-5); height:var(--space-5); stroke:currentColor; stroke-width:1.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  @media (hover:hover) and (prefers-reduced-motion:no-preference) { :global(html:not([data-reduce-motion="true"])) .tray-close:is(:hover,:focus-visible) .case-close-icon { transform:rotate(-8deg); } }
   @media(max-width:48rem) { .artwork-layout { grid-template-columns:minmax(0,1fr); } .headset-area { width:min(100%,calc(var(--space-10) * 3)); justify-self:center; } }
   @media (prefers-reduced-motion:reduce) { .case-object,.case-lid,.case-paper { transition:none; } }
   :global(html[data-reduce-motion="true"]) :is(.case-object,.case-lid,.case-paper) { transition:none; }
