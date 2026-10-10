@@ -295,6 +295,59 @@ collections:
         required: false
         hint: Write the approved page text; use headings, paragraphs, lists, and links
           as needed.
+      - name: gallery
+        label: Gallery
+        widget: list
+        required: false
+        hint: Add approved project images in display order; each needs alt text and may
+          include a caption.
+        collapsed: true
+        summary: "{{fields.caption}}"
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            hint: Upload or choose the image file you have permission to publish.
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
+            pattern:
+              - .*\S.*
+              - Describe the image.
+          - name: caption
+            label: Caption
+            widget: string
+            required: false
+            hint: Describe what this screenshot shows; do not add claims about results or
+              capabilities.
+      - name: credits
+        label: Credits
+        widget: list
+        required: false
+        hint: List the confirmed production credits by role, including contributors who
+          are not lab members.
+        collapsed: true
+        summary: "{{fields.role}}"
+        fields:
+          - name: role
+            label: Credit role
+            widget: string
+            required: true
+            hint: Enter the confirmed production role, such as Programming or Sound design.
+          - name: names
+            label: Contributors
+            widget: text
+            required: true
+            hint: Enter one credited name per line, preserving spelling, nicknames, and any
+              role notes.
       - name: status
         label: Status
         widget: select
@@ -307,8 +360,7 @@ collections:
         label: Featured
         widget: boolean
         required: false
-        hint: Turn on to make this project eligible for the three featured spots on
-          Home.
+        hint: Turn on to make this project eligible for the featured spot on Home.
         default: false
       - name: themes
         label: Themes

@@ -21,6 +21,7 @@ export const models = {
   },
   projects: {
     name: text(true), shortDescription: long(), heroMedia: image(), body: body(),
+    gallery: { kind: 'gallery' }, credits: { kind: 'credits' },
     status: { ...select('active', 'completed'), required: true },
     featured: { kind: 'boolean', default: false }, themes: refs('themes'), team: refs('people'), funding: refs('recognition'),
   },
@@ -65,6 +66,10 @@ export function makeSchema(z, reference, fields) {
         s = field.multiple ? z.array(s).nullish().transform(v => v ?? []) : z.preprocess(v => v === '' ? undefined : v, s.nullish()); break;
       case 'image':
         s = z.object({ src: z.string().regex(new RegExp(mediaPattern)), alt: z.string().trim().min(1) }).strict().nullish(); break;
+      case 'gallery':
+        s = z.array(z.object({ src:z.string().regex(new RegExp(mediaPattern)), alt:z.string().trim().min(1), caption:z.string().nullish().transform(v=>v??'') }).strict()).nullish().transform(v=>v??[]); break;
+      case 'credits':
+        s = z.array(z.object({ role:z.string().trim().min(1), names:z.string().trim().min(1) }).strict()).nullish().transform(v=>v??[]); break;
       case 'date':
         s = optionalString(z.string().regex(new RegExp(datePattern)).refine(value => {
           if (value.length !== 10) return true;

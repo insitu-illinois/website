@@ -1,0 +1,10 @@
+---
+const { images=[] }=Astro.props;
+---
+{images.length>0&&<section class="project-gallery" aria-labelledby="gallery-heading">
+  <h2 id="gallery-heading">Inside the experience</h2>
+  <div class="gallery-grid">{images.map((media:any)=><figure>
+    <img src={media.src} alt={media.alt} loading="lazy" decoding="async" width="1600" height="1000"/>
+    <figcaption>{media.caption&&<p>{media.caption}</p>}<a href={media.src} aria-label={`View full image: ${media.caption||media.alt}`}>View full image</a></figcaption>
+  </figure>)}</div>
+</section>}

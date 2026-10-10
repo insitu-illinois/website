@@ -1,4 +1,4 @@
 ---
-const {media, portrait=false, label='Project image forthcoming', eager=false}=Astro.props;
+const {media, portrait=false, label='Project image forthcoming', eager=false, natural=false}=Astro.props;
 ---
-{media ? <img class:list={['media',{portrait}]} src={media.src} alt={media.alt} loading={eager?'eager':'lazy'} decoding="async" /> : <div class:list={['media-placeholder',{portrait}]}><span class="label">{label}</span></div>}
+{media ? <img class:list={['media',{portrait,'media-natural':natural}]} src={media.src} alt={media.alt} loading={eager?'eager':'lazy'} decoding="async" /> : <div class:list={['media-placeholder',{portrait}]}><span class="label">{label}</span></div>}

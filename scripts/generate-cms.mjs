@@ -27,9 +27,11 @@ const hints = {
   question: 'Write the guiding research question for this theme.',
   description: 'Write a short, approved description for readers.',
   shortDescription: 'Summarize the project briefly for project lists.',
+  gallery: 'Add approved project images in display order; each needs alt text and may include a caption.',
+  credits: 'List the confirmed production credits by role, including contributors who are not lab members.',
   body: 'Write the approved page text; use headings, paragraphs, lists, and links as needed.',
   status: 'Choose whether this project is active or completed.',
-  featured: 'Turn on to make this project eligible for the three featured spots on Home.',
+  featured: 'Turn on to make this project eligible for the featured spot on Home.',
   themes: 'Choose the research themes connected to this work.',
   team: 'Choose the people involved; the project will also appear on their profile pages.',
   funding: 'Choose the awards or grants supporting this project.',
@@ -75,6 +77,16 @@ function field(name, f) {
         { name: 'src', label: 'Image', widget: 'image', required: true, hint: 'Upload or choose the image file you have permission to publish.', pattern: [mediaPattern, 'Upload an image to the media folder.'], choose_url: false },
         { name: 'alt', label: 'Alt text', widget: 'string', required: true, hint: 'Describe the image for people who cannot see it; for a headshot, use Portrait of followed by the person’s name.', pattern: ['.*\\S.*', 'Describe the image.'] },
       ] }); break;
+    case 'gallery':
+      Object.assign(result,{widget:'list',collapsed:true,summary:'{{fields.caption}}',fields:[
+        ...field('heroMedia',{kind:'image'}).fields,
+        {name:'caption',label:'Caption',widget:'string',required:false,hint:'Describe what this screenshot shows; do not add claims about results or capabilities.'},
+      ]}); break;
+    case 'credits':
+      Object.assign(result,{widget:'list',collapsed:true,summary:'{{fields.role}}',fields:[
+        {name:'role',label:'Credit role',widget:'string',required:true,hint:'Enter the confirmed production role, such as Programming or Sound design.'},
+        {name:'names',label:'Contributors',widget:'text',required:true,hint:'Enter one credited name per line, preserving spelling, nicknames, and any role notes.'},
+      ]}); break;
     case 'date': result.pattern = [datePattern, 'Use YYYY, YYYY-MM, or YYYY-MM-DD.']; result.hint = 'Keep only the precision that is known. Leave blank if the date is unknown.'; break;
     case 'url': result.pattern = ['^https?://\\S+$', 'Use a full http or https URL.']; break;
     case 'email': result.pattern = ['^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$', 'Use an email address.']; break;

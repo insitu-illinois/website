@@ -197,3 +197,28 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
 
 .person-placeholder { display:grid; place-items:center; background:var(--surface-card); color:var(--border-strong); border:var(--border-hairline) solid var(--border-default); }
 .person-placeholder svg { display:block; width:48%; height:auto; }
+
+/* Project artwork stays whole, including titles and production marks. */
+.media.media-natural { aspect-ratio:auto; object-fit:contain; background:var(--surface-card); }
+.feature-project .media-natural { max-height:calc(var(--space-10) * 4); }
+.project-intro { margin-block:var(--space-6) var(--space-7); }
+.project-intro .page-heading { margin:0; }
+.project-cover { margin-top:var(--space-5); }
+.project-cover .media { max-height:calc(var(--space-10) * 5); }
+.gallery-grid,.credits-grid { display:grid; gap:var(--space-6); }
+.gallery-grid figure { margin:0; min-width:0; }
+.gallery-grid img { width:100%; height:auto; aspect-ratio:8/5; object-fit:contain; background:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); }
+.gallery-grid figcaption { padding-block:var(--space-4); }
+.gallery-grid figcaption p { margin-bottom:var(--space-2); }
+.gallery-grid figcaption a { display:inline-block; padding-block:var(--space-3); }
+.credit-group { border-top:var(--border-hairline) solid var(--border-default); padding-top:var(--space-4); }
+.credit-group h3 { font-size:var(--text-body-lg); }
+.credit-group ul { list-style:none; padding:0; margin:0; }
+.credit-group li { margin-block:var(--space-2); }
+@media (min-width:48rem) {
+  .project-intro.has-cover { display:grid; grid-template-columns:minmax(0,3fr) minmax(0,2fr); gap:var(--space-7); align-items:center; }
+  .project-intro.has-cover .page-heading { border:0; padding:0; }
+  .project-cover { margin:0; }
+  .gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .credits-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}

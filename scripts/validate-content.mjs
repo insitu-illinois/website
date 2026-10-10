@@ -13,6 +13,7 @@ export function validate(data) {
     for (const [field,spec] of Object.entries(fieldsFor(name))) {
       const value=record.data[field];
       if (spec.kind==='image' && value && !existsSync(`public${value.src}`)) throw new Error(`${name}/${record.id}: missing image ${field}`);
+      if (spec.kind==='gallery') for (const media of value??[]) if (!existsSync(`public${media.src}`)) throw new Error(`${name}/${record.id}: missing gallery image ${media.src}`);
       if (spec.kind==='file' && value && !existsSync(`public${value}`)) throw new Error(`${name}/${record.id}: missing file ${field}`);
     }
     if (!record.data.draft && name==='people' && !record.data.role) throw new Error(`${record.id}: published people need a confirmed role`);

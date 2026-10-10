@@ -2,8 +2,11 @@
   "slug": "vrchaeology",
   "draft": false,
   "name": "VRchaeology",
-  "shortDescription": "VRchaeology teaches archaeological field methods using immersive virtual reality, allowing all students to learn archaeology without leaving the classroom. This is a test case for field sciences more broadly.",
-  "heroMedia": null,
+  "shortDescription": "An immersive virtual field school for learning archaeological field methods through excavation, mapping, documentation, and analysis.",
+  "heroMedia": {
+    "src": "/media/projects/vrchaeology/cover.webp",
+    "alt": "VRchaeology cover art: an illuminated cave waterfall and bridge, with the VRchaeology title and Game Studies and Design, The stu/dio mark."
+  },
   "status": "active",
   "featured": true,
   "themes": [
@@ -14,11 +17,114 @@
     "laura-shackelford",
     "wen-hao-david-huang",
     "cameron-merrill",
-    "sepehr-vaez-afshar"
+    "sepehr-vaez-afshar",
+    "nan-kang",
+    "robbie-sieczkowski",
+    "sarvin-eshaghi",
+    "emma-verstraete",
+    "alexandra-zachwieja"
   ],
   "funding": [
     "nsf-1736235",
     "nsf-2021460"
   ],
-  "body": "VRchaeology is built in Unreal Engine and belongs to The GSD Studio at the University of Illinois Urbana-Champaign.\n\nFirst taught as ANTH 399, the virtual field school began with 15 undergraduates working in pairs. Its virtual cave is modeled partly on a real cave excavated in the 1930s. Students set up research grids, locate artifacts, map features, excavate, photograph finds, and run lab analyses. Students transferred skills to real excavations.\n\nThe original team included Laura Shackelford, Wen-Hao David Huang, and Cameron Merrill. The work was presented at the Society for Historical Archaeology meeting in Boston in 2020.\n\n## Project strands\n\n- Archaeology Lab Class\n- Field School Prep\n- Virtual Reality for Wheelchair Users\n\n## Teaching\n\nGSD 282: VRchaeology, Spring 2027, was co-created by Laura Shackelford and Sepehr Vaez Afshar.\n\n## Support\n\nNational Science Foundation awards 1736235 and 2021460, and Epic MegaGrants."
+  "body": "## Ready for the classroom\n\nVRchaeology is ready for classroom use. Development continues at the Game Studies and Design (GSD) Stu/dio, with work on new labs and improvements to the experience.\n\n## Learning through fieldwork\n\nVRchaeology teaches archaeological field methods using immersive virtual reality, allowing students to learn archaeology without leaving the classroom. It serves as a test case for field sciences more broadly.\n\nStudents set up research grids, locate artifacts, map features, excavate, photograph finds, and run lab analyses. The experience is built in Unreal Engine.\n\n## Project history\n\nFirst taught as ANTH 399, the virtual field school began with 15 undergraduates working in pairs. Its virtual cave is modeled partly on a real cave excavated in the 1930s. Students transferred skills to real excavations.\n\nThe original team included Laura Shackelford, Wen-Hao David Huang, and Cameron Merrill. The work was presented at the Society for Historical Archaeology meeting in Boston in 2020.\n\n## Project strands\n\n- Archaeology Lab Class\n- Field School Prep\n- Virtual Reality for Wheelchair Users\n\n## Teaching\n\nGSD 282: VRchaeology, Spring 2027, was co-created by Laura Shackelford and Sepehr Vaez Afshar.\n\n## Support\n\nNational Science Foundation awards 1736235 and 2021460, and Epic MegaGrants.",
+  "gallery": [
+    {
+      "src": "/media/projects/vrchaeology/cave-waterfall.webp",
+      "alt": "A waterfall descends through an illuminated virtual cave, with a bridge, path, and information stand in the foreground.",
+      "caption": "The virtual cave and waterfall."
+    },
+    {
+      "src": "/media/projects/vrchaeology/cave-camp.webp",
+      "alt": "A roped-off area in the cave contains metal bed frames, crates, sacks, and lamps.",
+      "caption": "A camp scene inside the cave."
+    },
+    {
+      "src": "/media/projects/vrchaeology/cave-formations.webp",
+      "alt": "Colored light illuminates stalactites and rock columns inside the virtual cave.",
+      "caption": "Cave formations under colored lighting."
+    },
+    {
+      "src": "/media/projects/vrchaeology/cave-exhibit.webp",
+      "alt": "Roped displays contain pottery, barrels, crates, and a wooden frame against the cave wall.",
+      "caption": "Objects and displays in the cave environment."
+    },
+    {
+      "src": "/media/projects/vrchaeology/excavation-tools.webp",
+      "alt": "First-person view of gloved hands holding a brush beside a string excavation grid, a yellow bucket, and a blue dustpan.",
+      "caption": "Excavation tools and a marked grid in the virtual field school."
+    },
+    {
+      "src": "/media/projects/vrchaeology/excavation-grid-interface.webp",
+      "alt": "A virtual pointer selects a square on a numbered excavation grid; the board also has an Artifacts found area and instructions to confirm a selection.",
+      "caption": "The grid-selection interface used to choose an excavation square."
+    }
+  ],
+  "credits": [
+    {
+      "role": "Sponsor",
+      "names": "Dr. Laura Shackelford"
+    },
+    {
+      "role": "Co-PI (NSF Grant)",
+      "names": "Dr. David Wen-hau Huang"
+    },
+    {
+      "role": "Associate producer",
+      "names": "Sepehr Vaez Afshar"
+    },
+    {
+      "role": "Project manager",
+      "names": "Gabriel Wozniak"
+    },
+    {
+      "role": "Additional project management support",
+      "names": "Om Mistry\nPranav Shah"
+    },
+    {
+      "role": "Programming",
+      "names": "Anish Gupta\nPraneeth Rangamudri\nNick Simons\nAashish Subramanian"
+    },
+    {
+      "role": "Additional programming support",
+      "names": "Zach Krauter\nEzra Schur\nGloria Xiao\nWeijia “Charlie” Zhang"
+    },
+    {
+      "role": "Design",
+      "names": "Madison Rosenberger"
+    },
+    {
+      "role": "3D art",
+      "names": "Nancy “Nan” Kang\nDominic Larrieu\nXiaoxu “Johnny” Lyu\nYiwen “Tiffany” Wu"
+    },
+    {
+      "role": "Additional 3D art support",
+      "names": "Karan Ganesh\nMengzhen Yu"
+    },
+    {
+      "role": "2D art",
+      "names": "Synthia Cao\nPengkun “Daniel” Mao\nRuoheng Yang"
+    },
+    {
+      "role": "Music",
+      "names": "Adrian Pawlikowski"
+    },
+    {
+      "role": "Sound design",
+      "names": "Aubree Gray"
+    },
+    {
+      "role": "Voice acting",
+      "names": "Olive Wang"
+    },
+    {
+      "role": "Stu/dio leads",
+      "names": "Daniel Cermak (Director)\nRobbie Sieczkowski (Producer)\nMax Yang (Programming Lead)\nAditya Bhave (Art Lead)\nRodrigo Hidalgo Amat Y Leon (Design Lead)\nSarvin Eshaghi (Quality Assurance Lead)\nOlive Wang (Accessibility Lead)"
+    },
+    {
+      "role": "Archaeology content support",
+      "names": "Emma Verstraete\nAlexandra Zachwieja"
+    }
+  ]
 }

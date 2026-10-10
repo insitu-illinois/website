@@ -1,0 +1,10 @@
+---
+const { credits=[] }=Astro.props;
+---
+{credits.length>0&&<section class="project-credits" aria-labelledby="credits-heading">
+  <h2 id="credits-heading">Project credits</h2>
+  <div class="credits-grid">{credits.map((group:any)=><div class="credit-group">
+    <h3>{group.role}</h3>
+    <ul>{group.names.split('\n').map((name:string)=>name.trim()).filter(Boolean).map((name:string)=><li>{name}</li>)}</ul>
+  </div>)}</div>
+</section>}

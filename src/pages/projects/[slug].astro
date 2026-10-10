@@ -5,6 +5,8 @@ import RecordList from '../../components/RecordList.astro';
 import Tags from '../../components/Tags.astro';
 import Media from '../../components/Media.astro';
 import Prose from '../../components/Prose.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
+import ProjectCredits from '../../components/ProjectCredits.astro';
 import {content} from '../../lib/content';
 import {projectLists,referenced} from '../../lib/derived.mjs';
 import type { CollectionEntry } from 'astro:content';
@@ -15,11 +17,13 @@ const d=entry.data,lists=projectLists(data,entry.id);
 ---
 <Base noindex={d.draft} title={d.name} description={d.shortDescription || undefined}>
   <a class="back-link" href="/projects/">All projects</a>
-  <header class="page-heading"><p class="label">Project · {d.status}{d.draft?' · Draft':''}</p><h1>{d.name}</h1><Tags themes={referenced(data.themes,d.themes)}/>{d.shortDescription && <p class="lead">{d.shortDescription}</p>}</header>
-  <Media media={d.heroMedia} eager />
+  <div class:list={['project-intro',{'has-cover':Boolean(d.heroMedia)}]}><header class="page-heading"><p class="label">Project · {d.status}{d.draft?' · Draft':''}</p><h1>{d.name}</h1><Tags themes={referenced(data.themes,d.themes)}/>{d.shortDescription && <p class="lead">{d.shortDescription}</p>}</header>
+  {d.heroMedia&&<div class="project-cover"><Media media={d.heroMedia} natural eager /></div>}</div>
   <PeopleTags people={referenced(data.people,d.team)} label="Project team"/>
   <section class="reading-section"><Prose body={d.body}/></section>
-  <RecordList data={data} title="Team" records={referenced(data.people,d.team)} cards />
+  <ProjectGallery images={d.gallery??[]}/>
+  <RecordList data={data} title={d.credits?.length ? "Lab contributors" : "Team"} records={referenced(data.people,d.team)} cards />
+  <ProjectCredits credits={d.credits??[]}/>
   <RecordList data={data} title="Publications" records={lists.publications}/>
   <RecordList data={data} title="Presentations" records={lists.presentations}/>
   <RecordList data={data} title="Funding" records={referenced(data.recognition,d.funding)}/>
