@@ -1,0 +1,13 @@
+Meta Quest 3 headset by Elin (@ElinHohler)
+https://sketchfab.com/3d-models/meta-quest-3-65a813833dc04eeeb7d33bdca58c184c
+Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+Downloaded October 10, 2026, GLB conversion with 1k textures supplied by Sketchfab.
+No geometry edits. Positioned, scaled, lit, and animated for this website.
+
+Meta Quest Touch Plus controller assets by WebXR Input Profiles contributors
+https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/meta-quest-touch-plus
+MIT License (see CONTROLLERS-LICENSE.txt).
+No geometry edits. Positioned, scaled, lit, and animated for this website.
+
+This illustration does not imply endorsement by Meta or the model creators.
