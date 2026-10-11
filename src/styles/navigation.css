@@ -1,4 +1,6 @@
 /* Six content destinations, with separate compact display controls. */
+/* Keep animated dropdowns above page content even while their parent transforms. */
+.site-header { position:relative; z-index:5; }
 .site-header .shell { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:var(--space-4); }
 .primary-navigation { min-width:0; }
 .site-header .nav-list { justify-content:center; align-items:center; gap:var(--space-2) var(--space-4); }
