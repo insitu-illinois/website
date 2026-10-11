@@ -102,3 +102,9 @@ The disc uses the supplied cover as a single printed surface, keeping the origin
 The headset and each controller rotate independently through direct dragging. There is no visible rotation menu. With the headset focused, keys 1/2/3 select a part, arrows rotate it and Home resets that part. A drag never triggers the offline disclosure. The disclosure keeps its space reserved so the headset does not shift.
 
 Use `--dur-med` (220 ms), `--delay-settle` (40 ms), and `--ease-standard` for control and disclosure transitions, including entering and leaving. Preserve immediate semantic feedback and navigation; the short delay belongs to visual settling, not artificial network or click latency. Use `--dur-decorative` (600 ms) for the case and deliberate disc movement. Shared helpers in `src/scripts/motion.ts` keep Escape, rapid toggling, focus restoration and device/site reduced motion consistent. No continuous rotation or autoplay.
+
+### Research-led Home — October 11, 2026
+
+Home uses a shorter introduction beside a real image from the published featured project's gallery, with the existing caption and a project link. Do not present decorative placeholder imagery as lab photography. Four research-theme destinations form a compact row on wide screens; recent papers and news share two readable columns, stacking on mobile. Keep the interactive featured case, but contain its desktop width so it does not dominate the research summary. Use existing type, spacing, light/night surfaces, and preference behavior. The Home-only rules are in `src/styles/home.css`; other page layouts remain unchanged.
+
+Structure references reviewed: [University of Maryland HCIL](https://hcil.umd.edu/), [USC Institute for Creative Technologies](https://ict.usc.edu/), and [MIT Camera Culture](https://www.media.mit.edu/groups/camera-culture/overview/). These informed the emphasis on identity, research, publications, and people; no source content or imagery was copied.

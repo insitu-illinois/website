@@ -123,6 +123,8 @@ test('dragging a headset part does not open availability and disc controls reflo
   await page.setViewportSize({width:320,height:800});
   await page.evaluate(()=>{document.documentElement.dataset.textSize='200';document.documentElement.dataset.theme='night';});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  // Evaluate the selected palette after the shared theme transition has settled.
+  await page.evaluate(async()=>{await Promise.allSettled(document.getAnimations().filter(animation=>animation.effect?.getTiming().iterations!==Infinity).map(animation=>animation.finished));});
   expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()).violations).toEqual([]);
   await page.locator('[data-disc-spin]').focus();await page.keyboard.press('Escape');await expect(page.locator('[data-disc-spin]')).toHaveAttribute('aria-pressed','false');
 });

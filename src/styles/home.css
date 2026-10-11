@@ -1,0 +1,57 @@
+/* Home: a compact research introduction, with actual work and readable updates. */
+.home-page .home-hero {
+  grid-template-columns:minmax(0,1fr); gap:var(--space-6);
+  padding-block:var(--space-7); align-items:center;
+}
+.home-page .home-hero h1 { font-size:var(--text-display-sm); max-width:24ch; margin-block:var(--space-4); }
+.home-page .home-hero .lead { font-size:var(--text-body-md); max-width:58ch; margin-bottom:var(--space-5); }
+.home-actions { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-2) var(--space-5); }
+.home-actions .button { background:var(--accent-heritage-strong); color:var(--text-on-accent); }
+.home-actions .button:hover { background:var(--button-hover); }
+.home-research-image { margin:0; min-width:0; border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); background:var(--surface-card); }
+.home-research-image>a { display:block; border-radius:var(--radius-md) var(--radius-md) 0 0; }
+.home-research-image img { width:100%; aspect-ratio:16/10; object-fit:cover; object-position:center 60%; border-radius:inherit; }
+.home-research-image figcaption { display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--space-1) var(--space-3); padding:var(--space-3) var(--space-4); font-size:var(--text-body-sm); color:var(--text-secondary); }
+.home-research-image figcaption a { color:var(--text-heading); font-weight:700; padding-block:var(--space-2); }
+.home-page .main-content { padding-block:var(--space-5) var(--space-7); }
+.home-page .main-content > section { margin-block:var(--space-5); padding:var(--space-5); }
+.home-page .main-content > .home-theme-section:nth-of-type(n) { margin-top:0; padding:0 0 var(--space-5); border:0; border-bottom:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent; }
+.home-page .home-theme-section h2 { font-size:var(--text-body-lg); margin:0 0 var(--space-3); }
+.home-page .home-themes { grid-template-columns:minmax(0,1fr); gap:0 var(--space-5); }
+.home-page .home-themes a { font-size:var(--text-body-md); line-height:var(--lh-label); padding-block:var(--space-3); min-height:var(--space-7); }
+.home-page .home-themes span { color:var(--text-secondary); }
+.home-page .main-content > .featured { background:var(--surface-card); }
+.home-page .featured > .section-heading { margin-bottom:var(--space-3); }
+.home-page .featured > .section-heading .label { margin-bottom:var(--space-2); }
+.home-page .featured > .section-heading h2,
+.home-page .lab-values h2,
+.home-updates .section-heading h2 { font-size:var(--text-display-sm); }
+.home-page .feature-project { margin-top:0; gap:var(--space-5); }
+.home-page .feature-project > .feature-description { padding-block:0; }
+.home-page .feature-description h3 { font-size:var(--text-display-sm); }
+.home-page .feature-description h3 a { color:var(--text-heading); text-decoration:none; }
+.home-page .feature-description h3 a:hover { text-decoration:underline; }
+.home-page .feature-description>.button { margin-top:var(--space-2); }
+.home-updates { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-5); margin-block:var(--space-6); }
+.home-updates>.record-section { min-width:0; margin:0; padding:0; }
+.home-updates .section-heading { gap:var(--space-2) var(--space-4); margin-bottom:var(--space-3); }
+.home-updates .records>li { padding-block:var(--space-4); }
+.home-updates .records h3 { margin-top:0; font-size:var(--text-body-lg); }
+.home-updates .records h3 a { text-wrap:pretty; }
+.home-updates .records .metadata { margin-top:var(--space-2); }
+.home-page .main-content > .lab-values { background:var(--surface-card); }
+.home-page .lab-values .section-heading { margin-bottom:var(--space-2); }
+.home-page .values-statements { gap:var(--space-4); margin-bottom:0; }
+.home-page .home-support { padding-top:var(--space-3); gap:var(--space-2) var(--space-5); }
+@media(min-width:48rem) {
+  .home-page .home-hero.has-research-image { grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:var(--space-7); }
+  .home-page .home-hero h1 { font-size:var(--text-display-md); }
+  .home-page .home-themes { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .home-page .feature-project { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--space-7); }
+  .home-page .feature-artwork { width:100%; max-width:calc(var(--space-10) * 3); justify-self:center; }
+  .home-updates { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:var(--space-7); }
+  .home-updates>.record-section+ .record-section { border-inline-start:var(--border-hairline) solid var(--border-default); padding-inline-start:var(--space-7); }
+}
+@media(min-width:64rem) {
+  .home-page .home-themes { grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
