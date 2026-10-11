@@ -13,10 +13,14 @@ test('six destinations preserve research links and keyboard disclosure behavior'
   await page.keyboard.press('Escape'); await expect(research).toBeFocused();
   await expect(nav.locator('.research-menu')).not.toHaveAttribute('open','');
   await research.click(); await nav.getByRole('link',{name:'Research themes',exact:true}).click();
-  await expect(page).toHaveURL(/\/about\/#themes$/); await expect(page.locator('#themes')).toBeVisible();
+  await expect(page).toHaveURL(/\/about\/#themes$/);
+  // URL changes at document commit; wait for the new page before its next menu action.
+  await page.waitForLoadState('load');await page.evaluate(()=>document.fonts.ready);
+  await expect(page.locator('#themes')).toBeVisible();
   for(const [name,path] of [['Projects','projects'],['Presentations','presentations'],['Awards & funding','awards-funding']]) {
     await nav.locator('summary').click(); await nav.getByRole('link',{name,exact:true}).click();
     await expect(page).toHaveURL(new RegExp('/'+path+'/$'));
+    await page.waitForLoadState('load');await page.evaluate(()=>document.fonts.ready);
     await expect(nav.locator('summary')).toHaveClass(/section-current/);
     await nav.locator('summary').click(); await expect(nav.getByRole('link',{name,exact:true})).toHaveAttribute('aria-current','page');
     await page.keyboard.press('Escape');
