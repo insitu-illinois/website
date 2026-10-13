@@ -1,0 +1,176 @@
+{
+  "reviewed": "2026-10-13",
+  "scope": "Current members and collaborators, with verified relevant alumni publications; not an exhaustive bibliography.",
+  "added": [
+    {
+      "collection": "publications",
+      "slug": "from-past-to-present-2024",
+      "source": "https://doi.org/10.52842/conf.ecaade.2024.2.249"
+    },
+    {
+      "collection": "publications",
+      "slug": "location-based-games-climate-tourism-2025",
+      "source": "https://doi.org/10.1525/cse.2025.2439123"
+    },
+    {
+      "collection": "publications",
+      "slug": "gamified-medical-learning-solo-2024",
+      "source": "https://doi.org/10.1186/s12909-023-04955-1"
+    },
+    {
+      "collection": "publications",
+      "slug": "inclusive-online-stem-motivation-2024",
+      "source": "https://doi.org/10.30935/cedtech/14047"
+    },
+    {
+      "collection": "publications",
+      "slug": "gamification-adult-learners-2024",
+      "source": "https://doi.org/10.4324/9781003446019-23"
+    },
+    {
+      "collection": "publications",
+      "slug": "ai-scaffolding-learning-motivation-2026",
+      "source": "https://doi.org/10.1007/s11423-025-10576-w"
+    },
+    {
+      "collection": "publications",
+      "slug": "vr-electromagnetism-learning-2025",
+      "source": "https://doi.org/10.18260/1-2--56035"
+    },
+    {
+      "collection": "publications",
+      "slug": "connected-spaces-dashboard-2025",
+      "source": "https://doi.org/10.22318/icls2025.725749"
+    },
+    {
+      "collection": "publications",
+      "slug": "tam-pa-ling-environment-2024",
+      "source": "https://doi.org/10.1016/j.quascirev.2023.108471"
+    },
+    {
+      "collection": "publications",
+      "slug": "ar-climate-heritage-alaska-2025",
+      "source": "https://doi.org/10.1016/j.envsci.2025.104178"
+    },
+    {
+      "collection": "publications",
+      "slug": "vernacular-infrastructure-alaska-2025",
+      "source": "https://doi.org/10.1016/j.sftr.2025.100762"
+    },
+    {
+      "collection": "publications",
+      "slug": "permafrost-contamination-flow-network-2026",
+      "source": "https://doi.org/10.1080/15481603.2026.2713329"
+    },
+    {
+      "collection": "publications",
+      "slug": "anatomical-variation-language-2026",
+      "source": "https://doi.org/10.1002/ase.70307"
+    },
+    {
+      "collection": "publications",
+      "slug": "thyroidea-ima-variation-2024",
+      "source": "https://doi.org/10.1007/s00276-024-03306-z"
+    },
+    {
+      "collection": "recognition",
+      "slug": "laura-golden-apple-2025",
+      "source": "https://medicine.illinois.edu/giving/chairs-professorships-and-faculty-scholars/golden-apple-award"
+    },
+    {
+      "collection": "recognition",
+      "slug": "laura-golden-apple-2026",
+      "source": "https://medicine.illinois.edu/giving/chairs-professorships-and-faculty-scholars/golden-apple-award"
+    },
+    {
+      "collection": "news",
+      "slug": "laura-golden-apple-2026",
+      "source": "https://medicine.illinois.edu/giving/chairs-professorships-and-faculty-scholars/golden-apple-award"
+    },
+    {
+      "collection": "recognition",
+      "slug": "sepehr-apt-student-scholar-2025",
+      "source": "https://ischool.illinois.edu/news-events/news/2025/11/vaez-afshar-named-apt-student-scholar"
+    },
+    {
+      "collection": "news",
+      "slug": "sepehr-apt-scholar-2025",
+      "source": "https://ischool.illinois.edu/news-events/news/2025/11/vaez-afshar-named-apt-student-scholar"
+    },
+    {
+      "collection": "recognition",
+      "slug": "sepehr-apt-student-scholar-2026",
+      "source": "https://ischool.illinois.edu/news-events/news/2026/04/vaez-afshar-selected-2026-apt-student-scholar"
+    },
+    {
+      "collection": "news",
+      "slug": "sepehr-apt-scholar-2026",
+      "source": "https://ischool.illinois.edu/news-events/news/2026/04/vaez-afshar-selected-2026-apt-student-scholar"
+    },
+    {
+      "collection": "recognition",
+      "slug": "ogulcan-seetoo-award-2024",
+      "source": "https://linguistics.illinois.edu/news/2024-05-06t163707/congratulations-2024-award-winners-and-graduates"
+    },
+    {
+      "collection": "news",
+      "slug": "ogulcan-seetoo-2024",
+      "source": "https://linguistics.illinois.edu/news/2024-05-06t163707/congratulations-2024-award-winners-and-graduates"
+    },
+    {
+      "collection": "news",
+      "slug": "robbie-mv-lab-moco-2026",
+      "source": "https://ischool.illinois.edu/news-events/news/2026/06/informatics-phd-student-presents-mixed-reality-movement-app-international"
+    },
+    {
+      "collection": "news",
+      "slug": "studio-mdev-2025",
+      "source": "https://ischool.illinois.edu/news-events/news/2025/11/students-studio-present-work-mdev"
+    },
+    {
+      "collection": "presentations",
+      "slug": "silk-roads-poster-2024",
+      "source": "https://playfulbydesign.illinois.edu/wp-content/uploads/2024/10/PBD-24-Schedule-Final.pdf"
+    },
+    {
+      "collection": "presentations",
+      "slug": "studio-demos-playful-by-design-2024",
+      "source": "https://playfulbydesign.illinois.edu/wp-content/uploads/2024/10/PBD-24-Schedule-Final.pdf"
+    }
+  ],
+  "imagePolicy": "News uses existing approved portraits unless a source image is explicitly attached. Portraits are not represented as event photos. Publication figures omitted when no suitable cleared image was available.",
+  "pending": [
+    {
+      "person": "ogulcan-durmaz",
+      "work": "Language learning beyond the borders: Virtual space development with Spatial.io",
+      "source": "https://www.ideals.illinois.edu/items/132604",
+      "reason": "Item unavailable (403); indexed dates conflict between 2024 and 2025. Hold until verified."
+    },
+    {
+      "person": "lily-meyer",
+      "reason": "No confidently matched 2024+ publication, award, or news item found."
+    },
+    {
+      "person": "alan-b-craig",
+      "reason": "No confidently verified new 2024+ item found; older books cited by newer papers are not new publications."
+    }
+  ],
+  "exclusions": [
+    "Sarvin APT award is 2023, outside requested period.",
+    "Other same-name medical authors for Sarvin; sports and novelist results for Lily; obituary of a different David Hopping.",
+    "Accepted/in-revision work not represented as published."
+  ],
+  "dateNotes": [
+    "Huang adult-learning chapter uses year only because source dates differ.",
+    "AI-scaffolding paper uses April 2026 issue date and explicitly notes December 2025 online publication.",
+    "Flow-network paper uses August 2026 online publication, not future December print date.",
+    "Poster/demo date has month precision because individual day was not verified."
+  ],
+  "images": [
+    {
+      "file": "public/media/news/studio-mdev-2025.jpg",
+      "source": "https://ischool.illinois.edu/sites/default/files/styles/small/public/images/The%20Studio_NN.jpg?itok=UqYjjm8Y",
+      "context": "University news photograph of the featured team; attribution included in story."
+    }
+  ]
+}

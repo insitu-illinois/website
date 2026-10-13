@@ -28,13 +28,13 @@ export const models = {
   publications: {
     title: text(true), authors: long(), labAuthors: refs('people'), summary: long(), year: year(), publicationDate: date(), venue: text(),
     type: { ...select('journal', 'conference', 'chapter', 'thesis', 'preprint'), required: true },
-    award: text(), pdf: { kind: 'file' }, doi: url(), code: url(), bibtex: long(),
+    award: text(), pdf: { kind: 'file' }, doi: url(), sourceUrl: url(), code: url(), bibtex: long(),
     project: refs('projects', false), themes: refs('themes'), thumbnail: image(),
   },
   presentations: {
     title: text(true), type: { ...select('invited', 'conference', 'poster', 'demo', 'workshop', 'exhibition'), required: true },
     venue: text(), location: text(), date: date(), presenters: refs('people'), project: refs('projects', false),
-    themes: refs('themes'), slides: url(), video: url(),
+    themes: refs('themes'), slides: url(), video: url(), sourceUrl: url(),
   },
   recognition: {
     title: text(true), type: { ...select('award', 'grant', 'fellowship', 'scholarship'), required: true },

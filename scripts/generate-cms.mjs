@@ -3,6 +3,7 @@ import { stringify } from 'yaml';
 import { models, fieldsFor, slugPattern, datePattern, mediaPattern } from '../src/lib/content-model.mjs';
 import { roles } from '../src/lib/format.mjs';
 const hints = {
+  sourceUrl: 'Paste the university, publisher, or event page that verifies this work; leave blank if unavailable.',
   draft: 'Turn on to hide this entry from the website while you prepare it; GitHub files remain public.',
   name: 'Enter the name as it should appear on the website.',
   title: 'Enter the approved title in sentence case, keeping proper names capitalized.',
@@ -61,7 +62,7 @@ const hints = {
   statement: 'Enter the approved introductory statement for Home.',
   institution: 'Enter the university affiliation displayed in the footer.',
 };
-const labels = { linkedin: 'LinkedIn', scholar: 'Google Scholar', developerName: 'Developer name', universityProfile: 'University profile', publicationDate: 'Publication date', mapEmbedUrl: 'Map embed URL', directionsUrl: 'Directions link', labAuthors: 'Lab authors', heroMedia: 'Hero image', shortDescription: 'Short description', relatedPublication: 'Related publication', relatedProject: 'Related project', awardingBody: 'Awarding body', externalLink: 'External link', bibtex: 'BibTeX', doi: 'DOI URL', pdf: 'PDF', phd: 'PhD' };
+const labels = { sourceUrl: 'Source URL', linkedin: 'LinkedIn', scholar: 'Google Scholar', developerName: 'Developer name', universityProfile: 'University profile', publicationDate: 'Publication date', mapEmbedUrl: 'Map embed URL', directionsUrl: 'Directions link', labAuthors: 'Lab authors', heroMedia: 'Hero image', shortDescription: 'Short description', relatedPublication: 'Related publication', relatedProject: 'Related project', awardingBody: 'Awarding body', externalLink: 'External link', bibtex: 'BibTeX', doi: 'DOI URL', pdf: 'PDF', phd: 'PhD' };
 const label = name => labels[name] ?? name[0].toUpperCase() + name.slice(1);
 function field(name, f) {
   const result = { name, label: label(name), widget: f.widget ?? 'string', required: Boolean(f.required), hint: hints[name] };

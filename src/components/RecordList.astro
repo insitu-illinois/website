@@ -24,6 +24,7 @@ const {title,records,peopleLinks=false,more,cards=false,id,data,compact=false}=A
           {d.award && <span class="badge">{d.award}</span>}
           {d.pdf && <a href={d.pdf}>PDF</a>}{d.doi && <a href={d.doi}>DOI</a>}{d.code && <a href={d.code}>Code</a>}
           {d.slides && <a href={d.slides}>Slides</a>}{d.video && <a href={d.video}>Video</a>}
+          {d.sourceUrl && <a href={d.sourceUrl}>Read the source</a>}
           {d.link && <a href={d.link}>Award details</a>}
           {d.externalLink && <a href={d.externalLink}>Read the source</a>}
         </div>}

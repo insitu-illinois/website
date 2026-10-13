@@ -14,5 +14,8 @@
   ],
   "relatedProject": "game-accessibility",
   "relatedPublication": "",
-  "image": null
+  "image": {
+    "src": "/media/people/brian-graves-university.jpg",
+    "alt": "Portrait of Brian Graves"
+  }
 }

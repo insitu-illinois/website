@@ -514,6 +514,15 @@ collections:
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
+      - name: sourceUrl
+        label: Source URL
+        widget: string
+        required: false
+        hint: Paste the university, publisher, or event page that verifies this work;
+          leave blank if unavailable.
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
       - name: code
         label: Code
         widget: string
@@ -688,6 +697,15 @@ collections:
         widget: string
         required: false
         hint: Paste the full link to the presentation video, or leave blank.
+        pattern:
+          - ^https?://\S+$
+          - Use a full http or https URL.
+      - name: sourceUrl
+        label: Source URL
+        widget: string
+        required: false
+        hint: Paste the university, publisher, or event page that verifies this work;
+          leave blank if unavailable.
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.

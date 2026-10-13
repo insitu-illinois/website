@@ -40,5 +40,5 @@ const collection=page==='awards-funding'?'recognition':page;
     <section class="split-section"><h2>Access and participation</h2><div><p>Our work shares a commitment to situated, participatory, and accessible experiences.</p><p><a href="/themes/accessibility/">Accessibility & belonging</a></p></div></section>
     <aside class="next-entry"><h2><a href="/people/">Meet the team</a></h2></aside>
   </>}
-  {['about','join'].includes(page)&&<LabLocation/>}
+  {page==='join'&&<LabLocation/>}
 </Base>
