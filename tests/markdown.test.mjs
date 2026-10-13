@@ -6,3 +6,12 @@ test('CMS prose preserves headings and links but cannot execute HTML or embed tr
   assert.match(html,/<h2>Heading<\/h2>/);assert.match(html,/<strong>Research<\/strong>/);assert.match(html,/href="\/media\/paper.pdf"/);
   assert.doesNotMatch(html,/script|onerror|<img|javascript:/);
 });
+
+test('person references link prose names without nesting links or altering code',()=>{
+ const people=[{id:'brian-graves',data:{name:'Brian Graves',role:'phd',bio:'Researcher'}}];
+ const result=markdown('Brian Graves and **Brian Graves**. [Brian Graves](https://example.com) and `Brian Graves`.',people);
+ assert.match(result, /href="\/people\/brian-graves\/"/);
+ assert.match(result, /<a href="https:\/\/example.com">Brian Graves<\/a>/);
+ assert.match(result, /<code>Brian Graves<\/code>/);
+ assert.ok(!result.includes('<a href="https://example.com"><a'));
+});

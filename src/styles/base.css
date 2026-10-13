@@ -274,9 +274,41 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
 .resource-links svg { width:var(--space-5); height:var(--space-5); fill:currentColor; flex-shrink:0; }
 .publication-heading .resource-links { margin-top:var(--space-4); }
 @media(min-width:64rem) {
- .records:not(.card-grid)>.record-row { grid-template-columns:minmax(0,1fr) minmax(0,12rem); }
+ .records:not(.card-grid)>.record-with-resources { grid-template-columns:minmax(0,1fr) minmax(0,12rem); }
  .records:not(.card-grid)>.record-row>.resource-links { justify-content:flex-end; }
  .records:not(.card-grid)>.record-row>.people-metadata { grid-column:1; }
 }
 body:not(.home-page) .page-heading { margin-block:var(--space-4) var(--space-6); padding-bottom:var(--space-5); }
 body:not(.home-page) .main-content { padding-top:var(--space-6); }
+
+/* Small editorial headers distinguish sections without adding more prose. */
+body:not(.home-page) .page-intro { display:flex; align-items:center; gap:var(--space-5); padding:var(--space-5); margin-top:0; border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); background:var(--surface-card); }
+.page-intro h1 { font-size:var(--text-display-md); margin:0 0 var(--space-2); max-width:none; }
+.page-intro p { margin:0; font-size:var(--text-body-md); }
+.intro-copy { min-width:0; }
+.intro-symbol { flex-shrink:0; display:grid; place-items:center; width:var(--space-8); height:var(--space-8); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); background:var(--surface-page); color:var(--text-heading); }
+.intro-symbol svg { width:var(--space-6); height:var(--space-6); fill:currentColor; }
+body:not(.home-page) .intro-presentations,body:not(.home-page) .intro-news { background:var(--surface-page); border-inline-start:var(--border-thick) solid var(--text-heading); }
+body:not(.home-page) .intro-awards-funding { border-block-start:var(--border-thick) solid var(--text-heading); }
+.inline-people a { color:inherit; }
+.inline-people + time { margin-inline-start:var(--space-3); }
+.person-photo-link { display:block; border-radius:var(--radius-md); }
+.person-photo-link:hover { outline:var(--border-hairline) solid var(--text-secondary); outline-offset:var(--space-1); }
+.record-thumbnail { display:block; width:var(--space-9); border-radius:var(--radius-sm); overflow:hidden; }
+.record-thumbnail img { width:100%; aspect-ratio:1; object-fit:cover; }
+@media(min-width:48rem) {
+ .records:not(.card-grid)>.record-with-image { grid-template-columns:auto minmax(0,1fr); }
+ .record-with-image>.resource-links { grid-column:2; }
+}
+@media(min-width:64rem) {
+ .records:not(.card-grid)>.record-with-image.record-with-resources { grid-template-columns:auto minmax(0,1fr) minmax(0,12rem); }
+ .record-with-image>.resource-links { grid-column:3; }
+}
+@media(max-width:30rem) {
+ body:not(.home-page) .page-intro { align-items:flex-start; gap:var(--space-3); padding:var(--space-4); }
+ .intro-symbol { width:var(--space-7); height:var(--space-7); }
+ .intro-symbol svg { width:var(--space-5); height:var(--space-5); }
+ .page-intro h1 { font-size:var(--text-display-sm); }
+}
+
+.record-main>.metadata { max-width:none; }

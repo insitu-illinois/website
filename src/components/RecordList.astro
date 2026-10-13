@@ -4,7 +4,9 @@ import {recordPeople,referenced} from '../lib/derived.mjs';
 import Authors from './Authors.astro';
 import ResourceLinks from './ResourceLinks.astro';
 import Tags from './Tags.astro';
-import PeopleTags from './PeopleTags.astro';
+import InlinePeople from './InlinePeople.astro';
+import LinkedPeopleText from './LinkedPeopleText.astro';
+import {unmentionedPeople} from '../lib/people-text.mjs';
 interface Props { title: string; records: any[]; peopleLinks?: boolean; more?: string; cards?: boolean; id?: string; data?:any; compact?:boolean; }
 const {title,records,peopleLinks=false,more,cards=false,id,data,compact=false}=Astro.props;
 ---
@@ -14,18 +16,19 @@ const {title,records,peopleLinks=false,more,cards=false,id,data,compact=false}=A
     {records.map(record => {
       const href=entryUrl(peopleLinks ? {...record,collection:'people'} : record);
       const d=record.data;
-      return <li class:list={{card:cards,'record-row':!compact}}><div class="record-main">
+      const people=data?recordPeople(data,record):[];
+      const names=record.collection==='publications'?[]:unmentionedPeople([d.title,d.name,d.shortDescription,d.summary,d.description].filter(Boolean).join(" "),people);
+      return <li class:list={{card:cards,'record-row':!compact,'record-with-resources':!compact&&Boolean(d.pdf||d.doi||d.code||d.slides||d.video||d.link||d.sourceUrl||d.externalLink),'record-with-image':!compact&&record.collection==='news'&&Boolean(d.image)}}>{!compact&&record.collection==='news'&&d.image&&<a class="record-thumbnail" href={href} aria-label={`Read ${d.title}`}><img src={d.image.src} alt={d.image.alt} loading="lazy" width="128" height="128"/></a>}<div class="record-main">
         {!compact && (d.type||d.status||d.role) && <p class="label record-kind">{d.role ? roles[d.role as keyof typeof roles] : record.collection==='presentations'&&d.type==='conference'?'Conference talk':labels[(d.type||d.status) as keyof typeof labels] || d.type}</p>}
-        <h3>{href ? <a href={href}>{d.name ?? d.title}</a> : d.name ?? d.title}</h3>
+        <h3>{href ? <a href={href}>{d.name ?? d.title}</a> : <LinkedPeopleText text={d.name ?? d.title} people={people}/>}</h3>
         {d.draft && <p class="label">Draft · Not published</p>}
         {!compact && d.authors && <Authors text={d.authors} people={data?referenced(data.people,d.labAuthors):[]}/>}
-        {(d.venue || d.year || d.date || d.awardingBody) && <p class="label metadata">{[d.venue || d.awardingBody,d.location,d.year || dateLabel(d.date)].filter(Boolean).join(' · ')}</p>}
-        {!compact && (d.shortDescription || d.summary || d.description) && <p>{d.shortDescription || d.summary || d.description}</p>}
+        {(names.length || d.venue || d.year || d.date || d.awardingBody) && <p class="label metadata"><InlinePeople people={names}/>{names.length>0&&(d.venue||d.year||d.date||d.awardingBody)&&<span aria-hidden="true"> · </span>}{[d.venue || d.awardingBody,d.location,d.year || dateLabel(d.date)].filter(Boolean).join(' · ')}</p>}
+        {!compact && (d.shortDescription || d.summary || d.description) && <p><LinkedPeopleText text={d.shortDescription || d.summary || d.description} people={people}/></p>}
         {!compact && data && <Tags themes={referenced(data.themes,d.themes)}/>}
         {!compact && d.award && <span class="badge">{d.award}</span>}
         </div>
         {!compact && <ResourceLinks record={d}/>}
-        {!compact && data && record.collection!=='publications' && <PeopleTags people={recordPeople(data,record)}/>}
       </li>;
     })}
   </ul>

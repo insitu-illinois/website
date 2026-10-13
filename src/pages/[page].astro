@@ -1,4 +1,5 @@
 ---
+import PageIntro from '../components/PageIntro.astro';
 import Base from '../layouts/Base.astro';
 import LabValues from '../components/LabValues.astro';
 import RecordList from '../components/RecordList.astro';
@@ -22,7 +23,7 @@ const data=await content();
 const collection=page==='awards-funding'?'recognition':page;
 ---
 <Base title={titles[page]} description={intros[page]}>
-  <header class="page-heading"><p class="label">IN/SITU · {titles[page]}</p><h1>{titles[page]}</h1><p class="lead">{intros[page]}</p></header>
+  <PageIntro kind={page} title={titles[page]} description={intros[page]}/>
   {page==='about' && <>
     {(!about.draft||import.meta.env.DEV)&&<section class="reading-section"><h2>Our shared premise</h2><Prose body={about.body}/></section>}
     <LabValues />

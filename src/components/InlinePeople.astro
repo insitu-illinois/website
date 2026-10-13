@@ -1,0 +1,5 @@
+---
+import {personHref} from '../lib/people-text.mjs';
+const {people=[]}=Astro.props;
+---
+{people.length>0&&<span class="inline-people">{people.map((person:any,index:number)=><>{index>0&&' · '}<a href={personHref(person)}>{person.data.name}</a></>)}</span>}

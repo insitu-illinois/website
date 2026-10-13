@@ -126,7 +126,7 @@ test('person and theme tags connect the new paper and news to their profiles',as
   await expect(page.getByText('Health Innovation Professor, Carle Illinois College of Medicine',{exact:true})).toBeVisible();
   await expect(page.getByRole('link',{name:'Bridging anatomy curricular gaps: Leveraging student-created video resources in elective courses',exact:true})).toBeVisible();
   await page.goto('/news/brian-graves-research-live-2026/');
-  await page.locator('main .main-content > .people-metadata .people-tags').getByRole('link',{name:'Brian Graves',exact:true}).click();
+  await page.locator('.reading-section .prose').getByRole('link',{name:'Brian Graves',exact:true}).click();
   await expect(page.getByRole('link',{name:'Brian Graves named a Research Live finalist',exact:true})).toBeVisible();
   await page.goto('/themes/accessibility/');
   await expect(page.getByRole('link',{name:'Brian Graves named a Research Live finalist',exact:true})).toBeVisible();

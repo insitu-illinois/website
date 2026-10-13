@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import ResourceLinks from '../../components/ResourceLinks.astro';
 import Tags from '../../components/Tags.astro';
-import PeopleTags from '../../components/PeopleTags.astro';
+import InlinePeople from '../../components/InlinePeople.astro';
+import {unmentionedPeople} from '../../lib/people-text.mjs';
 import RecordList from '../../components/RecordList.astro';
 import Prose from '../../components/Prose.astro';
 import {content} from '../../lib/content';
@@ -12,15 +13,15 @@ import type { CollectionEntry } from 'astro:content';
 interface Props { entry: CollectionEntry<'news'>; data: Awaited<ReturnType<typeof content>>; }
 export async function getStaticPaths(){const data=await content();return data.news.map((entry:any)=>({params:{slug:entry.id},props:{entry,data}}));}
 const {entry,data}=Astro.props,d=entry.data;
+const people=referenced(data.people,d.people);
 const related=[...referenced(data.projects,[d.relatedProject]),...referenced(data.publications,[d.relatedPublication])];
 ---
 <Base noindex={d.draft} title={d.title} description={`${d.title}. ${dateLabel(d.date)}. News from IN/SITU.`}>
   <a class="back-link" href="/news/">All news</a>
-  <header class="page-heading"><p class="label"><time datetime={d.date}>{dateLabel(d.date)}</time> · {labels[d.type as keyof typeof labels]}{d.draft?' · Draft':''}</p><h1>{d.title}</h1></header>
+  <header class="page-heading"><p class="label"><InlinePeople people={unmentionedPeople(d.title+" "+d.body,people)}/><time datetime={d.date}>{dateLabel(d.date)}</time> · {labels[d.type as keyof typeof labels]}{d.draft?' · Draft':''}</p><h1>{d.title}</h1></header>
   {d.image&&<img class="media" src={d.image.src} alt={d.image.alt}/>}
   <Tags themes={referenced(data.themes,d.themes)}/>
-  <section class="reading-section"><Prose body={d.body}/><ResourceLinks record={d} sourceLabel="Read the original story"/></section>
+  <section class="reading-section"><Prose body={d.body} people={people}/><ResourceLinks record={d} sourceLabel="Read the original story"/></section>
   {related.length>0&&<RecordList data={data} title="Related work" records={related}/>}
   <RecordList data={data} title="More news" records={newest(data.news.filter((r:any)=>r.id!==entry.id)).slice(0,3)}/>
-  <PeopleTags people={referenced(data.people,d.people)}/>
 </Base>

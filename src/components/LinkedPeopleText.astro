@@ -1,0 +1,5 @@
+---
+import {peopleTextParts,personHref} from '../lib/people-text.mjs';
+const {text='',people=[]}=Astro.props;
+---
+{peopleTextParts(text,people).map(part=>part.person?<a href={personHref(part.person)}>{part.text}</a>:part.text)}

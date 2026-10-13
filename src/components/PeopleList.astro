@@ -19,7 +19,7 @@ const { people, data } = Astro.props;
           <ProfileLinks person={person.data} alumni iconsOnly/>
         </div>
       </li> : <li id={`person-${person.id}`} class="card" tabindex="-1">
-        {person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy" /> : <PersonPlaceholder/>}
+        {href ? <a class="person-photo-link" href={href} aria-label={`View ${person.data.name}’s profile`}>{person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy"/> : <PersonPlaceholder/>}</a> : <>{person.data.photo ? <img class="people-photo" src={person.data.photo.src} alt={person.data.photo.alt} width="272" height="272" loading="lazy"/> : <PersonPlaceholder/>}</>}
         <div>
           <h3>{href ? <a href={href}>{person.data.name}</a> : person.data.name}</h3>
           {group.key==='current' && <p class="label">{roles[person.data.role as keyof typeof roles]}</p>}
