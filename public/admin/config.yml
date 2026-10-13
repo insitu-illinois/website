@@ -709,6 +709,36 @@ collections:
         pattern:
           - ^https?://\S+$
           - Use a full http or https URL.
+      - name: description
+        label: Description
+        widget: text
+        required: false
+        hint: Write a short, approved description for readers.
+      - name: image
+        label: Image
+        widget: object
+        required: false
+        hint: Optional. Adding an image requires both a file and meaningful alt text.
+        collapsed: true
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            hint: Upload or choose the image file you have permission to publish.
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
+            pattern:
+              - .*\S.*
+              - Describe the image.
   - name: recognition
     label: Recognition
     folder: src/content/recognition

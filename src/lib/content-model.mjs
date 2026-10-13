@@ -34,7 +34,7 @@ export const models = {
   presentations: {
     title: text(true), type: { ...select('invited', 'conference', 'poster', 'demo', 'workshop', 'exhibition'), required: true },
     venue: text(), location: text(), date: date(), presenters: refs('people'), project: refs('projects', false),
-    themes: refs('themes'), slides: url(), video: url(), sourceUrl: url(),
+    themes: refs('themes'), slides: url(), video: url(), sourceUrl: url(), description: long(), image: image(),
   },
   recognition: {
     title: text(true), type: { ...select('award', 'grant', 'fellowship', 'scholarship'), required: true },

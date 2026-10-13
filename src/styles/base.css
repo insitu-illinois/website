@@ -296,6 +296,7 @@ body:not(.home-page) .intro-awards-funding { border-block-start:var(--border-thi
 .person-photo-link:hover { outline:var(--border-hairline) solid var(--text-secondary); outline-offset:var(--space-1); }
 .record-thumbnail { display:block; width:var(--space-9); border-radius:var(--radius-sm); overflow:hidden; }
 .record-thumbnail img { width:100%; aspect-ratio:1; object-fit:cover; }
+.record-poster img { aspect-ratio:auto; object-fit:contain; }
 @media(min-width:48rem) {
  .records:not(.card-grid)>.record-with-image { grid-template-columns:auto minmax(0,1fr); }
  .record-with-image>.resource-links { grid-column:2; }
