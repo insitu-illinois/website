@@ -120,7 +120,7 @@ collections:
             value: phd
           - label: Master’s student
             value: ms
-          - label: Undergraduate
+          - label: Bachelor’s student
             value: undergrad
           - label: Collaborator
             value: collaborator

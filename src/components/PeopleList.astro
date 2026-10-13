@@ -7,7 +7,7 @@ import ProfileLinks from './ProfileLinks.astro';
 import PersonPlaceholder from './PersonPlaceholder.astro';
 const { people, data } = Astro.props;
 ---
-{peopleGroups(people).map(group => <section aria-labelledby={`people-${group.key}`}>
+{peopleGroups(people).filter(group=>group.items.length>0).map(group => <section aria-labelledby={`people-${group.key}`}>
   <h2 id={`people-${group.key}`}>{group.title}</h2>
   <ul class:list={['records','people-list',group.key==='alumni' ? 'people-compact' : 'card-grid']}>
     {group.items.map((person:any) => {

@@ -254,3 +254,29 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
 .project-intro.has-game-case .page-heading { max-width:60ch; padding-top:0; margin-bottom:var(--space-5); }
 .project-intro.has-game-case h1 { font-size:var(--text-display-sm); }
 .project-intro.has-game-case .lead { font-size:var(--text-body-md); }
+
+/* Shared compact research lists: reading column with resources alongside. */
+.record-section { margin-block:var(--space-6); }
+.record-section .section-heading { margin-bottom:var(--space-4); }
+.record-section .section-heading h2 { font-size:var(--text-display-sm); }
+.records>li { padding-block:var(--space-4); }
+.records h3 { font-size:var(--text-body-lg); line-height:var(--lh-body); max-width:none; margin-top:0; }
+.records .record-kind { display:none; }
+.record-main { min-width:0; }
+.record-main>p { max-width:85ch; margin-bottom:var(--space-2); }
+.records .metadata { margin-top:var(--space-2); }
+.record-row { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-3) var(--space-6); align-items:start; }
+.record-row>.people-metadata { grid-column:1/-1; margin-top:0; padding-top:var(--space-2); }
+.authors a { color:inherit; text-decoration:underline; }
+.resource-links { display:flex; flex-wrap:wrap; gap:var(--space-2); align-items:center; }
+.resource-links>a { position:relative; display:inline-flex; align-items:center; justify-content:center; width:var(--space-7); min-height:var(--space-7); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); color:var(--text-primary); background:var(--surface-page); }
+.resource-links>a:hover { background:var(--surface-card); border-color:var(--control-boundary,var(--text-secondary)); }
+.resource-links svg { width:var(--space-5); height:var(--space-5); fill:currentColor; flex-shrink:0; }
+.publication-heading .resource-links { margin-top:var(--space-4); }
+@media(min-width:64rem) {
+ .records:not(.card-grid)>.record-row { grid-template-columns:minmax(0,1fr) minmax(0,12rem); }
+ .records:not(.card-grid)>.record-row>.resource-links { justify-content:flex-end; }
+ .records:not(.card-grid)>.record-row>.people-metadata { grid-column:1; }
+}
+body:not(.home-page) .page-heading { margin-block:var(--space-4) var(--space-6); padding-bottom:var(--space-5); }
+body:not(.home-page) .main-content { padding-top:var(--space-6); }

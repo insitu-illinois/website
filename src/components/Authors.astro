@@ -1,0 +1,6 @@
+---
+import {authorParts} from '../lib/author-links.mjs';
+import {hasPersonPage} from '../lib/format.mjs';
+const {text='',people=[]}=Astro.props;
+---
+<p class="authors">{authorParts(text,people).map(part=>part.person?<a href={hasPersonPage(part.person)?`/people/${part.person.id}/`:`/people/#person-${part.person.id}`}>{part.text}</a>:part.text)}</p>

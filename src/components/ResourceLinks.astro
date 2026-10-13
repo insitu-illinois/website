@@ -1,0 +1,13 @@
+---
+import pdf from '../assets/icons/bootstrap/file-earmark-pdf.svg?raw';
+import doi from '../assets/icons/bootstrap/link-45deg.svg?raw';
+import code from '../assets/icons/bootstrap/code-slash.svg?raw';
+import slides from '../assets/icons/bootstrap/easel.svg?raw';
+import video from '../assets/icons/bootstrap/play-circle.svg?raw';
+import award from '../assets/icons/bootstrap/award.svg?raw';
+import source from '../assets/icons/bootstrap/box-arrow-up-right.svg?raw';
+const {record:d,sourceLabel="Read the source"}=Astro.props;
+const items=[{url:d.pdf,label:'PDF',icon:pdf},{url:d.doi,label:'DOI',icon:doi},{url:d.code,label:'Code',icon:code},{url:d.slides,label:'Slides',icon:slides},{url:d.video,label:'Video',icon:video},{url:d.link,label:'Award details',icon:award},{url:d.sourceUrl||d.externalLink,label:sourceLabel,icon:source}].filter(i=>i.url);
+const paths=(svg:string)=>svg.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
+---
+{items.length>0&&<div class="resource-links" aria-label="Resources">{items.map(item=><a href={item.url} aria-label={item.label} title={item.label}><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" set:html={paths(item.icon)}/></a>)}</div>}

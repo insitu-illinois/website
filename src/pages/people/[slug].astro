@@ -32,7 +32,7 @@ const alumniTarget=`/people/#person-${person.id}`;
       {person.data.bio?.split('\n\n').map((paragraph:string) => <p>{paragraph}</p>)}
       {person.data.affiliations && <div class="affiliations"><h2>Appointments & affiliations</h2><ul>{person.data.affiliations.split('\n').filter(Boolean).map((line:string)=><li>{line}</li>)}</ul></div>}
       <Tags themes={personThemes(data,person)}/>
-      <ProfileLinks person={person.data}/>
+      <ProfileLinks person={person.data} iconsOnly/>
       <div class="links">
         {person.data.universityProfile && <a href={person.data.universityProfile}>University profile</a>}
         {person.data.email && <a href={`mailto:${person.data.email}`}>Email</a>}
