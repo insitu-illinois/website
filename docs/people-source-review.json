@@ -271,7 +271,13 @@
       "missingChannels": [
         "scholar",
         "website"
-      ]
+      ],
+      "photoSource": {
+        "url": "https://www.linkedin.com/in/lily-i-meyer/",
+        "retrieved": "2026-10-13",
+        "asset": "/media/people/lily-meyer-linkedin.jpg",
+        "note": "Profile photo from the exact LinkedIn profile supplied by the user."
+      }
     },
     {
       "name": "Monika Janas",
