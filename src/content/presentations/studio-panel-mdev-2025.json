@@ -1,0 +1,17 @@
+{
+  "slug": "studio-panel-mdev-2025",
+  "draft": false,
+  "title": "A panel discussion of the stu/dio: Contributions, Focus Areas, and Challenges in University Student-Driven Game Production",
+  "type": "conference",
+  "date": "2025-11",
+  "venue": "MDEV 2025",
+  "presenters": [
+    "robbie-sieczkowski",
+    "sarvin-eshaghi",
+    "sepehr-vaez-afshar"
+  ],
+  "themes": [],
+  "description": "Panel with Daniel Cermak, Robbie Sieczkowski, Sarvin Eshaghi, Sepehr Vaez Afshar, O. Wang, and R. Hidalgo.",
+  "sourceUrl": "https://ischool.illinois.edu/news-events/news/2025/11/students-studio-present-work-mdev",
+  "location": "Madison, Wisconsin"
+}
