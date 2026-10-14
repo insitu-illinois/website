@@ -23,6 +23,8 @@ const hasGameCase=Boolean(d.heroMedia)&&entry.id==='vrchaeology'&&(d.gallery?.le
   {d.heroMedia&&<div class="project-cover">{hasGameCase ? <GameCase cover={d.heroMedia} images={d.gallery} name={d.name} availability={d.availability} description={d.shortDescription||''} credits={d.credits??[]}/> : <Media media={d.heroMedia} natural eager />}</div>}</div>
   <section class="reading-section"><Prose body={d.body}/></section>
   {hasGameCase ? <noscript><ProjectGallery images={d.gallery??[]}/></noscript> : <ProjectGallery images={d.gallery??[]}/>}
+  <ProjectGallery images={d.classroomGallery??[]} id="classroom-history" title="Classroom & fieldwork archive" description="Selected photographs from the former lab website. Dates are included where recorded." source="https://www.vrchaeologyillinois.com/lab-media"/>
+  <ProjectGallery images={d.archiveGallery??[]} id="early-environments" title="Early environments & interactions" description="Historical development images, separate from the current game shown above. Animations are silent and play only when selected." source="https://www.vrchaeologyillinois.com/environment-media"/>
   <ProjectCredits credits={d.credits??[]}/>
   <RecordList data={data} title="Publications" records={lists.publications}/>
   <RecordList data={data} title="Presentations" records={lists.presentations}/>
@@ -31,3 +33,5 @@ const hasGameCase=Boolean(d.heroMedia)&&entry.id==='vrchaeology'&&(d.gallery?.le
   <PeopleTags people={referenced(data.people,d.team)} label="Project team"/>
   {next.id!==entry.id && <aside class="next-entry"><p class="label">Next project</p><h2><a href={`/projects/${next.id}/`}>{next.data.name}</a></h2></aside>}
 </Base>
+
+<script>import '../../scripts/project-gallery';</script>

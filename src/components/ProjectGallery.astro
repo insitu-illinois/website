@@ -1,10 +1,20 @@
 ---
-const { images=[] }=Astro.props;
+const { images=[],id='gallery',title='Inside the experience',description='',source='' }=Astro.props;
 ---
-{images.length>0&&<section class="project-gallery" aria-labelledby="gallery-heading">
-  <h2 id="gallery-heading">Inside the experience</h2>
-  <div class="gallery-grid">{images.map((media:any)=><figure>
-    <img src={media.src} alt={media.alt} loading="lazy" decoding="async" width="1600" height="1000"/>
-    <figcaption>{media.caption&&<p>{media.caption}</p>}<a href={media.src} aria-label={`View full image: ${media.caption||media.alt}`}>View full image</a></figcaption>
+{images.length>0&&<section class:list={['project-gallery',{'archive-gallery':id!=='gallery'}]} aria-labelledby={`${id}-heading`}>
+  <h2 id={`${id}-heading`}>{title}</h2>
+  {description&&<p>{description} {source&&<a href={source}>Original gallery</a>}</p>}
+  <div class="gallery-grid">{images.map((media:any,index:number)=><figure>
+    <img id={`${id}-image-${index}`} src={media.src} alt={media.alt} loading="lazy" decoding="async" width="1600" height="1000"/>
+    <figcaption>{media.caption&&<p>{media.caption}</p>}
+      {media.animatedSrc ? <><button type="button" class="button secondary" hidden data-archive-animation={media.animatedSrc} data-poster={media.src} aria-controls={`${id}-image-${index}`} aria-pressed="false">Play animation<span class="visually-hidden">: {media.caption||media.alt}</span></button><noscript><a href={media.animatedSrc}>Open animation</a></noscript></> : <a href={media.src} aria-label={`View full image: ${media.caption||media.alt}`}>View full image</a>}
+    </figcaption>
   </figure>)}</div>
 </section>}
+
+
+<style>
+  @media(min-width:64rem) { .archive-gallery .gallery-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-4); } }
+  .archive-gallery figcaption { padding-block:var(--space-2); }
+  .archive-gallery button { min-height:var(--space-7); }
+</style>

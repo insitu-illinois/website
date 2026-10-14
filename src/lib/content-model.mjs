@@ -21,7 +21,7 @@ export const models = {
   },
   projects: {
     name: text(true), shortDescription: long(), availability: long(), heroMedia: image(), body: body(),
-    gallery: { kind: 'gallery' }, credits: { kind: 'credits' },
+    gallery: { kind: 'gallery' }, classroomGallery: { kind: 'gallery' }, archiveGallery: { kind: 'gallery' }, credits: { kind: 'credits' },
     status: { ...select('active', 'completed'), required: true },
     featured: { kind: 'boolean', default: false }, themes: refs('themes'), team: refs('people'), funding: refs('recognition'),
   },
@@ -67,7 +67,7 @@ export function makeSchema(z, reference, fields) {
       case 'image':
         s = z.object({ src: z.string().regex(new RegExp(mediaPattern)), alt: z.string().trim().min(1) }).strict().nullish(); break;
       case 'gallery':
-        s = z.array(z.object({ src:z.string().regex(new RegExp(mediaPattern)), alt:z.string().trim().min(1), caption:z.string().nullish().transform(v=>v??'') }).strict()).nullish().transform(v=>v??[]); break;
+        s = z.array(z.object({ src:z.string().regex(new RegExp(mediaPattern)), alt:z.string().trim().min(1), caption:z.string().nullish().transform(v=>v??''), animatedSrc:optionalString(z.string().regex(new RegExp(mediaPattern))) }).strict()).nullish().transform(v=>v??[]); break;
       case 'credits':
         s = z.array(z.object({ role:z.string().trim().min(1), names:z.string().trim().min(1) }).strict()).nullish().transform(v=>v??[]); break;
       case 'date':

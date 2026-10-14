@@ -1,0 +1,58 @@
+{
+  "approved": "2026-10-13",
+  "media": [
+    {
+      "asset": "/media/projects/vrchaeology/history/classroom-2019.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/archaeology-lab-class",
+      "original": "https://static.wixstatic.com/media/2104fc_33b9247834d84d2797f4d2aa983fc2f8~mv2.jpg",
+      "caption": "Fall 2019 lab experience."
+    },
+    {
+      "asset": "/media/projects/vrchaeology/history/classroom-collaboration-2019.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/archaeology-lab-class",
+      "original": "https://static.wixstatic.com/media/2104fc_f37cc1a8965e4b528686c2460d1de1df~mv2.jpg",
+      "caption": "Fall 2019 lab experience: using VR at a workstation."
+    },
+    {
+      "asset": "/media/projects/vrchaeology/history/lab-session.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/lab-media",
+      "original": "https://static.wixstatic.com/media/2261cb_f794c1b3b324453b964ed0c2e2e4dcc7~mv2_d_4032_3024_s_4_2.jpg",
+      "caption": "A lab session documented on the former VRchaeology website; date not recorded."
+    },
+    {
+      "asset": "/media/projects/vrchaeology/history/outdoor-fieldwork.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/lab-media",
+      "original": "https://static.wixstatic.com/media/23ef03_8d3eb139c4d347c8970e0c0c1bc7a5e9~mv2_d_4032_3024_s_4_2.jpg",
+      "caption": "Outdoor fieldwork documented in the former lab gallery; date not recorded."
+    },
+    {
+      "asset": "/media/projects/vrchaeology/history/early-field-camp.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/environment-media",
+      "original": "https://static.wixstatic.com/media/a0781a_2d9258d94d5d4aaabe3e0dc159847111~mv2.png",
+      "caption": "An early VRchaeology field-camp environment."
+    },
+    {
+      "asset": "/media/projects/vrchaeology/history/early-lab-workspace.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/environment-media",
+      "original": "https://static.wixstatic.com/media/a0781a_263b7808750c4e77aa71c849e3c2b2d8~mv2.png",
+      "caption": "An early virtual lab workspace."
+    },
+    {
+      "asset": "/media/projects/vrchaeology/history/early-camera.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/environment-media",
+      "original": "https://static.wixstatic.com/media/23ef03_f7aad78f9613444490a3004c9debd364~mv2.gif",
+      "caption": "An early camera interaction demonstration. Silent animation.",
+      "animation": "/media/projects/vrchaeology/history/early-camera-motion.webp"
+    },
+    {
+      "asset": "/media/projects/vrchaeology/history/early-teleport.webp",
+      "sourcePage": "https://www.vrchaeologyillinois.com/environment-media",
+      "original": "https://static.wixstatic.com/media/23ef03_c51e38c56f5d45d59dc7f79fdc2bc504~mv2.gif",
+      "caption": "An early teleport movement demonstration. Silent animation.",
+      "animation": "/media/projects/vrchaeology/history/early-teleport-motion.webp"
+    }
+  ],
+  "paper": "https://www.vrchaeologyillinois.com/_files/ugd/a0781a_7822292bf8b1480eaf43f3defa9f179a.pdf",
+  "support": "https://www.vrchaeologyillinois.com/support",
+  "accessibilityStudy": "https://www.vrchaeologyillinois.com/accessibility-and-design"
+}

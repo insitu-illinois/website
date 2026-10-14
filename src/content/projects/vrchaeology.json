@@ -28,7 +28,7 @@
     "nsf-1736235",
     "nsf-2021460"
   ],
-  "body": "## Learning through fieldwork\n\nStudents learn archaeological field methods in an immersive virtual cave: setting up grids, locating and excavating artifacts, mapping features, photographing finds, and running lab analyses. Built in Unreal Engine, VRchaeology connects classroom learning with field practice.\n\nDevelopment continues at the Game Studies and Design (GSD) Stu/dio, with new labs and improvements to the experience. GSD 282: VRchaeology, Spring 2027, was co-created by Laura Shackelford and Sepehr Vaez Afshar. The project is supported by NSF awards 1736235 and 2021460, and Epic MegaGrants.",
+  "body": "## Learning through fieldwork\n\nStudents learn archaeological field methods in an immersive virtual cave: setting up grids, locating and excavating artifacts, mapping features, photographing finds, and running lab analyses. Built in Unreal Engine, VRchaeology connects classroom learning with field practice.\n\nDevelopment continues at the Game Studies and Design (GSD) Stu/dio, with new labs and improvements to the experience. GSD 282: VRchaeology, Spring 2027, was co-created by Laura Shackelford and Sepehr Vaez Afshar. The project is supported by NSF awards 1736235 and 2021460, and Epic MegaGrants.\n\n## Accessibility research, 2020–2022\n\nWith NSF support, the project investigated how virtual reality could make archaeology and other field-based sciences more accessible to college students who use wheelchairs. The study sought perspectives from students with mobility or physical disabilities to inform the experience’s accessibility. This is a historical research strand, not an active recruitment announcement. [NSF award 2021460](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2021460) · [Original project description](https://www.vrchaeologyillinois.com/accessibility-and-design).",
   "gallery": [
     {
       "src": "/media/projects/vrchaeology/cave-waterfall.webp",
@@ -127,5 +127,51 @@
       "names": "Emma Verstraete\nAlexandra Zachwieja"
     }
   ],
-  "availability": "VRchaeology is currently used offline."
+  "availability": "VRchaeology is currently used offline.",
+  "classroomGallery": [
+    {
+      "src": "/media/projects/vrchaeology/history/classroom-2019.webp",
+      "alt": "A participant wearing a VR headset faces a monitor showing a virtual excavation.",
+      "caption": "Fall 2019 lab experience."
+    },
+    {
+      "src": "/media/projects/vrchaeology/history/classroom-collaboration-2019.webp",
+      "alt": "A participant holds a VR controller up while another person sits beside the workstation.",
+      "caption": "Fall 2019 lab experience: using VR at a workstation."
+    },
+    {
+      "src": "/media/projects/vrchaeology/history/lab-session.webp",
+      "alt": "Participants use VR headsets and handheld controllers in a computer lab.",
+      "caption": "A lab session documented on the former VRchaeology website; date not recorded."
+    },
+    {
+      "src": "/media/projects/vrchaeology/history/outdoor-fieldwork.webp",
+      "alt": "A group works beside marked excavation areas outdoors, with buckets and field tools.",
+      "caption": "Outdoor fieldwork documented in the former lab gallery; date not recorded."
+    }
+  ],
+  "archiveGallery": [
+    {
+      "src": "/media/projects/vrchaeology/history/early-field-camp.webp",
+      "alt": "An early virtual environment with a rocky landscape, tents, trees and a cave entrance.",
+      "caption": "An early VRchaeology field-camp environment."
+    },
+    {
+      "src": "/media/projects/vrchaeology/history/early-lab-workspace.webp",
+      "alt": "A virtual laboratory counter with equipment, cabinets and an instruction display.",
+      "caption": "An early virtual lab workspace."
+    },
+    {
+      "src": "/media/projects/vrchaeology/history/early-camera.webp",
+      "alt": "A virtual camera frames part of a rocky excavation area.",
+      "caption": "An early camera interaction demonstration. Silent animation.",
+      "animatedSrc": "/media/projects/vrchaeology/history/early-camera-motion.webp"
+    },
+    {
+      "src": "/media/projects/vrchaeology/history/early-teleport.webp",
+      "alt": "A blue pointer and destination marker indicate a position on the ground in a virtual field camp.",
+      "caption": "An early teleport movement demonstration. Silent animation.",
+      "animatedSrc": "/media/projects/vrchaeology/history/early-teleport-motion.webp"
+    }
+  ]
 }

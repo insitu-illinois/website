@@ -1,23 +1,28 @@
 {
   "slug": "cognitive-loads",
-  "draft": true,
-  "title": "Relationships between cognitive loads and motivational support in a VR game-based learning system for teaching introductory archaeology",
+  "draft": false,
+  "title": "Relationships between cognitive loads and motivational support in a virtual reality game-based learning system for teaching introductory archaeology",
   "venue": "E-Learn 2019",
   "year": 2019,
   "type": "conference",
-  "authors": "",
+  "authors": "Laura Shackelford; Wenhao David Huang; Alan Craig; Cameron Merrill; Danying Chen; Xuehui Chao; Jamie Arjona",
   "labAuthors": [
-    "laura-shackelford"
+    "laura-shackelford",
+    "wen-hao-david-huang",
+    "alan-b-craig",
+    "cameron-merrill",
+    "jamie-arjona"
   ],
   "themes": [
     "situated-learning"
   ],
   "project": "vrchaeology",
-  "summary": "",
-  "pdf": "",
+  "summary": "A study of cognitive load and motivational support in a VR archaeology learning environment, drawing on survey responses from 106 participants.",
+  "pdf": "/media/papers/cognitive-loads.pdf",
   "doi": "",
   "code": "",
   "bibtex": "",
   "award": "",
-  "thumbnail": null
+  "thumbnail": null,
+  "sourceUrl": "https://www.vrchaeologyillinois.com/publications"
 }

@@ -29,6 +29,8 @@ const hints = {
   description: 'Write a short, approved description for readers.',
   shortDescription: 'Summarize the project briefly for project lists.',
   availability: 'For the VRchaeology headset panel, describe how the game can be used now; keep future possibilities clearly conditional.',
+  classroomGallery: 'Add historical classroom or fieldwork photos; include the year only when the source confirms it.',
+  archiveGallery: 'Add images of earlier project versions; keep these separate from the current game gallery.',
   gallery: 'Add approved project images in display order; each needs alt text and may include a caption.',
   credits: 'List the confirmed production credits by role, including contributors who are not lab members.',
   body: 'Write the approved page text; use headings, paragraphs, lists, and links as needed.',
@@ -82,6 +84,7 @@ function field(name, f) {
     case 'gallery':
       Object.assign(result,{widget:'list',collapsed:true,summary:'{{fields.caption}}',fields:[
         ...field('heroMedia',{kind:'image'}).fields,
+        {name:'animatedSrc',label:'Optional animation',widget:'image',required:false,choose_url:false,pattern:[mediaPattern,'Upload an animation to the media folder.'],hint:'Optional animated WebP or GIF shown only after the visitor presses Play animation; use a still image above.'},
         {name:'caption',label:'Caption',widget:'string',required:false,hint:'Describe what this screenshot shows; do not add claims about results or capabilities.'},
       ]}); break;
     case 'credits':

@@ -328,6 +328,102 @@ collections:
             pattern:
               - .*\S.*
               - Describe the image.
+          - name: animatedSrc
+            label: Optional animation
+            widget: image
+            required: false
+            choose_url: false
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an animation to the media folder.
+            hint: Optional animated WebP or GIF shown only after the visitor presses Play
+              animation; use a still image above.
+          - name: caption
+            label: Caption
+            widget: string
+            required: false
+            hint: Describe what this screenshot shows; do not add claims about results or
+              capabilities.
+      - name: classroomGallery
+        label: ClassroomGallery
+        widget: list
+        required: false
+        hint: Add historical classroom or fieldwork photos; include the year only when
+          the source confirms it.
+        collapsed: true
+        summary: "{{fields.caption}}"
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            hint: Upload or choose the image file you have permission to publish.
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
+            pattern:
+              - .*\S.*
+              - Describe the image.
+          - name: animatedSrc
+            label: Optional animation
+            widget: image
+            required: false
+            choose_url: false
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an animation to the media folder.
+            hint: Optional animated WebP or GIF shown only after the visitor presses Play
+              animation; use a still image above.
+          - name: caption
+            label: Caption
+            widget: string
+            required: false
+            hint: Describe what this screenshot shows; do not add claims about results or
+              capabilities.
+      - name: archiveGallery
+        label: ArchiveGallery
+        widget: list
+        required: false
+        hint: Add images of earlier project versions; keep these separate from the
+          current game gallery.
+        collapsed: true
+        summary: "{{fields.caption}}"
+        fields:
+          - name: src
+            label: Image
+            widget: image
+            required: true
+            hint: Upload or choose the image file you have permission to publish.
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an image to the media folder.
+            choose_url: false
+          - name: alt
+            label: Alt text
+            widget: string
+            required: true
+            hint: Describe the image for people who cannot see it; for a headshot, use
+              Portrait of followed by the person’s name.
+            pattern:
+              - .*\S.*
+              - Describe the image.
+          - name: animatedSrc
+            label: Optional animation
+            widget: image
+            required: false
+            choose_url: false
+            pattern:
+              - ^/media/(?!.*\.\.)(?!.*[?#]).+\.(?:png|jpg|jpeg|webp|avif|gif|svg)$
+              - Upload an animation to the media folder.
+            hint: Optional animated WebP or GIF shown only after the visitor presses Play
+              animation; use a still image above.
           - name: caption
             label: Caption
             widget: string
