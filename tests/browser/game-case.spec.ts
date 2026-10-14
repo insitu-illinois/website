@@ -62,7 +62,9 @@ test('game cover and full gallery remain accessible without JavaScript',async({b
   await expect(page.locator('.game-case noscript img')).toBeVisible();
   await expect(page.locator('[data-case-toggle]')).toBeHidden();
   await page.getByRole('link',{name:'Explore the game images'}).click();
-  await expect(page.locator('.project-gallery figure')).toHaveCount(6);
+  await expect(page.locator('.project-gallery[aria-labelledby="gallery-heading"] figure')).toHaveCount(6);
+  await expect(page.locator('.archive-gallery figure')).toHaveCount(8);
+  await expect(page.getByRole('link',{name:'Open animation',exact:true})).toHaveCount(2);
   await context.close();
 });
 
@@ -75,7 +77,7 @@ test('game cover and full gallery remain accessible without JavaScript',async({b
   await expect(page.locator('#experience-availability')).toHaveText('VRchaeology is currently used offline.');
   await headset.press('Space');await expect(page.locator('#experience-availability')).toHaveCSS('visibility','hidden');
   await expect(page.getByRole('heading',{name:'Ready for the classroom'})).toHaveCount(0);
-  await expect(page.locator('.project-gallery')).toHaveCount(0);
+  await expect(page.locator('.project-gallery[aria-labelledby="gallery-heading"]')).toHaveCount(0);
 });
 
 test('real headset stays fixed, parts rotate independently, and the disc remains explorable',async({page})=>{
