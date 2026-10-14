@@ -1,0 +1,16 @@
+---
+import '../styles/research-desk.css';
+const {projects,people}=Astro.props;
+const slugs=['vrchaeology','xr-us-museums','ai-xr-language','game-accessibility'];
+const records=slugs.map(slug=>projects.find((p:any)=>p.id===slug)).filter(Boolean).map((p:any)=>({...p.data,slug:p.id,people:(p.data.team||[]).map((id:string)=>people.find((person:any)=>person.id===id)?.data.name).filter(Boolean)}));
+---
+<div class="research-desk">
+<script type="application/json" data-desk-content is:inline set:html={JSON.stringify(records).replaceAll('<','\\u003c')} />
+<section id="desk" class="workspace" aria-label="Interactive research desk"><div class="desk-area"><div class="desk-heading"><div><span class="eyebrow">Explore the lab</span><h2>The research desk</h2></div><span class="hint">Select an object</span></div>
+<div class="scene-wrap"><div id="scene" aria-hidden="true"></div><p class="scene-help">Drag to rotate · Scroll or pinch to zoom · Select an object</p><div class="view-controls" aria-label="Desk view controls"><button type="button" id="rotate-left" aria-label="Rotate desk left">↶</button><button type="button" id="rotate-right" aria-label="Rotate desk right">↷</button><button type="button" id="zoom-in" aria-label="Zoom in">+</button><button type="button" id="zoom-out" aria-label="Zoom out">−</button><button type="button" id="reset-view">Reset view</button></div></div><div class="objects">{records.map((p:any,index:number)=><button class="object" data-project={index} aria-pressed={index===0?'true':'false'} aria-controls="inspect-dialog"><span aria-hidden="true"></span><span class="object-label"><span class="number">0{index+1}</span>{p.name}<span aria-hidden="true">↗</span></span></button>)}</div><div class="desk-bottom"><span id="progress" aria-live="polite">1 of 4 projects explored</span><label><input type="checkbox" id="motion"> Reduce desk motion</label></div></div>
+</section><dialog id="inspect-dialog" aria-labelledby="inspect-title"><button id="close-inspect" aria-label="Return to research desk">×</button><div class="inspect-layout"><div class="inspect-visual"><span class="eyebrow">On the research desk</span><div id="inspect-scene" aria-hidden="true"></div><span class="inspect-hint">Drag to turn the object</span></div><aside id="details" aria-label="Selected project"><div class="detail-top"><span id="project-index" class="eyebrow">Project 01 / 04</span><span class="status">Active</span></div><div id="detail-content" aria-live="polite" aria-atomic="true"></div><a id="project-link" class="project-link" >View full project <span aria-hidden="true">↗</span></a><p class="external-note">Full project details</p></aside></div></dialog>
+<dialog id="photo-dialog" aria-labelledby="photo-caption"><button id="close-photo" aria-label="Close image">×</button><img id="large-photo" alt=""><p id="photo-caption"></p></dialog>
+
+<noscript><p>Browse the projects below to explore our research.</p></noscript>
+</div>
+<script>import "../scripts/research-desk.js";</script>
