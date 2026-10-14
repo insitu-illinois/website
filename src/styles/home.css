@@ -77,3 +77,20 @@
 .home-other-projects h3 a { gap:var(--space-2); }
 .home-other-projects h3 a span { flex-shrink:0; }
 @media(min-width:64rem) { .home-project-grid>div:first-child { align-self:center; } }
+
+/* Give the flagship its own balanced row, with companion projects below. */
+.home-project-grid { grid-template-columns:minmax(0,1fr); }
+.home-projects .feature-artwork { width:100%; max-width:calc(var(--space-10) * 4); }
+.home-projects .feature-project { grid-template-columns:minmax(0,1fr); gap:var(--space-4); }
+.home-projects .feature-project h3 { font-size:var(--text-display-md); }
+.home-projects .feature-project>div:last-child { max-width:48ch; }
+.home-other-projects { border-top:var(--border-hairline) solid var(--border-default); padding-top:var(--space-5); }
+@media(min-width:40rem) {
+ .home-projects .feature-project { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--space-6); }
+ .home-other-projects { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .home-other-projects article { grid-template-columns:minmax(0,1fr); gap:var(--space-2); }
+}
+@media(max-width:39.999rem) {
+ .home-projects .feature-artwork { max-width:calc(var(--space-10) * 3); }
+ .home-projects .feature-project>div:last-child { text-align:left; }
+}

@@ -15,3 +15,13 @@ test('historical media stays separate and animations play only on request',async
  await expect(page.getByRole('heading',{name:'Accessibility research, 2020–2022'})).toBeVisible();
  await page.goto('/publications/');await expect(page.locator('a[href="/media/papers/cognitive-loads.pdf"]')).toBeVisible();
 });
+
+test('mobile archives scroll within their own region using the keyboard',async({page})=>{
+ await page.setViewportSize({width:390,height:850});await page.goto('/projects/vrchaeology/');
+ const archive=page.getByRole('region',{name:'Classroom & fieldwork archive images',exact:true});
+ await archive.focus();await page.keyboard.press('ArrowRight');
+ await expect.poll(()=>archive.evaluate(el=>el.scrollLeft)).toBeGreaterThan(0);
+ await archive.locator('a').last().focus();
+ await expect(archive.locator('a').last()).toBeInViewport();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
