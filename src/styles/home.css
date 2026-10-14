@@ -106,3 +106,18 @@
 .home-other-projects .label { font-size:var(--text-body-sm); margin:0; }
 .home-other-projects p:not(.label) { font-size:var(--text-body-sm); margin:var(--space-2) 0 0; }
 @media(min-width:40rem) and (max-width:63.999rem) { .home-other-projects { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* Updates share the compact companion-card rhythm. */
+.home-update-grid { align-items:start; gap:var(--space-3); }
+.home-update-card { display:grid; grid-template-columns:var(--space-8) minmax(0,1fr); align-items:start; gap:var(--space-3); height:auto; padding:var(--space-3); }
+.home-update-visual { width:var(--space-8); height:var(--space-8); min-height:var(--space-7); aspect-ratio:1; border-radius:var(--radius-sm); }
+.home-update-copy { padding:0; min-width:0; }
+.home-update-copy .label { font-size:var(--text-body-sm); margin:0 0 var(--space-1); }
+.home-update-copy h3 { font-size:var(--text-body-md); }
+.home-update-copy h3 a { display:inline-flex; align-items:center; min-height:var(--space-7); }
+.home-paper-art { padding:var(--space-3); }
+.home-paper-art svg { width:var(--space-5); height:var(--space-5); }
+.home-paper-art span { display:none; }
+.home-update-links { gap:var(--space-2) var(--space-4); margin-top:var(--space-2); }
+@media(min-width:40rem) and (max-width:63.999rem) { .home-update-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:39.999rem) { .home-update-grid { grid-template-columns:minmax(0,1fr); } }
