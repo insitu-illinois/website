@@ -94,3 +94,15 @@
  .home-projects .feature-artwork { max-width:calc(var(--space-10) * 3); }
  .home-projects .feature-project>div:last-child { text-align:left; }
 }
+
+/* Companion cards fit their content instead of stretching to the longest card. */
+.home-other-projects { align-items:start; gap:var(--space-3); padding-top:var(--space-4); }
+.home-other-projects li { padding:var(--space-3); }
+.home-other-projects article { grid-template-columns:var(--space-5) minmax(0,1fr); gap:var(--space-3); }
+.home-other-projects .home-project-symbol { width:var(--space-5); height:var(--space-7); }
+.home-other-projects .home-project-symbol svg { width:var(--space-5); height:var(--space-5); }
+.home-other-projects h3 { font-size:var(--text-body-md); }
+.home-other-projects h3 a { min-height:var(--space-7); }
+.home-other-projects .label { font-size:var(--text-body-sm); margin:0; }
+.home-other-projects p:not(.label) { font-size:var(--text-body-sm); margin:var(--space-2) 0 0; }
+@media(min-width:40rem) and (max-width:63.999rem) { .home-other-projects { grid-template-columns:repeat(2,minmax(0,1fr)); } }
