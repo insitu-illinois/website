@@ -1,11 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import LabValues from '../components/LabValues.astro';
-import Media from '../components/Media.astro';
-import GameCase from '../components/GameCase.astro';
-import globeIcon from '../assets/icons/bootstrap/globe.svg?raw';
-import peopleIcon from '../assets/icons/bootstrap/people.svg?raw';
-import layersIcon from '../assets/icons/bootstrap/layers.svg?raw';
+import ProjectShelf from '../components/ProjectShelf.astro';
 import paperIcon from '../assets/icons/bootstrap/file-earmark-pdf.svg?raw';
 import {dateLabel,entryUrl} from '../lib/format.mjs';
 import {content} from '../lib/content';
@@ -13,9 +9,7 @@ import {homeLists} from '../lib/derived.mjs';
 import home from '../content/pages/home.json';
 import '../styles/home.css';
 const data=await content(),lists=homeLists(data);
-const otherProjects=data.projects.filter((p:any)=>!lists.projects.some((featured:any)=>featured.id===p.id));
-const projectIcons:Record<string,string>={'ai-xr-language':layersIcon,'xr-us-museums':globeIcon,'game-accessibility':peopleIcon};
-const iconPaths=(svg:string)=>svg.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
+const shelfProjects=[...data.projects.filter((p:any)=>p.id==='vrchaeology'),...data.projects.filter((p:any)=>p.id!=='vrchaeology')].filter((p:any)=>!p.data.draft);
 const updates=[...lists.news,...lists.publications.slice(0,1)].sort((a:any,b:any)=>String(b.data.date||b.data.publicationDate||b.data.year||'').localeCompare(String(a.data.date||a.data.publicationDate||a.data.year||'')));
 const paperPaths=paperIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
 ---
@@ -29,7 +23,7 @@ const paperPaths=paperIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'
     </div>
 
   </header>
-  <section class="featured home-projects" aria-labelledby="home-projects-heading"><div class="section-heading"><div><p class="label">Across the lab</p><h2 id="home-projects-heading">Our projects</h2></div><a class="text-link" href="/projects/">All projects</a></div><div class="home-project-grid"><div>{lists.projects.map((project:any)=><article class="feature-project"><div class="feature-artwork">{project.id==='vrchaeology'&&project.data.heroMedia&&project.data.gallery?.length?<GameCase cover={project.data.heroMedia} images={project.data.gallery} name={project.data.name} description={project.data.shortDescription} credits={project.data.credits||[]} creditsHref={`/projects/${project.id}/#credits-heading`} galleryHref={`/projects/${project.id}/#gallery-heading`}/>:<Media media={project.data.heroMedia} natural/>}</div><div><p class="label">Flagship project · {project.data.status}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name}</a></h3><p>{project.data.shortDescription}</p><a class="button" href={`/projects/${project.id}/`}>View project</a></div></article>)}</div><ul class="home-other-projects">{otherProjects.map((project:any)=><li><article><div class="home-project-symbol" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false" set:html={iconPaths(projectIcons[project.id]||layersIcon)}/></div><div><p class="label">{project.data.status==='active'?'Active project':'Completed project'}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name} <span aria-hidden="true">↗</span></a></h3>{project.data.shortDescription&&<p>{project.data.shortDescription}</p>}</div></article></li>)}</ul></div></section>
+  <section class="featured home-projects" aria-labelledby="home-projects-heading"><div class="section-heading"><div><p class="label">Across the lab</p><h2 id="home-projects-heading">Our projects</h2></div><a class="text-link" href="/projects/">All projects</a></div><ProjectShelf projects={shelfProjects}/></section>
 
   <section class="home-updates" aria-labelledby="home-updates-heading">
     <div class="section-heading"><div><p class="label">Research & lab life</p><h2 id="home-updates-heading">Latest from IN/SITU</h2></div></div>
