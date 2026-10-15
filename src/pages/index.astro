@@ -1,5 +1,4 @@
 ---
-import ResearchDesk from '../components/ResearchDesk.astro';
 import Base from '../layouts/Base.astro';
 import LabValues from '../components/LabValues.astro';
 import Media from '../components/Media.astro';
@@ -30,7 +29,6 @@ const paperPaths=paperIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'
     </div>
 
   </header>
-  <ResearchDesk projects={data.projects} people={data.people}/>
   <section class="featured home-projects" aria-labelledby="home-projects-heading"><div class="section-heading"><div><p class="label">Across the lab</p><h2 id="home-projects-heading">Our projects</h2></div><a class="text-link" href="/projects/">All projects</a></div><div class="home-project-grid"><div>{lists.projects.map((project:any)=><article class="feature-project"><div class="feature-artwork">{project.id==='vrchaeology'&&project.data.heroMedia&&project.data.gallery?.length?<GameCase cover={project.data.heroMedia} images={project.data.gallery} name={project.data.name} description={project.data.shortDescription} credits={project.data.credits||[]} creditsHref={`/projects/${project.id}/#credits-heading`} galleryHref={`/projects/${project.id}/#gallery-heading`}/>:<Media media={project.data.heroMedia} natural/>}</div><div><p class="label">Flagship project · {project.data.status}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name}</a></h3><p>{project.data.shortDescription}</p><a class="button" href={`/projects/${project.id}/`}>View project</a></div></article>)}</div><ul class="home-other-projects">{otherProjects.map((project:any)=><li><article><div class="home-project-symbol" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false" set:html={iconPaths(projectIcons[project.id]||layersIcon)}/></div><div><p class="label">{project.data.status==='active'?'Active project':'Completed project'}</p><h3><a href={`/projects/${project.id}/`}>{project.data.name} <span aria-hidden="true">↗</span></a></h3>{project.data.shortDescription&&<p>{project.data.shortDescription}</p>}</div></article></li>)}</ul></div></section>
 
   <section class="home-updates" aria-labelledby="home-updates-heading">
