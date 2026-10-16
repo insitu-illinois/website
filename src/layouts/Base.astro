@@ -23,7 +23,9 @@ import signInIcon from '../assets/icons/bootstrap/box-arrow-in-right.svg?raw';
 import { indexingEnabled } from '../config/site.mjs';
 const signInPaths=signInIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
 const copyrightYear=new Date().getUTCFullYear();
-const { title, noindex=false, description = 'IN/SITU at the University of Illinois Urbana-Champaign. People, technology, and experience in context.' } = Astro.props;
+const { title, noindex=false, description: rawDescription = 'IN/SITU at the University of Illinois Urbana-Champaign. People, technology, and experience in context.' } = Astro.props;
+const flatDescription=rawDescription.replace(/\s+/g,' ').trim();
+const description=flatDescription.length>160?`${flatDescription.slice(0,157).replace(/\s+\S*$/,'')}…`:flatDescription;
 const canonical=new URL(Astro.url.pathname,Astro.site);
 ---
 <!doctype html>
