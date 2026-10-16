@@ -40,7 +40,7 @@ for(const shelf of document.querySelectorAll<HTMLElement>('[data-project-shelf]'
 <style>
 .shelf-panel[hidden],.shelf-picker[hidden]{display:none!important}
 .project-shelf .shelf-panel{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:var(--space-5);align-items:center;margin:0;background:transparent;border:0;border-radius:0;overflow:hidden;padding:0}
-.shelf-visual{min-width:0;display:grid;place-items:center;background:var(--surface-card);border-radius:var(--radius-sm);padding:var(--space-2)}
+.shelf-visual{min-width:0;display:grid;place-items:center;background:transparent;border-radius:0;padding:0}
 .shelf-visual :global(.game-case){width:100%;max-width:calc(var(--space-10)*2.5)}
 .shelf-visual :global(img.media){max-height:calc(var(--space-10)*2);object-fit:contain}
 .shelf-symbol{display:grid;place-items:center;width:100%;min-height:calc(var(--space-10)*2);color:var(--text-secondary)}

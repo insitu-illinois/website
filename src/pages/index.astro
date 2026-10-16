@@ -16,7 +16,7 @@ const paperPaths=paperIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'
 <Base homePage title="People, technology, and experience in context">
   <header slot="hero" class="home-hero">
     <div class="home-introduction"><p class="label">University of Illinois Urbana-Champaign</p><p class="home-lab-name" aria-hidden="true">IN/SITU</p>
-      {(!home.draft||import.meta.env.DEV)?<h1>{home.title}</h1>:<h1>People, technology, and experience <em>in context.</em></h1>}
+      {(!home.draft||import.meta.env.DEV)?<h1>{home.title.split(' ').map((word:string,i:number)=><><span class="hero-word" style={`--i:${i}`}>{word}</span>{' '}</>)}</h1>:<h1>{['People,','technology,','and','experience'].map((word,i)=><><span class="hero-word" style={`--i:${i}`}>{word}</span>{' '}</>)}<em class="hero-word" style="--i:4">in context.</em></h1>}
     </div>
     <div class="home-overview"><p class="label">An interdisciplinary research lab</p><p class="lead">We design immersive, game-based, and interactive experiences across archaeological sites, museums, cities, classrooms, and virtual worlds.</p>
       <div class="home-actions"><a class="button" href="/projects/">Explore our research <span aria-hidden="true">↗</span></a><a class="home-team-link" href="/people/">Meet the team <span aria-hidden="true">→</span></a></div>

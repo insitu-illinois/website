@@ -114,7 +114,7 @@ const bookletCredits=credits.slice(0,4);
   .game-case { min-width:0; }
   .artwork-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); align-items:start; gap:var(--space-5); }
   .artwork-layout.case-only { grid-template-columns:minmax(0,1fr); }
-  .case-stage { position:relative; width:100%; aspect-ratio:5/4; perspective:calc(var(--space-10) * 10); background:radial-gradient(ellipse at 50% 80%,var(--border-default),transparent 62%); }
+  .case-stage { position:relative; width:100%; aspect-ratio:5/4; perspective:calc(var(--space-10) * 10); background:radial-gradient(ellipse at 50% 85%,color-mix(in srgb,var(--text-heading) 14%,transparent),transparent 62%); }
   .case-object { pointer-events:none; position:absolute; top:3%; left:49%; width:47%; aspect-ratio:2/3; transform:translateX(-50%) rotateY(-16deg) rotateX(5deg); transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); }
   .case-only .case-stage { aspect-ratio:1/1; }
   .case-only .case-object { width:60%; transition:transform var(--dur-decorative) var(--ease-standard),width var(--dur-decorative) var(--ease-standard); }

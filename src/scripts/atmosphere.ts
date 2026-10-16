@@ -34,3 +34,11 @@ if ('IntersectionObserver' in window && toned.length) {
   }, { rootMargin: '-45% 0px -45% 0px' });
   toned.forEach((section) => toneObserver.observe(section));
 }
+
+// Hero scene: a lazily loaded WebGL accent, skipped when motion is reduced or contrast is raised.
+const hero = document.querySelector<HTMLElement>('.home-hero');
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches || root.dataset.reduceMotion === 'true' || root.dataset.highContrast === 'true';
+if (hero && !calm) {
+  const load = () => import('./hero-scene').then((scene) => scene.mountHeroScene(hero)).catch(() => {});
+  if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 1500 }); else setTimeout(load, 600);
+}
