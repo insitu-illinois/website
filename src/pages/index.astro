@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import LabValues from '../components/LabValues.astro';
 import ProjectShelf from '../components/ProjectShelf.astro';
-import paperIcon from '../assets/icons/bootstrap/file-earmark-pdf.svg?raw';
 import {dateLabel,entryUrl} from '../lib/format.mjs';
 import {content} from '../lib/content';
 import {homeLists} from '../lib/derived.mjs';
@@ -11,7 +10,6 @@ import '../styles/home.css';
 const data=await content(),lists=homeLists(data);
 const shelfProjects=[...data.projects.filter((p:any)=>p.id==='vrchaeology'),...data.projects.filter((p:any)=>p.id!=='vrchaeology')].filter((p:any)=>!p.data.draft);
 const updates=[...lists.news,...lists.publications.slice(0,1)].sort((a:any,b:any)=>String(b.data.date||b.data.publicationDate||b.data.year||'').localeCompare(String(a.data.date||a.data.publicationDate||a.data.year||'')));
-const paperPaths=paperIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
 ---
 <Base homePage title="People, technology, and experience in context">
   <header slot="hero" class="home-hero">
@@ -29,7 +27,7 @@ const paperPaths=paperIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'
     <div class="section-heading"><div><p class="label">Research & lab life</p><h2 id="home-updates-heading">Latest from IN/SITU</h2></div></div>
     <ul class="home-update-grid">{updates.map((record:any)=>{const d=record.data;const visual=d.image||d.thumbnail;return <li><article class="home-update-card">
       <a class:list={["home-update-visual",{"is-publication":record.collection==='publications'}]} href={entryUrl(record)} aria-label={`Read ${d.title}`}>
-        {visual?<img src={visual.src} alt={visual.alt} loading="lazy" width="480" height="320"/>:<div class="home-paper-art" aria-hidden="true"><svg viewBox="0 0 16 16" set:html={paperPaths}/><span>{d.venue}</span></div>}
+        {visual?<img src={visual.src} alt={visual.alt} loading="lazy" width="480" height="320"/>:<div class="home-paper-art" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="url(#ig)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path fill="url(#ig)" fill-opacity=".16" d="M8 3h11l6 6v18a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M19 3v6h6M10 15h10M10 19h10M10 23h6"/><path d="M24 20l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg><span>{d.venue}</span></div>}
       </a>
       <div class="home-update-copy"><p class="label">{record.collection==='publications'?'Publication':'News'} <span aria-hidden="true">/</span> {dateLabel(String(d.date||d.publicationDate||d.year||''))}</p><h3><a href={entryUrl(record)}>{d.title}</a></h3></div>
     </article></li>})}</ul>

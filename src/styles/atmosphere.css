@@ -21,14 +21,10 @@ html body .records>.card,html body.home-page .records>.card,html body:not(.home-
 .button::after { content:""; position:absolute; inset:0; pointer-events:none; transform:translateX(-120%); transition:transform .7s var(--ease-standard); background:linear-gradient(110deg,transparent 30%,var(--spot) 50%,transparent 70%); }
 
 @media(hover:hover) and (pointer:fine) {
-  html body .home-update-card:hover,html body .records>.card:hover,html body .home-other-projects li:hover { border-color:var(--accent-heritage-strong); background-image:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),var(--spot),transparent 65%); }
+  html body .home-update-card:hover,html body .records>.card:hover,html body .home-other-projects li:hover { border-color:var(--hover-light); background-image:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),var(--spot),transparent 65%); }
   .home-themes a:hover,.resource-links>a:hover { background-image:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),var(--spot),transparent 65%); }
-  .button:hover { border-color:var(--accent-heritage-strong); color:var(--hover-light); }
+  .button:hover { border-color:var(--hover-light); color:var(--hover-light); }
   .button:hover::after { transform:translateX(120%); }
-}
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
-  html:not([data-reduce-motion="true"]) :is(.home-update-card,.records>.card,.home-other-projects li):hover { transform:translateY(-3px); }
-  html:not([data-reduce-motion="true"]) .button:hover { transform:translateY(-2px); }
 }
 
 /* Entrance: the hero settles in and later sections arrive as they scroll into view. Blur and slide only, so text never loses contrast. */

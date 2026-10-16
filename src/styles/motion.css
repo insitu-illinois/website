@@ -24,11 +24,11 @@ dialog[data-closing]::backdrop { animation:scrim-leave var(--dur-med) var(--ease
   transition-property:color,text-shadow; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); transition-delay:0s;
 }
 :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.site-footer a,.accessibility-entry,.primary-navigation a:not([aria-current]),.site-header .research-links a,.site-header summary:not(.section-current)) { text-decoration:none; }
-:root { --hover-light:#a9bdff; }
-:root[data-theme="light"] { --hover-light:#2a41ad; }
-.site-header,.site-footer { --hover-light:#ffffff; --spot-text:rgba(169,189,255,.75); }
+:root { --hover-light:#b9a5ff; }
+:root[data-theme="light"] { --hover-light:#6d3fd9; }
+.site-header,.site-footer { --hover-light:#5eead4; --spot-text:rgba(169,189,255,.75); }
 @media(hover:hover) and (pointer:fine) {
   :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry,.site-header .icon-control):hover,
   .home-update-card:hover .home-update-copy h3 a,
-  .shelf-picker button:hover strong { color:var(--hover-light); text-shadow:0 0 14px var(--spot-text),0 0 3px var(--spot-text); }
+  .shelf-picker button:hover strong { color:var(--hover-light); }
 }

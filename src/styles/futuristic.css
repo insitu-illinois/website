@@ -43,13 +43,9 @@ html body :is(.home-team-link,.home-update-links a,.home-support a,.section-head
 }
 html body .home-update-links,html body .home-support { gap:var(--space-3); border:0; }
 @media(hover:hover) and (pointer:fine) {
-  html body :is(.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link):hover { border-color:var(--accent-heritage-strong); color:var(--hover-light); }
+  html body :is(.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link):hover { border-color:var(--hover-light); color:var(--hover-light); }
   html body :is(.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link):hover::after { transform:translateX(120%); }
-  html body .home-themes a:hover { border-color:var(--accent-heritage-strong); }
-}
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
-  html:not([data-reduce-motion="true"]) body :is(.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link):hover { transform:translateY(-2px); }
-  html:not([data-reduce-motion="true"]) body .home-themes a:hover { transform:translateY(-3px); }
+  html body .home-themes a:hover { border-color:var(--hover-light); }
 }
 @media(prefers-reduced-motion:reduce) { html body :is(.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link)::after { display:none; } }
 html[data-reduce-motion="true"] body :is(.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link)::after,
@@ -131,7 +127,7 @@ html body .home-overview { border-inline-start:0; }
 /* ---- Publication icon: a soft tinted glass tile instead of a dark plate ---- */
 html body .home-update-visual { background:transparent; }
 html body .home-update-visual.is-publication { background:none; border:0; }
-html body .home-paper-art svg { transition:filter var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard); }
+html body .home-paper-art svg { fill:none; stroke:url(#ig); transition:filter var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard); }
 @media(hover:hover) and (pointer:fine) { html body .home-update-card:hover .home-paper-art svg { color:var(--hover-light); filter:drop-shadow(0 0 8px var(--spot-text)); } html body :is(.button,.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link):hover span[aria-hidden] { text-shadow:0 0 12px var(--spot-text); } }
 html body .home-paper-art { color:var(--accent-heritage-strong); }
 
@@ -156,4 +152,11 @@ html :is(.home-page,body) .main-content > section:is(:nth-of-type(odd),:nth-of-t
 .footer-login { gap:var(--space-2); }
 .footer-login svg { width:var(--space-4); height:var(--space-4); fill:currentColor; flex-shrink:0; }
 .footer-social { list-style:none; display:flex; flex-wrap:wrap; gap:var(--space-4); margin:var(--space-5) 0 0; padding:0; }
-.footer-social svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; color:var(--text-muted-on-chrome); opacity:.8; }
+.footer-social svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:url(#ig); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
+
+/* ---- Hover colour: teal in the header and footer, violet everywhere else. No glow, lift or zoom. ---- */
+html body .site-header .icon-control { position:relative; }
+@media(hover:hover) and (pointer:fine) {
+  html body .site-header .icon-control:hover,html body .site-footer .footer-login:hover { color:#5eead4; }
+  html body .site-header .icon-control:hover { background:radial-gradient(circle at center,rgba(94,234,212,.22),transparent 68%); }
+}
