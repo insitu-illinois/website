@@ -295,3 +295,13 @@ body:not(.home-page) .intro-awards-funding { border-block-start:var(--border-thi
 }
 
 .record-main>.metadata { max-width:none; }
+
+/* Quiet layout: content sits directly on the page and is separated by hairlines instead of nested boxes. */
+.main-content > section,.home-page .main-content > section,.main-content > div.reading-section,
+.main-content > section:nth-of-type(odd),.home-page .main-content > section:nth-of-type(odd) {
+  margin-block:0; padding:clamp(var(--space-6),5vw,var(--space-7)) 0; border:0; border-top:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent;
+}
+.main-content > section:first-child,.home-page .main-content > section:first-child { border-top:0; }
+body:not(.home-page) .page-intro { padding:var(--space-5) 0 var(--space-6); border:0; border-bottom:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent; }
+.records>.card,.home-page .records>.card,main:not(.home-page) .records>.card { padding:var(--space-5) 0; border:0; border-top:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent; }
+.home-page .home-hero h1 { max-width:16ch; font-size:var(--text-display-xl); }

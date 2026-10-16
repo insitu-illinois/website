@@ -4,32 +4,33 @@ import {readdirSync,readFileSync} from 'node:fs';
 import {join} from 'node:path';
 const pages=(dir='dist'):string[]=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?pages(join(dir,entry.name)):entry.name.endsWith('.html')?[join(dir,entry.name)]:[]);
 
-test('night mode is explicit, keyboard accessible, persistent, and resettable',async({page})=>{
-  await page.emulateMedia({colorScheme:'dark'});
+test('night is the default, the toggle is keyboard accessible, persistent, and resettable',async({page})=>{
+  await page.emulateMedia({colorScheme:'light'});
   await page.goto('/');
   const toggle=page.getByRole('button',{name:'Night mode',exact:true});
-  await expect(toggle).toHaveAttribute('aria-pressed','false');
-  await expect(page.locator('body')).toHaveCSS('background-color','rgb(255, 255, 255)');
-  await toggle.focus(); await toggle.press('Space');
   await expect(toggle).toHaveAttribute('aria-pressed','true');
-  await expect(toggle.locator('.night-moon')).toBeVisible();
-  await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(0px)');
-  await expect(toggle.locator('.night-sun')).toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('background-color','rgb(22, 22, 22)');
+  await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(0px)');
+  await toggle.focus(); await toggle.press('Space');
+  await expect(toggle).toHaveAttribute('aria-pressed','false');
+  await expect(toggle.locator('.night-moon')).toBeVisible();
+  await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(100% 0px 0px)');
+  await expect(toggle.locator('.night-sun')).toHaveCount(0);
+  await expect(page.locator('body')).toHaveCSS('background-color','rgb(255, 255, 255)');
   await page.goto('/publications/');
-  await expect(toggle).toHaveAttribute('aria-pressed','true');
+  await expect(toggle).toHaveAttribute('aria-pressed','false');
   await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
   await page.getByLabel('Text size',{exact:true}).selectOption('125');
   await page.keyboard.press('Escape');
   await toggle.click(); await toggle.click(); await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-text-size','125');
-  await expect(toggle).toHaveAttribute('aria-pressed','true');
+  await expect(toggle).toHaveAttribute('aria-pressed','false');
   await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
   await page.getByRole('button',{name:'Reset preferences'}).click();
   await page.keyboard.press('Escape');
-  await expect(toggle).toHaveAttribute('aria-pressed','false');
-  await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(100% 0px 0px)');
-  await page.reload(); await expect(toggle).toHaveAttribute('aria-pressed','false');
+  await expect(toggle).toHaveAttribute('aria-pressed','true');
+  await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(0px)');
+  await page.reload(); await expect(toggle).toHaveAttribute('aria-pressed','true');
 });
 
 test('moon filling honors both device and site reduced-motion preferences',async({page})=>{
@@ -62,7 +63,7 @@ for(const width of [1440,320]) {
 test('night contrast and enlarged text also apply to the settings panel',async({page},testInfo)=>{
   await page.setViewportSize({width:320,height:700});
   await page.goto('/');
-  await page.getByRole('button',{name:'Night mode',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Night mode',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
   await page.getByLabel('Higher contrast',{exact:true}).check();
   await page.getByLabel('Text size',{exact:true}).selectOption('200');

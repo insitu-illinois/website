@@ -124,3 +124,37 @@
   --button-hover:var(--neutral-200);
   --header-border:var(--neutral-600);
 }
+
+/* Default presentation: quiet dark with one calm accent. Light is an opt-in preference (data-theme="light"). */
+:root,
+:root[data-theme="night"] {
+  --accent-calm:#7FD1C0;
+  color-scheme:dark;
+  --surface-page:var(--neutral-950);
+  --surface-card:var(--neutral-900);
+  --text-primary:var(--neutral-50);
+  --text-heading:var(--white);
+  --text-secondary:var(--neutral-200);
+  --accent-heritage-strong:var(--accent-calm);
+  --border-default:var(--neutral-600);
+  --border-strong:var(--neutral-300);
+  --focus-ring:var(--white);
+  --text-on-accent:var(--neutral-950);
+  --button-hover:var(--neutral-200);
+  --header-border:var(--neutral-600);
+}
+:root[data-theme="light"] {
+  color-scheme:light;
+  --surface-page:var(--white);
+  --surface-card:var(--neutral-50);
+  --text-primary:var(--neutral-900);
+  --text-heading:var(--neutral-950);
+  --text-secondary:var(--neutral-600);
+  --accent-heritage-strong:var(--neutral-950);
+  --border-default:var(--neutral-200);
+  --border-strong:var(--neutral-500);
+  --focus-ring:var(--neutral-950);
+  --text-on-accent:var(--white);
+  --button-hover:var(--neutral-800);
+  --header-border:var(--neutral-800);
+}
