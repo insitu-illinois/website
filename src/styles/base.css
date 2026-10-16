@@ -9,10 +9,11 @@ h3 { font-size:var(--text-display-sm); margin-block:var(--space-2) var(--space-3
 h4 { font-size:var(--text-body-lg); }
 p { max-width:70ch; margin-block:0 var(--space-4); }
 a { color:var(--accent-heritage-strong); text-underline-offset:var(--space-1); overflow-wrap:anywhere; text-decoration-thickness:var(--border-hairline); }
-a:hover { text-decoration-thickness:var(--border-hairline); }
+@media(hover:hover) and (pointer:fine) { a:hover { text-decoration-thickness:var(--border-hairline); } }
 :where(a,button,summary,[tabindex]):focus-visible { outline:var(--border-thick) solid var(--focus-ring); outline-offset:var(--space-1); box-shadow:0 0 0 var(--space-2) var(--surface-page); }
 :where(a,button):active { translate:0 var(--border-hairline); }
 img { max-width:100%; height:auto; display:block; }
+button,input,select,textarea { font-family:inherit; }
 button { cursor:pointer; }
 [hidden] { display:none !important; }
 .label,.tags,.badge,.button,.text-link,.back-link,.pagination,nav { font-family:var(--font-mono); font-size:var(--text-label-md); line-height:var(--lh-label); letter-spacing:var(--ls-label); }
@@ -32,9 +33,9 @@ button { cursor:pointer; }
 .site-header a:focus-visible { outline-color:var(--white); box-shadow:0 0 0 var(--space-2) var(--surface-chrome); }
 nav ul { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-5); list-style:none; padding:0; margin:0; }
 nav a { display:inline-block; padding-block:var(--space-3); text-decoration:none; }
-nav a:hover,.site-footer a:hover { text-decoration:none; text-decoration-color:var(--accent-heritage-strong); }
+@media(hover:hover) and (pointer:fine) { nav a:hover,.site-footer a:hover { text-decoration:none; text-decoration-color:var(--accent-heritage-strong); } }
 nav [aria-current] { text-decoration:underline; text-decoration-thickness:var(--border-thick); }
-.site-header nav a:hover { text-decoration-color:var(--text-on-chrome); }
+@media(hover:hover) and (pointer:fine) { .site-header nav a:hover { text-decoration-color:var(--text-on-chrome); } }
 .site-header .nav-list > .nav-join > a { border:var(--border-hairline) solid var(--text-muted-on-chrome); padding-inline:var(--space-4); border-radius:var(--radius-sm); }
 .home-hero { display:grid; gap:var(--space-7); padding-block:var(--space-8); align-items:end; }
 .home-hero h1 { font-size:var(--text-display-xl); margin-block:var(--space-6); }
@@ -44,10 +45,9 @@ nav [aria-current] { text-decoration:underline; text-decoration-thickness:var(--
 .hero-field { padding:var(--space-5); border:var(--border-hairline) solid var(--border-default); background:var(--surface-card); border-radius:var(--radius-md); }
 .field-frame { aspect-ratio:4/3; display:grid; place-items:center; border:var(--border-hairline) solid var(--border-strong); margin-block:var(--space-5); border-radius:var(--radius-sm); }
 .hero-field>p:last-child { margin:0; padding-top:var(--space-4); border-top:var(--border-hairline) solid var(--accent-lumen); }
-.button { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--space-7); padding:var(--space-3) var(--space-5); background:var(--accent-heritage-strong); color:var(--text-on-accent); border:var(--border-hairline) solid var(--accent-heritage-strong); border-radius:var(--radius-sm); text-decoration:none; transition:background var(--dur-med) var(--ease-standard) var(--delay-settle); }
-.button:hover { background:var(--button-hover); border-color:var(--button-hover); text-decoration:none; }
-.button.secondary { background:transparent; color:var(--accent-heritage-strong); }
-.button.secondary:hover { background:var(--surface-card); }
+.button { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--space-7); padding:var(--space-3) var(--space-5); background:transparent; color:var(--accent-heritage-strong); border:var(--border-hairline) solid var(--accent-heritage-strong); border-radius:var(--radius-sm); text-decoration:none; transition:background var(--dur-med) var(--ease-standard); }
+@media(hover:hover) and (pointer:fine) { .button:hover { background:var(--accent-heritage-strong); color:var(--text-on-accent); border-color:var(--button-hover); text-decoration:none; } }
+@media(hover:hover) and (pointer:fine) { .button.secondary:hover { background:var(--surface-card); color:var(--accent-heritage-strong); } }
 section { margin-block:var(--space-8); }
 section:first-child { margin-top:0; }
 .section-heading { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:var(--space-4); margin-bottom:var(--space-5); }
@@ -67,7 +67,7 @@ section:first-child { margin-top:0; }
 .records>li { border-top:var(--border-hairline) solid var(--border-default); padding-block:var(--space-5); }
 .records h3 { max-width:48ch; }
 .records h3 a { color:var(--text-heading); text-decoration:none; }
-.records h3 a:hover { text-decoration:none; text-decoration-color:var(--accent-heritage-strong); }
+@media(hover:hover) and (pointer:fine) { .records h3 a:hover { text-decoration:none; text-decoration-color:var(--accent-heritage-strong); } }
 .records .record-kind { margin-bottom:var(--space-3); }
 .records .metadata { max-width:80ch; margin-top:var(--space-3); }
 .records .authors { margin-bottom:var(--space-2); }
@@ -80,7 +80,7 @@ section:first-child { margin-top:0; }
 .links a:not(.button) { font-family:var(--font-mono); font-size:var(--text-label-md); letter-spacing:var(--ls-label); padding-block:var(--space-2); }
 .tags { display:flex; flex-wrap:wrap; gap:var(--space-3); list-style:none; padding:0; margin-block:var(--space-5); }
 .tags a { display:block; border:var(--border-hairline) solid var(--border-default); padding:var(--space-3); border-radius:var(--radius-xs); text-decoration:none; }
-.tags a:hover { border-color:var(--accent-heritage-strong); background:var(--surface-card); }
+@media(hover:hover) and (pointer:fine) { .tags a:hover { border-color:var(--accent-heritage-strong); background:var(--surface-card); } }
 .badge { display:inline-block; padding:var(--space-2) var(--space-3); border:var(--border-hairline) solid var(--accent-heritage-strong); color:var(--accent-heritage-strong); }
 .media,.media-placeholder { width:100%; aspect-ratio:16/9; object-fit:cover; border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); }
 .media-placeholder { background:var(--surface-card); display:grid; place-items:center; padding:var(--space-5); text-align:center; }
@@ -131,7 +131,7 @@ section:first-child { margin-top:0; }
 .people-caption { font-size:var(--text-body-sm); }
 .people-tags { display:flex; flex-wrap:wrap; list-style:none; padding:0; margin:0; font-family:var(--font-mono); font-size:var(--text-person-tag); line-height:var(--lh-label); gap:0 var(--space-3); }
 .people-tags a { display:inline-flex; align-items:center; min-height:var(--space-6); padding-block:var(--space-1); color:var(--text-secondary); text-decoration:underline; }
-.people-tags a:hover { color:var(--text-heading); }
+@media(hover:hover) and (pointer:fine) { .people-tags a:hover { color:var(--text-heading); } }
 .main-content > .people-metadata { margin-block:var(--space-7); }
 
 .header-tools { display:flex; flex-wrap:wrap; gap:var(--space-3); max-width:100%; }
@@ -144,12 +144,9 @@ section:first-child { margin-top:0; }
 
 /* Open monochrome surfaces keep the content, rather than colored panels, prominent. */
 .site-footer { border-color:var(--border-chrome); }
-.site-footer a:hover { text-decoration-color:currentColor; }
+@media(hover:hover) and (pointer:fine) { .site-footer a:hover { text-decoration-color:currentColor; } }
 .site-footer :is(a,button):focus-visible { outline-color:var(--text-on-chrome); box-shadow:0 0 0 var(--space-2) var(--surface-chrome); }
 .site-header .wordmark span,.site-footer .wordmark span { color:inherit; }
-.button { background:transparent; color:var(--accent-heritage-strong); }
-.button:hover { background:var(--accent-heritage-strong); color:var(--text-on-accent); }
-.button.secondary:hover { color:var(--accent-heritage-strong); }
 .records>.card { background:var(--surface-page); }
 .home-hero h1 { font-size:var(--text-display-lg); }
 .home-page .records>.card { padding:var(--space-5) 0; border:0; border-top:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-none); }
@@ -167,7 +164,7 @@ section:first-child { margin-top:0; }
 .home-themes { list-style:none; padding:0; margin:0; display:grid; gap:0 var(--space-7); }
 .home-themes li { border-top:var(--border-hairline) solid var(--border-default); }
 .home-themes a { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); min-height:var(--space-7); padding-block:var(--space-5); color:var(--text-heading); text-decoration:none; }
-.home-themes a:hover { text-decoration:none; }
+@media(hover:hover) and (pointer:fine) { .home-themes a:hover { text-decoration:none; } }
 .home-themes span { flex-shrink:0; }
 .compact-records h3 { font-size:var(--text-body-lg); line-height:var(--lh-body); max-width:60ch; }
 .compact-records .metadata { margin-bottom:0; }
@@ -270,7 +267,7 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
 .authors a { color:inherit; text-decoration:underline; }
 .resource-links { display:flex; flex-wrap:wrap; gap:var(--space-2); align-items:center; }
 .resource-links>a { position:relative; display:inline-flex; align-items:center; justify-content:center; width:var(--space-7); min-height:var(--space-7); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-sm); color:var(--text-primary); background:var(--surface-page); }
-.resource-links>a:hover { background:var(--surface-card); border-color:var(--control-boundary,var(--text-secondary)); }
+@media(hover:hover) and (pointer:fine) { .resource-links>a:hover { background:var(--surface-card); border-color:var(--control-boundary,var(--text-secondary)); } }
 .resource-links svg { width:var(--space-5); height:var(--space-5); fill:currentColor; flex-shrink:0; }
 .publication-heading .resource-links { margin-top:var(--space-4); }
 @media(min-width:64rem) {
@@ -293,7 +290,7 @@ body:not(.home-page) .intro-awards-funding { border-block-start:var(--border-thi
 .inline-people a { color:inherit; }
 .inline-people + time { margin-inline-start:var(--space-3); }
 .person-photo-link { display:block; border-radius:var(--radius-md); }
-.person-photo-link:hover { outline:var(--border-hairline) solid var(--text-secondary); outline-offset:var(--space-1); }
+@media(hover:hover) and (pointer:fine) { .person-photo-link:hover { outline:var(--border-hairline) solid var(--text-secondary); outline-offset:var(--space-1); } }
 .record-thumbnail { display:block; width:var(--space-9); border-radius:var(--radius-sm); overflow:hidden; }
 .record-thumbnail img { width:100%; aspect-ratio:1; object-fit:cover; }
 .record-poster img { aspect-ratio:auto; object-fit:contain; }

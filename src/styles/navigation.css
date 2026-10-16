@@ -14,12 +14,12 @@
 .research-menu summary.section-current { text-decoration:underline; text-underline-offset:var(--space-1); }
 .site-header .research-links { position:absolute; z-index:5; inset-block-start:100%; inset-inline-start:0; display:flex; flex-direction:column; gap:0; align-items:stretch; min-width:18rem; max-width:calc(100vw - var(--space-6)); padding:var(--space-2); background:var(--surface-chrome); border:var(--border-hairline) solid var(--text-muted-on-chrome); border-radius:var(--radius-sm); box-shadow:var(--shadow-raised); }
 .site-header .research-links a { display:flex; align-items:center; padding:var(--space-3); }
-.site-header .research-links a:hover { background:var(--surface-chrome-hover); }
+@media(hover:hover) and (pointer:fine) { .site-header .research-links a:hover { background:var(--surface-chrome-hover); } }
 .header-tools { justify-self:end; gap:var(--space-1); flex-wrap:nowrap; }
 .utility-control { position:relative; display:inline-flex; }
 .site-header .icon-control { width:var(--space-7); min-height:var(--space-7); padding:var(--space-3); display:inline-flex; align-items:center; justify-content:center; border-color:transparent; }
 .icon-control svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
-.site-header .icon-control:hover { background:var(--surface-chrome-hover); border-color:var(--text-muted-on-chrome); }
+@media(hover:hover) and (pointer:fine) { .site-header .icon-control:hover { background:var(--surface-chrome-hover); border-color:var(--text-muted-on-chrome); } }
 .night-moon { display:grid; width:var(--space-5); height:var(--space-5); }
 .night-moon svg { grid-area:1 / 1; }
 .moon-fill { clip-path:inset(100% 0 0); transition:clip-path var(--dur-decorative) var(--ease-standard); }
@@ -51,7 +51,7 @@ html[data-reduce-motion="true"] .moon-fill { transition:none; }
 /* Matched optical weight and a single quiet container for display utilities. */
 .site-header .header-tools { padding:var(--space-1); border:var(--border-hairline) solid var(--border-chrome); border-radius:var(--radius-md); gap:var(--space-1); }
 .site-header .accessibility-entry.icon-control { border-color:transparent; padding:var(--space-1); }
-.site-header .accessibility-entry.icon-control:hover { background:var(--surface-chrome-hover); border-color:var(--text-muted-on-chrome); }
+@media(hover:hover) and (pointer:fine) { .site-header .accessibility-entry.icon-control:hover { background:var(--surface-chrome-hover); border-color:var(--text-muted-on-chrome); } }
 .icon-control svg { width:var(--space-5); height:var(--space-5); fill:currentColor; stroke:none; }
 
 /* One compact mobile row; the menu opens below it without squeezing controls. */

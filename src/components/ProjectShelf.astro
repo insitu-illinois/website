@@ -50,7 +50,7 @@ for(const shelf of document.querySelectorAll<HTMLElement>('[data-project-shelf]'
 .shelf-copy p{margin-block:var(--space-3)}
 .shelf-copy .button{margin-top:var(--space-2)}
 .shelf-picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-2);margin-top:var(--space-3)}
-.shelf-picker button{display:flex;align-items:center;text-align:left;gap:var(--space-3);padding:var(--space-3);color:var(--text-heading);background:var(--surface-page);border:var(--border-hairline) solid var(--border-default);border-radius:var(--radius-sm);cursor:pointer;min-width:0;transition:background var(--dur-med) var(--ease-standard) var(--delay-glow),border-color var(--dur-med) var(--ease-standard) var(--delay-glow),box-shadow var(--dur-med) var(--ease-standard) var(--delay-glow)}
+.shelf-picker button{display:flex;align-items:center;text-align:left;gap:var(--space-3);padding:var(--space-3);color:var(--text-heading);background:var(--surface-page);border:var(--border-hairline) solid var(--border-default);border-radius:var(--radius-sm);cursor:pointer;min-width:0;transition:background var(--dur-med) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),box-shadow var(--dur-med) var(--ease-standard)}
 .shelf-picker button[aria-pressed=true]{background:var(--surface-card);border-color:var(--text-heading);--selection-shadow:inset 0 calc(-1 * var(--border-thick)) 0 var(--text-heading);box-shadow:var(--selection-shadow),var(--hover-shadow,0 0 0 transparent)}
 .shelf-thumb{width:var(--space-7);height:var(--space-7);flex-shrink:0;display:grid;place-items:center;overflow:hidden;border-radius:var(--radius-xs)}
 .shelf-thumb img{width:100%;height:100%;object-fit:cover}

@@ -20,7 +20,7 @@ html[data-high-contrast="true"] {
 }
 .site-header .accessibility-entry { background:transparent; color:var(--white); border-color:var(--text-muted-on-chrome); }
 .site-header .accessibility-entry:focus-visible { outline-color:var(--white); box-shadow:0 0 0 var(--space-2) var(--surface-chrome); }
-.accessibility-entry:hover { text-decoration:underline; }
+@media(hover:hover) and (pointer:fine) { .accessibility-entry:hover { text-decoration:underline; } }
 .accessibility-panel {
   width:min(36rem,calc(100% - var(--space-6))); max-width:calc(100% - var(--space-6));
   max-height:calc(100dvh - var(--space-6)); overflow:auto; overscroll-behavior:contain;
@@ -57,4 +57,4 @@ html[data-theme="night"][data-high-contrast="true"] {
 }
 
 .site-footer .accessibility-entry { display:inline-block; font:inherit; min-height:0; margin:0; padding:var(--space-2) 0; background:transparent; color:var(--text-on-chrome); border:0; border-radius:0; text-align:start; text-decoration:none; text-decoration-thickness:var(--border-hairline); text-underline-offset:var(--space-1); }
-.site-footer .accessibility-entry:hover { text-decoration-thickness:var(--border-thick); }
+@media(hover:hover) and (pointer:fine) { .site-footer .accessibility-entry:hover { text-decoration-thickness:var(--border-thick); } }

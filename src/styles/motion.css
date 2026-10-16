@@ -3,7 +3,6 @@
   transition-property:background-color,color,border-color,box-shadow,opacity,translate,filter;
   transition-duration:var(--dur-med);
   transition-timing-function:var(--ease-standard);
-  transition-delay:var(--delay-settle);
 }
 .research-menu summary svg { transition:rotate var(--dur-med) var(--ease-standard) var(--delay-settle); }
 .accessibility-panel[open] { animation:surface-arrive var(--dur-med) var(--ease-standard) var(--delay-settle) both; }
@@ -51,7 +50,6 @@ nav a[aria-current],nav a[aria-current]:hover { text-decoration:underline; }
   transition-property:background-color,color,border-color,box-shadow,opacity,translate;
   transition-duration:var(--dur-med);
   transition-timing-function:var(--ease-standard);
-  transition-delay:var(--delay-glow);
 }
 .home-update-card { color:var(--text-heading); }
 .home-themes a { border-radius:var(--radius-sm); }
