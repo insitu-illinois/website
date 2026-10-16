@@ -160,3 +160,7 @@ html body .site-header .icon-control { position:relative; }
   html body .site-header .icon-control:hover,html body .site-footer .footer-login:hover { color:#5eead4; }
   html body .site-header .icon-control:hover { background:radial-gradient(circle at center,rgba(94,234,212,.22),transparent 68%); }
 }
+
+/* The skip link must sit above the fixed header when it receives focus. */
+html body .skip { z-index:100; }
+html body .skip:focus { box-shadow:0 0 0 var(--border-thick) var(--focus-ring); border-radius:var(--radius-sm); }
