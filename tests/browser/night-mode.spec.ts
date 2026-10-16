@@ -9,7 +9,7 @@ test('night is the default, the toggle is keyboard accessible, persistent, and r
   await page.goto('/');
   const toggle=page.getByRole('button',{name:'Night mode',exact:true});
   await expect(toggle).toHaveAttribute('aria-pressed','true');
-  await expect(page.locator('body')).toHaveCSS('background-color','rgb(22, 22, 22)');
+  await expect(page.locator('body')).toHaveCSS('background-color','rgb(11, 13, 18)');
   await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(0px)');
   await toggle.focus(); await toggle.press('Space');
   await expect(toggle).toHaveAttribute('aria-pressed','false');

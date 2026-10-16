@@ -1,0 +1,54 @@
+/* Atmosphere: slow drifting light behind the page, a glass header, scroll reveals and the hover light.
+   Everything that moves is switched off for reduced-motion and high-contrast preferences. */
+body::before {
+  content:""; position:fixed; inset:-20% -10% auto -10%; height:60vh; z-index:-1; pointer-events:none;
+  background:radial-gradient(60% 60% at 30% 20%,var(--glow-1),transparent 70%),radial-gradient(40% 50% at 80% 10%,var(--glow-2),transparent 70%);
+  animation:atmosphere-drift 22s ease-in-out infinite alternate;
+}
+body::after {
+  content:""; position:fixed; right:-15%; top:30vh; width:55vw; height:55vw; max-width:720px; max-height:720px; z-index:-1; pointer-events:none;
+  border-radius:50%; filter:blur(90px); opacity:.5; background:radial-gradient(circle,var(--orb),transparent 65%);
+  animation:atmosphere-drift-slow 28s ease-in-out infinite alternate;
+}
+@keyframes atmosphere-drift { from { transform:translate3d(0,0,0) scale(1); } to { transform:translate3d(6%,8%,0) scale(1.15); } }
+@keyframes atmosphere-drift-slow { from { transform:translate3d(0,0,0); } to { transform:translate3d(-12%,-10%,0) scale(1.2); } }
+.home-band { background:transparent; }
+.site-header { backdrop-filter:blur(14px); background-color:color-mix(in srgb,var(--surface-chrome) 82%,transparent); }
+
+/* Cards: quiet surface, lift and spotlight on hover. */
+html body .home-update-card,html body .records>.card,html body.home-page .records>.card,html body:not(.home-page) main .records>.card,html body .home-other-projects li {
+  background-color:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); padding:var(--space-4);
+  transition:transform var(--dur-med) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),background-color var(--dur-med) var(--ease-standard);
+}
+html body .records>.card,html body.home-page .records>.card,html body:not(.home-page) main .records>.card { padding:var(--space-5); }
+
+/* Buttons: pill shape, a lift and one sweep of light. */
+.button { position:relative; overflow:hidden; border-radius:999px; transition:transform var(--dur-fast) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard); }
+.button::after { content:""; position:absolute; inset:0; pointer-events:none; transform:translateX(-120%); transition:transform .7s var(--ease-standard); background:linear-gradient(110deg,transparent 30%,var(--spot) 50%,transparent 70%); }
+
+@media(hover:hover) and (pointer:fine) {
+  html body .home-update-card:hover,html body .records>.card:hover,html body .home-other-projects li:hover { border-color:var(--accent-heritage-strong); background-image:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),var(--spot),transparent 65%); }
+  .home-themes a:hover,.resource-links>a:hover { background-image:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),var(--spot),transparent 65%); }
+  .button:hover { border-color:var(--accent-heritage-strong); color:var(--hover-light); }
+  .button:hover::after { transform:translateX(120%); }
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  html:not([data-reduce-motion="true"]) :is(.home-update-card,.records>.card,.home-other-projects li):hover { transform:translateY(-3px); }
+  html:not([data-reduce-motion="true"]) .button:hover { transform:translateY(-2px); }
+}
+
+/* Entrance: the hero settles in and later sections arrive as they scroll into view. Blur and slide only, so text never loses contrast. */
+@media(prefers-reduced-motion:no-preference) {
+  html:not([data-reduce-motion="true"]) .home-hero > * { animation:atmosphere-rise .8s var(--ease-standard) both; }
+  html:not([data-reduce-motion="true"]) .home-hero > *:nth-child(2) { animation-delay:.12s; }
+  html:not([data-reduce-motion="true"]) .home-hero > *:nth-child(3) { animation-delay:.24s; }
+  html.js:not([data-reduce-motion="true"]) .reveal { filter:blur(8px); transform:translateY(24px); transition:filter .75s var(--ease-standard),transform .75s var(--ease-standard); transition-delay:var(--d,0s); }
+  html.js:not([data-reduce-motion="true"]) .reveal.in { filter:none; transform:none; }
+}
+@keyframes atmosphere-rise { from { filter:blur(8px); transform:translateY(22px); } to { filter:none; transform:none; } }
+
+@media(prefers-reduced-motion:reduce) { body::before,body::after { animation:none; } .button::after { display:none; } }
+html[data-reduce-motion="true"] :is(body::before,body::after) { animation:none; }
+html[data-reduce-motion="true"] .button::after,html[data-high-contrast="true"] .button::after { display:none; }
+html[data-high-contrast="true"] body::before,html[data-high-contrast="true"] body::after { display:none; }
+@media print { .reveal { filter:none!important; transform:none!important; } body::before,body::after { display:none; } }

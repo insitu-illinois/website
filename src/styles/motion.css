@@ -18,23 +18,17 @@ dialog[data-closing]::backdrop { animation:scrim-leave var(--dur-med) var(--ease
 
 .home-support a { display:inline-flex; align-items:center; gap:var(--space-2); }
 
-/* Hover lights up the label only: an underline fades in and, on the page surface, the text takes the accent colour.
-   Controls never gain a fill, box, border change, glow or movement on hover. */
-:is(.button,.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.shelf-picker button strong,.primary-navigation a:not([aria-current]),.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry) {
-  text-decoration:underline; text-decoration-color:transparent; text-decoration-thickness:var(--border-hairline); text-underline-offset:.25em;
-  transition-property:color,text-decoration-color; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); transition-delay:0s;
+/* Hover turns a light on instead of underlining: text glows, buttons catch a sheen, and cards lift under a soft spotlight
+   that follows the pointer (see atmosphere.css). Colour and glow only for text. */
+:is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.shelf-picker button strong,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry,.site-header .icon-control) {
+  transition-property:color,text-shadow; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); transition-delay:0s;
 }
-.site-header .icon-control { transition-property:color; }
-nav a[aria-current],.site-header summary.section-current { text-decoration:underline; text-decoration-color:currentColor; }
+:is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.site-footer a,.accessibility-entry,.primary-navigation a:not([aria-current]),.site-header .research-links a,.site-header summary:not(.section-current)) { text-decoration:none; }
+:root { --hover-light:#a9bdff; }
+:root[data-theme="light"] { --hover-light:#2a41ad; }
+.site-header,.site-footer { --hover-light:#ffffff; --spot-text:rgba(169,189,255,.75); }
 @media(hover:hover) and (pointer:fine) {
-  :is(.button,.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry):hover,
+  :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry,.site-header .icon-control):hover,
   .home-update-card:hover .home-update-copy h3 a,
-  .shelf-picker button:hover strong { text-decoration-color:currentColor; }
-  :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a):hover,
-  .home-update-card:hover .home-update-copy h3 a,
-  .shelf-picker button:hover strong { color:var(--accent-heritage-strong); }
-  .site-header .icon-control:hover,.site-footer .footer-editor:hover { color:var(--accent-lumen); }
+  .shelf-picker button:hover strong { color:var(--hover-light); text-shadow:0 0 14px var(--spot-text),0 0 3px var(--spot-text); }
 }
-/* Preferences disable transformed states as well as their transitions. */
-@media(prefers-reduced-motion:reduce) { .shelf-thumb,.shelf-indicator { transform:none!important; } }
-html[data-reduce-motion="true"] :is(.shelf-thumb,.shelf-indicator) { transform:none!important; }

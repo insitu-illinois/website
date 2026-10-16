@@ -19,6 +19,7 @@ import '../styles/motion.css';
 import '../styles/compact-pages.css';
 import '../styles/accessibility.css';
 import '../styles/footer.css';
+import '../styles/atmosphere.css';
 import signInIcon from '../assets/icons/bootstrap/box-arrow-in-right.svg?raw';
 import { indexingEnabled } from '../config/site.mjs';
 const signInPaths=signInIcon.trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
@@ -84,6 +85,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
       <div class="shell footer-bottom"><p>© {copyrightYear} IN/SITU</p>{(!footer.draft||import.meta.env.DEV)&&footer.developerName&&<p>Developed by {footer.developerName}</p>}<a href="/accessibility/">Accessibility statement</a></div>
     </footer>
     <AccessibilityPanel />
+      <script>import '../scripts/atmosphere.ts';</script>
   </body>
 </html>
 

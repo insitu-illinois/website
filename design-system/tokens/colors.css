@@ -125,36 +125,49 @@
   --header-border:var(--neutral-600);
 }
 
-/* Default presentation: quiet dark with one calm accent. Light is an opt-in preference (data-theme="light"). */
+/* Default presentation: deep blue-black with soft indigo and teal light (after sepafshar.com). Light is an opt-in preference. */
 :root,
 :root[data-theme="night"] {
-  --accent-calm:#7FD1C0;
+  --night-bg:#0b0d12; --night-card:#141823; --night-line:#232838; --night-line-strong:#5a6585;
+  --accent-calm:#7c9cff; --accent-calm-hover:#a9bdff; --accent-2:#5eead4;
+  --glow-1:rgba(124,156,255,.18); --glow-2:rgba(94,234,212,.10); --orb:rgba(124,156,255,.16);
+  --spot:rgba(124,156,255,.14); --spot-text:rgba(124,156,255,.55);
   color-scheme:dark;
-  --surface-page:var(--neutral-950);
-  --surface-card:var(--neutral-900);
-  --text-primary:var(--neutral-50);
-  --text-heading:var(--white);
-  --text-secondary:var(--neutral-200);
+  --surface-page:var(--night-bg);
+  --surface-card:var(--night-card);
+  --surface-chrome:#0e1118;
+  --surface-chrome-hover:#171c28;
+  --border-chrome:var(--night-line);
+  --text-primary:#e8eaf0;
+  --text-heading:#ffffff;
+  --text-secondary:#aab2c4;
   --accent-heritage-strong:var(--accent-calm);
-  --border-default:var(--neutral-600);
-  --border-strong:var(--neutral-300);
-  --focus-ring:var(--white);
-  --text-on-accent:var(--neutral-950);
-  --button-hover:var(--neutral-200);
-  --header-border:var(--neutral-600);
+  --border-default:var(--night-line);
+  --border-strong:var(--night-line-strong);
+  --focus-ring:#b6c6ff;
+  --text-on-accent:var(--night-bg);
+  --button-hover:var(--accent-calm-hover);
+  --header-border:var(--night-line);
 }
 :root[data-theme="light"] {
   color-scheme:light;
   --surface-page:var(--white);
   --surface-card:var(--neutral-50);
+  --surface-chrome:#0e1118;
+  --surface-chrome-hover:#171c28;
+  --border-chrome:#232838;
   --text-primary:var(--neutral-900);
   --text-heading:var(--neutral-950);
   --text-secondary:var(--neutral-600);
-  --accent-heritage-strong:var(--neutral-950);
+  --accent-heritage-strong:#3451d1;
+  --accent-calm-hover:#2a41ad;
+  --accent-2:#0b6e66;
+  --glow-1:rgba(52,81,209,.10); --glow-2:rgba(11,110,102,.07); --orb:rgba(52,81,209,.08);
+  --spot:rgba(52,81,209,.10); --spot-text:rgba(52,81,209,.35);
   --border-default:var(--neutral-200);
   --border-strong:var(--neutral-500);
-  --focus-ring:var(--neutral-950);
+  --focus-ring:#1a37b8;
   --text-on-accent:var(--white);
-  --button-hover:var(--neutral-800);
+  --button-hover:#2a41ad;
   --header-border:var(--neutral-800);
 }

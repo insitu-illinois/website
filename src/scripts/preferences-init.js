@@ -1,5 +1,6 @@
 // Apply saved preferences before the page is painted. Storage may be unavailable.
 (() => {
+  document.documentElement.classList.add('js');
   try {
     const preferences = JSON.parse(localStorage.getItem('insitu-accessibility') || '{}');
     const root = document.documentElement;
