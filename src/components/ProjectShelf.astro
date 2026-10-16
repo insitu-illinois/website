@@ -63,7 +63,7 @@ for(const shelf of document.querySelectorAll<HTMLElement>('[data-project-shelf]'
 @media(max-width:64rem){.shelf-picker{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:40rem){.project-shelf .shelf-panel{grid-template-columns:minmax(0,1fr);padding:var(--space-4);gap:var(--space-3)}.shelf-visual{padding:var(--space-1)}.shelf-visual :global(.game-case){max-width:calc(var(--space-9)*2)}.shelf-visual :global(img.media){max-height:calc(var(--space-9)*2)}.shelf-symbol{min-height:var(--space-10)}.project-shelf .shelf-copy h3{font-size:var(--text-display-sm)}.shelf-picker button{padding:var(--space-2);gap:var(--space-2)}.shelf-thumb{width:var(--space-6);height:var(--space-7)}.shelf-item-copy>span,.shelf-indicator{display:none}}
 /* Match the portfolio’s responsive controls without moving reading text. */
-.shelf-panel:not([hidden]){animation:scrim-arrive var(--dur-med) var(--ease-standard) both}
+.shelf-panel:not([hidden]) .shelf-visual{animation:scrim-arrive var(--dur-med) var(--ease-standard) both}
 .shelf-thumb,.shelf-indicator{transition:transform var(--dur-med) var(--ease-responsive)}
 .shelf-picker button[aria-pressed=true] .shelf-thumb{animation:shelf-select var(--dur-decorative) var(--ease-responsive) both}
 @keyframes shelf-select{0%{transform:scale(.9)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
