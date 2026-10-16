@@ -305,3 +305,5 @@ body:not(.home-page) .intro-awards-funding { border-block-start:var(--border-thi
 body:not(.home-page) .page-intro { padding:var(--space-5) 0 var(--space-6); border:0; border-bottom:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent; }
 .records>.card,.home-page .records>.card,main:not(.home-page) .records>.card { padding:var(--space-5) 0; border:0; border-top:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent; }
 .home-page .home-hero h1 { max-width:16ch; font-size:var(--text-display-xl); }
+:is(.page-heading,.page-intro) + section { border-top:0; }
+body:not(.home-page) .page-intro { border-bottom:0; padding-bottom:var(--space-4); }
