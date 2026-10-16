@@ -44,3 +44,18 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   window.addEventListener('scroll', () => { if (!waiting) { waiting = true; requestAnimationFrame(sync); } }, { passive: true });
   sync();
 }
+
+// Header and footer glass: the highlight follows the pointer and the panel drifts a few pixels toward it.
+for (const glass of Array.from(document.querySelectorAll<HTMLElement>('.site-header,.site-footer'))) {
+  glass.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    const box = glass.getBoundingClientRect();
+    const px = (event.clientX - box.left) / box.width - 0.5;
+    const py = (event.clientY - box.top) / box.height - 0.5;
+    glass.style.setProperty('--mx', `${Math.round(event.clientX - box.left)}px`);
+    glass.style.setProperty('--my', `${Math.round(event.clientY - box.top)}px`);
+    glass.style.setProperty('--tx', `${(px * 4).toFixed(2)}px`);
+    glass.style.setProperty('--ty', `${(py * 3).toFixed(2)}px`);
+  }, { passive: true });
+  glass.addEventListener('pointerleave', () => { glass.style.setProperty('--tx', '0px'); glass.style.setProperty('--ty', '0px'); });
+}
