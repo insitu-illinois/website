@@ -1,16 +1,6 @@
 ---
-import people from '../assets/icons/bootstrap/people.svg?raw';
-import news from '../assets/icons/bootstrap/newspaper.svg?raw';
-import projects from '../assets/icons/bootstrap/layers.svg?raw';
-import presentations from '../assets/icons/bootstrap/easel.svg?raw';
-import awards from '../assets/icons/bootstrap/award.svg?raw';
-import publications from '../assets/icons/bootstrap/file-earmark-pdf.svg?raw';
-import globe from '../assets/icons/bootstrap/globe.svg?raw';
 const {kind,title,description}=Astro.props;
-const icons:Record<string,string>={people,news,projects,presentations,'awards-funding':awards,publications,about:globe,join:people};
-const svg=(icons[kind]||globe).trim().replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
 ---
 <header class:list={['page-heading','page-intro',`intro-${kind}`]}>
- <div class="intro-symbol" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false" set:html={svg}/></div>
  <div class="intro-copy"><h1>{title}</h1><p>{description}</p></div>
 </header>

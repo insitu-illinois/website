@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 test('people references are inline and portraits open non-alumni profiles',async({page})=>{
  for(const route of ['/presentations/','/awards-funding/','/news/']){
   await page.goto(route);await expect(page.getByText('People mentioned',{exact:true})).toHaveCount(0);
-  await expect(page.locator('.page-intro svg')).toHaveCount(1);
+  await expect(page.locator('.page-intro svg')).toHaveCount(0);
  }
  await page.goto('/presentations/');await expect(page.locator('.metadata .inline-people a').first()).toBeVisible();
  await page.goto('/news/brian-graves-research-live-2026/');

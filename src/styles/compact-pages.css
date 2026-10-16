@@ -4,8 +4,6 @@ main:not(.home-page) .page-heading { margin-block:var(--space-3) var(--space-5);
 main:not(.home-page) .page-heading h1 { font-size:clamp(var(--text-display-sm),3.5vw,var(--text-display-md)); margin-block:var(--space-3); }
 main:not(.home-page) .page-intro { padding:var(--space-4); gap:var(--space-4); }
 main:not(.home-page) .page-intro h1 { margin-block:0 var(--space-2); }
-main:not(.home-page) .intro-symbol { width:var(--space-7); height:var(--space-7); }
-main:not(.home-page) .intro-symbol svg { width:var(--space-5); height:var(--space-5); }
 main:not(.home-page) .main-content>section,
 main:not(.home-page) .main-content>div.reading-section { margin-block:var(--space-5); padding:var(--space-5); }
 main:not(.home-page) h2 { font-size:var(--text-display-sm); margin-bottom:var(--space-4); }

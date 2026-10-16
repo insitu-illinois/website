@@ -16,52 +16,25 @@ dialog[data-closing]::backdrop { animation:scrim-leave var(--dur-med) var(--ease
   transition:background-color var(--dur-med) var(--ease-standard) var(--delay-settle),color var(--dur-med) var(--ease-standard) var(--delay-settle),border-color var(--dur-med) var(--ease-standard) var(--delay-settle);
 }
 
-/* Portfolio-inspired icon response; copy remains stationary. */
-.content-icon {
-  display:inline-block; width:var(--space-5); height:var(--space-5);
-  flex-shrink:0; fill:currentColor; vertical-align:middle;
-  transition:transform var(--dur-med) var(--ease-responsive);
-}
-:is(h2,h3) > .content-icon { margin-inline-end:var(--space-3); }
 .home-support a { display:inline-flex; align-items:center; gap:var(--space-2); }
-.home-update-visual img { transition:transform var(--dur-decorative) var(--ease-standard); }
-@media(hover:hover) and (pointer:fine) {
-  :is(a,button):hover > .content-icon { transform:translateY(calc(-1 * var(--space-1))) rotate(-5deg); }
-  .home-update-visual:hover img { transform:scale(1.045); }
-}
-:is(a,button):active > .content-icon { transform:scale(.92); }
-/* Preferences disable transformed hover states as well as their transitions. */
-@media(prefers-reduced-motion:reduce) {
-  .content-icon,.home-update-visual img,.shelf-thumb,.shelf-indicator { transform:none!important; }
-}
-html[data-reduce-motion="true"] :is(.content-icon,.home-update-visual img,.shelf-thumb,.shelf-indicator) { transform:none!important; }
-/* Keep the label and its surface in sync during the existing inverted hover. */
-.button { transition-property:background-color,color,border-color,box-shadow,filter; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); }
 
-/* Standalone navigation keeps a quiet surface; inline prose links stay marked. */
-:is(.home-team-link,.home-support a,.home-update-copy h3 a,.section-heading .text-link,.site-footer a),
-:is(.home-team-link,.home-support a,.home-update-copy h3 a,.section-heading .text-link,.site-footer a):hover { text-decoration:none; }
-.site-footer .accessibility-entry,.site-footer .accessibility-entry:hover { text-decoration:none; }
-nav a[aria-current],nav a[aria-current]:hover { text-decoration:underline; }
-
-/* One surface glow and timing for controls, navigation and update cards. */
-:is(button,.button,summary,.text-link,.home-team-link,.home-update-links a,.home-support a,.primary-navigation a,.resource-links a,.home-themes a,.home-update-card) {
-  --control-glow:0 0 var(--space-3) color-mix(in srgb,currentColor 18%,transparent);
-  transition-property:background-color,color,border-color,box-shadow,opacity,translate;
-  transition-duration:var(--dur-med);
-  transition-timing-function:var(--ease-standard);
+/* Hover lights up the label only: an underline fades in and, on the page surface, the text takes the accent colour.
+   Controls never gain a fill, box, border change, glow or movement on hover. */
+:is(.button,.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.shelf-picker button strong,.primary-navigation a:not([aria-current]),.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry) {
+  text-decoration:underline; text-decoration-color:transparent; text-decoration-thickness:var(--border-hairline); text-underline-offset:.25em;
+  transition-property:color,text-decoration-color; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); transition-delay:0s;
 }
-.home-update-card { color:var(--text-heading); }
-.home-themes a { border-radius:var(--radius-sm); }
-.site-header :is(.primary-navigation a,summary,.icon-control,.mobile-menu-toggle) {
-  --control-glow:0 0 var(--space-3) color-mix(in srgb,var(--text-on-chrome) 28%,transparent);
-  border-radius:var(--radius-sm);
-}
+.site-header .icon-control { transition-property:color; }
+nav a[aria-current],.site-header summary.section-current { text-decoration:underline; text-decoration-color:currentColor; }
 @media(hover:hover) and (pointer:fine) {
-  :is(button,.button,summary,.text-link,.home-team-link,.home-update-links a,.home-support a,.primary-navigation a,.resource-links a,.home-themes a,.home-update-card):not(:disabled):hover {
-    --hover-shadow:var(--control-glow);
-    box-shadow:var(--selection-shadow,0 0 0 transparent),var(--hover-shadow);
-  }
-  .home-update-card:hover { border-color:var(--text-secondary); }
+  :is(.button,.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry):hover,
+  .home-update-card:hover .home-update-copy h3 a,
+  .shelf-picker button:hover strong { text-decoration-color:currentColor; }
+  :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a):hover,
+  .home-update-card:hover .home-update-copy h3 a,
+  .shelf-picker button:hover strong { color:var(--accent-heritage-strong); }
+  .site-header .icon-control:hover,.site-footer .footer-editor:hover { color:var(--accent-lumen); }
 }
-.home-update-card:focus-within { box-shadow:var(--control-glow); }
+/* Preferences disable transformed states as well as their transitions. */
+@media(prefers-reduced-motion:reduce) { .shelf-thumb,.shelf-indicator { transform:none!important; } }
+html[data-reduce-motion="true"] :is(.shelf-thumb,.shelf-indicator) { transform:none!important; }

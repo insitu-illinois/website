@@ -67,5 +67,4 @@ for(const shelf of document.querySelectorAll<HTMLElement>('[data-project-shelf]'
 .shelf-thumb,.shelf-indicator{transition:transform var(--dur-med) var(--ease-responsive)}
 .shelf-picker button[aria-pressed=true] .shelf-thumb{animation:shelf-select var(--dur-decorative) var(--ease-responsive) both}
 @keyframes shelf-select{0%{transform:scale(.9)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
-@media(hover:hover) and (pointer:fine){.shelf-picker button:hover .shelf-thumb{transform:translateY(calc(-1 * var(--space-1)))}}
 </style>
