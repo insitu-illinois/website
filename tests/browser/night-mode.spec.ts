@@ -16,7 +16,7 @@ test('night is the default, the toggle is keyboard accessible, persistent, and r
   await expect(toggle.locator('.night-moon')).toBeVisible();
   await expect(toggle.locator('.moon-fill')).toHaveCSS('clip-path','inset(100% 0px 0px)');
   await expect(toggle.locator('.night-sun')).toHaveCount(0);
-  await expect(page.locator('body')).toHaveCSS('background-color','rgb(255, 255, 255)');
+  await expect(page.locator('body')).toHaveCSS('background-color','rgb(238, 241, 252)');
   await page.goto('/publications/');
   await expect(toggle).toHaveAttribute('aria-pressed','false');
   await page.locator('header').getByRole('button',{name:'Accessibility',exact:true}).click();
