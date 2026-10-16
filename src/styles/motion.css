@@ -1,6 +1,6 @@
 /* One rhythm across public controls, disclosures and dialogs. */
 :where(a,button,summary,input,select) {
-  transition-property:background-color,color,border-color,box-shadow,opacity,translate;
+  transition-property:background-color,color,border-color,box-shadow,opacity,translate,filter;
   transition-duration:var(--dur-med);
   transition-timing-function:var(--ease-standard);
   transition-delay:var(--delay-settle);
@@ -16,3 +16,54 @@ dialog[data-closing]::backdrop { animation:scrim-leave var(--dur-med) var(--ease
 :where(body,.site-header,.site-footer,.home-band,.main-content > section,.card) {
   transition:background-color var(--dur-med) var(--ease-standard) var(--delay-settle),color var(--dur-med) var(--ease-standard) var(--delay-settle),border-color var(--dur-med) var(--ease-standard) var(--delay-settle);
 }
+
+/* Portfolio-inspired icon response; copy remains stationary. */
+.content-icon {
+  display:inline-block; width:var(--space-5); height:var(--space-5);
+  flex-shrink:0; fill:currentColor; vertical-align:middle;
+  transition:transform var(--dur-med) var(--ease-responsive);
+}
+:is(h2,h3) > .content-icon { margin-inline-end:var(--space-3); }
+.home-support a { display:inline-flex; align-items:center; gap:var(--space-2); }
+.home-update-visual img { transition:transform var(--dur-decorative) var(--ease-standard); }
+@media(hover:hover) and (pointer:fine) {
+  :is(a,button):hover > .content-icon { transform:translateY(calc(-1 * var(--space-1))) rotate(-5deg); }
+  .home-update-visual:hover img { transform:scale(1.045); }
+}
+:is(a,button):active > .content-icon { transform:scale(.92); }
+/* Preferences disable transformed hover states as well as their transitions. */
+@media(prefers-reduced-motion:reduce) {
+  .content-icon,.home-update-visual img,.shelf-thumb,.shelf-indicator { transform:none!important; }
+}
+html[data-reduce-motion="true"] :is(.content-icon,.home-update-visual img,.shelf-thumb,.shelf-indicator) { transform:none!important; }
+/* Keep the label and its surface in sync during the existing inverted hover. */
+.button { transition-property:background-color,color,border-color,box-shadow,filter; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); }
+
+/* Standalone navigation keeps a quiet surface; inline prose links stay marked. */
+:is(.home-team-link,.home-support a,.home-update-copy h3 a,.section-heading .text-link,.site-footer a),
+:is(.home-team-link,.home-support a,.home-update-copy h3 a,.section-heading .text-link,.site-footer a):hover { text-decoration:none; }
+.site-footer .accessibility-entry,.site-footer .accessibility-entry:hover { text-decoration:none; }
+nav a[aria-current],nav a[aria-current]:hover { text-decoration:underline; }
+
+/* One surface glow and timing for controls, navigation and update cards. */
+:is(button,.button,summary,.text-link,.home-team-link,.home-update-links a,.home-support a,.primary-navigation a,.resource-links a,.home-themes a,.home-update-card) {
+  --control-glow:0 0 var(--space-3) color-mix(in srgb,currentColor 18%,transparent);
+  transition-property:background-color,color,border-color,box-shadow,opacity,translate;
+  transition-duration:var(--dur-med);
+  transition-timing-function:var(--ease-standard);
+  transition-delay:var(--delay-glow);
+}
+.home-update-card { color:var(--text-heading); }
+.home-themes a { border-radius:var(--radius-sm); }
+.site-header :is(.primary-navigation a,summary,.icon-control,.mobile-menu-toggle) {
+  --control-glow:0 0 var(--space-3) color-mix(in srgb,var(--text-on-chrome) 28%,transparent);
+  border-radius:var(--radius-sm);
+}
+@media(hover:hover) and (pointer:fine) {
+  :is(button,.button,summary,.text-link,.home-team-link,.home-update-links a,.home-support a,.primary-navigation a,.resource-links a,.home-themes a,.home-update-card):not(:disabled):hover {
+    --hover-shadow:var(--control-glow);
+    box-shadow:var(--selection-shadow,0 0 0 transparent),var(--hover-shadow);
+  }
+  .home-update-card:hover { border-color:var(--text-secondary); }
+}
+.home-update-card:focus-within { box-shadow:var(--control-glow); }

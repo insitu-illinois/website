@@ -50,8 +50,8 @@ for(const shelf of document.querySelectorAll<HTMLElement>('[data-project-shelf]'
 .shelf-copy p{margin-block:var(--space-3)}
 .shelf-copy .button{margin-top:var(--space-2)}
 .shelf-picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-2);margin-top:var(--space-3)}
-.shelf-picker button{display:flex;align-items:center;text-align:left;gap:var(--space-3);padding:var(--space-3);color:var(--text-heading);background:var(--surface-page);border:var(--border-hairline) solid var(--border-default);border-radius:var(--radius-sm);cursor:pointer;min-width:0;transition:background var(--dur-med),border-color var(--dur-med)}
-.shelf-picker button[aria-pressed=true]{background:var(--surface-card);border-color:var(--text-heading);box-shadow:inset 0 calc(-1 * var(--border-thick)) 0 var(--text-heading)}
+.shelf-picker button{display:flex;align-items:center;text-align:left;gap:var(--space-3);padding:var(--space-3);color:var(--text-heading);background:var(--surface-page);border:var(--border-hairline) solid var(--border-default);border-radius:var(--radius-sm);cursor:pointer;min-width:0;transition:background var(--dur-med) var(--ease-standard) var(--delay-glow),border-color var(--dur-med) var(--ease-standard) var(--delay-glow),box-shadow var(--dur-med) var(--ease-standard) var(--delay-glow)}
+.shelf-picker button[aria-pressed=true]{background:var(--surface-card);border-color:var(--text-heading);--selection-shadow:inset 0 calc(-1 * var(--border-thick)) 0 var(--text-heading);box-shadow:var(--selection-shadow),var(--hover-shadow,0 0 0 transparent)}
 .shelf-thumb{width:var(--space-7);height:var(--space-7);flex-shrink:0;display:grid;place-items:center;overflow:hidden;border-radius:var(--radius-xs)}
 .shelf-thumb img{width:100%;height:100%;object-fit:cover}
 .shelf-thumb :global(svg){width:var(--space-5);height:var(--space-5);fill:currentColor}
@@ -62,4 +62,10 @@ for(const shelf of document.querySelectorAll<HTMLElement>('[data-project-shelf]'
 .shelf-picker button[aria-pressed=true] .shelf-indicator{transform:rotate(45deg)}
 @media(max-width:64rem){.shelf-picker{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:40rem){.project-shelf .shelf-panel{grid-template-columns:minmax(0,1fr);padding:var(--space-4);gap:var(--space-3)}.shelf-visual{padding:var(--space-1)}.shelf-visual :global(.game-case){max-width:calc(var(--space-9)*2)}.shelf-visual :global(img.media){max-height:calc(var(--space-9)*2)}.shelf-symbol{min-height:var(--space-10)}.project-shelf .shelf-copy h3{font-size:var(--text-display-sm)}.shelf-picker button{padding:var(--space-2);gap:var(--space-2)}.shelf-thumb{width:var(--space-6);height:var(--space-7)}.shelf-item-copy>span,.shelf-indicator{display:none}}
+/* Match the portfolio’s responsive controls without moving reading text. */
+.shelf-panel:not([hidden]){animation:scrim-arrive var(--dur-med) var(--ease-standard) both}
+.shelf-thumb,.shelf-indicator{transition:transform var(--dur-med) var(--ease-responsive)}
+.shelf-picker button[aria-pressed=true] .shelf-thumb{animation:shelf-select var(--dur-decorative) var(--ease-responsive) both}
+@keyframes shelf-select{0%{transform:scale(.9)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+@media(hover:hover) and (pointer:fine){.shelf-picker button:hover .shelf-thumb{transform:translateY(calc(-1 * var(--space-1)))}}
 </style>

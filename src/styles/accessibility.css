@@ -56,5 +56,5 @@ html[data-theme="night"][data-high-contrast="true"] {
   --accent-heritage-strong:var(--text-on-chrome);
 }
 
-.site-footer .accessibility-entry { display:inline-block; font:inherit; min-height:0; margin:0; padding:var(--space-2) 0; background:transparent; color:var(--text-on-chrome); border:0; border-radius:0; text-align:start; text-decoration:underline; text-decoration-thickness:var(--border-hairline); text-underline-offset:var(--space-1); }
+.site-footer .accessibility-entry { display:inline-block; font:inherit; min-height:0; margin:0; padding:var(--space-2) 0; background:transparent; color:var(--text-on-chrome); border:0; border-radius:0; text-align:start; text-decoration:none; text-decoration-thickness:var(--border-hairline); text-underline-offset:var(--space-1); }
 .site-footer .accessibility-entry:hover { text-decoration-thickness:var(--border-thick); }
