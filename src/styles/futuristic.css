@@ -4,7 +4,7 @@ html body :is(.home-themes li,.records>li,.people-compact>li + li,.credit-group,
   border-top-color:transparent; border-bottom-color:transparent;
 }
 html body .site-header { margin:var(--space-3) var(--space-3) 0; border:0; border-radius:22px; background:var(--glass); -webkit-backdrop-filter:blur(18px) saturate(140%); backdrop-filter:blur(18px) saturate(140%); box-shadow:0 18px 44px -26px rgba(0,0,0,.7); }
-html body .site-footer { margin:var(--space-8) var(--space-3) var(--space-3); border:0; border-radius:26px; background:var(--glass); -webkit-backdrop-filter:blur(18px) saturate(140%); backdrop-filter:blur(18px) saturate(140%); }
+html body .site-footer { margin:var(--space-8) var(--space-3) var(--space-3); border:0; border-radius:26px; background:var(--glass-footer); -webkit-backdrop-filter:blur(6px) saturate(140%); backdrop-filter:blur(6px) saturate(140%); }
 html body .site-header .header-tools { border:0; background:rgba(255,255,255,.06); border-radius:999px; }
 html body .site-header .icon-control,html body .site-footer .footer-editor { border:0; border-radius:999px; }
 html body .site-header .nav-list > .nav-join > a { border:var(--border-hairline) solid rgba(255,255,255,.4); border-radius:var(--radius-md); padding-inline:var(--space-5); font-weight:600; color:#ffffff; background:transparent; box-shadow:none; }
@@ -81,7 +81,7 @@ html[data-theme="light"][data-tone="violet"] { --glow-1:rgba(167,139,250,.42); -
 /* ---- Header and footer: depth, a lit top edge and a thin line of light ---- */
 html body .site-header { box-shadow:0 30px 60px -32px rgba(0,0,0,.9),0 12px 26px -16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12); }
 :root[data-theme="light"] body .site-header { box-shadow:0 28px 56px -28px rgba(40,50,110,.6),0 10px 22px -14px rgba(40,50,110,.35),inset 0 1px 0 rgba(255,255,255,.14); }
-html body .site-footer { position:relative; box-shadow:0 -24px 60px -34px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1); background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1.5px); background-size:18px 18px; background-color:var(--glass); }
+html body .site-footer { position:relative; box-shadow:0 -24px 60px -34px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1); background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1.5px); background-size:18px 18px; background-color:var(--glass-footer); }
 html :is(.home-page,body) .main-content > section { padding-inline:0; }
 
 /* ---- Hero: staggered word reveal and a softly glowing accent ---- */
@@ -152,7 +152,7 @@ html :is(.home-page,body) .main-content > section:is(:nth-of-type(odd),:nth-of-t
 .footer-login { gap:var(--space-2); }
 .footer-login svg { width:var(--space-4); height:var(--space-4); fill:currentColor; flex-shrink:0; }
 .footer-social { list-style:none; display:flex; flex-wrap:wrap; gap:var(--space-4); margin:var(--space-5) 0 0; padding:0; }
-.footer-social svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:url(#ig); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
+.footer-social svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:#b9a5ff; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
 
 /* ---- Hover colour: teal in the header and footer, violet everywhere else. No glow, lift or zoom. ---- */
 html body .site-header .icon-control { position:relative; }
@@ -161,19 +161,23 @@ html body .site-header .icon-control { position:relative; }
   html body .site-header .icon-control:hover { background:radial-gradient(circle at center,rgba(94,234,212,.22),transparent 68%); }
 }
 
-/* ---- Liquid glass header and footer: see-through, bright edge, a highlight that follows the pointer, a tiny drift ---- */
-html body :is(.site-header,.site-footer) {
+
+/* ---- Liquid glass header: see-through, bright edge, a highlight that follows the pointer, a tiny drift ---- */
+html body .site-header {
   background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02) 45%,rgba(255,255,255,.07)),var(--glass);
   -webkit-backdrop-filter:blur(9px) saturate(170%) brightness(1.08); backdrop-filter:blur(9px) saturate(170%) brightness(1.08);
   transform:translate3d(var(--tx,0px),var(--ty,0px),0); transition:transform .35s var(--ease-standard);
+  box-shadow:0 30px 60px -32px rgba(0,0,0,.85),0 10px 24px -14px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(255,255,255,.08),inset 0 0 0 1px rgba(255,255,255,.08);
 }
-html body .site-header { box-shadow:0 30px 60px -32px rgba(0,0,0,.85),0 10px 24px -14px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(255,255,255,.08),inset 0 0 0 1px rgba(255,255,255,.08); }
-html body .site-footer { box-shadow:0 -24px 60px -34px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(255,255,255,.06),inset 0 0 0 1px rgba(255,255,255,.07); background-image:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02) 45%,rgba(255,255,255,.07)),radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1.5px); background-size:auto,18px 18px; }
-html body :is(.site-header,.site-footer)::before {
+:root[data-theme="light"] body .site-header { background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.01) 45%,rgba(255,255,255,.05)),var(--glass); box-shadow:0 28px 56px -28px rgba(40,50,110,.6),0 10px 22px -14px rgba(40,50,110,.35),inset 0 1px 0 rgba(255,255,255,.22); }
+html body .site-header::before {
   content:""; position:absolute; inset:0; z-index:-1; border-radius:inherit; pointer-events:none;
   background:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.16),transparent 62%),linear-gradient(105deg,transparent 30%,rgba(255,255,255,.07) 46%,transparent 58%);
-  opacity:.9;
 }
-html body .site-footer { isolation:isolate; }
-@media(prefers-reduced-motion:reduce) { html body :is(.site-header,.site-footer) { transform:none; transition:none; } }
-html[data-reduce-motion="true"] body :is(.site-header,.site-footer) { transform:none; transition:none; }
+@media(prefers-reduced-motion:reduce) { html body .site-header { transform:none; transition:none; } }
+html[data-reduce-motion="true"] body .site-header { transform:none; transition:none; }
+
+/* ---- Icons: one violet, no gradients ---- */
+.bg-icon { color:var(--icon-violet); }
+.bg-icon.tone-indigo,.bg-icon.tone-teal,.bg-icon.tone-amber,.bg-icon.tone-violet { --ic:var(--icon-violet); }
+:root[data-theme="light"] .bg-icon.tone-indigo,:root[data-theme="light"] .bg-icon.tone-teal,:root[data-theme="light"] .bg-icon.tone-amber,:root[data-theme="light"] .bg-icon.tone-violet { --ic:var(--icon-violet); }

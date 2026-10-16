@@ -45,8 +45,8 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   sync();
 }
 
-// Header and footer glass: the highlight follows the pointer and the panel drifts a few pixels toward it.
-for (const glass of Array.from(document.querySelectorAll<HTMLElement>('.site-header,.site-footer'))) {
+// Header glass: the highlight follows the pointer and the panel drifts a few pixels toward it.
+for (const glass of Array.from(document.querySelectorAll<HTMLElement>('.site-header'))) {
   glass.addEventListener('pointermove', (event) => {
     if (event.pointerType !== 'mouse') return;
     const box = glass.getBoundingClientRect();
