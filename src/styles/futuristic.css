@@ -1,13 +1,13 @@
 /* Futuristic pass: floating glass header and footer, no hairline dividers, a modern UI typeface and gradient accents.
    Dividers keep their 1px so layout never shifts; they are simply invisible. */
-html body :is(.home-themes li,.records>li,.people-compact>li + li,.credit-group,.home-support,.footer-bottom,.prose h2:not(:first-child),.support-section,.home-other-projects,.empty-note,.people-metadata,.premise,.page-heading,.home-page .home-band,.home-page .main-content > section + section,.main-content > section,.home-update-card,.home-other-projects li) {
+html body :is(.home-themes li,.records>li,.people-compact>li + li,.credit-group,.home-support,.footer-bottom,.prose h2:not(:first-child),.support-section,.home-other-projects,.empty-note,.people-metadata,.premise,.page-heading,.home-page .home-band,.home-page .main-content > section + section,.main-content > section) {
   border-top-color:transparent; border-bottom-color:transparent;
 }
 html body .site-header { margin:var(--space-3) var(--space-3) 0; border:0; border-radius:22px; background:var(--glass); -webkit-backdrop-filter:blur(18px) saturate(140%); backdrop-filter:blur(18px) saturate(140%); box-shadow:0 18px 44px -26px rgba(0,0,0,.7); }
 html body .site-footer { margin:var(--space-8) var(--space-3) var(--space-3); border:0; border-radius:26px; background:var(--glass); -webkit-backdrop-filter:blur(18px) saturate(140%); backdrop-filter:blur(18px) saturate(140%); }
 html body .site-header .header-tools { border:0; background:rgba(255,255,255,.06); border-radius:999px; }
 html body .site-header .icon-control,html body .site-footer .footer-editor { border:0; border-radius:999px; }
-html body .site-header .nav-list > .nav-join > a { border:var(--border-hairline) solid rgba(255,255,255,.4); border-radius:999px; padding-inline:var(--space-5); font-weight:500; color:#ffffff; background:transparent; box-shadow:none; }
+html body .site-header .nav-list > .nav-join > a { border:var(--border-hairline) solid rgba(255,255,255,.4); border-radius:var(--radius-md); padding-inline:var(--space-5); font-weight:600; color:#ffffff; background:transparent; box-shadow:none; }
 @media(hover:hover) and (pointer:fine) {
   html body .site-header .nav-list > .nav-join > a:hover { color:#ffffff; border-color:rgba(255,255,255,.85); text-shadow:0 0 14px rgba(169,189,255,.75); }
 }
@@ -33,8 +33,8 @@ html body :is(.home-update-card,.home-other-projects li) { padding:var(--space-5
 
 html body :is(.button,.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link) {
   position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:var(--space-2); min-height:var(--space-7); padding:0 var(--space-5);
-  border-radius:999px; border:var(--border-hairline) solid color-mix(in srgb,var(--text-heading) 24%,transparent);
-  background:color-mix(in srgb,var(--text-heading) 5%,transparent); color:var(--text-heading); font-weight:500; text-decoration:none;
+  border-radius:var(--radius-md); border:var(--border-hairline) solid var(--border-default);
+  background:var(--tile-bg); color:var(--text-heading); font-weight:600; font-size:var(--text-body-sm); text-decoration:none;
   transition:transform var(--dur-fast) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard);
 }
 html body :is(.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link)::after {
@@ -70,17 +70,6 @@ html[data-high-contrast="true"] body :is(.home-team-link,.home-update-links a,.h
   background:radial-gradient(circle,var(--tone) 1.4px,transparent 1.9px) 0 50%/14px 8px repeat-x; opacity:.75;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
 }
-.main-content > section::before {
-  content:""; position:absolute; z-index:-1; right:0; top:var(--space-5); width:min(300px,42vw); aspect-ratio:1; pointer-events:none; opacity:.11; background:var(--tone);
-  -webkit-mask:var(--motif) center/contain no-repeat; mask:var(--motif) center/contain no-repeat;
-}
-:root[data-theme="light"] .main-content > section::before { opacity:.14; }
-.main-content > section:nth-of-type(5n+1) { --motif:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='6' y='20' width='52' height='26' rx='10'/%3E%3Ccircle cx='22' cy='33' r='6'/%3E%3Ccircle cx='42' cy='33' r='6'/%3E%3Cpath d='M6 33H2M58 33h4M26 20c2-4 10-4 12 0'/%3E%3C/svg%3E"); }
-.main-content > section:nth-of-type(5n+2) { --motif:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 22h32a12 12 0 0 1 12 12l-3 12a6 6 0 0 1-10 2l-4-6H21l-4 6a6 6 0 0 1-10-2L4 34a12 12 0 0 1 12-12z'/%3E%3Cpath d='M20 30v8M16 34h8'/%3E%3Ccircle cx='42' cy='32' r='2'/%3E%3Ccircle cx='48' cy='36' r='2'/%3E%3C/svg%3E"); }
-.main-content > section:nth-of-type(5n+3) { --motif:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 20L32 8l26 12'/%3E%3Cpath d='M10 22h44M14 26v22M26 26v22M38 26v22M50 26v22M8 50h48M4 56h56'/%3E%3C/svg%3E"); }
-.main-content > section:nth-of-type(5n+4) { --motif:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='32' cy='32' r='29'/%3E%3Ccircle cx='32' cy='13' r='4.5'/%3E%3Cpath d='M14 24h36M32 24v14M32 38l-9 14M32 38l9 14'/%3E%3C/svg%3E"); }
-.main-content > section:nth-of-type(5n+5) { --motif:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='32' cy='32' r='26'/%3E%3Cellipse cx='32' cy='32' rx='11' ry='26'/%3E%3Cpath d='M6 32h52M10 20h44M10 44h44'/%3E%3C/svg%3E"); }
-
 /* The light behind the page changes tone as each section passes (set by atmosphere.ts). */
 @property --glow-1 { syntax:'<color>'; inherits:true; initial-value:rgba(124,156,255,.18); }
 @property --glow-2 { syntax:'<color>'; inherits:true; initial-value:rgba(94,234,212,.10); }
@@ -96,9 +85,7 @@ html[data-theme="light"][data-tone="violet"] { --glow-1:rgba(167,139,250,.42); -
 /* ---- Header and footer: depth, a lit top edge and a thin line of light ---- */
 html body .site-header { box-shadow:0 30px 60px -32px rgba(0,0,0,.9),0 12px 26px -16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12); }
 :root[data-theme="light"] body .site-header { box-shadow:0 28px 56px -28px rgba(40,50,110,.6),0 10px 22px -14px rgba(40,50,110,.35),inset 0 1px 0 rgba(255,255,255,.14); }
-html body .site-header::after { content:""; position:absolute; left:14%; right:14%; bottom:0; height:2px; border-radius:2px; pointer-events:none; background:linear-gradient(90deg,transparent,#7c9cff,#5eead4,transparent); opacity:.85; }
 html body .site-footer { position:relative; box-shadow:0 -24px 60px -34px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1); background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1.5px); background-size:18px 18px; background-color:var(--glass); }
-html body .site-footer::before { content:""; position:absolute; left:14%; right:14%; top:0; height:2px; border-radius:2px; pointer-events:none; background:linear-gradient(90deg,transparent,#a78bfa,#7c9cff,transparent); opacity:.85; }
 html :is(.home-page,body) .main-content > section { padding-inline:0; }
 
 /* ---- Hero: staggered word reveal and a softly glowing accent ---- */
@@ -113,7 +100,7 @@ html :is(.home-page,body) .main-content > section { padding-inline:0; }
 :root { --pill-bg:rgba(255,255,255,.07); --pill-border:rgba(255,255,255,.16); --tile-bg:rgba(20,24,35,.58); --glass-shadow:0 10px 28px -16px rgba(0,0,0,.6); }
 :root[data-theme="light"] { --pill-bg:rgba(255,255,255,.55); --pill-border:rgba(52,81,209,.22); --tile-bg:rgba(255,255,255,.58); --glass-shadow:0 10px 28px -16px rgba(52,81,209,.45); }
 html body :is(.button,.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link) {
-  background:var(--pill-bg); border-color:var(--pill-border); -webkit-backdrop-filter:blur(14px) saturate(140%); backdrop-filter:blur(14px) saturate(140%);
+  background:var(--tile-bg); border-color:var(--border-default); -webkit-backdrop-filter:blur(14px) saturate(140%); backdrop-filter:blur(14px) saturate(140%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.14),var(--glass-shadow);
 }
 html body :is(.shelf-picker button,.home-themes a,.home-update-card,.records>.card,.home-other-projects li,.values-statements li) {
@@ -124,3 +111,41 @@ html body :is(.shelf-picker button,.home-themes a,.home-update-card,.records>.ca
 html body .home-page .home-hero { padding-block:var(--space-6) var(--space-5); }
 html :is(.home-page,body) .main-content > section:is(:nth-of-type(odd),:nth-of-type(even)) { padding-block:clamp(var(--space-5),3.2vw,var(--space-6)); }
 html body .site-footer { margin-top:var(--space-6); }
+
+/* ---- Fixed, floating header; wordmark that responds; smooth scrolling ---- */
+html { scroll-padding-top:104px; }
+@media(prefers-reduced-motion:no-preference) { html:not([data-reduce-motion="true"]) { scroll-behavior:smooth; } }
+html body .site-header { position:sticky; top:var(--space-3); z-index:40; }
+.wordmark { display:inline-flex; align-items:baseline; letter-spacing:-.01em; transition:letter-spacing var(--dur-med) var(--ease-standard),text-shadow var(--dur-med) var(--ease-standard); }
+.wordmark span { display:inline-block; transition:transform .45s var(--ease-standard),color var(--dur-med) var(--ease-standard),text-shadow var(--dur-med) var(--ease-standard); }
+@media(hover:hover) and (pointer:fine) {
+  .wordmark:hover { letter-spacing:.04em; text-shadow:0 0 18px var(--spot-text); }
+  .wordmark:hover span { transform:rotate(-16deg) scale(1.25); color:var(--accent-2); text-shadow:0 0 14px var(--accent-2); }
+}
+@media(prefers-reduced-motion:reduce) { .wordmark,.wordmark span { transition:none; } .wordmark:hover span { transform:none; } }
+html[data-reduce-motion="true"] .wordmark:hover span { transform:none; }
+
+/* ---- Hero: no vertical rule, no duplicate name ---- */
+html body .home-overview { border-inline-start:0; }
+
+/* ---- Publication icon: a soft tinted glass tile instead of a dark plate ---- */
+html body .home-update-visual { background:transparent; }
+html body .home-update-visual.is-publication { background:linear-gradient(145deg,color-mix(in srgb,var(--accent-heritage-strong) 26%,transparent),color-mix(in srgb,var(--accent-2) 14%,transparent)); border:var(--border-hairline) solid var(--border-default); }
+html body .home-paper-art { color:var(--accent-heritage-strong); }
+
+/* ---- Background: faint line icons that drift, bob and shift slightly as you scroll ---- */
+.bg-icons { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+.bg-icon { position:absolute; width:var(--s); height:var(--s); color:var(--ic,#7c9cff); opacity:.12; transform:translate3d(0,calc(var(--sy,0) * var(--depth) * -1px),0); will-change:transform; }
+.bg-icon svg { width:100%; height:100%; display:block; animation:bg-bob var(--dur) ease-in-out var(--delay) infinite alternate; }
+.bg-icon.tone-indigo { --ic:#7c9cff; } .bg-icon.tone-teal { --ic:#5eead4; } .bg-icon.tone-amber { --ic:#f5c76b; } .bg-icon.tone-violet { --ic:#a78bfa; }
+:root[data-theme="light"] .bg-icon { opacity:.2; }
+:root[data-theme="light"] .bg-icon.tone-indigo { --ic:#3451d1; } :root[data-theme="light"] .bg-icon.tone-teal { --ic:#0b8f84; } :root[data-theme="light"] .bg-icon.tone-amber { --ic:#b7791f; } :root[data-theme="light"] .bg-icon.tone-violet { --ic:#7c4dff; }
+@keyframes bg-bob { from { transform:translate3d(0,0,0) rotate(-4deg); } to { transform:translate3d(10px,-18px,0) rotate(5deg); } }
+@media(max-width:47.999rem) { .bg-icon.hide-small { display:none; } .bg-icon { opacity:.09; } }
+@media(prefers-reduced-motion:reduce) { .bg-icon { transform:none; } .bg-icon svg { animation:none; } }
+html[data-reduce-motion="true"] .bg-icon { transform:none; } html[data-reduce-motion="true"] .bg-icon svg { animation:none; }
+html[data-high-contrast="true"] .bg-icons { display:none; }
+
+/* ---- Project tabs: glass icon chips and a live dot ---- */
+html :is(.home-page,body) .main-content > section:is(:nth-of-type(odd),:nth-of-type(even)),html body .next-entry { border-top-color:transparent; border-bottom-color:transparent; }
+.bg-icon { opacity:.1; }

@@ -3,12 +3,6 @@
 body::before {
   content:""; position:fixed; inset:-20% -10% auto -10%; height:60vh; z-index:-1; pointer-events:none;
   background:radial-gradient(60% 60% at 30% 20%,var(--glow-1),transparent 70%),radial-gradient(40% 50% at 80% 10%,var(--glow-2),transparent 70%);
-  animation:atmosphere-drift 22s ease-in-out infinite alternate;
-}
-body::after {
-  content:""; position:fixed; right:-15%; top:30vh; width:55vw; height:55vw; max-width:720px; max-height:720px; z-index:-1; pointer-events:none;
-  border-radius:50%; filter:blur(90px); opacity:.5; background:radial-gradient(circle,var(--orb),transparent 65%);
-  animation:atmosphere-drift-slow 28s ease-in-out infinite alternate;
 }
 @keyframes atmosphere-drift { from { transform:translate3d(0,0,0) scale(1); } to { transform:translate3d(6%,8%,0) scale(1.15); } }
 @keyframes atmosphere-drift-slow { from { transform:translate3d(0,0,0); } to { transform:translate3d(-12%,-10%,0) scale(1.2); } }
@@ -47,8 +41,7 @@ html body .records>.card,html body.home-page .records>.card,html body:not(.home-
 }
 @keyframes atmosphere-rise { from { filter:blur(8px); transform:translateY(22px); } to { filter:none; transform:none; } }
 
-@media(prefers-reduced-motion:reduce) { body::before,body::after { animation:none; } .button::after { display:none; } }
-html[data-reduce-motion="true"] :is(body::before,body::after) { animation:none; }
+@media(prefers-reduced-motion:reduce) { .button::after { display:none; } }
 html[data-reduce-motion="true"] .button::after,html[data-high-contrast="true"] .button::after { display:none; }
-html[data-high-contrast="true"] body::before,html[data-high-contrast="true"] body::after { display:none; }
-@media print { .reveal { filter:none!important; transform:none!important; } body::before,body::after { display:none; } }
+html[data-high-contrast="true"] body::before { display:none; }
+@media print { .reveal { filter:none!important; transform:none!important; } body::before,.bg-icons { display:none; } }

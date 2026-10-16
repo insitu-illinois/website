@@ -11,7 +11,9 @@ document.addEventListener('pointermove', (event) => {
 }, { passive: true });
 
 if ('IntersectionObserver' in window && root.classList.contains('js')) {
-  const sections = Array.from(document.querySelectorAll<HTMLElement>('.main-content > section'));
+  const groups = '.home-update-grid>li,.home-themes>li,.values-statements>li,.shelf-picker button,.records>li,.records>.card,.card-grid>*,.people-grid>*,.alumni-list>*';
+  const sections = Array.from(document.querySelectorAll<HTMLElement>(`.main-content > section,${groups}`));
+  sections.forEach((item) => { const parent = item.parentElement; if (parent && item.matches(groups)) item.style.setProperty('--d', `${Array.from(parent.children).indexOf(item) * 70}ms`); });
   const below = sections.filter((section) => section.getBoundingClientRect().top > window.innerHeight * 0.9);
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
@@ -33,4 +35,12 @@ if ('IntersectionObserver' in window && toned.length) {
     }
   }, { rootMargin: '-45% 0px -45% 0px' });
   toned.forEach((section) => toneObserver.observe(section));
+}
+
+// Page scroll position, for the slow parallax of the background icons.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let waiting = false;
+  const sync = () => { waiting = false; root.style.setProperty('--sy', String(Math.round(window.scrollY))); };
+  window.addEventListener('scroll', () => { if (!waiting) { waiting = true; requestAnimationFrame(sync); } }, { passive: true });
+  sync();
 }

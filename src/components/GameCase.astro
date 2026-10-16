@@ -123,7 +123,7 @@ const bookletCredits=credits.slice(0,4);
   [data-open="true"] .case-only .case-object { width:47%; }
   .case-object button { pointer-events:auto; }
   .case-tray,.case-lid,.case-front,.case-back { position:absolute; inset:0; border-radius:var(--radius-xs); }
-  .case-tray { display:grid; place-items:center; background:var(--neutral-900); border:var(--space-1) solid var(--neutral-800); box-shadow:var(--shadow-inverse); transform:translateZ(0); }
+  .case-tray { display:grid; place-items:center; background:linear-gradient(160deg,#2a2f3d,#10131a); border:3px solid rgba(255,255,255,.2); border-radius:8px; box-shadow:var(--shadow-inverse),inset 0 0 0 1px rgba(0,0,0,.5),inset 0 2px 0 rgba(255,255,255,.18),0 0 38px -8px rgba(124,156,255,.35); transform:translateZ(0); }
   .case-tray::before { content:""; position:absolute; inset:var(--space-2); border:var(--border-hairline) solid var(--neutral-600); border-radius:var(--radius-xs); }
   .case-lid { transform-origin:left center; transform-style:preserve-3d; transition:transform var(--dur-decorative) var(--ease-standard); box-shadow:var(--shadow-raised); }
   .case-front,.case-back { backface-visibility:hidden; overflow:hidden; border:var(--border-thick) solid var(--neutral-800); }
