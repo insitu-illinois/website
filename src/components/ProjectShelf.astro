@@ -56,7 +56,13 @@ for(const shelf of document.querySelectorAll<HTMLElement>('[data-project-shelf]'
 .shelf-picker button{display:flex;align-items:center;text-align:left;gap:var(--space-3);padding:var(--space-3);color:var(--text-heading);background:var(--surface-card);border:var(--border-hairline) solid var(--border-default);border-radius:var(--radius-md);cursor:pointer;min-width:0;transition:transform var(--dur-med) var(--ease-standard),background-color var(--dur-med) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),box-shadow var(--dur-med) var(--ease-standard)}
 .shelf-picker button[aria-pressed=true]{background:var(--surface-card);border-color:var(--accent-heritage-strong);--selection-shadow:inset 0 calc(-1 * var(--border-thick)) 0 var(--accent-heritage-strong);box-shadow:var(--selection-shadow),var(--hover-shadow,0 0 0 transparent)}
 .shelf-thumb{width:var(--space-7);height:var(--space-7);flex-shrink:0;display:grid;place-items:center;overflow:hidden;border-radius:14px;color:var(--text-heading);background:linear-gradient(145deg,color-mix(in srgb,var(--accent-heritage-strong) 30%,transparent),color-mix(in srgb,var(--accent-2,#5eead4) 16%,transparent));border:var(--border-hairline) solid var(--border-default);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 6px 16px -8px rgba(0,0,0,.5)}
-.shelf-thumb :global(svg){width:var(--space-5);height:var(--space-5)}
+.shelf-thumb:has(svg){background:none;border:0;box-shadow:none;border-radius:0;color:var(--accent-heritage-strong)}
+.shelf-thumb :global(svg){width:var(--space-6);height:var(--space-6);transition:filter var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard)}
+.shelf-thumb:has(img){border-radius:12px}
+@media(hover:hover) and (pointer:fine){.shelf-picker button:hover .shelf-thumb :global(svg){color:var(--hover-light);filter:drop-shadow(0 0 8px var(--spot-text))}}
+.shelf-picker button[aria-pressed=true] .shelf-thumb :global(svg){color:var(--hover-light);filter:drop-shadow(0 0 6px var(--spot-text))}
+.shelf-item-copy{grid-template-rows:2.6em auto;align-content:center}
+.shelf-item-copy strong{align-self:end}
 .shelf-thumb img{width:100%;height:100%;object-fit:cover}
 .shelf-item-copy>span::before{content:"";display:inline-block;width:7px;height:7px;margin-right:var(--space-2);border-radius:50%;background:#5eead4;box-shadow:0 0 8px #5eead4;vertical-align:1px;animation:shelf-live 2.4s ease-in-out infinite}
 @keyframes shelf-live{50%{opacity:.45}}

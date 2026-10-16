@@ -65,9 +65,9 @@ html[data-high-contrast="true"] body :is(.home-team-link,.home-update-links a,.h
 :root[data-theme="light"] .main-content > section:nth-of-type(5n+2),:root[data-theme="light"] .main-content > section:nth-of-type(5n+5) { --tone:#0b8f84; }
 :root[data-theme="light"] .main-content > section:nth-of-type(5n+3) { --tone:#b7791f; }
 :root[data-theme="light"] .main-content > section:nth-of-type(5n+4) { --tone:#7c4dff; }
-.main-content > section:not(:first-child)::after {
+.main-content > section::after {
   content:""; position:absolute; top:0; left:0; right:0; height:8px; pointer-events:none;
-  background:radial-gradient(circle,var(--tone) 1.4px,transparent 1.9px) 0 50%/14px 8px repeat-x; opacity:.75;
+  background:radial-gradient(circle,color-mix(in srgb,var(--tone) 38%,var(--text-secondary)) 1.3px,transparent 1.8px) 0 50%/14px 8px repeat-x; opacity:.55;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
 }
 /* The light behind the page changes tone as each section passes (set by atmosphere.ts). */
@@ -130,7 +130,9 @@ html body .home-overview { border-inline-start:0; }
 
 /* ---- Publication icon: a soft tinted glass tile instead of a dark plate ---- */
 html body .home-update-visual { background:transparent; }
-html body .home-update-visual.is-publication { background:linear-gradient(145deg,color-mix(in srgb,var(--accent-heritage-strong) 26%,transparent),color-mix(in srgb,var(--accent-2) 14%,transparent)); border:var(--border-hairline) solid var(--border-default); }
+html body .home-update-visual.is-publication { background:none; border:0; }
+html body .home-paper-art svg { transition:filter var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard); }
+@media(hover:hover) and (pointer:fine) { html body .home-update-card:hover .home-paper-art svg { color:var(--hover-light); filter:drop-shadow(0 0 8px var(--spot-text)); } html body :is(.button,.home-team-link,.home-update-links a,.home-support a,.section-heading .text-link):hover span[aria-hidden] { text-shadow:0 0 12px var(--spot-text); } }
 html body .home-paper-art { color:var(--accent-heritage-strong); }
 
 /* ---- Background: faint line icons that drift, bob and shift slightly as you scroll ---- */
@@ -149,3 +151,9 @@ html[data-high-contrast="true"] .bg-icons { display:none; }
 /* ---- Project tabs: glass icon chips and a live dot ---- */
 html :is(.home-page,body) .main-content > section:is(:nth-of-type(odd),:nth-of-type(even)),html body .next-entry { border-top-color:transparent; border-bottom-color:transparent; }
 .bg-icon { opacity:.1; }
+
+/* ---- Footer: login link, icon row ---- */
+.footer-login { gap:var(--space-2); }
+.footer-login svg { width:var(--space-4); height:var(--space-4); fill:currentColor; flex-shrink:0; }
+.footer-social { list-style:none; display:flex; flex-wrap:wrap; gap:var(--space-4); margin:var(--space-5) 0 0; padding:0; }
+.footer-social svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; color:var(--text-muted-on-chrome); opacity:.8; }
