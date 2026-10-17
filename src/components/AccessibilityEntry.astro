@@ -11,9 +11,16 @@ const {iconOnly=false} = Astro.props;
 </span>
 
 <script>
+  // A tooltip shows on hover, focus or click and then hides itself after a short while.
   document.querySelectorAll<HTMLElement>('.utility-control').forEach(control=>{
-    control.addEventListener('pointerleave',()=>control.classList.remove('tooltip-dismissed'));
-    control.addEventListener('focusout',()=>control.classList.remove('tooltip-dismissed'));
+    let timer = 0;
+    const arm=()=>{ window.clearTimeout(timer); control.classList.remove('tooltip-dismissed'); timer=window.setTimeout(()=>control.classList.add('tooltip-dismissed'),2000); };
+    const reset=()=>{ window.clearTimeout(timer); control.classList.remove('tooltip-dismissed'); };
+    control.addEventListener('pointerenter',arm);
+    control.addEventListener('focusin',arm);
+    control.addEventListener('click',arm);
+    control.addEventListener('pointerleave',reset);
+    control.addEventListener('focusout',reset);
   });
   document.addEventListener('keydown',event=>{
     if (event.key === 'Escape') document.querySelectorAll('.utility-control').forEach(control=>control.classList.add('tooltip-dismissed'));

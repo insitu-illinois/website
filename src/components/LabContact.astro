@@ -1,12 +1,12 @@
 ---
 import contact from '../content/pages/footer.json';
-const { button = false } = Astro.props;
+const { button = false, icon = false } = Astro.props;
 const [user, domain] = contact.email.split('@');
 const readable = `${user} [at] ${domain.replaceAll('.', ' [dot] ')}`;
 ---
-{(!contact.draft || import.meta.env.DEV) && <span class="lab-contact" data-user={user} data-domain={domain}>
-  <a hidden class:list={{button}} aria-label={`Email the IN/SITU lab at ${readable}`}>Email the lab</a>
-  <noscript><span>Email the lab: {readable}</span></noscript>
+{(!contact.draft || import.meta.env.DEV) && <span class:list={['lab-contact',{'lab-contact-icon':icon}]} data-user={user} data-domain={domain}>
+  <a hidden class:list={{button,'icon-link':icon}} aria-label={`Email the IN/SITU lab at ${readable}`}>{icon?<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>:'Email the lab'}</a>
+  <noscript><span>{icon?<><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span class="visually-hidden">Email the lab: {readable}</span></>:<>Email the lab: {readable}</>}</span></noscript>
 </span>}
 <script>
   document.querySelectorAll<HTMLElement>('.lab-contact').forEach(contact => {

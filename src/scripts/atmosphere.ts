@@ -1,6 +1,6 @@
 // Pointer spotlight and scroll reveals. Both are enhancements: without them every section is simply visible.
 const root = document.documentElement;
-const spotlight = '.home-update-card,.records>.card,.home-other-projects li,.home-themes a,.resource-links>a,.shelf-picker button';
+const spotlight = '.home-update-card,.records>.card,.records:not(.card-grid)>li,.people-compact>li,.home-other-projects li,.home-themes a,.shelf-picker button';
 document.addEventListener('pointermove', (event) => {
   if (event.pointerType !== 'mouse') return;
   const target = (event.target as Element | null)?.closest<HTMLElement>(spotlight);
@@ -11,7 +11,7 @@ document.addEventListener('pointermove', (event) => {
 }, { passive: true });
 
 if ('IntersectionObserver' in window && root.classList.contains('js')) {
-  const groups = '.home-update-grid>li,.home-themes>li,.values-statements>li,.shelf-picker button,.records>li,.records>.card,.card-grid>*,.people-grid>*,.alumni-list>*';
+  const groups = '.home-update-grid>li,.home-themes>li,.values-statements>li,.shelf-picker button,.records>li,.records>.card,.card-grid>*,.people-compact>li,.credits-grid>*,.gallery-grid>*';
   const sections = Array.from(document.querySelectorAll<HTMLElement>(`.main-content > section,${groups}`));
   sections.forEach((item) => { const parent = item.parentElement; if (parent && item.matches(groups)) item.style.setProperty('--d', `${Array.from(parent.children).indexOf(item) * 70}ms`); });
   const below = sections.filter((section) => section.getBoundingClientRect().top > window.innerHeight * 0.9);
