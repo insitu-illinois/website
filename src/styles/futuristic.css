@@ -164,3 +164,14 @@ html body .site-header .icon-control { position:relative; }
 /* The skip link must sit above the fixed header when it receives focus. */
 html body .skip { z-index:100; }
 html body .skip:focus { box-shadow:0 0 0 var(--border-thick) var(--focus-ring); border-radius:var(--radius-sm); }
+
+/* ---- Wide screens: the container grows with the window and grids add columns instead of leaving empty margins ---- */
+@media(min-width:64rem) {
+  html body .home-update-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr)); }
+  html body .home-page .card-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr)); }
+  html body main:not(.home-page) .people-compact { grid-template-columns:repeat(auto-fit,minmax(min(100%,24rem),1fr)); }
+}
+@media(min-width:48rem) {
+  html body .home-themes { grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr)); }
+  html body .values-statements { grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr)); }
+}

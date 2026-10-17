@@ -13,5 +13,5 @@
 --delay-settle:40ms; /* @kind other */
 --dur-med:220ms; /* @kind other */
 --dur-decorative:600ms; /* @kind other */
---grid-max:1280px;
+--grid-max:clamp(1280px,88vw,1800px);
 }
