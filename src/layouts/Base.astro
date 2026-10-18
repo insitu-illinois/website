@@ -15,6 +15,8 @@ import NightMode from '../components/NightMode.astro';
 import SiteNavigation from '../components/SiteNavigation.astro';
 import BackgroundIcons from '../components/BackgroundIcons.astro';
 import LabContact from '../components/LabContact.astro';
+import Artifacts from '../components/Artifacts.astro';
+import '../styles/play.css';
 import '../styles/navigation.css';
 import preferencesBootstrap from '../scripts/preferences-init.js?raw';
 import '../styles/motion.css';
@@ -57,7 +59,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
       <div class="shell">
         <a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a>
         <SiteNavigation />
-        <div class="header-tools"><NightMode /><AccessibilityEntry iconOnly /></div>
+        <div class="header-tools"><Artifacts /><NightMode /><AccessibilityEntry iconOnly /></div>
       </div>
     </header>
     <main id="main" tabindex="-1" class:list={{"home-page":Astro.props.homePage}}>
@@ -101,7 +103,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
       <div class="shell footer-bottom"><p>© {copyrightYear} IN/SITU</p>{(!footer.draft||import.meta.env.DEV)&&footer.developerName&&<p>Developed by {footer.developerName}</p>}</div>
     </footer>
     <AccessibilityPanel />
-      <script>import '../scripts/atmosphere.ts';</script>
+      <script>import '../scripts/atmosphere.ts'; import '../scripts/artifacts.ts';</script>
   </body>
 </html>
 

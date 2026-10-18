@@ -1,0 +1,23 @@
+---
+// The field journal: a counter in the header and a dialog listing the hidden artifacts. Logic lives in scripts/artifacts.ts.
+---
+<span class="utility-control">
+  <button type="button" class="accessibility-entry icon-control artifact-counter" data-journal-open aria-haspopup="dialog" aria-label="Field journal" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l8 9-8 9-8-9z"/><path d="M4 12h16M12 3v18"/></svg>
+    <span class="artifact-count" data-journal-count aria-hidden="true">0/8</span>
+  </button>
+  <span class="utility-tooltip" aria-hidden="true">Field journal</span>
+</span>
+<dialog class="journal" data-journal aria-labelledby="journal-title">
+  <div class="journal-head">
+    <h2 id="journal-title">Field journal</h2>
+    <button type="button" class="journal-close" data-journal-close aria-label="Close the field journal">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <p class="journal-progress" data-journal-progress></p>
+  <ul class="journal-list" data-journal-list></ul>
+  <label class="journal-switch"><input type="checkbox" data-artifacts-toggle checked /> Show hidden artifacts on the pages</label>
+  <label class="journal-switch" data-egg-row hidden><input type="checkbox" data-egg-toggle /> Field mode</label>
+  <p class="journal-hint" data-journal-hint></p>
+</dialog>

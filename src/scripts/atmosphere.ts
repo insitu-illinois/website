@@ -1,3 +1,4 @@
+export {};
 // Pointer spotlight and scroll reveals. Both are enhancements: without them every section is simply visible.
 const root = document.documentElement;
 const spotlight = '.home-update-card,.records>.card,.records:not(.card-grid)>li,.people-compact>li,.home-other-projects li,.home-themes a,.shelf-picker button';
