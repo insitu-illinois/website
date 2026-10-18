@@ -1,8 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base noindex title="Page not found">
-  <h1>Page not found</h1>
-  <p>This address does not have a page.</p>
-  <a href="/">Return to IN/SITU</a>
+<Base noindex title="Page not found" description="This address does not have a page on the IN/SITU website.">
+  <section class="notfound" aria-labelledby="notfound-title">
+    <p class="nf-glyph" aria-hidden="true">404</p>
+    <p class="label">Field note · Error 404</p>
+    <h1 id="notfound-title">Page not found</h1>
+    <p class="nf-lead">This part of the site has not been excavated yet. Our team dug at this address and found nothing but dust.</p>
+    <p class="label nf-path" data-nf-path hidden></p>
+    <nav class="nf-links" aria-label="Where to go next">
+      <a class="button" href="/">Home <span aria-hidden="true">→</span></a>
+      <a class="button" href="/projects/">Projects <span aria-hidden="true">→</span></a>
+      <a class="button" href="/people/">People <span aria-hidden="true">→</span></a>
+      <a class="button" href="/publications/">Publications <span aria-hidden="true">→</span></a>
+      <a class="button" href="/news/">News <span aria-hidden="true">→</span></a>
+      <button class="button" type="button" data-nf-back hidden>Go back <span aria-hidden="true">↩</span></button>
+    </nav>
+  </section>
 </Base>
+<script>
+  const path = document.querySelector<HTMLElement>('[data-nf-path]');
+  if (path) { path.textContent = `Looked for: ${location.pathname}`; path.hidden = false; }
+  const back = document.querySelector<HTMLButtonElement>('[data-nf-back]');
+  if (back && history.length > 1) { back.hidden = false; back.addEventListener('click', () => history.back()); }
+</script>
+<style>
+  .notfound { min-height:min(60vh,34rem); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:var(--space-3); }
+  .nf-glyph { margin:0; font-family:var(--font-display); font-weight:var(--weight-display); font-size:clamp(6rem,24vw,15rem); line-height:.9; letter-spacing:-.04em; background:linear-gradient(135deg,#7c9cff,#5eead4 60%,#a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 40px rgba(124,156,255,.35)); animation:nf-float 6s ease-in-out infinite alternate; user-select:none; }
+  @keyframes nf-float { from { transform:translateY(0) rotate(-1.5deg); } to { transform:translateY(-10px) rotate(1.5deg); } }
+  .notfound h1 { margin:0; font-size:var(--text-display-md); max-width:none; }
+  .nf-lead { max-width:46ch; color:var(--text-secondary); margin:0 auto var(--space-2); }
+  .nf-path { margin:0; text-transform:none; letter-spacing:.02em; overflow-wrap:anywhere; max-width:100%; }
+  .nf-links { display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-3); margin-top:var(--space-4); }
+  @media(prefers-reduced-motion:reduce) { .nf-glyph { animation:none; } }
+  :global(html[data-reduce-motion="true"]) .nf-glyph { animation:none; }
+  :global(:root[data-theme="light"]) .nf-glyph { filter:drop-shadow(0 0 30px rgba(52,81,209,.25)); }
+</style>
