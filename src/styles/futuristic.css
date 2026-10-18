@@ -207,3 +207,7 @@ html body .resource-links a svg { color:inherit; }
 
 .footer-social li { display:flex; align-items:center; }
 .footer-social .lab-contact { display:inline-flex; align-items:center; }
+
+/* Developer credit in the footer is an ordinary inline link, not one of the right-aligned footer actions. */
+html body .footer-bottom p a.credit-link { display:inline; min-height:0; margin:0; padding:0; color:#5eead4; text-decoration:underline; text-decoration-color:transparent; text-underline-offset:.25em; transition:text-decoration-color var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard); }
+@media(hover:hover) and (pointer:fine) { html body .footer-bottom p a.credit-link:hover { text-decoration-color:currentColor; } }

@@ -100,7 +100,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
           </ul>
         </div>
       </div>
-      <div class="shell footer-bottom"><p>© {copyrightYear} IN/SITU</p>{(!footer.draft||import.meta.env.DEV)&&footer.developerName&&<p>Developed by {footer.developerName}</p>}</div>
+      <div class="shell footer-bottom"><p>© {copyrightYear} IN/SITU</p>{(!footer.draft||import.meta.env.DEV)&&footer.developerName&&<p>Developed by <a class="credit-link" href="https://sepafshar.com/" target="_blank" rel="noopener">{footer.developerName}<span class="visually-hidden"> (opens in a new tab)</span></a></p>}</div>
     </footer>
     <AccessibilityPanel />
       <script>import '../scripts/atmosphere.ts'; import '../scripts/artifacts.ts';</script>
