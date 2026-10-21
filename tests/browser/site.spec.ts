@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { indexingEnabled, crawlerPolicy, showResearchTags } from '../../src/config/site.mjs';
 import { loadRaw } from '../../scripts/validate-content.mjs';
 import { hasPersonPage } from '../../src/lib/format.mjs';
+import astroConfig from '../../astro.config.mjs';
 const labEmail=JSON.parse(readFileSync('src/content/pages/footer.json','utf8')).email;
 const [emailUser,emailDomain]=labEmail.split('@');
 const readableEmail=`${emailUser} [at] ${emailDomain.replaceAll('.', ' [dot] ')}`;
@@ -70,7 +71,8 @@ test('publication citation copies, relationships navigate, and reduced motion di
 test('public sitemap and crawler policy expose public pages only',async({request})=>{
   const sitemap=await request.get('/sitemap.xml');expect(sitemap.ok()).toBeTruthy();
   const xml=await sitemap.text();expect(xml).toContain('/projects/vrchaeology/');expect(xml).not.toContain('cms-publishing-check');expect(xml).not.toContain('/admin/');
-  const robots=await request.get('/robots.txt');expect(robots.headers()['content-type']).toContain('text/plain');expect(await robots.text()).toBe(crawlerPolicy(indexingEnabled,new URL(sitemap.url().replace('/sitemap.xml','/'))));
+  const robots=await request.get('/robots.txt');expect(robots.headers()['content-type']).toContain('text/plain');// The sitemap line names the configured site origin, not the host the test happens to serve from.
+  expect(await robots.text()).toBe(crawlerPolicy(indexingEnabled,astroConfig.site));
   expect((await request.get('/favicon.svg')).headers()['content-type']).toContain('image/svg+xml');
 });
 test('capture representative layouts and report browser errors',async({page},testInfo)=>{

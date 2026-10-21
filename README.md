@@ -54,7 +54,9 @@ A separate non-writer identity has not been used for an end-to-end denial test. 
 
 ## Review mode and launch
 
-The preview URL is publicly reachable, but indexing is disabled. `src/config/site.mjs` contains the single switch, `indexingEnabled = false`. In this state, `robots.txt` disallows every crawler and every generated HTML page carries `noindex, nofollow`, including 404 and `/admin/`. These directives do not make the site private or immediately remove a previously indexed URL.
+**Status: launched.** The lab approved launch on October 21, 2026 and `indexingEnabled` is now `true`, so `robots.txt` allows crawling, `/admin/` and the 404 page stay `noindex`, and the sitemap is submitted in Google Search Console (domain property `insituillinois.com`, verified by a DNS TXT record that must stay in place). The paragraphs below describe the switch for returning to review mode.
+
+When the switch is `false`, the preview URL is publicly reachable, but indexing is disabled. `src/config/site.mjs` contains the single switch, `indexingEnabled = false`. In this state, `robots.txt` disallows every crawler and every generated HTML page carries `noindex, nofollow`, including 404 and `/admin/`. These directives do not make the site private or immediately remove a previously indexed URL.
 
 Only after the lab explicitly approves launch, a maintainer changes that one value to `true`, commits, and pushes to `main`. The next successful deployment allows public crawling and removes the public-page noindex tags. `/admin/` and the 404 page remain noindex. Verify the deployed robots.txt and a public page’s source. To return to review mode, set the same value back to `false` and deploy.
 
