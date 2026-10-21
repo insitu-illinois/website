@@ -305,7 +305,7 @@ Alumni appear as a compact list on People: name, optional photo, and verified Li
 
 ## Verified release — October 7, 2026
 
-- Live site: https://insitu-illinois.insituillinois.workers.dev/
+- Live site: https://insituillinois.com/ (the original https://insitu-illinois.insituillinois.workers.dev/ stays reachable)
 - Repository: https://github.com/insitu-illinois/website
 - Deployed source commit: `d9905e007430e44a7db809b8e851be4fd6bba163`.
 - Successful verification and deployment: [Actions run 37709223363](https://github.com/insitu-illinois/website/actions/runs/37709223363).
