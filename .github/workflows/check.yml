@@ -18,7 +18,7 @@ jobs:
       CMS_AUTH_URL: ${{ vars.CMS_AUTH_URL }}
       PLAYWRIGHT_CHANNEL: chrome
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -47,7 +47,7 @@ jobs:
       WRANGLER_SEND_METRICS: 'false'
       CLOUDFLARE_ACCOUNT_ID: '8ff08acf55c2976a352f2dcc15b7612f'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
