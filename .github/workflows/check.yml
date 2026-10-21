@@ -30,7 +30,7 @@ jobs:
       # The hosted runner includes Chrome and its OS dependencies.
       - run: google-chrome --version
       - run: npx playwright test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           name: verified-site
