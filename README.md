@@ -1,6 +1,6 @@
 # IN/SITU website
 
-[Review preview](https://insitu-illinois.insituillinois.workers.dev/) · [Edit content](https://insitu-illinois.insituillinois.workers.dev/admin/) · [GitHub repository](https://github.com/insitu-illinois/website)
+[Website](https://insituillinois.com/) · [Edit content](https://insituillinois.com/admin/) · [GitHub repository](https://github.com/insitu-illinois/website)
 
 Astro static site, Sveltia CMS, and Cloudflare Workers static assets. The organization owns the repository. Both Workers are in the lab Cloudflare account. No custom domain or paid service is required.
 
@@ -123,11 +123,9 @@ The lab-owned [IN/SITU content editor app](https://github.com/organizations/insi
 
 The CMS script is pinned to major version `0`. Its YAML is generated from the same field model as Astro's schemas; manual changes to generated YAML are overwritten. Markdown is rendered at build time with Marked and sanitized with sanitize-html. Images belong in the dedicated image fields, which require alt text; embedded Markdown images and executable HTML are not rendered.
 
-## Attach a custom domain later
+## Custom domain
 
-No custom domain has been bought or configured.
-
-When the lab separately authorizes it:
+**Status: attached on October 21, 2026.** The lab registered `insituillinois.com` in its Cloudflare account and attached `insituillinois.com` and `www.insituillinois.com` to the site Worker. `astro.config.mjs → site` is `https://insituillinois.com`, the auth Worker's `ALLOWED_DOMAINS` lists both the old `workers.dev` host and the new one, and the GitHub OAuth app's Homepage URL is the new origin. The old `workers.dev` address still serves the site. The steps below are the procedure used and the one to repeat if the domain ever changes:
 
 1. Register the chosen domain in the lab Cloudflare account; the lab owner handles payment.
 2. Add it under the site Worker's **Settings → Domains & Routes → Add → Custom Domain**.
