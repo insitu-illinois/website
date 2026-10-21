@@ -33,6 +33,11 @@ const { title, noindex=false, description: rawDescription = 'IN/SITU at the Univ
 const flatDescription=rawDescription.replace(/\s+/g,' ').trim();
 const description=flatDescription.length>160?`${flatDescription.slice(0,157).replace(/\s+\S*$/,'')}…`:flatDescription;
 const canonical=new URL(Astro.url.pathname,Astro.site);
+const ogImage=new URL('/og-image.png',Astro.site).href;
+const structuredData=Astro.props.homePage?JSON.stringify({'@context':'https://schema.org','@graph':[
+  {'@type':'Organization','@id':new URL('/#organization',Astro.site).href,name:'IN/SITU',alternateName:'IN/SITU research lab',url:new URL('/',Astro.site).href,image:ogImage,description:'An interdisciplinary research lab at the University of Illinois Urbana-Champaign designing immersive, game-based, and interactive experiences.',parentOrganization:{'@type':'CollegeOrUniversity',name:'University of Illinois Urbana-Champaign',url:'https://illinois.edu/'}},
+  {'@type':'WebSite','@id':new URL('/#website',Astro.site).href,name:'IN/SITU',url:new URL('/',Astro.site).href,publisher:{'@id':new URL('/#organization',Astro.site).href}}
+]}):null;
 ---
 <!doctype html>
 <html lang="en">
@@ -50,6 +55,16 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="IN/SITU" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="IN/SITU: people, technology, and experience in context. University of Illinois Urbana-Champaign." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | IN/SITU`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {structuredData&&<script type="application/ld+json" set:html={structuredData}></script>}
   </head>
   <body>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c9cff"/><stop offset="1" stop-color="#5eead4"/></linearGradient></defs></svg>
