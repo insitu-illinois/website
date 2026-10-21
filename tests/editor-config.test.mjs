@@ -22,4 +22,5 @@ test('every editor field, including nested images and page text, has useful help
 test('the editor dependency uses a fixed full version',()=>{
   const html=readFileSync('public/admin/index.html','utf8');
   assert.match(html,/https:\/\/unpkg\.com\/@sveltia\/cms@\d+\.\d+\.\d+\/dist\/sveltia-cms\.js/);
+  assert.match(html,/integrity="sha384-[A-Za-z0-9+\/=]+"/,'The editor script must carry a subresource integrity hash.');
 });
