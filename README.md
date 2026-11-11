@@ -162,6 +162,8 @@ Public pages use self-hosted fonts and make no third-party runtime requests. The
 - `src/lib/derived.mjs`: shared filtering, sorting, grouping, and reference rules.
 - `src/pages/`: nine ordinary pages and the five record templates; presentations and recognition remain list-only.
 - `src/components/`, `src/layouts/`, `src/styles/`: shared rendering and token-based styling.
+- `src/config/navigation.mjs`: the one list of destinations. The header menu, footer columns, 404 suggestions, and hub page titles and intros all read from it; add or rename a page there, never in a template. `SiteHeader.astro` and `SiteFooter.astro` are the only header and footer, used once by `src/layouts/Base.astro`.
+- `tests/browser/frame.spec.ts`: the frame audit. It loads every generated page at 1280 and 375 pixels in both themes and fails if a menu, current-page mark, header, or footer differs, if a page scrolls sideways, or if an anchor points nowhere.
 - `public/admin/`, `public/media/`: CMS entry point and uploaded media.
 - `infra/cms-auth/`: pinned official OAuth relay source and license.
 - `scripts/`: content checks, generated CMS configuration, and lab-only deployment guards.

@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { destinations, notFoundLinks } from '../config/navigation.mjs';
 ---
 <Base noindex title="Page not found" description="This address does not have a page on the IN/SITU website.">
   <section class="notfound" aria-labelledby="notfound-title">
@@ -9,11 +10,7 @@ import Base from '../layouts/Base.astro';
     <p class="nf-lead">This part of the site has not been excavated yet. Our team dug at this address and found nothing but dust.</p>
     <p class="label nf-path" data-nf-path hidden></p>
     <nav class="nf-links" aria-label="Where to go next">
-      <a class="button" href="/">Home <span aria-hidden="true">→</span></a>
-      <a class="button" href="/projects/">Projects <span aria-hidden="true">→</span></a>
-      <a class="button" href="/people/">People <span aria-hidden="true">→</span></a>
-      <a class="button" href="/publications/">Publications <span aria-hidden="true">→</span></a>
-      <a class="button" href="/news/">News <span aria-hidden="true">→</span></a>
+      {notFoundLinks.map(id=><a class="button" href={destinations[id as keyof typeof destinations].href}>{destinations[id as keyof typeof destinations].label} <span aria-hidden="true">→</span></a>)}
       <button class="button" type="button" data-nf-back hidden>Go back <span aria-hidden="true">↩</span></button>
     </nav>
   </section>

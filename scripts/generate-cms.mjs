@@ -2,6 +2,7 @@ import { writeFileSync } from 'node:fs';
 import { stringify } from 'yaml';
 import { models, fieldsFor, slugPattern, datePattern, mediaPattern } from '../src/lib/content-model.mjs';
 import { roles } from '../src/lib/format.mjs';
+import astroConfig from '../astro.config.mjs';
 const hints = {
   sourceUrl: 'Paste the university, publisher, or event page that verifies this work; leave blank if unavailable.',
   draft: 'Turn on to hide this entry from the website while you prepare it; GitHub files remain public.',
@@ -114,6 +115,8 @@ collections.push({ name: 'pages', label: 'Page text', files: [
 ] });
 const config = {
   backend: { name:'github',repo:'insitu-illinois/website',branch:'main',auth_scope:'public_repo',...(process.env.CMS_AUTH_URL ? {base_url:process.env.CMS_AUTH_URL} : {}) },
+  // The editor's frame takes its identity from the site: same origin setting, same icon.
+  site_url:astroConfig.site, app_title:'IN/SITU content editor', logo:{src:'/favicon.svg'},
   media_folder:'public/media', public_folder:'/media', collections,
 };
 writeFileSync('public/admin/config.yml', '# Generated from src/lib/content-model.mjs.\n' + stringify(config));

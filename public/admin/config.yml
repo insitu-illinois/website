@@ -5,6 +5,10 @@ backend:
   branch: main
   auth_scope: public_repo
   base_url: https://insitu-cms-auth.insituillinois.workers.dev
+site_url: https://insituillinois.com
+app_title: IN/SITU content editor
+logo:
+  src: /favicon.svg
 media_folder: public/media
 public_folder: /media
 collections:
