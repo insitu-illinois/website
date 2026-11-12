@@ -13,10 +13,12 @@ import { grouped } from '../lib/derived.mjs';
 import { labels } from '../lib/format.mjs';
 import about from '../content/pages/about.json';
 import join from '../content/pages/join.json';
-export function getStaticPaths(){return ['about','projects','publications','presentations','awards-funding','people','join'].map(page=>({params:{page}}));}
+import { destinations, hubPages } from '../config/navigation.mjs';
+// Hub page titles and intros come from src/config/navigation.mjs.
+export function getStaticPaths(){return hubPages.map(page=>({params:{page}}));}
 const page=Astro.params.page!;
-const titles:Record<string,string>={about:'About',projects:'Projects',publications:'Publications',presentations:'Presentations','awards-funding':'Awards & funding',people:'People',join:'Join'};
-const intros:Record<string,string>={about:'People, technology, and experience in context.',projects:'Our work across archaeological sites, museums, cities, classrooms, and virtual worlds.',publications:'Papers, chapters, theses, and preprints from our research.',presentations:'Talks, posters, demonstrations, workshops, and exhibitions.','awards-funding':'Recognition and support for our research.',people:'An interdisciplinary lab at the University of Illinois Urbana-Champaign.',join:'Graduate study in immersive learning and archaeology.'};
+const titles:Record<string,string>=Object.fromEntries(hubPages.map(id=>[id,destinations[id as keyof typeof destinations].label]));
+const intros:Record<string,string>=Object.fromEntries(hubPages.map(id=>[id,(destinations[id as keyof typeof destinations] as {intro:string}).intro]));
 if(page==='about'&&(!about.draft||import.meta.env.DEV))titles.about=about.title;
 if(page==='join'&&(!join.draft||import.meta.env.DEV))titles.join=join.title;
 const data=await content();

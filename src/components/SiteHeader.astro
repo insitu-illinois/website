@@ -1,0 +1,14 @@
+---
+// The one header for every public page. Menu items come from src/config/navigation.mjs.
+import AccessibilityEntry from './AccessibilityEntry.astro';
+import Artifacts from './Artifacts.astro';
+import NightMode from './NightMode.astro';
+import SiteNavigation from './SiteNavigation.astro';
+---
+<header class="site-header">
+  <div class="shell">
+    <a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a>
+    <SiteNavigation />
+    <div class="header-tools"><Artifacts /><NightMode /><AccessibilityEntry iconOnly /></div>
+  </div>
+</header>

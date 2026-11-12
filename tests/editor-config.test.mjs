@@ -24,3 +24,11 @@ test('the editor dependency uses a fixed full version',()=>{
   assert.match(html,/https:\/\/unpkg\.com\/@sveltia\/cms@\d+\.\d+\.\d+\/dist\/sveltia-cms\.js/);
   assert.match(html,/integrity="sha384-[A-Za-z0-9+\/=]+"/,'The editor script must carry a subresource integrity hash.');
 });
+test('the editor takes its identity and its data from the same sources as the public site',async()=>{
+  const config=parse(readFileSync('public/admin/config.yml','utf8'));
+  const {default:astroConfig}=await import('../astro.config.mjs');
+  assert.equal(config.site_url,astroConfig.site);
+  assert.equal(config.logo.src,'/favicon.svg');
+  for(const collection of config.collections) for(const target of collection.folder?[collection.folder]:collection.files.map(f=>f.file)) assert.match(target,/^src\/content\//,'The editor must write only to the content the public pages read.');
+  assert.match(readFileSync('public/admin/index.html','utf8'),/<meta name="robots" content="noindex, nofollow">/);
+});
