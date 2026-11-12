@@ -22,7 +22,7 @@ jobs:
         with:
           # The sitemap's lastmod dates come from the history of each content file.
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: npm
@@ -52,7 +52,7 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: '8ff08acf55c2976a352f2dcc15b7612f'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: npm
