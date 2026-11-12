@@ -127,7 +127,7 @@ The CMS script is pinned to major version `0`. Its YAML is generated from the sa
 
 ## Custom domain
 
-**Status: attached on October 21, 2026.** The lab registered `insituillinois.com` in its Cloudflare account and attached `insituillinois.com` and `www.insituillinois.com` to the site Worker. `astro.config.mjs → site` is `https://insituillinois.com`, the auth Worker's `ALLOWED_DOMAINS` lists both the old `workers.dev` host and the new one, and the GitHub OAuth app's Homepage URL is the new origin. The old `workers.dev` address still serves the site. The steps below are the procedure used and the one to repeat if the domain ever changes:
+**Status: attached on October 21, 2026.** The lab registered `insituillinois.com` in its Cloudflare account and attached `insituillinois.com` and `www.insituillinois.com` to the site Worker. `astro.config.mjs → site` is `https://insituillinois.com`, the auth Worker's `ALLOWED_DOMAINS` lists both the old `workers.dev` host and the new one, and the GitHub OAuth app's Homepage URL is the new origin. The old `workers.dev` address still serves the site. `www.insituillinois.com` answers with a permanent (301) redirect to the same path on `insituillinois.com`; the small Worker in `worker/` does this and passes every other request to the built site. The sitemap gives each page a `lastmod` date from the git history of the content files it reads (`src/lib/lastmod.mjs`), so the build needs full history: CI checks out with `fetch-depth: 0`. The steps below are the procedure used and the one to repeat if the domain ever changes:
 
 1. Register the chosen domain in the lab Cloudflare account; the lab owner handles payment.
 2. Add it under the site Worker's **Settings → Domains & Routes → Add → Custom Domain**.

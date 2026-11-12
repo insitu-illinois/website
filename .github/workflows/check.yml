@@ -19,6 +19,9 @@ jobs:
       PLAYWRIGHT_CHANNEL: chrome
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The sitemap's lastmod dates come from the history of each content file.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'

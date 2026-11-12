@@ -71,6 +71,8 @@ test('publication citation copies, relationships navigate, and reduced motion di
 test('public sitemap and crawler policy expose public pages only',async({request})=>{
   const sitemap=await request.get('/sitemap.xml');expect(sitemap.ok()).toBeTruthy();
   const xml=await sitemap.text();expect(xml).toContain('/projects/vrchaeology/');expect(xml).not.toContain('cms-publishing-check');expect(xml).not.toContain('/admin/');
+  // Every page in the sitemap carries the date its content last changed.
+  expect(xml.match(/<url><loc>[^<]+<\/loc><lastmod>\d{4}-\d{2}-\d{2}<\/lastmod><\/url>/g)?.length).toBe(xml.match(/<url>/g)?.length);
   const robots=await request.get('/robots.txt');expect(robots.headers()['content-type']).toContain('text/plain');// The sitemap line names the configured site origin, not the host the test happens to serve from.
   expect(await robots.text()).toBe(crawlerPolicy(indexingEnabled,astroConfig.site));
   expect((await request.get('/favicon.svg')).headers()['content-type']).toContain('image/svg+xml');
