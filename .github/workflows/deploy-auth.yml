@@ -1,0 +1,33 @@
+name: Deploy CMS sign-in relay
+# Manual only: Actions → Deploy CMS sign-in relay → Run workflow. The relay rarely changes.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cms-auth
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+      CLOUDFLARE_ACCOUNT_ID: '8ff08acf55c2976a352f2dcc15b7612f'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Deploy the relay to the lab account
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_AUTH_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo 'Add a token limited to the insitu-cms-auth Worker as the repository secret CLOUDFLARE_AUTH_API_TOKEN.'
+            exit 1
+          fi
+          npx --no-install wrangler deploy --config infra/cms-auth/wrangler.jsonc

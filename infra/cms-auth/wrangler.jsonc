@@ -1,0 +1,10 @@
+// The CMS sign-in relay, deployed from GitHub by .github/workflows/deploy-auth.yml.
+// keep_vars leaves ALLOWED_DOMAINS, GITHUB_CLIENT_ID and the encrypted GITHUB_CLIENT_SECRET as set in the Cloudflare dashboard.
+{
+  "name": "insitu-cms-auth",
+  "account_id": "8ff08acf55c2976a352f2dcc15b7612f",
+  "main": "index.js",
+  "compatibility_date": "2023-03-24",
+  "workers_dev": true,
+  "keep_vars": true
+}
