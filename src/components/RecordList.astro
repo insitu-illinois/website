@@ -23,7 +23,7 @@ const {title,records,peopleLinks=false,more,cards=false,id,data,compact=false}=A
         <h3>{href ? <a href={href}>{d.name ?? d.title}</a> : <LinkedPeopleText text={d.name ?? d.title} people={people}/>}</h3>
         {d.draft && <p class="label">Draft · Not published</p>}
         {!compact && d.authors && <Authors text={d.authors} people={data?referenced(data.people,d.labAuthors):[]}/>}
-        {(names.length || d.venue || d.year || d.date || d.awardingBody) && <p class="label metadata"><InlinePeople people={names}/>{names.length>0&&(d.venue||d.year||d.date||d.awardingBody)&&<span aria-hidden="true"> · </span>}{[d.venue || d.awardingBody,d.location,d.year || dateLabel(d.date)].filter(Boolean).join(' · ')}</p>}
+        {(names.length || d.venue || d.year || d.date || d.awardingBody) && <p class="label metadata"><InlinePeople people={names} limit={cards?4:Infinity}/>{names.length>0&&(d.venue||d.year||d.date||d.awardingBody)&&<span aria-hidden="true"> · </span>}{[d.venue || d.awardingBody,d.location,d.year || dateLabel(d.date)].filter(Boolean).join(' · ')}</p>}
         {!compact && (d.shortDescription || d.summary || d.description) && <p><LinkedPeopleText text={d.shortDescription || d.summary || d.description} people={people}/></p>}
         {!compact && data && <Tags themes={referenced(data.themes,d.themes)}/>}
         {!compact && d.award && <span class="badge">{d.award}</span>}

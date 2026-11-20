@@ -16,7 +16,7 @@ export const destinations = {
   join: { label: 'Join', href: '/join/', intro: 'Graduate study in immersive learning and archaeology.' },
   values: { label: 'Lab values', href: '/about/#values' },
   accessibility: { label: 'Accessibility statement', href: '/accessibility/' },
-  admin: { label: 'Log in', href: '/admin/' },
+  admin: { label: 'Lab sign-in', href: '/admin/' },
 };
 
 // Header menu, in display order. A group opens as a disclosure; `sections` lists the
@@ -31,8 +31,9 @@ export const primaryMenu = [
 ];
 
 // Footer columns. `accessibility-settings` is the button that opens the settings panel, not a page.
+// The lab sign-in (`admin`) sits in the footer's bottom row, apart from the public links.
 export const footerMenu = [
-  { heading: 'Explore', items: ['projects', 'publications', 'values', 'admin'] },
+  { heading: 'Explore', items: ['projects', 'publications', 'values'] },
   { heading: 'Useful links', items: ['about', 'people', 'accessibility-settings', 'accessibility'] },
 ];
 

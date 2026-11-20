@@ -22,7 +22,7 @@ test('settings support keyboard focus, Escape, persistence, and reset', async ({
   await expect(page.locator('html')).toHaveAttribute('data-reduce-motion','true');
   await expect(page.locator('html')).toHaveAttribute('data-high-contrast','true');
   await expect(page.locator('body')).toHaveCSS('font-size','27px');
-  const footer = page.locator('footer').getByRole('button',{name:'Accessibility',exact:true});
+  const footer = page.locator('footer').getByRole('button',{name:'Accessibility settings',exact:true});
   await footer.click();
   await expect(dialog.getByLabel('Text size',{exact:true})).toHaveValue('150');
   await dialog.getByRole('button',{name:'Reset preferences'}).click();

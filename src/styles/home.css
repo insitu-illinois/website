@@ -121,3 +121,5 @@
 .home-update-links { gap:var(--space-2) var(--space-4); margin-top:var(--space-2); }
 @media(min-width:40rem) and (max-width:63.999rem) { .home-update-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:39.999rem) { .home-update-grid { grid-template-columns:minmax(0,1fr); } }
+/* When the hero stacks on narrow screens, keep the headline clear of the overview label below it. */
+@media(max-width:63.999rem) { html body .home-page .home-hero { row-gap:var(--space-6); } }

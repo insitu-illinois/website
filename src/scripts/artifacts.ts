@@ -53,6 +53,8 @@ const render = () => {
   if (!counter || !count) return;
   counter.hidden = false;
   count.textContent = `${found.size}/${ARTIFACTS.length}`;
+  // Before anything is found the diamond shows alone, so it does not read as an unread-notification badge.
+  count.hidden = found.size === 0;
   counter.setAttribute('aria-label', `Field journal: ${found.size} of ${ARTIFACTS.length} artifacts found`);
   if (list) list.innerHTML = ARTIFACTS.map((a) => found.has(a.id)
     ? `<li class="found"><span class="journal-icon">${a.icon}</span><span><strong>${a.name}</strong><br>${a.note}</span></li>`

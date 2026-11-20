@@ -1,5 +1,6 @@
 ---
 import {personHref} from '../lib/people-text.mjs';
-const {people=[]}=Astro.props;
+const {people=[],limit=Infinity}=Astro.props;
+const shown=people.slice(0,limit),rest=people.length-shown.length;
 ---
-{people.length>0&&<span class="inline-people">{people.map((person:any,index:number)=><>{index>0&&' · '}<a href={personHref(person)}>{person.data.name}</a></>)}</span>}
+{people.length>0&&<span class="inline-people">{shown.map((person:any,index:number)=><>{index>0&&' · '}<a href={personHref(person)}>{person.data.name}</a></>)}{rest>0&&<> · +{rest} more</>}</span>}

@@ -35,7 +35,7 @@ html body .records>.card,html body.home-page .records>.card,html body:not(.home-
   html.js:not([data-reduce-motion="true"]) .reveal { filter:blur(8px); transform:translateY(24px); transition:filter .75s var(--ease-standard),transform .75s var(--ease-standard); transition-delay:var(--d,0s); }
   html.js:not([data-reduce-motion="true"]) .reveal.in { filter:none; transform:none; }
 }
-@keyframes atmosphere-rise { from { filter:blur(8px); transform:translateY(22px); } to { filter:none; transform:none; } }
+@keyframes atmosphere-rise { from { transform:translateY(22px); } to { transform:none; } }
 
 @media(prefers-reduced-motion:reduce) { .button::after { display:none; } }
 html[data-reduce-motion="true"] .button::after,html[data-high-contrast="true"] .button::after { display:none; }

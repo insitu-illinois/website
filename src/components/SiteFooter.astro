@@ -12,7 +12,7 @@ const copyrightYear=new Date().getUTCFullYear();
   <div class="shell footer-grid">
     <div class="footer-identity">
       <div class="footer-brand-row"><a class="wordmark" href="/" aria-label="IN/SITU home">IN<span>/</span>SITU</a></div>
-      {(!footer.draft||import.meta.env.DEV)&&<p class="label">{footer.institution}</p>}
+      {(!footer.draft||import.meta.env.DEV)&&<p class="label">{footer.institution.replace('Urbana-Champaign','Urbana\u2011Champaign')}</p>}
     </div>
     {footerMenu.map(column=><div>
       <h2 class="footer-heading">{column.heading}</h2>
@@ -21,12 +21,10 @@ const copyrightYear=new Date().getUTCFullYear();
           if(id==='accessibility-settings')return <li><AccessibilityEntry /></li>;
           if(id==='values'&&!showValues(import.meta.env.DEV))return null;
           const {href,label}=destinations[id as keyof typeof destinations];
-          return id==='admin'
-            ?<li><a class="footer-login" href={href}><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" set:html={signInPaths}/>{label}</a></li>
-            :<li><a href={href}>{label}</a></li>;
+          return <li><a href={href}>{label}</a></li>;
         })}
       </ul>
     </div>)}
   </div>
-  <div class="shell footer-bottom"><p>© {copyrightYear} IN/SITU</p>{(!footer.draft||import.meta.env.DEV)&&footer.developerName&&<p>Developed by <a class="credit-link" href="https://sepafshar.com/" target="_blank" rel="noopener">{footer.developerName}<span class="visually-hidden"> (opens in a new tab)</span></a></p>}</div>
+  <div class="shell footer-bottom"><p>© {copyrightYear} IN/SITU</p>{(!footer.draft||import.meta.env.DEV)&&footer.developerName&&<p>Developed by <a class="credit-link" href="https://sepafshar.com/" target="_blank" rel="noopener">{footer.developerName}<span class="visually-hidden"> (opens in a new tab)</span></a></p>}<a class="footer-login" href={destinations.admin.href}><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" set:html={signInPaths}/>{destinations.admin.label}</a></div>
 </footer>

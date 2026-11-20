@@ -35,5 +35,5 @@ const updates=[...lists.news,...lists.publications.slice(0,1)].sort((a:any,b:any
   </section>
   <section class="home-theme-section"><h2>Four research themes</h2><ul class="home-themes">{data.themes.map((theme:any)=><li><a href={`/themes/${theme.id}/`}>{theme.data.name}<span aria-hidden="true">→</span></a></li>)}</ul></section>
   <LabValues compact />
-  <aside class="home-support"><a href="/about/#support">Support & connections</a><a href="/awards-funding/">Awards & funding</a></aside>
+  <aside class="home-support" aria-labelledby="home-support-label"><p class="label" id="home-support-label">Funding & partners</p><a href="/about/#support">Support & connections</a><a href="/awards-funding/">Awards & funding</a></aside>
 </Base>
