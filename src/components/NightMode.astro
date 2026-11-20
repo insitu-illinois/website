@@ -27,6 +27,7 @@ import UtilityIcon from './UtilityIcon.astro';
     button.addEventListener('click', () => {
       const night = document.documentElement.dataset.theme !== 'night';
       document.documentElement.dataset.theme = night ? 'night' : 'light';
+      document.documentElement.dataset.themeChosen = 'true';
       const saved = savePreferences();
       if (status) status.textContent = `Night mode ${night ? 'on' : 'off'}.${saved ? '' : ' Browser storage is unavailable; this choice applies to the current page only.'}`;
     });

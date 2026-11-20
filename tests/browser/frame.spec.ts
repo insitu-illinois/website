@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { destinations, primaryMenu, footerMenu, expectedCurrent } from '../../src/config/navigation.mjs';
-import values from '../../src/content/pages/values.json' with { type: 'json' };
+import { showValues } from '../../src/lib/values.mjs';
 
 const files=(dir='dist'):string[]=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?files(join(dir,entry.name)):entry.name.endsWith('.html')?[join(dir,entry.name)]:[]);
 const publicFiles=files().filter(file=>!file.includes('/admin/'));
@@ -12,7 +12,7 @@ const route=(file:string)=>file.replace(/^dist/,'').replace(/index\.html$/,'');
 const redirectOf=(file:string)=>readFileSync(file,'utf8').match(/http-equiv="refresh" content="0;url=([^"]+)/)?.[1];
 const label=(id:string)=>destinations[id as keyof typeof destinations].label;
 const menuLabels=primaryMenu.flatMap(entry=>'group' in entry?entry.items!.map(label):[label(entry.id!)]);
-const footerLabels=footerMenu.flatMap(column=>column.items.filter(id=>id!=='accessibility-settings'&&!(id==='values'&&values.draft)).map(label));
+const footerLabels=footerMenu.flatMap(column=>column.items.filter(id=>id!=='accessibility-settings'&&!(id==='values'&&!showValues())).map(label));
 
 for(const theme of ['night','light']) for(const width of [1280,375]) {
   test(`every page carries the one frame at ${width}px in ${theme} mode`,async({page})=>{

@@ -1,5 +1,7 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+// These checks start from night mode, which a dark device setting gives on a first visit.
+test.use({colorScheme:'dark'});
 
 test('six destinations preserve research links and keyboard disclosure behavior',async({page})=>{
   await page.setViewportSize({width:1440,height:900}); await page.goto('/');

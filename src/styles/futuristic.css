@@ -151,8 +151,6 @@ html :is(.home-page,body) .main-content > section:is(:nth-of-type(odd),:nth-of-t
 /* ---- Footer: login link, icon row ---- */
 .footer-login { gap:var(--space-2); }
 .footer-login svg { width:var(--space-4); height:var(--space-4); fill:currentColor; flex-shrink:0; }
-.footer-social { list-style:none; display:flex; flex-wrap:wrap; gap:var(--space-4); margin:var(--space-5) 0 0; padding:0; }
-.footer-social svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:url(#ig); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
 
 /* ---- Hover colour: teal in the header and footer, violet everywhere else. No glow, lift or zoom. ---- */
 html body .site-header .icon-control { position:relative; }
@@ -177,10 +175,6 @@ html body .skip:focus { box-shadow:0 0 0 var(--border-thick) var(--focus-ring); 
 }
 
 /* ---- Footer email icon: the one live icon in the row ---- */
-.footer-social li:not(.footer-social-mail) svg { opacity:.9; }
-.footer-social-mail .icon-link { display:inline-flex; color:#b9a5ff; transition:color var(--dur-med) var(--ease-standard); }
-.footer-social-mail svg { width:var(--space-5); height:var(--space-5); fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:1; }
-@media(hover:hover) and (pointer:fine) { .footer-social-mail .icon-link:hover { color:#5eead4; } }
 
 /* ---- Subpages follow the home page: aligned headers, tiles for lists, plain icon links, same entrance and reveals ---- */
 html body main:not(.home-page) .page-intro,html body main .page-intro { padding-inline:0; }
@@ -205,8 +199,6 @@ html body .resource-links a svg { color:inherit; }
   html:not([data-reduce-motion="true"]) main .page-intro > *:nth-child(2) { animation-delay:.12s; }
 }
 
-.footer-social li { display:flex; align-items:center; }
-.footer-social .lab-contact { display:inline-flex; align-items:center; }
 
 /* Developer credit in the footer is an ordinary inline link, not one of the right-aligned footer actions. */
 html body .footer-bottom p a.credit-link { display:inline; min-height:0; margin:0; padding:0; color:#5eead4; text-decoration:underline; text-decoration-color:transparent; text-underline-offset:.25em; transition:text-decoration-color var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard); }

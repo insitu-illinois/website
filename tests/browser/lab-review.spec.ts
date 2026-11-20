@@ -1,16 +1,27 @@
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
+import {showValues} from '../../src/lib/values.mjs';
 
 test('shared values, footer credit, and new profile links survive navigation',async({page})=>{
   const values=JSON.parse(readFileSync('src/content/pages/values.json','utf8'));
   await page.goto('/');
-  await expect(page.locator('#values li')).toHaveText([values.participation,values.context,values.collaboration]);
-  await expect(page.locator('#values')).toContainText('Pending lab review');
   await expect(page.locator('footer')).not.toContainText('Davenport 209J');
   await expect(page.locator('footer')).toContainText('Developed by Sep Vaez Afshar');
-  await page.locator('footer').getByRole('link',{name:'Lab values',exact:true}).click();
-  await expect(page).toHaveURL(/\/about\/#values$/);
-  await expect(page.locator('#values li')).toHaveText([values.participation,values.context,values.collaboration]);
+  if(showValues()) {
+    await expect(page.locator('#values li')).toHaveText([values.participation,values.context,values.collaboration]);
+    await page.locator('footer').getByRole('link',{name:'Lab values',exact:true}).click();
+    await expect(page).toHaveURL(/\/about\/#values$/);
+    await expect(page.locator('#values li')).toHaveText([values.participation,values.context,values.collaboration]);
+  } else {
+    // Proposed values stay off the public build: no section, pending label, page link or footer link.
+    for(const path of ['/','/about/']) {
+      await page.goto(path);
+      await expect(page.locator('#values')).toHaveCount(0);
+      await expect(page.locator('body')).not.toContainText('Pending lab review');
+      await expect(page.getByRole('link',{name:'Read our values'})).toHaveCount(0);
+      await expect(page.locator('footer').getByRole('link',{name:'Lab values',exact:true})).toHaveCount(0);
+    }
+  }
   await page.goto('/people/lily-meyer/');
   await expect(page.getByRole('heading',{level:1})).toHaveText('Lily Meyer');
   await expect(page.getByRole('link',{name:'Lily Meyer on LinkedIn'})).toHaveAttribute('href','https://www.linkedin.com/in/lily-i-meyer');
