@@ -11,7 +11,9 @@ export function mountDisc(root:HTMLElement) {
   }
   function setLifted(value:boolean){
     spin?.cancel();lifted=value;x=value?-12:0;y=value?180:0;z=0;
-    disc.setAttribute('aria-pressed',String(value));disc.setAttribute('aria-label',value?'Return the VRchaeology disc to its tray':'Lift and turn the VRchaeology disc');
+    disc.setAttribute('aria-pressed',String(value));
+    // The name is text inside the button (not aria-label), so the disc artwork's printed words never contradict it.
+    const name=disc.querySelector<HTMLElement>('[data-disc-name]');if(name)name.textContent=value?'Return the VRchaeology disc to its tray':'Lift and turn the VRchaeology disc';
     actions.hidden=!value;render();
   }
   function turn(dx:number,dy:number){spin?.cancel();x+=dx;y+=dy;render();}

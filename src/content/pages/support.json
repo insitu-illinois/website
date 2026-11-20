@@ -1,0 +1,16 @@
+{
+  "title": "Support & connections",
+  "researchSupport": [
+    "National Science Foundation",
+    "Epic MegaGrants",
+    "University of Illinois Urbana-Champaign"
+  ],
+  "atIllinois": [
+    { "name": "The GSD Studio", "url": "" },
+    { "name": "VR@Illinois", "url": "" },
+    { "name": "Center for Innovation in Teaching and Learning (CITL)", "url": "https://citl.illinois.edu/" },
+    { "name": "Applied Technologies for Learning in the Arts & Sciences (ATLAS)", "url": "https://atlas.illinois.edu/" }
+  ],
+  "note": "CITL and ATLAS are acknowledged on the [former VRchaeology support page](https://www.vrchaeologyillinois.com/support).",
+  "draft": false
+}

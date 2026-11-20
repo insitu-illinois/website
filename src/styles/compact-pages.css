@@ -9,7 +9,6 @@ main:not(.home-page) .main-content>div.reading-section { margin-block:var(--spac
 main:not(.home-page) h2 { font-size:var(--text-display-sm); margin-bottom:var(--space-4); }
 main:not(.home-page) .section-heading { margin-bottom:var(--space-3); gap:var(--space-3); }
 main:not(.home-page) .section-heading h2 { margin:0; }
-main:not(.home-page) .records>.card { padding:var(--space-4); }
 main:not(.home-page) .records .record-kind { margin-bottom:var(--space-2); }
 main:not(.home-page) .record-main>p:last-child { margin-bottom:0; }
 main:not(.home-page) .records .metadata { margin-block:var(--space-2); }

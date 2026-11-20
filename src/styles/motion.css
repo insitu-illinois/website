@@ -1,8 +1,8 @@
 /* One rhythm across public controls, disclosures and dialogs. */
 :where(a,button,summary,input,select) {
-  transition-property:background-color,color,border-color,box-shadow,opacity,translate,filter;
-  transition-duration:var(--dur-med);
-  transition-timing-function:var(--ease-standard);
+ transition-property:background-color,color,border-color,box-shadow,opacity,translate,filter;
+ transition-duration:var(--dur-med);
+ transition-timing-function:var(--ease-standard);
 }
 .research-menu summary svg { transition:rotate var(--dur-med) var(--ease-standard) var(--delay-settle); }
 .accessibility-panel[open] { animation:surface-arrive var(--dur-med) var(--ease-standard) var(--delay-settle) both; }
@@ -13,22 +13,21 @@ dialog[open]::backdrop { animation:scrim-arrive var(--dur-med) var(--ease-standa
 dialog[data-closing]::backdrop { animation:scrim-leave var(--dur-med) var(--ease-standard) var(--delay-settle) both; }
 @keyframes scrim-leave { to { opacity:0; } }
 :where(body,.site-header,.site-footer,.home-band,.main-content > section,.card) {
-  transition:background-color var(--dur-med) var(--ease-standard) var(--delay-settle),color var(--dur-med) var(--ease-standard) var(--delay-settle),border-color var(--dur-med) var(--ease-standard) var(--delay-settle);
+ transition:background-color var(--dur-med) var(--ease-standard) var(--delay-settle),color var(--dur-med) var(--ease-standard) var(--delay-settle),border-color var(--dur-med) var(--ease-standard) var(--delay-settle);
 }
 
-.home-support a { display:inline-flex; align-items:center; gap:var(--space-2); }
 
 /* Hover turns a light on instead of underlining: text glows, buttons catch a sheen, and cards lift under a soft spotlight
-   that follows the pointer (see atmosphere.css). Colour and glow only for text. */
+ that follows the pointer (see atmosphere.css). Colour and glow only for text. */
 :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.shelf-picker button strong,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry,.site-header .icon-control) {
-  transition-property:color,text-shadow; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); transition-delay:0s;
+ transition-property:color,text-shadow; transition-duration:var(--dur-med); transition-timing-function:var(--ease-standard); transition-delay:0s;
 }
 :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.site-footer a,.accessibility-entry,.primary-navigation a:not([aria-current]),.site-header .research-links a,.site-header summary:not(.section-current)) { text-decoration:none; }
 :root { --hover-light:#b9a5ff; }
 :root[data-theme="light"] { --hover-light:#6d3fd9; }
 .site-header,.site-footer { --hover-light:#5eead4; --spot-text:rgba(169,189,255,.75); }
 @media(hover:hover) and (pointer:fine) {
-  :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry,.site-header .icon-control):hover,
-  .home-update-card:hover .home-update-copy h3 a,
-  .shelf-picker button:hover strong { color:var(--hover-light); }
+ :is(.text-link,.home-team-link,.home-update-links a,.home-support a,.resource-links a,.home-themes a,.tags a,.records h3 a,main h3>a,.home-update-copy h3 a,.primary-navigation a,.site-header .research-links a,.site-header summary,.site-footer a,.accessibility-entry,.site-header .icon-control):hover,
+ .home-update-card:hover .home-update-copy h3 a,
+ .shelf-picker button:hover strong { color:var(--hover-light); }
 }

@@ -1,39 +1,39 @@
 /* Atmosphere: slow drifting light behind the page, a glass header, scroll reveals and the hover light.
-   Everything that moves is switched off for reduced-motion and high-contrast preferences. */
+ Everything that moves is switched off for reduced-motion and high-contrast preferences. */
 body::before {
-  content:""; position:fixed; inset:-20% -10% auto -10%; height:60vh; z-index:-1; pointer-events:none;
-  background:radial-gradient(60% 60% at 30% 20%,var(--glow-1),transparent 70%),radial-gradient(40% 50% at 80% 10%,var(--glow-2),transparent 70%);
+ content:""; position:fixed; inset:-20% -10% auto -10%; height:60vh; z-index:-1; pointer-events:none;
+ background:radial-gradient(60% 60% at 30% 20%,var(--glow-1),transparent 70%),radial-gradient(40% 50% at 80% 10%,var(--glow-2),transparent 70%);
 }
 @keyframes atmosphere-drift { from { transform:translate3d(0,0,0) scale(1); } to { transform:translate3d(6%,8%,0) scale(1.15); } }
 @keyframes atmosphere-drift-slow { from { transform:translate3d(0,0,0); } to { transform:translate3d(-12%,-10%,0) scale(1.2); } }
 .home-band { background:transparent; }
-.site-header { backdrop-filter:blur(14px); background-color:color-mix(in srgb,var(--surface-chrome) 82%,transparent); }
+.site-header { background-color:color-mix(in srgb,var(--surface-chrome) 82%,transparent); }
 
 /* Cards: quiet surface, lift and spotlight on hover. */
-html body .home-update-card,html body .records>.card,html body.home-page .records>.card,html body:not(.home-page) main .records>.card,html body .home-other-projects li {
-  background-color:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md);
-  transition:transform var(--dur-med) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),background-color var(--dur-med) var(--ease-standard);
+.home-update-card,.records>.card,.home-other-projects li {
+ background-color:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md);
+ transition:transform var(--dur-med) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),background-color var(--dur-med) var(--ease-standard);
 }
-html body .records>.card,html body.home-page .records>.card,html body:not(.home-page) main .records>.card { padding:var(--space-5); }
+.records>.card { padding:var(--space-5); }
 
 /* Buttons: pill shape, a lift and one sweep of light. */
-.button { position:relative; overflow:hidden; border-radius:999px; transition:transform var(--dur-fast) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),color var(--dur-med) var(--ease-standard); }
+.button { border-radius:999px; }
 .button::after { content:""; position:absolute; inset:0; pointer-events:none; transform:translateX(-120%); transition:transform .7s var(--ease-standard); background:linear-gradient(110deg,transparent 30%,var(--spot) 50%,transparent 70%); }
 
 @media(hover:hover) and (pointer:fine) {
-  html body .home-update-card:hover,html body .records>.card:hover,html body .home-other-projects li:hover { border-color:var(--hover-light); background-image:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),var(--spot),transparent 65%); }
-  .home-themes a:hover,.resource-links>a:hover { background-image:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),var(--spot),transparent 65%); }
-  .button:hover { border-color:var(--hover-light); color:var(--hover-light); }
-  .button:hover::after { transform:translateX(120%); }
+ .home-update-card:hover,.records>.card:hover,.home-other-projects li:hover { border-color:var(--hover-light); background-image:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),var(--spot),transparent 65%); }
+ .home-themes a:hover,.resource-links>a:hover { background-image:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),var(--spot),transparent 65%); }
+ .button:hover { border-color:var(--hover-light); color:var(--hover-light); }
+ .button:hover::after { transform:translateX(120%); }
 }
 
 /* Entrance: the hero settles in and later sections arrive as they scroll into view. Blur and slide only, so text never loses contrast. */
 @media(prefers-reduced-motion:no-preference) {
-  html:not([data-reduce-motion="true"]) .home-hero > * { animation:atmosphere-rise .8s var(--ease-standard) both; }
-  html:not([data-reduce-motion="true"]) .home-hero > *:nth-child(2) { animation-delay:.12s; }
-  html:not([data-reduce-motion="true"]) .home-hero > *:nth-child(3) { animation-delay:.24s; }
-  html.js:not([data-reduce-motion="true"]) .reveal { filter:blur(8px); transform:translateY(24px); transition:filter .75s var(--ease-standard),transform .75s var(--ease-standard); transition-delay:var(--d,0s); }
-  html.js:not([data-reduce-motion="true"]) .reveal.in { filter:none; transform:none; }
+ html:not([data-reduce-motion="true"]) .home-hero > * { animation:atmosphere-rise .8s var(--ease-standard) both; }
+ html:not([data-reduce-motion="true"]) .home-hero > *:nth-child(2) { animation-delay:.12s; }
+ html:not([data-reduce-motion="true"]) .home-hero > *:nth-child(3) { animation-delay:.24s; }
+ html.js:not([data-reduce-motion="true"]) .reveal { filter:blur(8px); transform:translateY(24px); transition:filter .75s var(--ease-standard),transform .75s var(--ease-standard); transition-delay:var(--d,0s); }
+ html.js:not([data-reduce-motion="true"]) .reveal.in { filter:none; transform:none; }
 }
 @keyframes atmosphere-rise { from { transform:translateY(22px); } to { transform:none; } }
 

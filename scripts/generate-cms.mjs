@@ -110,6 +110,16 @@ collections.push({ name: 'pages', label: 'Page text', files: [
   { name: 'home', label: 'Home', file: 'src/content/pages/home.json', fields: [field('title',{required:true}),field('statement',{}),field('draft',{kind:'boolean',default:false})] },
   ...['about','join','accessibility'].map(name => ({name,label:label(name),file:`src/content/pages/${name}.json`,fields:[field('title',{required:true}),field('body',{widget:'markdown'}),field('draft',{kind:'boolean',default:false})]})),
   { name:'values',label:'Lab values',file:'src/content/pages/values.json',fields:[field('title',{required:true}),field('participation',{widget:'text',required:true}),field('context',{widget:'text',required:true}),field('collaboration',{widget:'text',required:true}),field('body',{widget:'markdown'}),field('proposed',{kind:'boolean',default:true}),field('draft',{kind:'boolean',default:true})] },
+  { name:'support',label:'Support & connections',file:'src/content/pages/support.json',fields:[
+    field('title',{required:true}),
+    {name:'researchSupport',label:'Research support',widget:'list',required:false,hint:'List each funder or supporting organization, one per entry.',field:{name:'name',label:'Organization',widget:'string'}},
+    {name:'atIllinois',label:'At Illinois',widget:'list',required:false,summary:'{{fields.name}}',hint:'List each campus partner. Add a link only to the partner’s own website.',fields:[
+      {name:'name',label:'Name',widget:'string',required:true,hint:'Enter the partner’s full name as it should appear.'},
+      {name:'url',label:'Link',widget:'string',required:false,pattern:['^(https?://\\S+)?$','Use a full http or https URL, or leave blank.'],hint:'Optional link to the partner’s website.'},
+    ]},
+    {name:'note',label:'Note',widget:'markdown',required:false,hint:'Optional short note shown under the lists; links are allowed.'},
+    field('draft',{kind:'boolean',default:false}),
+  ] },
   { name:'location',label:'Lab location',file:'src/content/pages/location.json',fields:[field('address',{widget:'text'}),field('mapEmbedUrl',{kind:'url'}),field('directionsUrl',{kind:'url'}),field('draft',{kind:'boolean',default:true})] },
   { name:'footer',label:'Lab contact',file:'src/content/pages/footer.json',fields:[field('email',{kind:'email',required:true}),field('institution',{}),field('developerName',{}),field('draft',{kind:'boolean',default:false})] },
 ] });

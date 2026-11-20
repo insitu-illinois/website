@@ -1211,6 +1211,57 @@ collections:
             hint: Turn on to hide this entry from the website while you prepare it; GitHub
               files remain public.
             default: true
+      - name: support
+        label: Support & connections
+        file: src/content/pages/support.json
+        fields:
+          - name: title
+            label: Title
+            widget: string
+            required: true
+            hint: Enter the approved title in sentence case, keeping proper names
+              capitalized.
+          - name: researchSupport
+            label: Research support
+            widget: list
+            required: false
+            hint: List each funder or supporting organization, one per entry.
+            field:
+              name: name
+              label: Organization
+              widget: string
+          - name: atIllinois
+            label: At Illinois
+            widget: list
+            required: false
+            summary: "{{fields.name}}"
+            hint: List each campus partner. Add a link only to the partner’s own website.
+            fields:
+              - name: name
+                label: Name
+                widget: string
+                required: true
+                hint: Enter the partner’s full name as it should appear.
+              - name: url
+                label: Link
+                widget: string
+                required: false
+                pattern:
+                  - ^(https?://\S+)?$
+                  - Use a full http or https URL, or leave blank.
+                hint: Optional link to the partner’s website.
+          - name: note
+            label: Note
+            widget: markdown
+            required: false
+            hint: Optional short note shown under the lists; links are allowed.
+          - name: draft
+            label: Draft
+            widget: boolean
+            required: false
+            hint: Turn on to hide this entry from the website while you prepare it; GitHub
+              files remain public.
+            default: false
       - name: location
         label: Lab location
         file: src/content/pages/location.json

@@ -12,7 +12,8 @@ const bookletCredits=credits.slice(0,4);
       <div class="case-object" id="case-interior" tabindex="-1">
         <div class="case-tray">
           <button class="tray-close" data-case-close type="button" disabled aria-label="Close the game case"><span class="case-close-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></span></button>
-          <button class="case-disc" data-disc-spin type="button" disabled aria-label="Lift and turn the VRchaeology disc" aria-pressed="false" aria-describedby="disc-instructions">
+          <button class="case-disc" data-disc-spin type="button" disabled aria-pressed="false" aria-describedby="disc-instructions">
+            <span class="visually-hidden" data-disc-name>Lift and turn the VRchaeology disc</span>
             <span class="disc-form" data-disc-model><DiscArtwork cover={cover.src} scene={images[0].src}/></span>
           </button>
           <div class="disc-actions" data-disc-actions hidden>
