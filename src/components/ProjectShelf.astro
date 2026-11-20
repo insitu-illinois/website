@@ -1,6 +1,7 @@
 ---
 import GameCase from './GameCase.astro';
 import Media from './Media.astro';
+import {hasGameCase} from '../lib/derived.mjs';
 const {projects,data}=Astro.props;
 const rid=(ref:any):string=>typeof ref==='string'?ref:ref?.id;
 const themeName=(id:string)=>data?.themes?.find((t:any)=>t.id===id);
@@ -12,9 +13,20 @@ const fallbackIcon=`<svg viewBox="0 0 32 32" fill="none" stroke="url(#ig)" strok
   <div class="shelf-panels">
     {projects.map((p:any)=><article class="shelf-panel feature-project" id={`shelf-${p.id}`} aria-labelledby={`shelf-title-${p.id}`} data-project-panel={p.id}>
       <div class="shelf-visual">
-        {p.id==='vrchaeology'&&p.data.heroMedia&&p.data.gallery?.length?<GameCase cover={p.data.heroMedia} images={p.data.gallery} name={p.data.name} description={p.data.shortDescription} credits={p.data.credits||[]} creditsHref={`/projects/${p.id}/#credits-heading`} galleryHref={`/projects/${p.id}/#gallery-heading`}/>:p.data.heroMedia?<Media media={p.data.heroMedia} natural/>:<div class="shelf-symbol" aria-hidden="true" set:html={icons[p.id]||fallbackIcon}/>}
+        {hasGameCase(p)?<GameCase cover={p.data.heroMedia} images={p.data.gallery} name={p.data.name} description={p.data.shortDescription} credits={p.data.credits||[]} creditsHref={`/projects/${p.id}/#credits-heading`} galleryHref={`/projects/${p.id}/#gallery-heading`}/>:p.data.heroMedia?<Media media={p.data.heroMedia} natural/>:<div class="shelf-symbol" aria-hidden="true" set:html={icons[p.id]||fallbackIcon}/>}
       </div>
-      <div class="shelf-copy"><p class="label">{p.id==='vrchaeology'?'Flagship project · ':''}{p.data.status==='active'?'Active project':'Completed project'}</p><div class="shelf-titlerow"><h3 id={`shelf-title-${p.id}`}>{p.data.name}</h3>{(p.data.themes||[]).length>0&&<ul class="shelf-meta" aria-label="Research themes">{p.data.themes.map(rid).map((id:string)=>themeName(id)&&<li><a href={`/themes/${id}/`}>{themeName(id).data.name}</a></li>)}</ul>}</div>{p.data.shortDescription&&<p>{p.data.shortDescription}</p>}{(p.data.team||[]).length>0&&<p class="shelf-team"><span>Team</span>{p.data.team.map(rid).map(personName).filter(Boolean).slice(0,4).join(' · ')}{p.data.team.length>4?` · +${p.data.team.length-4} more`:''}</p>}<a class="button" href={`/projects/${p.id}/`}>View project <span aria-hidden="true">↗</span></a></div>
+      <div class="shelf-copy">
+        <p class="label">{p.data.featured?'Flagship project · ':''}{p.data.status==='active'?'Active project':'Completed project'}</p>
+        <div class="shelf-titlerow">
+          <h3 id={`shelf-title-${p.id}`}>{p.data.name}</h3>
+          {(p.data.themes||[]).length>0&&<ul class="shelf-meta" aria-label="Research themes">
+            {p.data.themes.map(rid).map((id:string)=>themeName(id)&&<li><a href={`/themes/${id}/`}>{themeName(id).data.name}</a></li>)}
+          </ul>}
+        </div>
+        {p.data.shortDescription&&<p>{p.data.shortDescription}</p>}
+        {(p.data.team||[]).length>0&&<p class="shelf-team"><span>Team</span>{p.data.team.map(rid).map(personName).filter(Boolean).slice(0,4).join(' · ')}{p.data.team.length>4?` · +${p.data.team.length-4} more`:''}</p>}
+        <a class="button" href={`/projects/${p.id}/`}>View project <span aria-hidden="true">↗</span></a>
+      </div>
     </article>)}
   </div>
   <div class="shelf-picker" role="group" aria-label="Choose a project" hidden>

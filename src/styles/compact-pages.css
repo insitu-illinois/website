@@ -2,14 +2,13 @@
 main:not(.home-page) .main-content { padding-block:var(--space-5) var(--space-7); }
 main:not(.home-page) .page-heading { margin-block:var(--space-3) var(--space-5); padding-bottom:var(--space-4); }
 main:not(.home-page) .page-heading h1 { font-size:clamp(var(--text-display-sm),3.5vw,var(--text-display-md)); margin-block:var(--space-3); }
-main:not(.home-page) .page-intro { padding:var(--space-4); gap:var(--space-4); }
+main:not(.home-page) .page-intro { padding-block:var(--space-4); gap:var(--space-4); }
 main:not(.home-page) .page-intro h1 { margin-block:0 var(--space-2); }
-main:not(.home-page) .main-content>section,
+main:not(.home-page) .main-content>section { margin-block:var(--space-5); }
 main:not(.home-page) .main-content>div.reading-section { margin-block:var(--space-5); padding:var(--space-5); }
 main:not(.home-page) h2 { font-size:var(--text-display-sm); margin-bottom:var(--space-4); }
 main:not(.home-page) .section-heading { margin-bottom:var(--space-3); gap:var(--space-3); }
 main:not(.home-page) .section-heading h2 { margin:0; }
-main:not(.home-page) .records>li { padding-block:var(--space-4); }
 main:not(.home-page) .records>.card { padding:var(--space-4); }
 main:not(.home-page) .records .record-kind { margin-bottom:var(--space-2); }
 main:not(.home-page) .record-main>p:last-child { margin-bottom:0; }
@@ -41,9 +40,10 @@ main:not(.home-page) .lab-map { aspect-ratio:2/1; }
  main:not(.home-page) .lab-location>.split-section { grid-template-columns:1fr; gap:var(--space-3); }
  main:not(.home-page) .lab-location .map-panel { margin-top:0; }
 }
-@media(min-width:64rem) { main:not(.home-page) .people-compact { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 var(--space-5); } }
+@media(min-width:64rem) { main:not(.home-page) .people-compact { display:grid; } }
 @media(max-width:47.999rem) {
- main:not(.home-page) .main-content>section,main:not(.home-page) .main-content>div.reading-section { margin-block:var(--space-4); padding:var(--space-4); }
+ main:not(.home-page) .main-content>section { margin-block:var(--space-4); }
+ main:not(.home-page) .main-content>div.reading-section { margin-block:var(--space-4); padding:var(--space-4); }
  main:not(.home-page) .person-heading>img,main:not(.home-page) .person-heading>.portrait-placeholder { max-width:var(--space-10); }
  main:not(.home-page) .people-list.card-grid>.card { grid-template-columns:var(--space-8) minmax(0,1fr); gap:var(--space-3); }
  .news-story>.media { max-height:calc(var(--space-10) * 2); }

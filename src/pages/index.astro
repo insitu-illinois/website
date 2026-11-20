@@ -4,11 +4,10 @@ import LabValues from '../components/LabValues.astro';
 import ProjectShelf from '../components/ProjectShelf.astro';
 import {dateLabel,entryUrl} from '../lib/format.mjs';
 import {content} from '../lib/content';
-import {homeLists} from '../lib/derived.mjs';
+import {homeLists,shelfOrder} from '../lib/derived.mjs';
 import home from '../content/pages/home.json';
-import '../styles/home.css';
 const data=await content(),lists=homeLists(data);
-const shelfProjects=[...data.projects.filter((p:any)=>p.id==='vrchaeology'),...data.projects.filter((p:any)=>p.id!=='vrchaeology')].filter((p:any)=>!p.data.draft);
+const shelfProjects=shelfOrder(data.projects);
 const updates=[...lists.news,...lists.publications.slice(0,1)].sort((a:any,b:any)=>String(b.data.date||b.data.publicationDate||b.data.year||'').localeCompare(String(a.data.date||a.data.publicationDate||a.data.year||'')));
 ---
 <Base homePage title="People, technology, and experience in context">

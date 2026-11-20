@@ -9,13 +9,13 @@ import ProjectGallery from '../../components/ProjectGallery.astro';
 import ProjectCredits from '../../components/ProjectCredits.astro';
 import GameCase from '../../components/GameCase.astro';
 import {content} from '../../lib/content';
-import {projectLists,referenced} from '../../lib/derived.mjs';
+import {projectLists,referenced,hasGameCase as isGameCase} from '../../lib/derived.mjs';
 import type { CollectionEntry } from 'astro:content';
 interface Props { entry: CollectionEntry<'projects'>; data: Awaited<ReturnType<typeof content>>; next: CollectionEntry<'projects'>; }
 export async function getStaticPaths(){const data=await content();return data.projects.map((entry:any,index:number)=>({params:{slug:entry.id},props:{entry,data,next:data.projects[(index+1)%data.projects.length]}}));}
 const {entry,data,next}=Astro.props;
 const d=entry.data,lists=projectLists(data,entry.id);
-const hasGameCase=Boolean(d.heroMedia)&&entry.id==='vrchaeology'&&(d.gallery?.length??0)>0;
+const hasGameCase=isGameCase(entry);
 const funding=referenced(data.recognition,d.funding);
 // Long project pages get jump links to their later sections.
 const jumps=([

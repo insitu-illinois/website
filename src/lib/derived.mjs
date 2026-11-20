@@ -44,3 +44,9 @@ export const relatedPapers = (data,paper) => newest(data.publications.filter(r=>
 export const homeLists = data => ({publications:newest(data.publications).slice(0,2),projects:data.projects.filter(r=>r.data.featured).sort(byTitle).slice(0,1),news:newest(data.news).slice(0,2)});
 export const orders = {publications:['journal','conference','chapter','thesis','preprint'],presentations:['invited','conference','poster','demo','workshop','exhibition'],recognition:['award','grant','fellowship','scholarship'],projects:['active','completed']};
 export const grouped = (data,name) => orders[name].map(type=>({type,items:newest(data[name].filter(r=>r.data[name==='projects'?'status':'type']===type))}));
+
+// Featured projects lead the home shelf and carry the "Flagship project" label.
+export const shelfOrder = projects => [...projects.filter(p=>p.data.featured),...projects.filter(p=>!p.data.featured)].filter(p=>!p.data.draft);
+// Projects shown as a boxed game with a 3D case. Each needs a cover and an image gallery.
+const gameCaseProjects = ['vrchaeology'];
+export const hasGameCase = project => gameCaseProjects.includes(project.id) && Boolean(project.data.heroMedia) && (project.data.gallery?.length ?? 0) > 0;

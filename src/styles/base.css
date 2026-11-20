@@ -129,7 +129,7 @@ section:first-child { margin-top:0; }
 
 .header-tools { display:flex; flex-wrap:wrap; gap:var(--space-3); max-width:100%; }
 .home-page .home-band { border-bottom:var(--border-hairline) solid var(--border-default); }
-.home-page .main-content > section { margin-block:0; padding-block:var(--space-8); border:0; }
+.home-page .main-content > section { margin-block:0; border:0; }
 .home-page .main-content > section + section { border-top:var(--border-hairline) solid var(--border-strong); }
 .home-page .main-content { padding-top:0; }
 .home-page .section-heading { margin-bottom:var(--space-6); }
@@ -166,7 +166,6 @@ section:first-child { margin-top:0; }
 /* A compact footer for identity, contact and practical links. */
 .site-footer .footer-heading { font-family:var(--font-mono); font-size:var(--text-label-md); font-weight:400; line-height:var(--lh-label); letter-spacing:var(--ls-label); color:var(--text-muted-on-chrome); margin:0 0 var(--space-4); }
 .footer-identity p { max-width:28ch; }
-.site-footer .footer-editor { color:var(--text-muted-on-chrome); font-size:var(--text-label-md); margin-top:var(--space-3); }
 
 /* Shared values keep the home introduction concise and the fuller explanation on About. */
 .values-statements { list-style:none; padding:0; display:grid; gap:var(--space-5); }
@@ -216,11 +215,6 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
   .credits-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
 }
 
-/* Shared white and gray reading sections, including the home page. */
-.main-content > section,.home-page .main-content > section,.main-content > div.reading-section {
-  margin-block:var(--space-7); padding:var(--space-5); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); background:var(--surface-page);
-}
-.main-content > section:nth-of-type(odd),.home-page .main-content > section:nth-of-type(odd),.main-content > div.reading-section { background:var(--surface-card); }
 .home-page .main-content > section + section { border-top-color:var(--border-default); }
 .home-page .featured::before { content:none; }
 .main-content > .reading-section { max-width:none; }
@@ -230,11 +224,11 @@ img[src="/media/people/zade-lobo.jpg"] { object-position:left top; }
 .project-intro.has-cover > * { min-width:0; }
 .project-intro.has-cover .page-heading { align-self:start; }
 @media (min-width:48rem) {
-  .main-content > section,.home-page .main-content > section,.main-content > div.reading-section,.project-intro.has-cover { padding:var(--space-6); }
+  .main-content > div.reading-section,.project-intro.has-cover { padding:var(--space-6); }
   .project-intro.has-cover .page-heading { padding-top:var(--space-6); }
 }
 @media (max-width:30rem) {
-  .main-content > section,.home-page .main-content > section,.main-content > div.reading-section,.project-intro.has-cover { padding:var(--space-4); }
+  .main-content > div.reading-section,.project-intro.has-cover { padding:var(--space-4); }
 }
 
 /* Artwork leads the VRchaeology introduction; copy stays compact in the corner. */
@@ -297,10 +291,14 @@ body:not(.home-page) .intro-awards-funding { border-block-start:var(--border-thi
 .record-main>.metadata { max-width:none; }
 
 /* Quiet layout: content sits directly on the page and is separated by hairlines instead of nested boxes. */
+/* Section padding is set in futuristic.css. */
+.main-content > div.reading-section { padding:clamp(var(--space-6),5vw,var(--space-7)) 0; }
 .main-content > section,.home-page .main-content > section,.main-content > div.reading-section,
 .main-content > section:nth-of-type(odd),.home-page .main-content > section:nth-of-type(odd) {
-  margin-block:0; padding:clamp(var(--space-6),5vw,var(--space-7)) 0; border:0; border-top:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent;
+  margin-block:0; border:0; border-top:var(--border-hairline) solid transparent; border-radius:0; background:transparent;
 }
+/* Reading sections keep a visible top hairline; full sections hide theirs (futuristic.css). */
+.main-content > div.reading-section { border-top-color:var(--border-default); }
 .main-content > section:first-child,.home-page .main-content > section:first-child { border-top:0; }
 body:not(.home-page) .page-intro { padding:var(--space-5) 0 var(--space-6); border:0; border-bottom:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent; }
 .records>.card,.home-page .records>.card,main:not(.home-page) .records>.card { padding:var(--space-5) 0; border:0; border-top:var(--border-hairline) solid var(--border-default); border-radius:0; background:transparent; }

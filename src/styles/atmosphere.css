@@ -11,7 +11,7 @@ body::before {
 
 /* Cards: quiet surface, lift and spotlight on hover. */
 html body .home-update-card,html body .records>.card,html body.home-page .records>.card,html body:not(.home-page) main .records>.card,html body .home-other-projects li {
-  background-color:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md); padding:var(--space-4);
+  background-color:var(--surface-card); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-md);
   transition:transform var(--dur-med) var(--ease-standard),border-color var(--dur-med) var(--ease-standard),background-color var(--dur-med) var(--ease-standard);
 }
 html body .records>.card,html body.home-page .records>.card,html body:not(.home-page) main .records>.card { padding:var(--space-5); }
